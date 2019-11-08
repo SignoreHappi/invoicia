@@ -83,18 +83,24 @@ public class Database {
 	}
 	
 	//Insert a new material into the table
-	public static void CreateMaterial(String name, String cost, String type){
+	public static boolean CreateMaterial(String name, String cost, String type){
 		connect = DBConnect.connectDB();
 		String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
+		//In case the user uses , instead of . the program will replace it
+		String newCost = cost.replace(",", ".");		
+		System.out.print(newCost);
+		
+		
 		try (Connection conn = connect;
                 PreparedStatement pstmt = conn.prepareStatement(cmd)) {
 			pstmt.setString(1, name);
-            pstmt.setString(2, cost);
+            pstmt.setString(2, newCost);
             pstmt.setString(3, type);
             pstmt.executeUpdate();
-            System.out.print("Material Added");
+            return true;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        	System.out.println(e.getMessage());
+            return false;
         }
 	}
 	

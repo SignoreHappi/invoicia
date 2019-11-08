@@ -152,6 +152,7 @@ public class Invoice {
 	public JSpinner spnRA4;
 	
 	public JComboBox spnSS;
+	public JComboBox spnMaterialType;
 
 	private String ma[] = new String [10];
 	private String me[] = new String [10];
@@ -208,6 +209,7 @@ public class Invoice {
 	public static BufferedImage dancer, icon;
 	private JTextField txtName;
 	private JTextField txtCost;
+	private JTable tblMaterial;
 
 
 	
@@ -1443,7 +1445,7 @@ public class Invoice {
 		lblMaterialType.setBounds(73, 101, 92, 17);
 		panel_4.add(lblMaterialType);
 		
-		JComboBox spnMaterialType = new JComboBox();
+		spnMaterialType = new JComboBox();
 		spnMaterialType.setModel(new DefaultComboBoxModel(new String[] {"Velvet", "Mesh", "Lycra", "Toulle"}));
 		spnMaterialType.setBounds(175, 98, 86, 20);
 		panel_4.add(spnMaterialType);
@@ -1451,10 +1453,15 @@ public class Invoice {
 		btnMaterial.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
+				boolean success;
+				success = Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
 				txtName.setText("");
 				txtCost.setText("");
-				mOutput("Material", "Added");
+				if(success) {
+					mOutput("Material", "Added");
+				}else {
+					mOutput("Material", "Something went wrong");
+				}
 			}
 		});
 		
@@ -1540,6 +1547,22 @@ public class Invoice {
 		lblMCommand12.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand12.setBounds(10, 11, 530, 14);
 		panel_11.add(lblMCommand12);
+		
+		tblMaterial = new JTable();
+		tblMaterial.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"Material Name", "Material Type", "Price", "Material ID"
+			}
+		));
+		tblMaterial.setBounds(73, 65, 746, 577);
+		Material.add(tblMaterial);
 
 		
 
