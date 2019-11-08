@@ -57,6 +57,8 @@ import javax.swing.JMenu;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.sql.*;
+import java.awt.Choice;
+import java.awt.List;
 
 public class Invoice {
 	
@@ -1406,7 +1408,7 @@ public class Invoice {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_4.setBackground(new Color(255, 255, 153));
-		panel_4.setBounds(1126, 189, 271, 128);
+		panel_4.setBounds(1126, 189, 271, 172);
 		Material.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -1428,7 +1430,7 @@ public class Invoice {
 		
 		JLabel lblCost = new JLabel("Material Cost per Meter :");
 		lblCost.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		lblCost.setBounds(10, 59, 155, 14);
+		lblCost.setBounds(10, 59, 155, 17);
 		panel_4.add(lblCost);
 		
 		JButton btnMaterial = new JButton("S U B M I T");
@@ -1442,8 +1444,18 @@ public class Invoice {
 			}
 		});
 		btnMaterial.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		btnMaterial.setBounds(67, 85, 134, 32);
+		btnMaterial.setBounds(67, 129, 134, 32);
 		panel_4.add(btnMaterial);
+		
+		JLabel lblMaterialType = new JLabel("Material Type :");
+		lblMaterialType.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		lblMaterialType.setBounds(73, 101, 92, 17);
+		panel_4.add(lblMaterialType);
+		
+		JComboBox spnMaterialType = new JComboBox();
+		spnMaterialType.setModel(new DefaultComboBoxModel(new String[] {"Velvet", "Mesh", "Lycra", "Toulle"}));
+		spnMaterialType.setBounds(175, 98, 86, 20);
+		panel_4.add(spnMaterialType);
 		
 		
 		
