@@ -1404,7 +1404,7 @@ public class Invoice {
 		Material.setBackground(new Color(255, 204, 255));
 		tabbedPane.addTab("Material", new ImageIcon(Invoice.class.getResource("/images/icon-fabric.png")), Material, null);
 		Material.setLayout(null);
-		
+		    
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_4.setBackground(new Color(255, 255, 153));
