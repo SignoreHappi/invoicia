@@ -66,7 +66,7 @@ public class Database {
 	//If the studio has an invoice, create a new one with invoice_id+1
 	public static void CreateInvoice(int studio_id, int invoice_id, int iYear) {
 		connect = DBConnect.connectDB();
-		String cmd = "INSERT INTO invoices(code, studio_id, invoice_id, year) VALUES(?, ?,?, ?)";
+		String cmd = "INSERT INTO invoices(code, studio_id, invoice_id, year) VALUES(?, ?, ?, ?)";
 		int inv = invoice_id+1;
 		String code = CreateCode(studio_id, iYear, inv);
 		try (Connection conn = connect;
@@ -83,13 +83,14 @@ public class Database {
 	}
 	
 	//Insert a new material into the table
-	public static void CreateMaterial(String name, String cost){
+	public static void CreateMaterial(String name, String cost, String type){
 		connect = DBConnect.connectDB();
-		String cmd = "INSERT INTO material(name, cost) VALUES(?, ?)";
+		String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
 		try (Connection conn = connect;
                 PreparedStatement pstmt = conn.prepareStatement(cmd)) {
 			pstmt.setString(1, name);
             pstmt.setString(2, cost);
+            pstmt.setString(3, type);
             pstmt.executeUpdate();
             System.out.print("Material Added");
         } catch (SQLException e) {

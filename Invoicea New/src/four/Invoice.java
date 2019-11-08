@@ -1434,15 +1434,6 @@ public class Invoice {
 		panel_4.add(lblCost);
 		
 		JButton btnMaterial = new JButton("S U B M I T");
-		btnMaterial.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				   Database.CreateMaterial(txtName.getText(), txtCost.getText());
-				   txtName.setText("");
-				   txtCost.setText("");
-				   mOutput("Material", "Added");
-			}
-		});
 		btnMaterial.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnMaterial.setBounds(67, 129, 134, 32);
 		panel_4.add(btnMaterial);
@@ -1457,6 +1448,15 @@ public class Invoice {
 		spnMaterialType.setBounds(175, 98, 86, 20);
 		panel_4.add(spnMaterialType);
 		
+		btnMaterial.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
+				txtName.setText("");
+				txtCost.setText("");
+				mOutput("Material", "Added");
+			}
+		});
 		
 		
 		
@@ -1541,14 +1541,7 @@ public class Invoice {
 		lblMCommand12.setBounds(10, 11, 530, 14);
 		panel_11.add(lblMCommand12);
 
-		btnMaterial.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent arg0) {
-				Database.CreateMaterial(txtName.getText(), txtCost.getText());
-				txtName.setText("");
-				txtCost.setText("");
-				mOutput("?", "added");
-			}
-		});
+		
 
 		JPanel Rhynestones = new JPanel();
 		tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
