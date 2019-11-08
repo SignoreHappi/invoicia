@@ -20,16 +20,23 @@ public class Database {
 	   
 	//Search into the DB if the studio has any invoice, if not, create invoice_id 1
 	public static int HasInvoice(int studio_id) {
+		//Makes the connection with the DB
 		connect = DBConnect.connectDB();
 		int invoice_id = 0;
+		//Code to select the information
 		String cmd = "SELECT * FROM invoices WHERE studio_id = " + studio_id;
 		try {
+			//Create the code
 			stmt = connect.createStatement();
+			//Execute the code
 			stmt.executeQuery(cmd);
+			//For every possible execution, create a rs
 			ResultSet rs = stmt.executeQuery(cmd);
+			//While there's code to be executes, do something
 			while(rs.next()) {
 				invoice_id++;
 			}
+		//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
 		} 
@@ -43,10 +50,12 @@ public class Database {
 		String code = CreateCode(studio_id, iYear, 1);
 		try (Connection conn = connect;
                 PreparedStatement pstmt = conn.prepareStatement(cmd)) {
+			//Create a new item into the DB in the position 1 with the value defined
 			pstmt.setString(1, code);
             pstmt.setInt(2, studio_id);
             pstmt.setInt(3, 1);
             pstmt.setInt(4, iYear);
+            //Update the DB
             pstmt.executeUpdate();
             System.out.print("Saved");
 		} catch (SQLException e) {
