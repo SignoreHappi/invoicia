@@ -1400,7 +1400,7 @@ public class Invoice {
 		spinner_1.setBounds(283, 583, 29, 20);
 		Clients.add(spinner_1);
 
-		JPanel Material = new JPanel();
+		JPanel Material = new JPanel();       
 		Material.setBackground(new Color(255, 204, 255));
 		tabbedPane.addTab("Material", new ImageIcon(Invoice.class.getResource("/images/icon-fabric.png")), Material, null);
 		Material.setLayout(null);
