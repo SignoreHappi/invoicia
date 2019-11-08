@@ -35,14 +35,14 @@ public class Database {
 		} 
 //comment
 		
-		
+		       
 		return invoice_id;
 		
 	}
 
 	public static void CreateNewInvoice(int studio_id, int iYear) {
 		connect = DBConnect.connectDB();
-		String cmd = "INSERT INTO invoices(code, studio_id, invoice_id, year) VALUES(?,?,?, ?)";
+		String cmd = "INSERT INTO invoice(code, studio_id, invoice_id, year) VALUES(?,?,?, ?)";
 		String code = CreateCode(studio_id, iYear, 1);
 		try (Connection conn = connect;
                 PreparedStatement pstmt = conn.prepareStatement(cmd)) {
