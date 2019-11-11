@@ -1,6 +1,7 @@
 package four;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -13,6 +14,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,7 +46,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 import database.DBConnect;
 import database.Database;
@@ -52,6 +55,7 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JComboBox;
@@ -59,6 +63,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.sql.*;
 import java.awt.Choice;
 import java.awt.List;
+import java.awt.BorderLayout;
 
 public class Invoice {
 	
@@ -209,10 +214,13 @@ public class Invoice {
 	public static BufferedImage dancer, icon;
 	private JTextField txtName;
 	private JTextField txtCost;
-	private JTable tblMaterial;
+	private JTable table_1;
 
-
+	public static Connection connect;
 	
+	public static DefaultTableModel materialTable;
+	public static JTable tableMaterial;
+
 	
 	
 	
@@ -222,8 +230,7 @@ public class Invoice {
 	 */
 	public static void main(String[] args) throws SQLException {
 
-		DBConnect.connectDB();
-		
+		Database.LoadMaterials();
 		
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -341,15 +348,21 @@ public class Invoice {
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Invoice.class.getResource("/images/KIDLogo.png")));
 		frame.setBounds(0, 5, screenSize.width, screenSize.height - 50);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
+		
+		frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            		DBConnect.CloseDatabase();
+            }
+        });
 
 
 		//		System.out.println(screenSize.width);
 		//		System.out.println(screenSize.height);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(1, 0, screenSize.width - 7, screenSize.height - 79); 
 		//		tabbedPane.setBounds(0, 0, 1274, 945);
 		frame.getContentPane().add(tabbedPane);
 		tabbedPane.setFont(new Font("Times New Roman", Font.BOLD, 18));
@@ -1548,24 +1561,35 @@ public class Invoice {
 		lblMCommand12.setBounds(10, 11, 530, 14);
 		panel_11.add(lblMCommand12);
 		
-		tblMaterial = new JTable();
-		tblMaterial.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Material Name", "Material Type", "Price", "Material ID"
-			}
-		));
-		tblMaterial.setBounds(73, 65, 746, 577);
-		Material.add(tblMaterial);
-
+		JPanel panel_14 = new JPanel();
+		panel_14.setBounds(75, 46, 630, 664);
+		Material.add(panel_14);
 		
-
+		
+		
+		
+		
+		
+		materialTable= new DefaultTableModel();
+		tableMaterial= new JTable(materialTable);
+		materialTable.addColumn("Material Id");
+		materialTable.addColumn("Material Name");
+		materialTable.addColumn("Material Type");
+		materialTable.addColumn("Material Cost");		
+		materialTable.insertRow(materialTable.getRowCount(), new Object[] {"a", "a", "a", "a"});
+		
+		JPanel f = new JPanel();
+		
+		f.add(new JScrollPane(tableMaterial));
+		f.setVisible(true);
+		panel_14.add(f);
+		
+	      
+	      
+	      
+	      
+	      
+	      
 		JPanel Rhynestones = new JPanel();
 		tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
 
