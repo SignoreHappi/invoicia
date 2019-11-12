@@ -219,8 +219,8 @@ public class Invoice {
 	
 	public static DefaultTableModel materialTable;
 	public static Connection connect;
-	private JTextField txtSearchMaterial;
-
+	public static JTextField txtSearchMaterial;
+	public static String materialSearch = null;
 	
 	/**
 	 * Launch the application.
@@ -1574,8 +1574,7 @@ public class Invoice {
 		  materialTable.addColumn("Material Name");
 		  materialTable.addColumn("Material Type");
 		  materialTable.addColumn("Material Cost");
-		  materialTable.insertRow(materialTable.getRowCount(), new Object[] {"a", "a",
-		  "a", "a"});
+		  
 		  
 		  JPanel materialTablePanel = new JPanel();
 		  materialTablePanel.setBounds(84, 5, 462, 412);
@@ -1592,6 +1591,26 @@ public class Invoice {
 		  txtSearchMaterial.setColumns(10);
 		  
 		  
+		  JButton btnUpdateTable = new JButton("Update Table");
+		  btnUpdateTable.addMouseListener(new MouseAdapter() {
+		  	@Override
+		  	public void mouseClicked(MouseEvent e) {
+		  		Database.LoadMaterials();
+		  	}
+		  });
+		  btnUpdateTable.setBounds(265, 515, 155, 41);
+		  panel_14.add(btnUpdateTable);
+		  
+		  txtSearchMaterial.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+
+				}
+				@Override
+				public void keyPressed(KeyEvent enter) {
+					Database.SearchMaterial(enter, materialSearch);
+				}
+			});
 		
 		 Database.LoadMaterials();
 	      
