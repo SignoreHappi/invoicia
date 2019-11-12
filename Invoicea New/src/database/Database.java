@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
 
 import four.Invoice;
 
@@ -105,28 +108,34 @@ public class Database {
 	}
 	
 	public static void LoadMaterials(){
+		Invoice.materialTable.setRowCount(0);
 		String cmd = "SELECT * FROM material";
 		int id;
-		String name, type;
+		String name, type, sId, sCost;
 		double cost;
+		
+		
 		try {
 			//Create the code
 			connect = DBConnect.connectDB();
-			PreparedStatement pstmt = connect.prepareStatement(cmd);
+			//Create the code
+			stmt = connect.createStatement();
 			//Execute the code
-			pstmt.executeQuery(cmd);
+			stmt.executeQuery(cmd);
 			//For every possible execution, create a rs
-			ResultSet rs = pstmt.executeQuery(cmd);
+			ResultSet rs = stmt.executeQuery(cmd);
 			//While there's code to be executes, do something
 			while(rs.next()) {
+				
 				id = rs.getInt("material_id");
 				name = rs.getString("material_name");
 				type = rs.getString("material_type");
 				cost = rs.getDouble("material_cost");
-				System.out.println(id);
-				//Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {id});
-
+				
+				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
+						name, type, Double.toString(cost)});
 			}
+
 		//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);

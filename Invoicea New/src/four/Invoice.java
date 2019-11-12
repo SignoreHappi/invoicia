@@ -216,13 +216,11 @@ public class Invoice {
 	private JTextField txtCost;
 	private JTable table_1;
 
-	public static Connection connect;
 	
 	public static DefaultTableModel materialTable;
-	public static JTable tableMaterial;
+	public static Connection connect;
+	private JTextField txtSearchMaterial;
 
-	
-	
 	
 	/**
 	 * Launch the application.
@@ -230,7 +228,7 @@ public class Invoice {
 	 */
 	public static void main(String[] args) throws SQLException {
 
-		Database.LoadMaterials();
+//		Database.LoadMaterials();
 		
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -1440,7 +1438,7 @@ public class Invoice {
 		
 		JLabel lblName = new JLabel("Material Name :");
 		lblName.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		lblName.setBounds(67, 14, 98, 14);
+		lblName.setBounds(10, 14, 155, 14);
 		panel_4.add(lblName);
 		
 		JLabel lblCost = new JLabel("Material Cost per Meter :");
@@ -1455,7 +1453,7 @@ public class Invoice {
 		
 		JLabel lblMaterialType = new JLabel("Material Type :");
 		lblMaterialType.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		lblMaterialType.setBounds(73, 101, 92, 17);
+		lblMaterialType.setBounds(10, 101, 155, 17);
 		panel_4.add(lblMaterialType);
 		
 		spnMaterialType = new JComboBox();
@@ -1475,6 +1473,8 @@ public class Invoice {
 				}else {
 					mOutput("Material", "Something went wrong");
 				}
+				Database.LoadMaterials();
+
 			}
 		});
 		
@@ -1566,24 +1566,34 @@ public class Invoice {
 		Material.add(panel_14);
 		
 		
+	    
 		
+		materialTable= new DefaultTableModel(); 
+		  JTable tableMaterial= new JTable(materialTable); 
+		  materialTable.addColumn("Material Id");
+		  materialTable.addColumn("Material Name");
+		  materialTable.addColumn("Material Type");
+		  materialTable.addColumn("Material Cost");
+		  materialTable.insertRow(materialTable.getRowCount(), new Object[] {"a", "a",
+		  "a", "a"});
+		  
+		  JPanel materialTablePanel = new JPanel();
+		  materialTablePanel.setBounds(84, 5, 462, 412);
+		  
+		  materialTablePanel.add(new JScrollPane(tableMaterial));
+		  materialTablePanel.setVisible(true);
+		  panel_14.setLayout(null);
+		  tableMaterial.setSize(600, 800);
+		  panel_14.add(materialTablePanel);
+		  
+		  txtSearchMaterial = new JTextField();
+		  txtSearchMaterial.setBounds(254, 475, 96, 19);
+		  panel_14.add(txtSearchMaterial);
+		  txtSearchMaterial.setColumns(10);
+		  
+		  
 		
-		
-		
-		materialTable= new DefaultTableModel();
-		tableMaterial= new JTable(materialTable);
-		materialTable.addColumn("Material Id");
-		materialTable.addColumn("Material Name");
-		materialTable.addColumn("Material Type");
-		materialTable.addColumn("Material Cost");		
-		materialTable.insertRow(materialTable.getRowCount(), new Object[] {"a", "a", "a", "a"});
-		
-		JPanel f = new JPanel();
-		
-		f.add(new JScrollPane(tableMaterial));
-		f.setVisible(true);
-		panel_14.add(f);
-		
+		 Database.LoadMaterials();
 	      
 	      
 	      
