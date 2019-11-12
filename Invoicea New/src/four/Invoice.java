@@ -47,6 +47,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.*;
+import javax.swing.text.MaskFormatter;
 
 import database.DBConnect;
 import database.Database;
@@ -64,6 +65,7 @@ import java.sql.*;
 import java.awt.Choice;
 import java.awt.List;
 import java.awt.BorderLayout;
+import javax.swing.JFormattedTextField;
 
 public class Invoice {
 	
@@ -323,7 +325,16 @@ public class Invoice {
 
 
 
-
+	private MaskFormatter createFormatter(String s) {
+	    MaskFormatter formatter = null;
+	    try {
+	        formatter = new MaskFormatter(s);
+	    } catch (java.text.ParseException exc) {
+	        System.err.println("formatter is bad: " + exc.getMessage());
+	        System.exit(-1);
+	    }
+	    return formatter;
+	}
 
 	/**
 	 * Create the application.
@@ -842,6 +853,9 @@ public class Invoice {
 		panel_9.add(lblFileSearch);
 
 		txtFS = new JTextField();
+		txtFS.setEnabled(false);
+		txtFS.setEditable(false);
+		txtFS.setVisible(false);
 		txtFS.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -874,7 +888,7 @@ public class Invoice {
 				}
 			}
 		});
-		txtFS.setBounds(10, 42, 250, 20);
+		txtFS.setBounds(140, 41, 120, 22);
 		panel_9.add(txtFS);
 		txtFS.setColumns(10);
 
@@ -882,7 +896,7 @@ public class Invoice {
 		btnClear.setBounds(10, 73, 120, 30);
 		panel_9.add(btnClear);
 
-		JButton btnSave = new JButton("Save");
+		JButton btnSave = new JButton("Create");
 		btnSave.setBounds(140, 73, 120, 30);
 		panel_9.add(btnSave);
 		btnSave.addMouseListener(new MouseAdapter() {
@@ -942,9 +956,17 @@ public class Invoice {
 		button_2.setBounds(140, 114, 120, 30);
 		panel_9.add(button_2);
 
-		JButton button_3 = new JButton("?3");
-		button_3.setBounds(10, 114, 120, 30);
-		panel_9.add(button_3);
+		JButton btnSave_1 = new JButton("Save");
+		btnSave_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Database.EditInvoice(txtFS.getText());
+			}
+		});
+		btnSave_1.setBounds(10, 114, 120, 30);
+		panel_9.add(btnSave_1);
+		
+		
 
 		JButton btnPrintout = new JButton("Printout 1");
 		btnPrintout.addMouseListener(new MouseAdapter() {
@@ -989,6 +1011,48 @@ public class Invoice {
 		});
 		btnInformation.setBounds(140, 196, 120, 30);
 		panel_9.add(btnInformation);
+		
+		
+		
+		JFormattedTextField ftfSearch = new JFormattedTextField(createFormatter("##-##-###"));
+		ftfSearch.setBounds(10, 41, 120, 24);
+		panel_9.add(ftfSearch);
+		
+		JFormattedTextField ftfLogin = new JFormattedTextField(createFormatter("####"));
+		ftfLogin.setBounds(140, 43, 120, 24);
+		panel_9.add(ftfLogin);
+		ftfLogin.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+
+			}
+			@Override
+			public void keyPressed(KeyEvent enter) {
+				if(enter.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(ftfLogin.getText().equals("6054")) {
+						output("III","Welcome Admin");
+					}else if(ftfLogin.getText().equals("4444")) {
+						output("III", "Welcome User");
+					}else if(ftfLogin.getText().equals("1234")) {
+						output("III", "Welcome User");
+					}else if(ftfLogin.getText().length() == 9){
+						try {
+							reada(ftfLogin.getText());
+							output("II", "Read Complete");
+						}catch(FileNotFoundException e) {
+							output("IX", "User; File Could Not Be Found");
+						} catch (IOException e) {
+							output("IX", "User; Please enter a correct file number or sequence");
+						} catch(IndexOutOfBoundsException e) {
+							output("IX", "User; Please enter a correct file number or sequence");
+						} 
+					}else {
+						output("IX", "User; Please enter a correct file number or sequence");
+						output("IX", "User; Example :   ##-##-###");
+					}
+				}
+			}
+		});
 
 		JPanel panel_13 = new JPanel();
 		panel_13.setBackground(new Color(204, 255, 102));

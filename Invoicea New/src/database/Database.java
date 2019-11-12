@@ -43,6 +43,14 @@ public class Database {
 		//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		return invoice_id;	
 	}
@@ -65,7 +73,13 @@ public class Database {
             System.out.println("Saved");
 		} catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        }finally {
+        	try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		}
 	}
 
 	//If the studio has an invoice, create a new one with invoice_id+1
@@ -84,7 +98,13 @@ public class Database {
             System.out.print("Saved");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        }finally {
+        	try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		}
 	}
 	
 	//Insert a new material into the table
@@ -104,11 +124,18 @@ public class Database {
         } catch (SQLException e) {
         	System.out.println(e.getMessage());
             return false;
-        }
+        }finally {
+        	try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		}
 	}
 	
 	public static void LoadMaterials(){
 		Invoice.materialTable.setRowCount(0);
+		Invoice.txtSearchMaterial.setText("");;
 		String cmd = "SELECT * FROM material";
 		int id;
 		String name, type, sId, sCost;
@@ -139,7 +166,13 @@ public class Database {
 		//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
-		}
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		}
 	}
 
 	public static void SearchMaterial(KeyEvent enter, String materialSearch) {
@@ -154,22 +187,17 @@ public class Database {
 				Invoice.materialSearch = Character.toString(typed);
 			}else {
 				Invoice.materialSearch = Invoice.materialSearch + Character.toString(typed);
-			}
-			System.out.println(Invoice.materialSearch);
-			
+			}			
 		}
 		
 		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
 		}
 		
-		String cmd = "SELECT * FROM material WHERE material_name = " + Invoice.materialSearch;
-	
+		String cmd = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\"";
 		int id;
 		String name, type, sId, sCost;
-		double cost;
-		
-		
+		double cost;		
 		try {
 			//Create the code
 			connect = DBConnect.connectDB();
@@ -194,6 +222,17 @@ public class Database {
 		//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
-		}
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		}
+	}
+
+	public static void EditInvoice(String code) {
+		
+		
 	}	
 }

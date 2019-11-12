@@ -26,7 +26,6 @@ public class DBConnect {
 	public static void CloseDatabase() {
 		try {
 			Connection connect = DBConnect.connectDB();
-
 			connect.close();
 			System.out.println("Connection Closed");
 		} catch (SQLException e) {
