@@ -68,9 +68,9 @@ import java.awt.BorderLayout;
 import javax.swing.JFormattedTextField;
 
 public class Invoice {
-	
+
 	NumberFormat money = NumberFormat.getCurrencyInstance();
-	
+
 
 	public JRadioButton rdbGroup = new JRadioButton("Group");
 	public JRadioButton rdbSolo = new JRadioButton("Solo, Duet, Trio");
@@ -126,7 +126,7 @@ public class Invoice {
 	private JLabel label_6;
 	private JLabel label_7;
 	private JLabel label_8;
-	
+
 	private JLabel lbsMaterial;
 	private JLabel lbsBottom;
 	private JLabel lbsCPC;
@@ -157,7 +157,7 @@ public class Invoice {
 	public JSpinner spnRA2;
 	public JSpinner spnRA3;
 	public JSpinner spnRA4;
-	
+
 	public JComboBox spnSS;
 	public JComboBox spnMaterialType;
 
@@ -182,7 +182,7 @@ public class Invoice {
 	public JLabel lblCommand3;
 	public JLabel lblCommand2;
 	public JLabel lblCommand1;
-	
+
 	public JLabel lblMCommand12;
 	public JLabel lblMCommand11;
 	public JLabel lblMCommand10;
@@ -218,126 +218,49 @@ public class Invoice {
 	private JTextField txtCost;
 	private JTable table_1;
 
-	
+
 	public static DefaultTableModel materialTable;
 	public static Connection connect;
 	public static JTextField txtSearchMaterial;
 	public static String materialSearch = null;
+<<<<<<< HEAD
 	
 	
 	public static DefaultTableModel clientsTable;
 	public static String clientsSearch = null;
 	
+=======
+
+>>>>>>> branch 'master' of https://github.com/SignoreHappi/invoicia.git
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
 	 */
 	public static void main(String[] args) throws SQLException {
 
-//		Database.LoadMaterials();
-		
-		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//		Database.LoadMaterials();
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				install();
-				File files = new File("D:\\Invoice Gamma");
-				if (!files.exists()) {
-					if (files.mkdirs()) {
-						install();
-						System.out.println("Multiple directories are created!");
-						try {
-							Invoice window = new Invoice();
-							window.frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					} else {
-						try {
-							Invoice window = new Invoice();
-							window.frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-
-						try {
-							//							FailToCreate fail = new FailToCreate(screenSize.width / 2, screenSize.height / 2, 412, 163);
-							FailToCreate fail = new FailToCreate(100, 100, 412, 163);
-							fail.frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						//						System.out.println("Failed to create multiple directories!");
-					}
-				}else {
-					try {
-						Invoice window = new Invoice();
-						window.frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		
-		
-	}
-
-	
-	
-	private static void install() {
-		String vear = "20";
-		String cust = "Kids In Dance";
-
-
-		for (int j = 1; j < 8; j++) {
-			for (int i = 1; i < 7 ; i++) {
-
-				File files = new File("D:\\Invoice Gamma\\"+cust+"\\"+vear);
-				if (!files.exists()) {
-					if (files.mkdirs()) {
-					}
-				}
-
-				if( !cust.equals("Settings") || !(j >= 5)) {
-					switch (i){
-					case 1: vear = "20"; break;
-					case 2: vear = "21"; break;
-					case 3: vear = "22"; break;
-					case 4: vear = "23"; break;
-					case 5: vear = "24"; break;
-					//				case 6: vear = "25"; break;
-					//				case 7: vear = "26"; break;
-					}
-				}
-			}
-
-			switch (j){
-			//			case 0: cust = "01"; break;
-			case 1: cust = "Evolve Dance Centre"; break;
-			case 2: cust = "Maple Dance Acadamy"; break;
-			case 3: cust = "CB Dance Academy"; break;
-			case 4: cust = "The Eight Count"; break;
-			case 5: cust = "Settings"; break;
-			//			case 5: cust = "06"; break;
-			}
+		try {
+			Invoice window = new Invoice();
+			window.frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		File files = new File("D:\\Invoice Gamma\\Settings");
-	}//install()
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	}
 
 
 
 
 	private MaskFormatter createFormatter(String s) {
-	    MaskFormatter formatter = null;
-	    try {
-	        formatter = new MaskFormatter(s);
-	    } catch (java.text.ParseException exc) {
-	        System.err.println("formatter is bad: " + exc.getMessage());
-	        System.exit(-1);
-	    }
-	    return formatter;
+		MaskFormatter formatter = null;
+		try {
+			formatter = new MaskFormatter(s);
+		} catch (java.text.ParseException exc) {
+			System.err.println("formatter is bad: " + exc.getMessage());
+			System.exit(-1);
+		}
+		return formatter;
 	}
 
 	/**
@@ -363,13 +286,13 @@ public class Invoice {
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
-		
+
 		frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-            		DBConnect.CloseDatabase();
-            }
-        });
+			@Override
+			public void windowClosing(WindowEvent e) {
+				DBConnect.CloseDatabase();
+			}
+		});
 
 
 		//		System.out.println(screenSize.width);
@@ -909,50 +832,50 @@ public class Invoice {
 				int studio_id = 0;
 				String studio_name = spnSS.getSelectedItem().toString();
 				switch(studio_name){
-					case "Kids In Dance":
-						studio_id = 0;
-						break;
-					case "Evolve Dance Centre":
-						studio_id = 1;
-						break;
-					case "Maple Dance Acadamy":
-						studio_id = 2;
-						break;
-					case "CB Dance Acadamy":
-						studio_id = 3;
-						break;
-					case "The Eight Count":
-						studio_id = 4;
-						break;
+				case "Kids In Dance":
+					studio_id = 0;
+					break;
+				case "Evolve Dance Centre":
+					studio_id = 1;
+					break;
+				case "Maple Dance Acadamy":
+					studio_id = 2;
+					break;
+				case "CB Dance Acadamy":
+					studio_id = 3;
+					break;
+				case "The Eight Count":
+					studio_id = 4;
+					break;
 				}
 				output("Studio ID", " "+ studio_id );
-				 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
-				 LocalDateTime now = LocalDateTime.now();  
-				 
-				 String date = dtf.format(now);
-				 
-				 String month = date.substring(3, 5);
-				 String year = date.substring(0, 2);
-				 
-				 
-				 int iMonth = Integer.parseInt(month);
-				 int iYear = 0;
-				 if(iMonth >= 7) {
-					 iYear = Integer.parseInt(year);
-					 iYear++;
-					 year = String.valueOf(iYear);
-				 }
-				 
-				 
-				 output("Month", " "+ month);
-				 output("Year", " "+ iYear);
-				 
-				 int invoice_id = Database.HasInvoice(studio_id);
-				 if(invoice_id == 0) {
-					 Database.CreateNewInvoice(studio_id, iYear);
-				 }else {
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
+				LocalDateTime now = LocalDateTime.now();  
+
+				String date = dtf.format(now);
+
+				String month = date.substring(3, 5);
+				String year = date.substring(0, 2);
+
+
+				int iMonth = Integer.parseInt(month);
+				int iYear = 0;
+				if(iMonth >= 7) {
+					iYear = Integer.parseInt(year);
+					iYear++;
+					year = String.valueOf(iYear);
+				}
+
+
+				output("Month", " "+ month);
+				output("Year", " "+ iYear);
+
+				int invoice_id = Database.HasInvoice(studio_id);
+				if(invoice_id == 0) {
+					Database.CreateNewInvoice(studio_id, iYear);
+				}else {
 					Database.CreateInvoice(studio_id, invoice_id, iYear);
-				 }
+				}
 			}
 		});
 
@@ -969,8 +892,8 @@ public class Invoice {
 		});
 		btnSave_1.setBounds(10, 114, 120, 30);
 		panel_9.add(btnSave_1);
-		
-		
+
+
 
 		JButton btnPrintout = new JButton("Printout 1");
 		btnPrintout.addMouseListener(new MouseAdapter() {
@@ -986,7 +909,7 @@ public class Invoice {
 					}
 				} catch (NullPointerException e) {
 					// TODO Auto-generated catch block
-//					e.printStackTrace();
+					//					e.printStackTrace();
 					output("IX", "Null");
 				}
 
@@ -1015,13 +938,13 @@ public class Invoice {
 		});
 		btnInformation.setBounds(140, 196, 120, 30);
 		panel_9.add(btnInformation);
-		
-		
-		
+
+
+
 		JFormattedTextField ftfSearch = new JFormattedTextField(createFormatter("##-##-###"));
 		ftfSearch.setBounds(10, 41, 120, 24);
 		panel_9.add(ftfSearch);
-		
+
 		JFormattedTextField ftfLogin = new JFormattedTextField(createFormatter("####"));
 		ftfLogin.setBounds(140, 43, 120, 24);
 		panel_9.add(ftfLogin);
@@ -1106,7 +1029,7 @@ public class Invoice {
 		});
 		btnInvoice.setBounds(140, 45, 120, 30);
 		panel_13.add(btnInvoice);
-		
+
 		JButton btnInvoiceTax = new JButton("INVOICE TAX");
 		btnInvoiceTax.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1314,31 +1237,31 @@ public class Invoice {
 		lblCommand7.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand7.setBounds(10, 110, 530, 14);
 		panel_3.add(lblCommand7);
-		
+
 		lblCommand8 = new JLabel("_");
 		lblCommand8.setBounds(10, 90, 530, 14);
 		panel_3.add(lblCommand8);
 		lblCommand8.setForeground(new Color(51, 153, 0));
 		lblCommand8.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
+
 		lblCommand9 = new JLabel("_");
 		lblCommand9.setForeground(new Color(51, 153, 0));
 		lblCommand9.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand9.setBounds(10, 70, 530, 14);
 		panel_3.add(lblCommand9);
-		
+
 		lblCommand10 = new JLabel("_");
 		lblCommand10.setForeground(new Color(51, 153, 0));
 		lblCommand10.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand10.setBounds(10, 50, 530, 14);
 		panel_3.add(lblCommand10);
-		
+
 		lblCommand11 = new JLabel("_");
 		lblCommand11.setForeground(new Color(51, 153, 0));
 		lblCommand11.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand11.setBounds(10, 30, 530, 14);
 		panel_3.add(lblCommand11);
-		
+
 		lblCommand12 = new JLabel("_");
 		lblCommand12.setForeground(new Color(51, 153, 0));
 		lblCommand12.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -1518,50 +1441,51 @@ public class Invoice {
 		Material.setBackground(new Color(255, 204, 255));
 		tabbedPane.addTab("Material", new ImageIcon(Invoice.class.getResource("/images/icon-fabric.png")), Material, null);
 		Material.setLayout(null);
-		    
+
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_4.setBackground(new Color(255, 255, 153));
 		panel_4.setBounds(1126, 189, 271, 172);
 		Material.add(panel_4);
 		panel_4.setLayout(null);
-		
+
 		txtName = new JTextField();
 		txtName.setBounds(175, 11, 86, 20);
 		panel_4.add(txtName);
 		txtName.setColumns(10);
-		
+
 		txtCost = new JTextField();
 		txtCost.setText("");
 		txtCost.setBounds(175, 56, 86, 20);
 		panel_4.add(txtCost);
 		txtCost.setColumns(10);
-		
+
 		JLabel lblName = new JLabel("Material Name :");
 		lblName.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		lblName.setBounds(10, 14, 155, 14);
 		panel_4.add(lblName);
-		
+
 		JLabel lblCost = new JLabel("Material Cost per Meter :");
 		lblCost.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		lblCost.setBounds(10, 59, 155, 17);
 		panel_4.add(lblCost);
-		
+
 		JButton btnMaterial = new JButton("S U B M I T");
 		btnMaterial.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnMaterial.setBounds(67, 129, 134, 32);
 		panel_4.add(btnMaterial);
-		
+
 		JLabel lblMaterialType = new JLabel("Material Type :");
 		lblMaterialType.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		lblMaterialType.setBounds(10, 101, 155, 17);
 		panel_4.add(lblMaterialType);
-		
+
 		spnMaterialType = new JComboBox();
-		spnMaterialType.setModel(new DefaultComboBoxModel(new String[] {"Velvet", "Mesh", "Lycra", "Toulle"}));
+		spnMaterialType.setModel(new DefaultComboBoxModel(new String[] {"Velvet", "Mesh", "Lycra", "Toulle", "Hologram", "Cracked Ice", "Mystique",
+				"Organdy", "Fringe", "Supplex", "Trim", "Cosmo", "Print", "Chiffon", "Sequin", "Georgette", "Unknown"}));
 		spnMaterialType.setBounds(175, 98, 86, 20);
 		panel_4.add(spnMaterialType);
-		
+
 		btnMaterial.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -1578,93 +1502,94 @@ public class Invoice {
 
 			}
 		});
-		
-		
-		
+
+
+
 		JPanel panel_11 = new JPanel();
 		panel_11.setLayout(null);
 		panel_11.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_11.setBackground(Color.DARK_GRAY);
-//		panel_11.setBounds(846, 328, 550, 255);
-		
+		//		panel_11.setBounds(846, 328, 550, 255);
+
 		panel_11.setBounds(screenSize.width - 580, screenSize.height - 395, 550, 255);
 		Material.add(panel_11);
-		
+
 		lblMCommand1 = new JLabel("|");
 		lblMCommand1.setForeground(new Color(51, 153, 0));
 		lblMCommand1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand1.setBounds(10, 230, 530, 14);
 		panel_11.add(lblMCommand1);
-		
+
 		lblMCommand2 = new JLabel("_");
 		lblMCommand2.setForeground(new Color(51, 153, 0));
 		lblMCommand2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand2.setBounds(10, 210, 530, 14);
 		panel_11.add(lblMCommand2);
-		
+
 		lblMCommand3 = new JLabel("_");
 		lblMCommand3.setForeground(new Color(51, 153, 0));
 		lblMCommand3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand3.setBounds(10, 190, 530, 14);
 		panel_11.add(lblMCommand3);
-		
+
 		lblMCommand4 = new JLabel("_");
 		lblMCommand4.setForeground(new Color(51, 153, 0));
 		lblMCommand4.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand4.setBounds(10, 170, 530, 14);
 		panel_11.add(lblMCommand4);
-		
+
 		lblMCommand5 = new JLabel("_");
 		lblMCommand5.setForeground(new Color(51, 153, 0));
 		lblMCommand5.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand5.setBounds(10, 150, 530, 14);
 		panel_11.add(lblMCommand5);
-		
+
 		lblMCommand6 = new JLabel("_");
 		lblMCommand6.setForeground(new Color(51, 153, 0));
 		lblMCommand6.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand6.setBounds(10, 130, 530, 14);
 		panel_11.add(lblMCommand6);
-		
+
 		lblMCommand7 = new JLabel("_");
 		lblMCommand7.setForeground(new Color(51, 153, 0));
 		lblMCommand7.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand7.setBounds(10, 110, 530, 14);
 		panel_11.add(lblMCommand7);
-		
+
 		lblMCommand8 = new JLabel("_");
 		lblMCommand8.setForeground(new Color(51, 153, 0));
 		lblMCommand8.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand8.setBounds(10, 90, 530, 14);
 		panel_11.add(lblMCommand8);
-		
+
 		lblMCommand9 = new JLabel("_");
 		lblMCommand9.setForeground(new Color(51, 153, 0));
 		lblMCommand9.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand9.setBounds(10, 70, 530, 14);
 		panel_11.add(lblMCommand9);
-		
+
 		lblMCommand10 = new JLabel("_");
 		lblMCommand10.setForeground(new Color(51, 153, 0));
 		lblMCommand10.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand10.setBounds(10, 50, 530, 14);
 		panel_11.add(lblMCommand10);
-		
+
 		lblMCommand11 = new JLabel("_");
 		lblMCommand11.setForeground(new Color(51, 153, 0));
 		lblMCommand11.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand11.setBounds(10, 30, 530, 14);
 		panel_11.add(lblMCommand11);
-		
-		 lblMCommand12 = new JLabel("_");
+
+		lblMCommand12 = new JLabel("_");
 		lblMCommand12.setForeground(new Color(51, 153, 0));
 		lblMCommand12.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMCommand12.setBounds(10, 11, 530, 14);
 		panel_11.add(lblMCommand12);
-		
+
 		JPanel panel_14 = new JPanel();
 		panel_14.setBounds(75, 46, 630, 664);
 		Material.add(panel_14);
+<<<<<<< HEAD
 		
 		
 	    
@@ -1705,21 +1630,63 @@ public class Invoice {
 		  txtSearchMaterial.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent arg0) {
+=======
+>>>>>>> branch 'master' of https://github.com/SignoreHappi/invoicia.git
 
-				}
-				@Override
-				public void keyPressed(KeyEvent enter) {
-					Database.SearchMaterial(enter, materialSearch);
-				}
-			});
-		
-		 Database.LoadMaterials();
-	      
-	      
-	      
-	      
-	      
-	      
+
+
+
+		materialTable= new DefaultTableModel(); 
+		JTable tableMaterial= new JTable(materialTable); 
+		materialTable.addColumn("Material Id");
+		materialTable.addColumn("Material Name");
+		materialTable.addColumn("Material Type");
+		materialTable.addColumn("Material Cost");
+
+
+		JPanel materialTablePanel = new JPanel();
+		materialTablePanel.setBounds(84, 5, 462, 412);
+
+		materialTablePanel.add(new JScrollPane(tableMaterial));
+		materialTablePanel.setVisible(true);
+		panel_14.setLayout(null);
+		tableMaterial.setSize(600, 800);
+		panel_14.add(materialTablePanel);
+
+		txtSearchMaterial = new JTextField();
+		txtSearchMaterial.setBounds(254, 475, 96, 19);
+		panel_14.add(txtSearchMaterial);
+		txtSearchMaterial.setColumns(10);
+
+
+		JButton btnUpdateTable = new JButton("Update Table");
+		btnUpdateTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Database.LoadMaterials();
+			}
+		});
+		btnUpdateTable.setBounds(265, 515, 155, 41);
+		panel_14.add(btnUpdateTable);
+
+		txtSearchMaterial.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+
+			}
+			@Override
+			public void keyPressed(KeyEvent enter) {
+				Database.SearchMaterial(enter, materialSearch);
+			}
+		});
+
+		Database.LoadMaterials();
+
+
+
+
+
+
 		JPanel Rhynestones = new JPanel();
 		tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
 
@@ -1791,7 +1758,7 @@ public class Invoice {
 	}
 
 	protected void Fill() {
-		
+
 		ma[0] = txtMC1.getText();
 		ma[1] = txtMC2.getText();
 		ma[2] = txtMC3.getText();
@@ -1802,7 +1769,7 @@ public class Invoice {
 		ma[7] = txtMC8.getText();
 		ma[8] = txtMC9.getText();
 		ma[9] = txtMC10.getText();
-		
+
 		me[0] = txtMM1.getText();
 		me[1] = txtMM2.getText();
 		me[2] = txtMM3.getText();
@@ -1813,8 +1780,8 @@ public class Invoice {
 		me[7] = txtMM8.getText();
 		me[8] = txtMM9.getText();
 		me[9] = txtMM10.getText();
-		
-//		output("0",ma + "");
+
+		//		output("0",ma + "");
 	}
 	private void Filli() {
 
@@ -1886,7 +1853,7 @@ public class Invoice {
 			lblCommand1.setText(text);
 		}
 	}
-	
+
 	public void mOutput(String catagory, String text) {
 		text = "{" + catagory + "}- " + text;
 
@@ -1923,7 +1890,7 @@ public class Invoice {
 			lblMCommand1.setText(text);
 		}
 	}
-	
+
 	public void material(){
 		double answer = 0;
 		for(int i = 0; i < 10; i++) {
@@ -1933,39 +1900,39 @@ public class Invoice {
 		}
 		lbsMaterial.setText("" + money.format(answer));
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 
 
 
 
 
-//-----------------------------------------------------------------------------------------------// R E A D A //-------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//-----------------------------------------------------------------------------------------------// R E A D A //-------------------------------------------------------
 
 
 	public void reada(String x) throws IOException {
@@ -2102,7 +2069,7 @@ public class Invoice {
 						}else if(strCurrentLine.equals("K")){
 							strCurrentLine = br.readLine();
 							spnK.setValue(Double.parseDouble(strCurrentLine));
-//							output("", (strCurrentLine));
+							//							output("", (strCurrentLine));
 							strCurrentLine = br.readLine();
 
 
@@ -2187,7 +2154,7 @@ public class Invoice {
 							if(oe[1].isEmpty()) {oe[1] = "0";}
 							if(oe[2].isEmpty()) {oe[2] = "0";}
 
-//							output("0","end");
+							//							output("0","end");
 							Filli();
 
 
