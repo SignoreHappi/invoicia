@@ -113,11 +113,13 @@ public class Database {
 		//In case the user uses , instead of . the program will replace it
 		String newCost = cost.replace(",", ".");		
 		
+		double dCost = Double.parseDouble(newCost);
+		
 		try{
 			connect = DBConnect.connectDB();
 			PreparedStatement pstmt = connect.prepareStatement(cmd);			
 			pstmt.setString(1, name);
-            pstmt.setString(2, newCost);
+            pstmt.setDouble(2, dCost);
             pstmt.setString(3, type);
             pstmt.executeUpdate();
             return true;
@@ -179,7 +181,6 @@ public class Database {
 		Invoice.materialTable.setRowCount(0);
 
 		char typed = enter.getKeyChar();
-//		String letter = typed.substring(55, 56);
 		if(typed == 'a' || typed == 'b' || typed == 'c' || typed == 'd' || typed == 'e'||  typed == 'f' || typed == 'g' || typed == 'h' || typed == 'i' || typed == 'j' || typed == 'k' || typed == 'l' || typed == 'm' || typed == 'n' || typed == 'o' || typed == 'p' || typed == 'q' || typed == 'r' || typed == 's' || typed == 't' || typed == 'u' || typed == 'v' || typed == 'w' || typed == 'x' || typed == 'y' || typed == 'z' ||  
 		   typed == 'A' || typed == 'B' || typed == 'C' || typed == 'D' || typed == 'E'||  typed == 'F' || typed == 'G' || typed == 'H' || typed == 'I' || typed == 'J' || typed == 'K' || typed == 'L' || typed == 'M' || typed == 'N' || typed == 'O' || typed == 'P' || typed == 'Q' || typed == 'R' || typed == 'S' || typed == 'T' || typed == 'U' || typed == 'V' || typed == 'W' || typed == 'X' || typed == 'Y' || typed == 'Z' ||
 		   typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
@@ -234,5 +235,56 @@ public class Database {
 	public static void EditInvoice(String code) {
 		
 		
+	}
+
+	public static void LoadClients() {
+		Invoice.clientsTable.setRowCount(0);
+		String cmd = "SELECT * FROM studio";
+		int id, costumes;
+		String address, email, owner, phone, name;
+		double bill = 0;
+		
+		
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			//Create the code
+			stmt = connect.createStatement();
+			//Execute the code
+			stmt.executeQuery(cmd);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmd);
+			//While there's code to be executes, do something
+			while(rs.next()) {
+				
+				id = rs.getInt("studio_id");
+				costumes = rs.getInt("studio_costumes");
+				
+				address = rs.getString("studio_address");
+				email = rs.getString("studio_email");
+				owner = rs.getString("studio_owner");
+				phone = rs.getString("studio_phone");
+				name = rs.getString("studio_name");
+				
+				bill = rs.getDouble("studio_bill");
+				
+				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
+						 + " . " + phone + " . " + email);
+				
+//				Invoice.clientsTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), Integer.toString(costumes), 
+//						address, email, owner, phone, name, Double.toString(bill)});
+			}
+
+		//If there's some error, return it
+		} catch (SQLException e) {
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}		
 	}	
 }

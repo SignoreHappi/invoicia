@@ -224,6 +224,10 @@ public class Invoice {
 	public static JTextField txtSearchMaterial;
 	public static String materialSearch = null;
 	
+	
+	public static DefaultTableModel clientsTable;
+	public static String clientsSearch = null;
+	
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
@@ -1365,7 +1369,7 @@ public class Invoice {
 		d.addColumn("ONE");
 		table.setModel(new DefaultTableModel(
 				new Object[][] {
-					{"Name", "№ Costumes", "Total Bill", "Owner", "Address", "Phone Number", "Email Address"},
+					{"ID", "Name", "№ Costumes", "Total Bill", "Owner", "Address", "Phone Number", "Email Address"},
 					{"Kids In Dance", "0", "0", "Corinne Moore", "100 Penn Dr. Toronto ON, CANADA   L6S 3B3 Unit 5 ", "(416) 571-4863", "corinne.moore@kidsindance.com"},
 					{"Evolve Dance Centre", "0", "0", "Katie Martin", null, null, null},
 					{null, null, null, null, null, null, null},
@@ -1386,7 +1390,35 @@ public class Invoice {
 		table.getColumnModel().getColumn(4).setPreferredWidth(280);
 		//		table.getColumnModel().getColumn(5).setPreferredWidth(1);
 		table.getColumnModel().getColumn(6).setPreferredWidth(261);
-		Clients.add(table);
+		
+		JPanel panel_15 = new JPanel();
+		panel_15.setBackground(Color.WHITE);
+		panel_15.setBounds(0, 266, 1517, 245);
+		Clients.add(panel_15);
+		
+		clientsTable= new DefaultTableModel(); 
+		JTable tableClients= new JTable(clientsTable); 
+		clientsTable.addColumn("ID");
+		clientsTable.addColumn("Name");
+		clientsTable.addColumn("Costumes");
+		clientsTable.addColumn("Total Bill");
+		clientsTable.addColumn("Owner");
+		clientsTable.addColumn("Address");
+		clientsTable.addColumn("Phone Number");
+		clientsTable.addColumn("Email Address");
+
+		
+		JPanel clientsTablePanel = new JPanel();
+		clientsTablePanel.setBounds(0, 5, 1507, 506);
+		
+		clientsTablePanel.add(new JScrollPane(tableClients));
+		clientsTablePanel.setVisible(true);
+		panel_15.setLayout(null);
+		panel_15.add(clientsTablePanel);
+		Clients.add(clientsTablePanel);
+
+		Database.LoadClients();
+
 
 		txtStudio = new JTextField();
 		txtStudio.setBounds(130, 626, 225, 20);
@@ -1477,6 +1509,11 @@ public class Invoice {
 		spinner_1.setBounds(283, 583, 29, 20);
 		Clients.add(spinner_1);
 
+
+		
+		
+		
+		
 		JPanel Material = new JPanel();       
 		Material.setBackground(new Color(255, 204, 255));
 		tabbedPane.addTab("Material", new ImageIcon(Invoice.class.getResource("/images/icon-fabric.png")), Material, null);
@@ -1633,33 +1670,33 @@ public class Invoice {
 	    
 		
 		materialTable= new DefaultTableModel(); 
-		  JTable tableMaterial= new JTable(materialTable); 
-		  materialTable.addColumn("Material Id");
-		  materialTable.addColumn("Material Name");
-		  materialTable.addColumn("Material Type");
-		  materialTable.addColumn("Material Cost");
+		JTable tableMaterial= new JTable(materialTable); 
+		materialTable.addColumn("Material Id");
+		materialTable.addColumn("Material Name");
+		materialTable.addColumn("Material Type");
+		materialTable.addColumn("Material Cost");
 		  
 		  
-		  JPanel materialTablePanel = new JPanel();
-		  materialTablePanel.setBounds(84, 5, 462, 412);
+		JPanel materialTablePanel = new JPanel();
+		materialTablePanel.setBounds(84, 5, 462, 412);
 		  
-		  materialTablePanel.add(new JScrollPane(tableMaterial));
-		  materialTablePanel.setVisible(true);
-		  panel_14.setLayout(null);
-		  tableMaterial.setSize(600, 800);
-		  panel_14.add(materialTablePanel);
+		materialTablePanel.add(new JScrollPane(tableMaterial));
+		materialTablePanel.setVisible(true);
+		panel_14.setLayout(null);
+		tableMaterial.setSize(600, 800);
+		panel_14.add(materialTablePanel);
 		  
-		  txtSearchMaterial = new JTextField();
-		  txtSearchMaterial.setBounds(254, 475, 96, 19);
-		  panel_14.add(txtSearchMaterial);
-		  txtSearchMaterial.setColumns(10);
+		txtSearchMaterial = new JTextField();
+		txtSearchMaterial.setBounds(254, 475, 96, 19);
+		panel_14.add(txtSearchMaterial);
+		txtSearchMaterial.setColumns(10);
+		
 		  
-		  
-		  JButton btnUpdateTable = new JButton("Update Table");
-		  btnUpdateTable.addMouseListener(new MouseAdapter() {
-		  	@Override
-		  	public void mouseClicked(MouseEvent e) {
-		  		Database.LoadMaterials();
+		JButton btnUpdateTable = new JButton("Update Table");
+		btnUpdateTable.addMouseListener(new MouseAdapter() {
+			@Override
+		public void mouseClicked(MouseEvent e) {
+			Database.LoadMaterials();
 		  	}
 		  });
 		  btnUpdateTable.setBounds(265, 515, 155, 41);
