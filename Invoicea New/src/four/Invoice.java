@@ -223,15 +223,11 @@ public class Invoice {
 	public static Connection connect;
 	public static JTextField txtSearchMaterial;
 	public static String materialSearch = null;
-<<<<<<< HEAD
-	
-	
+
+
 	public static DefaultTableModel clientsTable;
 	public static String clientsSearch = null;
-	
-=======
 
->>>>>>> branch 'master' of https://github.com/SignoreHappi/invoicia.git
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
@@ -1313,12 +1309,12 @@ public class Invoice {
 		table.getColumnModel().getColumn(4).setPreferredWidth(280);
 		//		table.getColumnModel().getColumn(5).setPreferredWidth(1);
 		table.getColumnModel().getColumn(6).setPreferredWidth(261);
-		
+
 		JPanel panel_15 = new JPanel();
 		panel_15.setBackground(Color.WHITE);
 		panel_15.setBounds(0, 266, 1517, 245);
 		Clients.add(panel_15);
-		
+
 		clientsTable= new DefaultTableModel(); 
 		JTable tableClients= new JTable(clientsTable); 
 		clientsTable.addColumn("ID");
@@ -1330,10 +1326,10 @@ public class Invoice {
 		clientsTable.addColumn("Phone Number");
 		clientsTable.addColumn("Email Address");
 
-		
+
 		JPanel clientsTablePanel = new JPanel();
 		clientsTablePanel.setBounds(0, 5, 1507, 506);
-		
+
 		clientsTablePanel.add(new JScrollPane(tableClients));
 		clientsTablePanel.setVisible(true);
 		panel_15.setLayout(null);
@@ -1433,10 +1429,10 @@ public class Invoice {
 		Clients.add(spinner_1);
 
 
-		
-		
-		
-		
+
+
+
+
 		JPanel Material = new JPanel();       
 		Material.setBackground(new Color(255, 204, 255));
 		tabbedPane.addTab("Material", new ImageIcon(Invoice.class.getResource("/images/icon-fabric.png")), Material, null);
@@ -1589,49 +1585,6 @@ public class Invoice {
 		JPanel panel_14 = new JPanel();
 		panel_14.setBounds(75, 46, 630, 664);
 		Material.add(panel_14);
-<<<<<<< HEAD
-		
-		
-	    
-		
-		materialTable= new DefaultTableModel(); 
-		JTable tableMaterial= new JTable(materialTable); 
-		materialTable.addColumn("Material Id");
-		materialTable.addColumn("Material Name");
-		materialTable.addColumn("Material Type");
-		materialTable.addColumn("Material Cost");
-		  
-		  
-		JPanel materialTablePanel = new JPanel();
-		materialTablePanel.setBounds(84, 5, 462, 412);
-		  
-		materialTablePanel.add(new JScrollPane(tableMaterial));
-		materialTablePanel.setVisible(true);
-		panel_14.setLayout(null);
-		tableMaterial.setSize(600, 800);
-		panel_14.add(materialTablePanel);
-		  
-		txtSearchMaterial = new JTextField();
-		txtSearchMaterial.setBounds(254, 475, 96, 19);
-		panel_14.add(txtSearchMaterial);
-		txtSearchMaterial.setColumns(10);
-		
-		  
-		JButton btnUpdateTable = new JButton("Update Table");
-		btnUpdateTable.addMouseListener(new MouseAdapter() {
-			@Override
-		public void mouseClicked(MouseEvent e) {
-			Database.LoadMaterials();
-		  	}
-		  });
-		  btnUpdateTable.setBounds(265, 515, 155, 41);
-		  panel_14.add(btnUpdateTable);
-		  
-		  txtSearchMaterial.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyTyped(KeyEvent arg0) {
-=======
->>>>>>> branch 'master' of https://github.com/SignoreHappi/invoicia.git
 
 
 
@@ -1666,6 +1619,46 @@ public class Invoice {
 				Database.LoadMaterials();
 			}
 		});
+
+		btnUpdateTable.setBounds(265, 515, 155, 41);
+		panel_14.add(btnUpdateTable);
+
+		txtSearchMaterial.addKeyListener(new KeyAdapter() {
+			//@Override
+			public void keyTyped(KeyEvent arg0) {
+
+			}});
+
+		materialTable= new DefaultTableModel(); 
+		JTable tableMaterial1= new JTable(materialTable); 
+		materialTable.addColumn("Material Id");
+		materialTable.addColumn("Material Name");
+		materialTable.addColumn("Material Type");
+		materialTable.addColumn("Material Cost");
+
+
+		JPanel materialTablePanel1 = new JPanel();
+		materialTablePanel.setBounds(84, 5, 462, 412);
+
+		materialTablePanel.add(new JScrollPane(tableMaterial));
+		materialTablePanel.setVisible(true);
+		panel_14.setLayout(null);
+		tableMaterial.setSize(600, 800);
+		panel_14.add(materialTablePanel);
+
+		txtSearchMaterial = new JTextField();
+		txtSearchMaterial.setBounds(254, 475, 96, 19);
+		panel_14.add(txtSearchMaterial);
+		txtSearchMaterial.setColumns(10);
+
+
+		JButton btnUpdateTable1 = new JButton("Update Table");
+		btnUpdateTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Database.LoadMaterials();
+			}
+		});
 		btnUpdateTable.setBounds(265, 515, 155, 41);
 		panel_14.add(btnUpdateTable);
 
@@ -1681,6 +1674,7 @@ public class Invoice {
 		});
 
 		Database.LoadMaterials();
+
 
 
 
@@ -2274,4 +2268,5 @@ public class Invoice {
 
 		} catch (IOException e) {  e.printStackTrace();  }
 	}
+
 }
