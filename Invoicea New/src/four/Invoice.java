@@ -49,11 +49,14 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
+import com.sun.javafx.tk.ImageLoader;
+
 import database.DBConnect;
 import database.Database;
 
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -225,9 +228,9 @@ public class Invoice {
 	public static String materialSearch = null;
 
 
+
 	public static DefaultTableModel clientsTable;
 	public static String clientsSearch = null;
-
 
 	/**
 	 * Launch the application.
@@ -272,8 +275,8 @@ public class Invoice {
 	 */
 	private void initialize() {
 
-		//		inventoryScreen = ImageLoader.loadImage("/textures/Inventory.png");
-		dancer = ImageLoader.loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
+		////		inventoryScreen = ImageLoader.loadImage("/textures/Iventory.png");
+//		dancer = loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -1335,7 +1338,7 @@ public class Invoice {
 		clientsTablePanel.setVisible(true);
 		panel_15.setLayout(null);
 		panel_15.add(clientsTablePanel);
-		Clients.add(clientsTablePanel);
+		Clients.add(panel_15);
 
 		Database.LoadClients();
 
@@ -1602,11 +1605,13 @@ public class Invoice {
 		tableMaterial.setSize(600, 800);
 		panel_14.add(materialTablePanel);
 
+		
 		txtSearchMaterial = new JTextField();
 		txtSearchMaterial.setBounds(254, 475, 96, 19);
 		panel_14.add(txtSearchMaterial);
 		txtSearchMaterial.setColumns(10);
 
+		Database.LoadMaterials();
 
 		JButton btnUpdateTable = new JButton("Update Table");
 		btnUpdateTable.addMouseListener(new MouseAdapter() {
@@ -1615,11 +1620,12 @@ public class Invoice {
 				Database.LoadMaterials();
 			}
 		});
+
 		btnUpdateTable.setBounds(265, 515, 155, 41);
 		panel_14.add(btnUpdateTable);
 
 		txtSearchMaterial.addKeyListener(new KeyAdapter() {
-			@Override
+			//@Override
 			public void keyTyped(KeyEvent arg0) {
 			}});
 			
@@ -1674,11 +1680,8 @@ public class Invoice {
 
 
 
-
-
-
-				JPanel Rhynestones = new JPanel();
-				tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
+		JPanel Rhynestones = new JPanel();
+		tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
 
 				Settings = new JPanel();
 				tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
@@ -1848,6 +1851,15 @@ public class Invoice {
 		lbsMaterial.setText("" + money.format(answer));
 	}
 
+//	public static BufferedImage loadImage(String path) {
+//		try {
+//			return ImageIO.read(ImageLoader.class.getResource(path));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			System.exit(1);
+//		}
+//		return null;
+//	}
 
 
 
@@ -2221,6 +2233,5 @@ public class Invoice {
 
 		} catch (IOException e) {  e.printStackTrace();  }
 	}
-
 
 }

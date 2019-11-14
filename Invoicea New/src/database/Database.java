@@ -197,7 +197,7 @@ public class Database {
 			}			
 		}
 		
-		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && materialSearch.length() > 0) {
 			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
 		}
 		
