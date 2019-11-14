@@ -228,6 +228,8 @@ public class Invoice {
 
 	public static DefaultTableModel clientsTable;
 	public static String clientsSearch = null;
+	
+	public static String cmdMaterialSearch = null;
 
 	/**
 	 * Launch the application.
@@ -1585,7 +1587,12 @@ public class Invoice {
 
 
 
-		materialTable= new DefaultTableModel(); 
+		materialTable= new DefaultTableModel(){ 
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}};
+		
 		JTable tableMaterial= new JTable(materialTable); 
 		materialTable.addColumn("Material Id");
 		materialTable.addColumn("Material Name");
@@ -1626,7 +1633,7 @@ public class Invoice {
 			public void keyTyped(KeyEvent arg0) {
 			}
 				public void keyPressed(KeyEvent arg0) {
-					Database.SearchMaterial(arg0, materialSearch);
+					Database.SearchMaterial(arg0, materialSearch, cmdMaterialSearch);
 				}
 			});
 
