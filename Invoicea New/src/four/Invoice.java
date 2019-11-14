@@ -225,6 +225,7 @@ public class Invoice {
 	public static String materialSearch = null;
 
 
+
 	public static DefaultTableModel clientsTable;
 	public static String clientsSearch = null;
 
@@ -1334,7 +1335,7 @@ public class Invoice {
 		clientsTablePanel.setVisible(true);
 		panel_15.setLayout(null);
 		panel_15.add(clientsTablePanel);
-		Clients.add(clientsTablePanel);
+		Clients.add(panel_15);
 
 		Database.LoadClients();
 
@@ -1427,11 +1428,6 @@ public class Invoice {
 		JSpinner spinner_1 = new JSpinner();
 		spinner_1.setBounds(283, 583, 29, 20);
 		Clients.add(spinner_1);
-
-
-
-
-
 
 		JPanel Material = new JPanel();       
 		Material.setBackground(new Color(255, 204, 255));
@@ -1606,11 +1602,13 @@ public class Invoice {
 		tableMaterial.setSize(600, 800);
 		panel_14.add(materialTablePanel);
 
+		
 		txtSearchMaterial = new JTextField();
 		txtSearchMaterial.setBounds(254, 475, 96, 19);
 		panel_14.add(txtSearchMaterial);
 		txtSearchMaterial.setColumns(10);
 
+		Database.LoadMaterials();
 
 		JButton btnUpdateTable = new JButton("Update Table");
 		btnUpdateTable.addMouseListener(new MouseAdapter() {
@@ -1626,113 +1624,67 @@ public class Invoice {
 		txtSearchMaterial.addKeyListener(new KeyAdapter() {
 			//@Override
 			public void keyTyped(KeyEvent arg0) {
-
-			}});
-
-		materialTable= new DefaultTableModel(); 
-		JTable tableMaterial1= new JTable(materialTable); 
-		materialTable.addColumn("Material Id");
-		materialTable.addColumn("Material Name");
-		materialTable.addColumn("Material Type");
-		materialTable.addColumn("Material Cost");
-
-
-		JPanel materialTablePanel1 = new JPanel();
-		materialTablePanel.setBounds(84, 5, 462, 412);
-
-		materialTablePanel.add(new JScrollPane(tableMaterial));
-		materialTablePanel.setVisible(true);
-		panel_14.setLayout(null);
-		tableMaterial.setSize(600, 800);
-		panel_14.add(materialTablePanel);
-
-		txtSearchMaterial = new JTextField();
-		txtSearchMaterial.setBounds(254, 475, 96, 19);
-		panel_14.add(txtSearchMaterial);
-		txtSearchMaterial.setColumns(10);
-
-
-		JButton btnUpdateTable1 = new JButton("Update Table");
-		btnUpdateTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Database.LoadMaterials();
 			}
-		});
-		btnUpdateTable.setBounds(265, 515, 155, 41);
-		panel_14.add(btnUpdateTable);
-
-		txtSearchMaterial.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-
-			}
-			@Override
-			public void keyPressed(KeyEvent enter) {
-				Database.SearchMaterial(enter, materialSearch);
-			}
-		});
-
-		Database.LoadMaterials();
-
-
-
-
+				public void keyPressed(KeyEvent arg0) {
+					Database.SearchMaterial(arg0, materialSearch);
+				}
+			});
 
 
 
 		JPanel Rhynestones = new JPanel();
 		tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
 
-		Settings = new JPanel();
-		tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
-		Settings.setLayout(null);
+				Settings = new JPanel();
+				tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
+				Settings.setLayout(null);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 204, 153));
-		panel.setBounds(10, 11, 181, 52);
-		Settings.add(panel);
-		panel.setLayout(null);
+				JPanel panel = new JPanel();
+				panel.setBackground(new Color(255, 204, 153));
+				panel.setBounds(10, 11, 181, 52);
+				Settings.add(panel);
+				panel.setLayout(null);
 
-		JButton btnDirectoryUpdate = new JButton("Directory Update");
-		btnDirectoryUpdate.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				try {
-					Warning WarnUpdate = new Warning();
-					WarnUpdate.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		btnDirectoryUpdate.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-		btnDirectoryUpdate.setBounds(10, 11, 161, 29);
-		panel.add(btnDirectoryUpdate);
+				JButton btnDirectoryUpdate = new JButton("Directory Update");
+				btnDirectoryUpdate.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+						try {
+							Warning WarnUpdate = new Warning();
+							WarnUpdate.frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				btnDirectoryUpdate.setFont(new Font("Sitka Text", Font.PLAIN, 15));
+				btnDirectoryUpdate.setBounds(10, 11, 161, 29);
+				panel.add(btnDirectoryUpdate);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBackground(new Color(255, 204, 153));
-		panel_2.setBounds(10, 74, 181, 52);
-		Settings.add(panel_2);
+				JPanel panel_2 = new JPanel();
+				panel_2.setLayout(null);
+				panel_2.setBackground(new Color(255, 204, 153));
+				panel_2.setBounds(10, 74, 181, 52);
+				Settings.add(panel_2);
 
-		JButton button = new JButton("Tutorial");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Tutorial tutorial = new Tutorial();
-					tutorial.frame.setVisible(true);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		button.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-		button.setBounds(10, 11, 161, 29);
-		panel_2.add(button);
-
-	}
+				JButton button = new JButton("Tutorial");
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							Tutorial tutorial = new Tutorial();
+							tutorial.frame.setVisible(true);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+				button.setFont(new Font("Sitka Text", Font.PLAIN, 15));
+				button.setBounds(10, 11, 161, 29);
+				panel_2.add(button);
+			
+		}
+	
 
 	private void math() {
 
