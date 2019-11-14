@@ -199,7 +199,7 @@ public class Database {
 				Invoice.materialSearch = Invoice.materialSearch + Character.toString(typed);
 			}			
 			
-			if(Invoice.searching == "id") {
+			if(Invoice.searching == "id") {//fuck u daniel
 				Invoice.cmdMaterialSearch = "SELECT * FROM material WHERE material_id LIKE " +"\"" + Invoice.materialSearch + "%\"";
 			}else if(Invoice.searching == "name") {
 				Invoice.cmdMaterialSearch = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\"";									
