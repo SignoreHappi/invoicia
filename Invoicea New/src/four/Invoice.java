@@ -1625,14 +1625,14 @@ public class Invoice {
 			
 
 				materialTable= new DefaultTableModel(); 
-				JTable tableMaterial1= new JTable(materialTable); 
+//				JTable tableMaterial1= new JTable(materialTable); 
 				materialTable.addColumn("Material Id");
 				materialTable.addColumn("Material Name");
 				materialTable.addColumn("Material Type");
 				materialTable.addColumn("Material Cost");
 
 
-				JPanel materialTablePanel1 = new JPanel();
+//				JPanel materialTablePanel1 = new JPanel();
 				materialTablePanel.setBounds(84, 5, 462, 412);
 
 				materialTablePanel.add(new JScrollPane(tableMaterial));
@@ -1651,7 +1651,9 @@ public class Invoice {
 				btnUpdateTable.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						mOutput("Test", "Updating Table");
 						Database.LoadMaterials();
+						mOutput("Test", "Table Updated");
 					}
 				});
 				btnUpdateTable.setBounds(265, 515, 155, 41);
@@ -1682,50 +1684,6 @@ public class Invoice {
 				tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
 				Settings.setLayout(null);
 
-				JPanel panel = new JPanel();
-				panel.setBackground(new Color(255, 204, 153));
-				panel.setBounds(10, 11, 181, 52);
-				Settings.add(panel);
-				panel.setLayout(null);
-
-				JButton btnDirectoryUpdate = new JButton("Directory Update");
-				btnDirectoryUpdate.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent arg0) {
-						try {
-							Warning WarnUpdate = new Warning();
-							WarnUpdate.frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				btnDirectoryUpdate.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-				btnDirectoryUpdate.setBounds(10, 11, 161, 29);
-				panel.add(btnDirectoryUpdate);
-
-				JPanel panel_2 = new JPanel();
-				panel_2.setLayout(null);
-				panel_2.setBackground(new Color(255, 204, 153));
-				panel_2.setBounds(10, 74, 181, 52);
-				Settings.add(panel_2);
-
-				JButton button = new JButton("Tutorial");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						try {
-							Tutorial tutorial = new Tutorial();
-							tutorial.frame.setVisible(true);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
-				button.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-				button.setBounds(10, 11, 161, 29);
-				panel_2.add(button);
-			
 		}
 	
 
