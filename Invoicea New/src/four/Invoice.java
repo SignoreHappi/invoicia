@@ -49,11 +49,13 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
+
 import database.DBConnect;
 import database.Database;
 
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -274,8 +276,8 @@ public class Invoice {
 	 */
 	private void initialize() {
 
-		//		inventoryScreen = ImageLoader.loadImage("/textures/Inventory.png");
-		dancer = ImageLoader.loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
+		////		inventoryScreen = ImageLoader.loadImage("/textures/Iventory.png");
+//		dancer = loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -1637,6 +1639,56 @@ public class Invoice {
 				}
 			});
 
+			
+
+				materialTable= new DefaultTableModel(); 
+//				JTable tableMaterial1= new JTable(materialTable); 
+				materialTable.addColumn("Material Id");
+				materialTable.addColumn("Material Name");
+				materialTable.addColumn("Material Type");
+				materialTable.addColumn("Material Cost");
+
+
+//				JPanel materialTablePanel1 = new JPanel();
+				materialTablePanel.setBounds(84, 5, 462, 412);
+
+				materialTablePanel.add(new JScrollPane(tableMaterial));
+				materialTablePanel.setVisible(true);
+				panel_14.setLayout(null);
+				tableMaterial.setSize(600, 800);
+				panel_14.add(materialTablePanel);
+
+				txtSearchMaterial = new JTextField();
+				txtSearchMaterial.setBounds(254, 475, 96, 19);
+				panel_14.add(txtSearchMaterial);
+				txtSearchMaterial.setColumns(10);
+
+
+				JButton btnUpdateTable1 = new JButton("Update Table");
+				btnUpdateTable.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						mOutput("Test", "Updating Table");
+						Database.LoadMaterials();
+						mOutput("Test", "Table Updated");
+					}
+				});
+				btnUpdateTable.setBounds(265, 515, 155, 41);
+				panel_14.add(btnUpdateTable);
+
+				txtSearchMaterial.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyTyped(KeyEvent arg0) {
+
+					}
+					@Override
+					public void keyPressed(KeyEvent enter) {
+						Database.SearchMaterial(enter, materialSearch, cmdMaterialSearch);
+					}
+				});
+
+				Database.LoadMaterials();
+
 
 
 		JPanel Rhynestones = new JPanel();
@@ -1646,50 +1698,6 @@ public class Invoice {
 				tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
 				Settings.setLayout(null);
 
-				JPanel panel = new JPanel();
-				panel.setBackground(new Color(255, 204, 153));
-				panel.setBounds(10, 11, 181, 52);
-				Settings.add(panel);
-				panel.setLayout(null);
-
-				JButton btnDirectoryUpdate = new JButton("Directory Update");
-				btnDirectoryUpdate.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent arg0) {
-						try {
-							Warning WarnUpdate = new Warning();
-							WarnUpdate.frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				btnDirectoryUpdate.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-				btnDirectoryUpdate.setBounds(10, 11, 161, 29);
-				panel.add(btnDirectoryUpdate);
-
-				JPanel panel_2 = new JPanel();
-				panel_2.setLayout(null);
-				panel_2.setBackground(new Color(255, 204, 153));
-				panel_2.setBounds(10, 74, 181, 52);
-				Settings.add(panel_2);
-
-				JButton button = new JButton("Tutorial");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						try {
-							Tutorial tutorial = new Tutorial();
-							tutorial.frame.setVisible(true);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
-				button.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-				button.setBounds(10, 11, 161, 29);
-				panel_2.add(button);
-			
 		}
 	
 
@@ -1854,6 +1862,15 @@ public class Invoice {
 		lbsMaterial.setText("" + money.format(answer));
 	}
 
+//	public static BufferedImage loadImage(String path) {
+//		try {
+//			return ImageIO.read(ImageLoader.class.getResource(path));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			System.exit(1);
+//		}
+//		return null;
+//	}
 
 
 

@@ -154,6 +154,9 @@ public class Database {
 			//For every possible execution, create a rs
 			ResultSet rs = stmt.executeQuery(cmd);
 			//While there's code to be executes, do something
+			
+			
+			
 			while(rs.next()) {
 
 				id = rs.getInt("material_id");
@@ -174,18 +177,20 @@ public class Database {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		}
+			}		
+		}
 	}
 
 	public static void SearchMaterial(KeyEvent enter, String materialSearch, String cmd) {
 		Invoice.materialTable.setRowCount(0);
+
 		char typed = enter.getKeyChar();
 		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && materialSearch.length() > 0) {
 			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
 		}
 		if(typed == 'a' || typed == 'b' || typed == 'c' || typed == 'd' || typed == 'e'||  typed == 'f' || typed == 'g' || typed == 'h' || typed == 'i' || typed == 'j' || typed == 'k' || typed == 'l' || typed == 'm' || typed == 'n' || typed == 'o' || typed == 'p' || typed == 'q' || typed == 'r' || typed == 's' || typed == 't' || typed == 'u' || typed == 'v' || typed == 'w' || typed == 'x' || typed == 'y' || typed == 'z' ||  
-				typed == 'A' || typed == 'B' || typed == 'C' || typed == 'D' || typed == 'E'||  typed == 'F' || typed == 'G' || typed == 'H' || typed == 'I' || typed == 'J' || typed == 'K' || typed == 'L' || typed == 'M' || typed == 'N' || typed == 'O' || typed == 'P' || typed == 'Q' || typed == 'R' || typed == 'S' || typed == 'T' || typed == 'U' || typed == 'V' || typed == 'W' || typed == 'X' || typed == 'Y' || typed == 'Z' ||
-				typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
+		   typed == 'A' || typed == 'B' || typed == 'C' || typed == 'D' || typed == 'E'||  typed == 'F' || typed == 'G' || typed == 'H' || typed == 'I' || typed == 'J' || typed == 'K' || typed == 'L' || typed == 'M' || typed == 'N' || typed == 'O' || typed == 'P' || typed == 'Q' || typed == 'R' || typed == 'S' || typed == 'T' || typed == 'U' || typed == 'V' || typed == 'W' || typed == 'X' || typed == 'Y' || typed == 'Z' ||
+		   typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0' || typed == '"') {
 			if(materialSearch == null) {
 				Invoice.materialSearch = Character.toString(typed);					
 				if(typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
@@ -218,7 +223,8 @@ public class Database {
 				name = rs.getString("material_name");
 				type = rs.getString("material_type");
 				cost = rs.getDouble("material_cost");
-
+//asdwasad
+//w
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, Double.toString(cost)});
 			}
