@@ -185,25 +185,31 @@ public class Database {
 		Invoice.materialTable.setRowCount(0);
 
 		char typed = enter.getKeyChar();
-		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && materialSearch.length() > 0) {
-			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
-		}
 		if(typed == 'a' || typed == 'b' || typed == 'c' || typed == 'd' || typed == 'e'||  typed == 'f' || typed == 'g' || typed == 'h' || typed == 'i' || typed == 'j' || typed == 'k' || typed == 'l' || typed == 'm' || typed == 'n' || typed == 'o' || typed == 'p' || typed == 'q' || typed == 'r' || typed == 's' || typed == 't' || typed == 'u' || typed == 'v' || typed == 'w' || typed == 'x' || typed == 'y' || typed == 'z' ||  
 		   typed == 'A' || typed == 'B' || typed == 'C' || typed == 'D' || typed == 'E'||  typed == 'F' || typed == 'G' || typed == 'H' || typed == 'I' || typed == 'J' || typed == 'K' || typed == 'L' || typed == 'M' || typed == 'N' || typed == 'O' || typed == 'P' || typed == 'Q' || typed == 'R' || typed == 'S' || typed == 'T' || typed == 'U' || typed == 'V' || typed == 'W' || typed == 'X' || typed == 'Y' || typed == 'Z' ||
-		   typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0' || typed == '"') {
+		   typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
 			if(materialSearch == null) {
 				Invoice.materialSearch = Character.toString(typed);					
 				if(typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
-					Invoice.cmdMaterialSearch = "SELECT * FROM material WHERE material_id LIKE " +"\"" + Invoice.materialSearch + "%\"";										
+					Invoice.searching = "id";
 				}else {
-					Invoice.cmdMaterialSearch = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\"";					
-				}				
+					Invoice.searching = "name";
+				}
 			}else {
 				Invoice.materialSearch = Invoice.materialSearch + Character.toString(typed);
 			}			
+			
+			if(Invoice.searching == "id") {
+				Invoice.cmdMaterialSearch = "SELECT * FROM material WHERE material_id LIKE " +"\"" + Invoice.materialSearch + "%\"";
+			}else if(Invoice.searching == "name") {
+				Invoice.cmdMaterialSearch = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\"";									
+			}
 		}
-
-		System.out.println(Invoice.cmdMaterialSearch);
+		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && materialSearch.length() > 0) {
+			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
+		}
+		System.out.println(Invoice.materialSearch);
+		System.out.println(cmd);
 		int id;
 		String name, type;
 		double cost;		
@@ -213,9 +219,9 @@ public class Database {
 			//Create the code
 			stmt = connect.createStatement();
 			//Execute the code
-			stmt.executeQuery(Invoice.cmdMaterialSearch);
+			stmt.executeQuery(Invoice.materialSearch);
 			//For every possible execution, create a rs
-			ResultSet rs = stmt.executeQuery(Invoice.cmdMaterialSearch);
+			ResultSet rs = stmt.executeQuery(Invoice.materialSearch);
 			//While there's code to be executes, do something
 			while(rs.next()) {
 
@@ -277,11 +283,11 @@ public class Database {
 
 				bill = rs.getDouble("studio_bill");
 
-				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
-						+ " . " + phone + " . " + email);
+//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
+//						+ " . " + phone + " . " + email);
 
-				//				Invoice.clientsTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), Integer.toString(costumes), 
-				//						address, email, owner, phone, name, Double.toString(bill)});
+//								Invoice.clientsTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), Integer.toString(costumes), 
+//										address, email, owner, phone, name, Double.toString(bill)});
 			}
 
 			//If there's some error, return it

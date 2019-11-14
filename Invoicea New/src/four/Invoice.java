@@ -232,7 +232,7 @@ public class Invoice {
 	public static String clientsSearch = null;
 	
 	public static String cmdMaterialSearch = null;
-
+	public static String searching = null;
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
