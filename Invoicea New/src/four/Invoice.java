@@ -230,7 +230,7 @@ public class Invoice {
 
 	public static DefaultTableModel clientsTable;
 	public static String clientsSearch = null;
-	
+
 	public static String cmdMaterialSearch = null;
 
 	/**
@@ -277,7 +277,7 @@ public class Invoice {
 	private void initialize() {
 
 		////		inventoryScreen = ImageLoader.loadImage("/textures/Iventory.png");
-//		dancer = loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
+		//		dancer = loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -1594,112 +1594,112 @@ public class Invoice {
 				//all cells false
 				return false;
 			}};
-		
-		JTable tableMaterial= new JTable(materialTable); 
-		materialTable.addColumn("Material Id");
-		materialTable.addColumn("Material Name");
-		materialTable.addColumn("Material Type");
-		materialTable.addColumn("Material Cost");
+
+			JTable tableMaterial= new JTable(materialTable); 
+			materialTable.addColumn("Material Id");
+			materialTable.addColumn("Material Name");
+			materialTable.addColumn("Material Type");
+			materialTable.addColumn("Material Cost");
 
 
-		JPanel materialTablePanel = new JPanel();
-		materialTablePanel.setBounds(84, 5, 462, 412);
+			JPanel materialTablePanel = new JPanel();
+			materialTablePanel.setBounds(84, 5, 462, 412);
 
-		materialTablePanel.add(new JScrollPane(tableMaterial));
-		materialTablePanel.setVisible(true);
-		panel_14.setLayout(null);
-		tableMaterial.setSize(600, 800);
-		panel_14.add(materialTablePanel);
+			materialTablePanel.add(new JScrollPane(tableMaterial));
+			materialTablePanel.setVisible(true);
+			panel_14.setLayout(null);
+			tableMaterial.setSize(600, 800);
+			panel_14.add(materialTablePanel);
 
-		
-		txtSearchMaterial = new JTextField();
-		txtSearchMaterial.setBounds(254, 475, 96, 19);
-		panel_14.add(txtSearchMaterial);
-		txtSearchMaterial.setColumns(10);
 
-		Database.LoadMaterials();
+			txtSearchMaterial = new JTextField();
+			txtSearchMaterial.setBounds(254, 475, 96, 19);
+			panel_14.add(txtSearchMaterial);
+			txtSearchMaterial.setColumns(10);
 
-		JButton btnUpdateTable = new JButton("Update Table");
-		btnUpdateTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Database.LoadMaterials();
-			}
-		});
+			Database.LoadMaterials();
 
-		btnUpdateTable.setBounds(265, 515, 155, 41);
-		panel_14.add(btnUpdateTable);
+			JButton btnUpdateTable = new JButton("Update Table");
+			btnUpdateTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Database.LoadMaterials();
+				}
+			});
 
-		txtSearchMaterial.addKeyListener(new KeyAdapter() {
-			//@Override
-			public void keyTyped(KeyEvent arg0) {
-			}
+			btnUpdateTable.setBounds(265, 515, 155, 41);
+			panel_14.add(btnUpdateTable);
+
+			txtSearchMaterial.addKeyListener(new KeyAdapter() {
+				//@Override
+				public void keyTyped(KeyEvent arg0) {
+				}
 				public void keyPressed(KeyEvent arg0) {
 					Database.SearchMaterial(arg0, materialSearch, cmdMaterialSearch);
 				}
 			});
 
-			
-
-				materialTable= new DefaultTableModel(); 
-//				JTable tableMaterial1= new JTable(materialTable); 
-				materialTable.addColumn("Material Id");
-				materialTable.addColumn("Material Name");
-				materialTable.addColumn("Material Type");
-				materialTable.addColumn("Material Cost");
 
 
-//				JPanel materialTablePanel1 = new JPanel();
-				materialTablePanel.setBounds(84, 5, 462, 412);
-
-				materialTablePanel.add(new JScrollPane(tableMaterial));
-				materialTablePanel.setVisible(true);
-				panel_14.setLayout(null);
-				tableMaterial.setSize(600, 800);
-				panel_14.add(materialTablePanel);
-
-				txtSearchMaterial = new JTextField();
-				txtSearchMaterial.setBounds(254, 475, 96, 19);
-				panel_14.add(txtSearchMaterial);
-				txtSearchMaterial.setColumns(10);
+			materialTable= new DefaultTableModel(); 
+			//				JTable tableMaterial1= new JTable(materialTable); 
+			materialTable.addColumn("Material Id");
+			materialTable.addColumn("Material Name");
+			materialTable.addColumn("Material Type");
+			materialTable.addColumn("Material Cost");
 
 
-				JButton btnUpdateTable1 = new JButton("Update Table");
-				btnUpdateTable.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						mOutput("Test", "Updating Table");
-						Database.LoadMaterials();
-						mOutput("Test", "Table Updated");
-					}
-				});
-				btnUpdateTable.setBounds(265, 515, 155, 41);
-				panel_14.add(btnUpdateTable);
+			//				JPanel materialTablePanel1 = new JPanel();
+			materialTablePanel.setBounds(84, 5, 462, 412);
 
-				txtSearchMaterial.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyTyped(KeyEvent arg0) {
+			materialTablePanel.add(new JScrollPane(tableMaterial));
+			materialTablePanel.setVisible(true);
+			panel_14.setLayout(null);
+			tableMaterial.setSize(600, 800);
+			panel_14.add(materialTablePanel);
 
-					}
-					@Override
-					public void keyPressed(KeyEvent enter) {
-						Database.SearchMaterial(enter, materialSearch, cmdMaterialSearch);
-					}
-				});
-
-				Database.LoadMaterials();
+			txtSearchMaterial = new JTextField();
+			txtSearchMaterial.setBounds(254, 475, 96, 19);
+			panel_14.add(txtSearchMaterial);
+			txtSearchMaterial.setColumns(10);
 
 
+			JButton btnUpdateTable1 = new JButton("Update Table");
+			btnUpdateTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					mOutput("Test", "Updating Table");
+					Database.LoadMaterials();
+					mOutput("Test", "Table Updated");
+				}
+			});
+			btnUpdateTable.setBounds(265, 515, 155, 41);
+			panel_14.add(btnUpdateTable);
 
-		JPanel Rhynestones = new JPanel();
-		tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
+			txtSearchMaterial.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
 
-				Settings = new JPanel();
-				tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
-				Settings.setLayout(null);
+				}
+				@Override
+				public void keyPressed(KeyEvent enter) {
+					Database.SearchMaterial(enter, materialSearch, cmdMaterialSearch);
+				}
+			});
 
-		}
-	
+			Database.LoadMaterials();
+
+
+
+			JPanel Rhynestones = new JPanel();
+			tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
+
+			Settings = new JPanel();
+			tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
+			Settings.setLayout(null);
+
+	}
+
 
 	private void math() {
 
@@ -1862,15 +1862,15 @@ public class Invoice {
 		lbsMaterial.setText("" + money.format(answer));
 	}
 
-//	public static BufferedImage loadImage(String path) {
-//		try {
-//			return ImageIO.read(ImageLoader.class.getResource(path));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			System.exit(1);
-//		}
-//		return null;
-//	}
+	//	public static BufferedImage loadImage(String path) {
+	//		try {
+	//			return ImageIO.read(ImageLoader.class.getResource(path));
+	//		} catch (IOException e) {
+	//			e.printStackTrace();
+	//			System.exit(1);
+	//		}
+	//		return null;
+	//	}
 
 
 
