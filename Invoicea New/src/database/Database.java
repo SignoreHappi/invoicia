@@ -293,13 +293,7 @@ public class Database {
 			//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
-		}finally {
-			try {
-				connect.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-		}		
+		}	
+		
 	}	
 }
