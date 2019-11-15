@@ -231,15 +231,14 @@ public class Invoice {
 	public static DefaultTableModel clientsTable;
 	public static String clientsSearch = null;
 
-	public static String cmdMaterialSearch = null;
 	public static String searching = null;
+	
+	public static int result = 0;
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
 	 */
 	public static void main(String[] args) throws SQLException {
-
-		//		Database.LoadMaterials();
 
 		try {
 			Invoice window = new Invoice();
@@ -849,7 +848,6 @@ public class Invoice {
 					studio_id = 4;
 					break;
 				}
-				output("Studio ID", " "+ studio_id );
 				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
 				LocalDateTime now = LocalDateTime.now();  
 
@@ -866,16 +864,20 @@ public class Invoice {
 					iYear++;
 					year = String.valueOf(iYear);
 				}
-
-
-				output("Month", " "+ month);
-				output("Year", " "+ iYear);
+				
+				result = 0;
 
 				int invoice_id = Database.HasInvoice(studio_id);
 				if(invoice_id == 0) {
-					Database.CreateNewInvoice(studio_id, iYear);
+					result = Database.CreateNewInvoice(studio_id, iYear);
 				}else {
-					Database.CreateInvoice(studio_id, invoice_id, iYear);
+					result = Database.CreateInvoice(studio_id, invoice_id, iYear);
+				}
+				
+				if(result == 1) {
+					output("Invoice:", "saved");
+				}else if(result == 2) {
+					output("Invoice:", "something went wrong");
 				}
 			}
 		});
@@ -1611,7 +1613,6 @@ public class Invoice {
 			tableMaterial.setSize(600, 800);
 			panel_14.add(materialTablePanel);
 
-
 			txtSearchMaterial = new JTextField();
 			txtSearchMaterial.setBounds(254, 475, 96, 19);
 			panel_14.add(txtSearchMaterial);
@@ -1635,59 +1636,13 @@ public class Invoice {
 				public void keyTyped(KeyEvent arg0) {
 				}
 				public void keyPressed(KeyEvent arg0) {
-					Database.SearchMaterial(arg0, materialSearch, cmdMaterialSearch);
+					Database.SearchMaterial(arg0, materialSearch);
 				}
 			});
 
 
 
-			materialTable= new DefaultTableModel(); 
-			//				JTable tableMaterial1= new JTable(materialTable); 
-			materialTable.addColumn("Material Id");
-			materialTable.addColumn("Material Name");
-			materialTable.addColumn("Material Type");
-			materialTable.addColumn("Material Cost");
-
-
-			//				JPanel materialTablePanel1 = new JPanel();
-			materialTablePanel.setBounds(84, 5, 462, 412);
-
-			materialTablePanel.add(new JScrollPane(tableMaterial));
-			materialTablePanel.setVisible(true);
-			panel_14.setLayout(null);
-			tableMaterial.setSize(600, 800);
-			panel_14.add(materialTablePanel);
-
-			txtSearchMaterial = new JTextField();
-			txtSearchMaterial.setBounds(254, 475, 96, 19);
-			panel_14.add(txtSearchMaterial);
-			txtSearchMaterial.setColumns(10);
-
-
-			JButton btnUpdateTable1 = new JButton("Update Table");
-			btnUpdateTable.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					mOutput("Test", "Updating Table");
-					Database.LoadMaterials();
-					mOutput("Test", "Table Updated");
-				}
-			});
-			btnUpdateTable.setBounds(265, 515, 155, 41);
-			panel_14.add(btnUpdateTable);
-
-			txtSearchMaterial.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyTyped(KeyEvent arg0) {
-
-				}
-				@Override
-				public void keyPressed(KeyEvent enter) {
-					Database.SearchMaterial(enter, materialSearch, cmdMaterialSearch);
-				}
-			});
-
-			Database.LoadMaterials();
+			
 
 
 
