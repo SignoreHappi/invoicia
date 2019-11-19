@@ -237,9 +237,13 @@ public class Invoice {
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
+	 * @throws IOException 
+	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, InterruptedException, IOException {
 
+//		Database.ExportDB();
+		
 		try {
 			Invoice window = new Invoice();
 			window.frame.setVisible(true);

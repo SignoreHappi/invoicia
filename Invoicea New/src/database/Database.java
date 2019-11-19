@@ -1,6 +1,7 @@
 package database;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,23 @@ public class Database {
 	public static Connection connect;
 	public static Statement stmt = null;
 
+	public static void ExportDB() throws InterruptedException, IOException {
+		String cmd = "mysqldump -h remotemysql.com -P 3306 -u ZYebHXfmH9 -p AIRtr96APu –database ZYebHXfmH9 > backup.sql";		
+		Process runtimeProcess =Runtime.getRuntime().exec(cmd);
+		int processComplete = runtimeProcess.waitFor();
+		if(processComplete == 0){
+
+		System.out.println("Backup taken successfully");
+
+		} else {
+
+		System.out.println("Could not take mysql backup");
+
+		}
+	}
+	
+	
+	
 	//Creates the code with the studio_id-year-invoic_id 
 	public static String CreateCode(int studio_id, int year, int invoice_id) {
 		String code = "0" + studio_id + "-" + year + "-00" + invoice_id;
