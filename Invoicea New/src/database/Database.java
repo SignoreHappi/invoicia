@@ -42,6 +42,7 @@ public class Database {
 			}
 			//If there's some error, return it
 		} catch (SQLException e) {
+			System.out.println("Has Invoice");
 			System.out.print(e);
 		}finally {
 			try {
@@ -56,7 +57,8 @@ public class Database {
 	}
 
 	//If the studio has no invoice, create a new one starting from studio_id 1
-	public static void CreateNewInvoice(int studio_id, int iYear) {
+	public static int CreateNewInvoice(int studio_id, int iYear) {
+		Invoice.result = 0;
 		String cmd = "INSERT INTO invoice(code, studio_id, invoice_id, year) VALUES(?,?,?, ?)";
 		String code = CreateCode(studio_id, iYear, 1);
 
@@ -71,19 +73,25 @@ public class Database {
 			//Update the DB
 			pstmt.executeUpdate();
 			System.out.println("Saved");
+			return 1;
 		} catch (SQLException e) {
+			System.out.println("Create New Invoice");
 			System.out.println(e.getMessage());
+			return 2;
 		}finally {
 			try {
 				connect.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		}
+			}		
+		}
+		
 	}
 
 	//If the studio has an invoice, create a new one with invoice_id+1
-	public static void CreateInvoice(int studio_id, int invoice_id, int iYear) {
+	public static int CreateInvoice(int studio_id, int invoice_id, int iYear) {
+		Invoice.result = 0;
 		String cmd = "INSERT INTO invoice(code, studio_id, invoice_id, year) VALUES(?, ?, ?, ?)";
 		int inv = invoice_id+1;
 		String code = CreateCode(studio_id, iYear, inv);
@@ -96,8 +104,11 @@ public class Database {
 			pstmt.setInt(4, iYear);
 			pstmt.executeUpdate();
 			System.out.print("Saved");
+			return 1;
 		} catch (SQLException e) {
+			System.out.println("Create Invoice");
 			System.out.println(e.getMessage());
+			return 2;
 		}finally {
 			try {
 				connect.close();
@@ -124,6 +135,7 @@ public class Database {
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
+			System.out.println("Create Material");
 			System.out.println(e.getMessage());
 			return false;
 		}finally {
@@ -132,7 +144,8 @@ public class Database {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		}
+			}		
+		}
 	}
 
 	public static void LoadMaterials(){
@@ -140,23 +153,23 @@ public class Database {
 		Invoice.txtSearchMaterial.setText("");;
 		String cmd = "SELECT * FROM material";
 		int id;
-		String name, type, sId, sCost;
+		String name, type;
 		double cost;
 
 
 		try {
 			//Create the code
 			connect = DBConnect.connectDB();
+			stmt = connect.prepareStatement(cmd);			
 			//Create the code
-			stmt = connect.createStatement();
 			//Execute the code
 			stmt.executeQuery(cmd);
 			//For every possible execution, create a rs
 			ResultSet rs = stmt.executeQuery(cmd);
 			//While there's code to be executes, do something
-			
-			
-			
+
+
+
 			while(rs.next()) {
 
 				id = rs.getInt("material_id");
@@ -170,6 +183,7 @@ public class Database {
 
 			//If there's some error, return it
 		} catch (SQLException e) {
+			System.out.println("Load Material");
 			System.out.print(e);
 		}finally {
 			try {
@@ -181,47 +195,45 @@ public class Database {
 		}
 	}
 
-	public static void SearchMaterial(KeyEvent enter, String materialSearch, String cmd) {
+	public static void SearchMaterial(KeyEvent enter, String materialSearch) {
 		Invoice.materialTable.setRowCount(0);
-
 		char typed = enter.getKeyChar();
+		//		String letter = typed.substring(55, 56);
 		if(typed == 'a' || typed == 'b' || typed == 'c' || typed == 'd' || typed == 'e'||  typed == 'f' || typed == 'g' || typed == 'h' || typed == 'i' || typed == 'j' || typed == 'k' || typed == 'l' || typed == 'm' || typed == 'n' || typed == 'o' || typed == 'p' || typed == 'q' || typed == 'r' || typed == 's' || typed == 't' || typed == 'u' || typed == 'v' || typed == 'w' || typed == 'x' || typed == 'y' || typed == 'z' ||  
-		   typed == 'A' || typed == 'B' || typed == 'C' || typed == 'D' || typed == 'E'||  typed == 'F' || typed == 'G' || typed == 'H' || typed == 'I' || typed == 'J' || typed == 'K' || typed == 'L' || typed == 'M' || typed == 'N' || typed == 'O' || typed == 'P' || typed == 'Q' || typed == 'R' || typed == 'S' || typed == 'T' || typed == 'U' || typed == 'V' || typed == 'W' || typed == 'X' || typed == 'Y' || typed == 'Z' ||
-		   typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
+				typed == 'A' || typed == 'B' || typed == 'C' || typed == 'D' || typed == 'E'||  typed == 'F' || typed == 'G' || typed == 'H' || typed == 'I' || typed == 'J' || typed == 'K' || typed == 'L' || typed == 'M' || typed == 'N' || typed == 'O' || typed == 'P' || typed == 'Q' || typed == 'R' || typed == 'S' || typed == 'T' || typed == 'U' || typed == 'V' || typed == 'W' || typed == 'X' || typed == 'Y' || typed == 'Z' ||
+				typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
 			if(materialSearch == null) {
-				Invoice.materialSearch = Character.toString(typed);					
-				if(typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
-					Invoice.searching = "id";
-				}else {
-					Invoice.searching = "name";
-				}
+				Invoice.materialSearch = Character.toString(typed);
 			}else {
 				Invoice.materialSearch = Invoice.materialSearch + Character.toString(typed);
-			}			
-			
-			if(Invoice.searching == "id") {//fuck u daniel
-				Invoice.cmdMaterialSearch = "SELECT * FROM material WHERE material_id LIKE " +"\"" + Invoice.materialSearch + "%\"";
-			}else if(Invoice.searching == "name") {
-				Invoice.cmdMaterialSearch = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\"";									
 			}
-		}
-		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && materialSearch.length() > 0) {
+			System.out.println(Invoice.materialSearch);
+
+		}			
+
+
+		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && Invoice.materialSearch.length() > 0) {
 			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
 		}
-		System.out.println(Invoice.materialSearch);
-		System.out.println(cmd);
+		
+		if(enter.getKeyCode() == KeyEvent.VK_TAB) {
+			
+		}
+
+		String cmd = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\"";
 		int id;
 		String name, type;
+
+
 		double cost;		
 		try {
 			//Create the code
 			connect = DBConnect.connectDB();
-			//Create the code
-			stmt = connect.createStatement();
+			stmt = connect.prepareStatement(cmd);
 			//Execute the code
-			stmt.executeQuery(Invoice.materialSearch);
+			stmt.executeQuery(cmd);
 			//For every possible execution, create a rs
-			ResultSet rs = stmt.executeQuery(Invoice.materialSearch);
+			ResultSet rs = stmt.executeQuery(cmd);
 			//While there's code to be executes, do something
 			while(rs.next()) {
 
@@ -229,12 +241,10 @@ public class Database {
 				name = rs.getString("material_name");
 				type = rs.getString("material_type");
 				cost = rs.getDouble("material_cost");
-//asdwasad
-//w
+
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, Double.toString(cost)});
 			}
-
 			//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
@@ -244,8 +254,11 @@ public class Database {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		}
+			}
+		}
 	}
+
+
 
 	public static void EditInvoice(String code) {
 
@@ -283,11 +296,11 @@ public class Database {
 
 				bill = rs.getDouble("studio_bill");
 
-//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
-//						+ " . " + phone + " . " + email);
+				//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
+				//						+ " . " + phone + " . " + email);
 
-//								Invoice.clientsTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), Integer.toString(costumes), 
-//										address, email, owner, phone, name, Double.toString(bill)});
+				//								Invoice.clientsTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), Integer.toString(costumes), 
+				//										address, email, owner, phone, name, Double.toString(bill)});
 			}
 
 			//If there's some error, return it

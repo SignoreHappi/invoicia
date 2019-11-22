@@ -7,14 +7,12 @@ import java.sql.SQLException;
 public class DBConnect {
 	public static Connection connectDB() throws SQLException{
 		Connection connection = null;
-		String driver = "";
-		String url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9311205?useSSL=false";
-		String user = "sql9311205";
-		String password = "g3Ti5WIUeg";
+		String url = "jdbc:mysql://remotemysql.com:3306/ZYebHXfmH9?useSSL=false";
+		String user = "ZYebHXfmH9";
+		String password = "AIRtr96APu";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url,user,password);
-			System.out.println("Connection opened");
 			return connection;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -27,7 +25,6 @@ public class DBConnect {
 		try {
 			Connection connect = DBConnect.connectDB();
 			connect.close();
-			System.out.println("Connection Closed");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
