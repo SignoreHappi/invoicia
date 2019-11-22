@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Formatter;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -169,7 +170,7 @@ public class Database {
 	public static void LoadMaterials(){
 		Invoice.materialTable.setRowCount(0);
 		Invoice.txtSearchMaterial.setText("");;
-		String cmd = "SELECT * FROM material";
+		String cmd = "SELECT * FROM material ORDER BY material_name ASC";
 		int id;
 		String name, type;
 		double cost;
@@ -195,8 +196,13 @@ public class Database {
 				type = rs.getString("material_type");
 				cost = rs.getDouble("material_cost");
 
+//				Builds the price with .00 in the end
+				StringBuilder sbuf = new StringBuilder();
+				Formatter fmt = new Formatter(sbuf);
+				fmt.format("$%.2f%n", cost);
+				
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
-						name, type, Double.toString(cost)});
+						name, type, fmt});
 			}
 
 			//If there's some error, return it
@@ -238,7 +244,8 @@ public class Database {
 			
 		}
 
-		String cmd = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\"";
+		String cmd = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\" ORDER BY material_name ASC";
+		System.out.print(cmd);
 		int id;
 		String name, type;
 
