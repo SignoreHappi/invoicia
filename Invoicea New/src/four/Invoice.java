@@ -46,6 +46,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
@@ -232,8 +233,10 @@ public class Invoice {
 	public static String clientsSearch = null;
 
 	public static String searching = null;
-	
+
 	public static int result = 0;
+	
+	public static JFrame updateTable;
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
@@ -242,8 +245,8 @@ public class Invoice {
 	 */
 	public static void main(String[] args) throws SQLException, InterruptedException, IOException {
 
-//		Database.ExportDB();
-		
+		//		Database.ExportDB();
+
 		try {
 			Invoice window = new Invoice();
 			window.frame.setVisible(true);
@@ -868,7 +871,7 @@ public class Invoice {
 					iYear++;
 					year = String.valueOf(iYear);
 				}
-				
+
 				result = 0;
 
 				int invoice_id = Database.HasInvoice(studio_id);
@@ -877,7 +880,7 @@ public class Invoice {
 				}else {
 					result = Database.CreateInvoice(studio_id, invoice_id, iYear);
 				}
-				
+
 				if(result == 1) {
 					output("Invoice:", "saved");
 				}else if(result == 2) {
@@ -1443,7 +1446,7 @@ public class Invoice {
 		Material.setBackground(new Color(255, 204, 255));
 		tabbedPane.addTab("Material", new ImageIcon(Invoice.class.getResource("/images/icon-fabric.png")), Material, null);
 		Material.setLayout(null);
-
+		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_4.setBackground(new Color(255, 255, 153));
@@ -1452,13 +1455,13 @@ public class Invoice {
 		panel_4.setLayout(null);
 
 		txtName = new JTextField();
-		txtName.setBounds(175, 11, 86, 20);
+		txtName.setBounds(125, 11, 136, 20);
 		panel_4.add(txtName);
 		txtName.setColumns(10);
 
 		txtCost = new JTextField();
 		txtCost.setText("");
-		txtCost.setBounds(175, 56, 86, 20);
+		txtCost.setBounds(125, 56, 136, 20);
 		panel_4.add(txtCost);
 		txtCost.setColumns(10);
 
@@ -1467,7 +1470,7 @@ public class Invoice {
 		lblName.setBounds(10, 14, 155, 14);
 		panel_4.add(lblName);
 
-		JLabel lblCost = new JLabel("Material Cost per Meter :");
+		JLabel lblCost = new JLabel("Material Cost:");
 		lblCost.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		lblCost.setBounds(10, 59, 155, 17);
 		panel_4.add(lblCost);
@@ -1483,9 +1486,9 @@ public class Invoice {
 		panel_4.add(lblMaterialType);
 
 		spnMaterialType = new JComboBox();
-		spnMaterialType.setModel(new DefaultComboBoxModel(new String[] {"Velvet", "Mesh", "Lycra", "Toulle", "Hologram", "Cracked Ice", "Mystique",
-				"Organdy", "Fringe", "Supplex", "Trim", "Cosmo", "Print", "Chiffon", "Sequin", "Georgette", "Unknown"}));
-		spnMaterialType.setBounds(175, 98, 86, 20);
+		spnMaterialType.setMaximumRowCount(30);
+		spnMaterialType.setModel(new DefaultComboBoxModel(new String[] {"Chiffon", "Cosmo", "Cracked Ice", "Fringe", "Georgette", "Hologram", "Lace", "Lycra", "Mesh", "Mystique", "Organdy", "Print", "Sequin", "Supplex", "Toulle", "Trim", "Velvet", "Unknown"}));
+		spnMaterialType.setBounds(125, 98, 136, 20);
 		panel_4.add(spnMaterialType);
 
 		btnMaterial.addMouseListener(new MouseAdapter() {
@@ -1595,71 +1598,94 @@ public class Invoice {
 
 
 
-		materialTable= new DefaultTableModel(){ 
-			public boolean isCellEditable(int row, int column) {
-				//all cells false
-				return false;
-			}};
+		materialTable = new DefaultTableModel(){public boolean isCellEditable(int row, int column) {return false;}};
 
-			JTable tableMaterial= new JTable(materialTable); 
-			materialTable.addColumn("Material Id");
-			materialTable.addColumn("Material Name");
-			materialTable.addColumn("Material Type");
-			materialTable.addColumn("Material Cost");
+		JTable tableMaterial= new JTable(materialTable); 
 
-
-			JPanel materialTablePanel = new JPanel();
-			materialTablePanel.setBounds(84, 5, 462, 412);
-
-			materialTablePanel.add(new JScrollPane(tableMaterial));
-			materialTablePanel.setVisible(true);
-			panel_14.setLayout(null);
-			tableMaterial.setSize(600, 800);
-			panel_14.add(materialTablePanel);
-
-			txtSearchMaterial = new JTextField();
-			txtSearchMaterial.setBounds(254, 475, 96, 19);
-			panel_14.add(txtSearchMaterial);
-			txtSearchMaterial.setColumns(10);
-
-			Database.LoadMaterials();
-
-			JButton btnUpdateTable = new JButton("Update Table");
-			btnUpdateTable.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					Database.LoadMaterials();
+		tableMaterial.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent me) {
+				int row = table.rowAtPoint(me.getPoint());
+				
+				if(me.getClickCount()>1) {
+					
+					UpdateMaterial update = new UpdateMaterial(0);
+					
+				
 				}
-			});
+			}
+		});
 
-			btnUpdateTable.setBounds(265, 515, 155, 41);
-			panel_14.add(btnUpdateTable);
-
-			txtSearchMaterial.addKeyListener(new KeyAdapter() {
-				//@Override
-				public void keyTyped(KeyEvent arg0) {
-				}
-				public void keyPressed(KeyEvent arg0) {
-					Database.SearchMaterial(arg0, materialSearch);
-				}
-			});
+		materialTable.addColumn("Material Id");
+		materialTable.addColumn("Material Name");
+		materialTable.addColumn("Material Type");
+		materialTable.addColumn("Material Cost");
 
 
+		JPanel materialTablePanel = new JPanel();
+		materialTablePanel.setBounds(84, 5, 462, 412);
 
-			
+		JScrollPane scrollPane = new JScrollPane(tableMaterial);
+
+		materialTablePanel.add(scrollPane);
+		materialTablePanel.setVisible(true);
+		panel_14.setLayout(null);
+		tableMaterial.setSize(600, 800);
+		panel_14.add(materialTablePanel);
+
+		txtSearchMaterial = new JTextField();
+		txtSearchMaterial.setBounds(254, 475, 96, 19);
+		panel_14.add(txtSearchMaterial);
+		txtSearchMaterial.setColumns(10);
+
+		Database.LoadMaterials();
+
+		JButton btnUpdateTable = new JButton("Update Table");
+		btnUpdateTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Database.LoadMaterials();
+			}
+		});
+
+		btnUpdateTable.setBounds(221, 514, 155, 41);
+		panel_14.add(btnUpdateTable);
+
+		txtSearchMaterial.addKeyListener(new KeyAdapter() {
+			//@Override
+			public void keyTyped(KeyEvent arg0) {
+			}
+			public void keyPressed(KeyEvent arg0) {
+				Database.SearchMaterial(arg0, materialSearch);
+			}
+		});
 
 
 
-			JPanel Rhynestones = new JPanel();
-			tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
 
-			Settings = new JPanel();
-			tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
-			Settings.setLayout(null);
 
+
+
+		JPanel Rhynestones = new JPanel();
+		tabbedPane.addTab("Rhynestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhynestones, null);
+
+		Settings = new JPanel();
+		tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
+		Settings.setLayout(null);
 	}
 
 
+	public void UpdateTable(int row) {
+		System.out.println("You DoubleClicked row " + row);
+		updateTable = new JFrame("FrameDemo");
+		updateTable.setBounds(0, 0, 166, 47);
+//		Material.add(updateTable);
+		updateTable.setForeground(Color.YELLOW);
+		updateTable.setTitle("Update Material");
+		
+		//5. Show it.
+		updateTable.setVisible(true);
+	}
+	
 	private void math() {
 
 	}
