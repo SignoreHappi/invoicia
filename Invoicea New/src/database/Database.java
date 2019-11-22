@@ -151,7 +151,7 @@ public class Database extends Invoice{
 			System.out.println("Material Name: " + name);
 			System.out.println("Material Type: " + type);
 			//While there's code to be executes, do something
-			while(rs.next()) {
+			while(rs.next()) {//Working
 				material_name = rs.getString(2);
 				material_type = rs.getString(3);
 				System.out.println(material_name + " " + material_type);
@@ -364,13 +364,7 @@ public class Database extends Invoice{
 			//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
-		}finally {
-			try {
-				connect.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-		}		
+		}	
+		
 	}	
 }
