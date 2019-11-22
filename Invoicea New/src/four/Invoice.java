@@ -1674,7 +1674,7 @@ public class Invoice {
 	}
 
 
-	public void UpdateTable(int row) {
+	public void  UpdateTable(int row) {
 		System.out.println("You DoubleClicked row " + row);
 		updateTable = new JFrame("FrameDemo");
 		updateTable.setBounds(0, 0, 166, 47);

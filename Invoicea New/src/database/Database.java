@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import four.Invoice;
 
 
-public class Database {
+public class Database extends Invoice{
 	public static Connection connect;
 	public static Statement stmt = null;
 
@@ -25,17 +25,15 @@ public class Database {
 		int processComplete = runtimeProcess.waitFor();
 		if(processComplete == 0){
 
-		System.out.println("Backup taken successfully");
+			System.out.println("Backup taken successfully");
 
 		} else {
 
-		System.out.println("Could not take mysql backup");
+			System.out.println("Could not take mysql backup");
 
 		}
 	}
-	
-	
-	
+
 	//Creates the code with the studio_id-year-invoic_id 
 	public static String CreateCode(int studio_id, int year, int invoice_id) {
 		String code = "0" + studio_id + "-" + year + "-00" + invoice_id;
@@ -105,7 +103,7 @@ public class Database {
 				e.printStackTrace();
 			}		
 		}
-		
+
 	}
 
 	//If the studio has an invoice, create a new one with invoice_id+1
@@ -139,32 +137,67 @@ public class Database {
 
 	//Insert a new material into the table
 	public static boolean CreateMaterial(String name, String cost, String type){
-		String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
-		//In case the user uses , instead of . the program will replace it
-		String newCost = cost.replace(",", ".");		
+		String material_name = null, material_type = null;
+		String cmdSearch = "SELECT * FROM material WHERE material_name = \"" + name + "\" AND material_type = \"" + type + "\"";
 
-		double dCost = Double.parseDouble(newCost);
-
-		try{
+		try {
 			connect = DBConnect.connectDB();
-			PreparedStatement pstmt = connect.prepareStatement(cmd);			
-			pstmt.setString(1, name);
-			pstmt.setDouble(2, dCost);
-			pstmt.setString(3, type);
-			pstmt.executeUpdate();
-			return true;
-		} catch (SQLException e) {
-			System.out.println("Create Material");
-			System.out.println(e.getMessage());
-			return false;
-		}finally {
-			try {
-				connect.close();
+			stmt = connect.prepareStatement(cmdSearch);			
+			//Create the code
+			//Execute the code
+			stmt.executeQuery(cmdSearch);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmdSearch);
+			System.out.println("Material Name: " + name);
+			System.out.println("Material Type: " + type);
+			//While there's code to be executes, do something
+			while(rs.next()) {
+				material_name = rs.getString(2);
+				material_type = rs.getString(3);
+				System.out.println(material_name + " " + material_type);
+				System.out.println();
+				if(name.equals(material_name)  && type.equals(material_type)) {
+					System.out.println("Doubled material");					
+					break;
+				}else {
+					System.out.println("Add Material");
+				}
+			}
+
+
+			String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
+			//In case the user uses , instead of . the program will replace it
+			String newCost = cost.replace(",", ".");		
+
+			double dCost = Double.parseDouble(newCost);
+
+			try{
+				connect = DBConnect.connectDB();
+				PreparedStatement pstmt = connect.prepareStatement(cmd);			
+				pstmt.setString(1, name);
+				pstmt.setDouble(2, dCost);
+				pstmt.setString(3, type);
+				pstmt.executeUpdate();
+				return true;
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
+				System.out.println("Create Material");
+				System.out.println(e.getMessage());
+				return false;
+			}finally {
+				try {
+					connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+			}
+
+
+		}catch(SQLException e){
+			System.out.println(e);
+			return false;
 		}
+
 	}
 
 	public static void LoadMaterials(){
@@ -196,11 +229,11 @@ public class Database {
 				type = rs.getString("material_type");
 				cost = rs.getDouble("material_cost");
 
-//				Builds the price with .00 in the end
+				//				Builds the price with .00 in the end
 				StringBuilder sbuf = new StringBuilder();
 				Formatter fmt = new Formatter(sbuf);
 				fmt.format("$%.2f%n", cost);
-				
+
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, fmt});
 			}
@@ -239,9 +272,9 @@ public class Database {
 		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && Invoice.materialSearch.length() > 0) {
 			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
 		}
-		
+
 		if(enter.getKeyCode() == KeyEvent.VK_TAB) {
-			
+
 		}
 
 		String cmd = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\" ORDER BY material_name ASC";
