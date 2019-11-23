@@ -1447,11 +1447,11 @@ public class Invoice {
 				success = Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
 				txtName.setText("");
 				txtCost.setText("");
-				if(success) {
-					mOutput("Material", "Added");
-				}else {
-					mOutput("Material", "Something went wrong");
-				}
+//				if(success) {
+//					mOutput("Material", "Added");
+//				}else {
+//					mOutput("Material", "Something went wrong");
+//				}
 				Database.LoadMaterials();
 
 			}
@@ -1634,6 +1634,11 @@ public class Invoice {
 		//5. Show it.
 		updateTable.setVisible(true);
 	}
+	
+	public static void writeMatOutput(String first, String second) {
+		mOutput(first, second);
+	}
+	
 	
 	private void math() {
 
