@@ -102,26 +102,26 @@ public class Invoice {
 	public JTextField txtPhone;
 	public JTextField txtAddress;
 	public JTextField txtEmail;
-	protected JTextField txtMC1;
+	protected JComboBox txtMC1;
 	public JTextField txtMM1;
 	public JTextField txtMM2;
-	public JTextField txtMC2;
+	public JComboBox txtMC2;
 	public JTextField txtMM3;
-	public JTextField txtMC3;
+	public JComboBox txtMC3;
 	public JTextField txtMM4;
-	public JTextField txtMC4;
+	public JComboBox txtMC4;
 	public JTextField txtMM5;
-	public JTextField txtMC5;
+	public JComboBox txtMC5;
 	public JTextField txtMM6;
-	public JTextField txtMC6;
+	public JComboBox txtMC6;
 	public JTextField txtMM7;
-	public JTextField txtMC7;
+	public JComboBox txtMC7;
 	public JTextField txtMM8;
-	public JTextField txtMC8;
+	public JComboBox txtMC8;
 	public JTextField txtMM9;
-	public JTextField txtMC9;
+	public JComboBox txtMC9;
 	public JTextField txtMM10;
-	public JTextField txtMC10;
+	public JComboBox txtMC10;
 
 
 	protected JPanel PInvoice;
@@ -338,10 +338,9 @@ public class Invoice {
 		lblMaterial.setBounds(10, 11, 250, 24);
 		panel_5.add(lblMaterial);
 
-		txtMC1 = new JTextField();
+		txtMC1 = new JComboBox();
 		txtMC1.setBounds(10, 46, 86, 20);
 		panel_5.add(txtMC1);
-		txtMC1.setColumns(10);
 
 		txtMM1 = new JTextField();
 		txtMM1.setColumns(10);
@@ -353,8 +352,7 @@ public class Invoice {
 		txtMM2.setBounds(174, 77, 86, 20);
 		panel_5.add(txtMM2);
 
-		txtMC2 = new JTextField();
-		txtMC2.setColumns(10);
+		txtMC2 = new JComboBox();
 		txtMC2.setBounds(10, 77, 86, 20);
 		panel_5.add(txtMC2);
 
@@ -363,8 +361,7 @@ public class Invoice {
 		txtMM3.setBounds(174, 108, 86, 20);
 		panel_5.add(txtMM3);
 
-		txtMC3 = new JTextField();
-		txtMC3.setColumns(10);
+		txtMC3 = new JComboBox();
 		txtMC3.setBounds(10, 108, 86, 20);
 		panel_5.add(txtMC3);
 
@@ -373,8 +370,7 @@ public class Invoice {
 		txtMM4.setBounds(174, 139, 86, 20);
 		panel_5.add(txtMM4);
 
-		txtMC4 = new JTextField();
-		txtMC4.setColumns(10);
+		txtMC4 = new JComboBox();
 		txtMC4.setBounds(10, 139, 86, 20);
 		panel_5.add(txtMC4);
 
@@ -383,8 +379,7 @@ public class Invoice {
 		txtMM5.setBounds(174, 170, 86, 20);
 		panel_5.add(txtMM5);
 
-		txtMC5 = new JTextField();
-		txtMC5.setColumns(10);
+		txtMC5 = new JComboBox();
 		txtMC5.setBounds(10, 170, 86, 20);
 		panel_5.add(txtMC5);
 
@@ -393,8 +388,7 @@ public class Invoice {
 		txtMM6.setBounds(174, 201, 86, 20);
 		panel_5.add(txtMM6);
 
-		txtMC6 = new JTextField();
-		txtMC6.setColumns(10);
+		txtMC6 = new JComboBox();
 		txtMC6.setBounds(10, 201, 86, 20);
 		panel_5.add(txtMC6);
 
@@ -403,8 +397,7 @@ public class Invoice {
 		txtMM7.setBounds(174, 232, 86, 20);
 		panel_5.add(txtMM7);
 
-		txtMC7 = new JTextField();
-		txtMC7.setColumns(10);
+		txtMC7 = new JComboBox();
 		txtMC7.setBounds(10, 232, 86, 20);
 		panel_5.add(txtMC7);
 
@@ -413,8 +406,7 @@ public class Invoice {
 		txtMM8.setBounds(174, 263, 86, 20);
 		panel_5.add(txtMM8);
 
-		txtMC8 = new JTextField();
-		txtMC8.setColumns(10);
+		txtMC8 = new JComboBox();
 		txtMC8.setBounds(10, 263, 86, 20);
 		panel_5.add(txtMC8);
 
@@ -423,8 +415,7 @@ public class Invoice {
 		txtMM9.setBounds(174, 294, 86, 20);
 		panel_5.add(txtMM9);
 
-		txtMC9 = new JTextField();
-		txtMC9.setColumns(10);
+		txtMC9 = new JComboBox();
 		txtMC9.setBounds(10, 294, 86, 20);
 		panel_5.add(txtMC9);
 
@@ -433,8 +424,7 @@ public class Invoice {
 		txtMM10.setBounds(174, 325, 86, 20);
 		panel_5.add(txtMM10);
 
-		txtMC10 = new JTextField();
-		txtMC10.setColumns(10);
+		txtMC10 = new JComboBox();
 		txtMC10.setBounds(10, 325, 86, 20);
 		panel_5.add(txtMC10);
 
@@ -1397,11 +1387,11 @@ public class Invoice {
 				success = Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
 				txtName.setText("");
 				txtCost.setText("");
-				if(success) {
-					mOutput("Material", "Added");
-				}else {
-					mOutput("Material", "Something went wrong");
-				}
+//				if(success) {
+//					mOutput("Material", "Added");
+//				}else {
+//					mOutput("Material", "Something went wrong");
+//				}
 				Database.LoadMaterials();
 
 			}
@@ -1579,7 +1569,13 @@ public class Invoice {
 		//5. Show it.
 		updateTable.setVisible(true);
 	}
-
+	
+	
+	public static void writeMatOutput(String first, String second) {
+		mOutput(first, second);
+	}
+	
+	
 	private void math() {
 
 	}
@@ -1599,16 +1595,16 @@ public class Invoice {
 
 	protected void Fill() {
 
-		ma[0] = txtMC1.getText();
-		ma[1] = txtMC2.getText();
-		ma[2] = txtMC3.getText();
-		ma[3] = txtMC4.getText();
-		ma[4] = txtMC5.getText();
-		ma[5] = txtMC6.getText();
-		ma[6] = txtMC7.getText();
-		ma[7] = txtMC8.getText();
-		ma[8] = txtMC9.getText();
-		ma[9] = txtMC10.getText();
+//		ma[0] = txtMC1.getText();
+//		ma[1] = txtMC2.getText();
+//		ma[2] = txtMC3.getText();
+//		ma[3] = txtMC4.getText();
+//		ma[4] = txtMC5.getText();
+//		ma[5] = txtMC6.getText();
+//		ma[6] = txtMC7.getText();
+//		ma[7] = txtMC8.getText();
+//		ma[8] = txtMC9.getText();
+//		ma[9] = txtMC10.getText();
 
 		me[0] = txtMM1.getText();
 		me[1] = txtMM2.getText();
@@ -1623,30 +1619,30 @@ public class Invoice {
 
 		//		output("0",ma + "");
 	}
-	private void Filli() {
-
-		txtMC1.setText(ma[0]);
-		output("0","ma(0)" + txtMM1.getText());
-		txtMM1.setText(me[0]);
-		txtMC2.setText(ma[1]);
-		txtMM2.setText(me[1]);
-		txtMC3.setText(ma[2]);
-		txtMM3.setText(me[2]);
-		txtMC4.setText(ma[3]);
-		txtMM4.setText(me[3]);
-		txtMC5.setText(ma[4]);
-		txtMM5.setText(me[4]);
-		txtMC6.setText(ma[5]);
-		txtMM6.setText(me[5]);
-		txtMC7.setText(ma[6]);
-		txtMM7.setText(me[6]);
-		txtMC8.setText(ma[7]);
-		txtMM8.setText(me[7]);
-		txtMC9.setText(ma[8]);
-		txtMM9.setText(me[8]);
-		txtMC10.setText(ma[9]);
-		txtMM10.setText(me[9]);
-	}
+//	private void Filli() {
+//
+//		txtMC1.setText(ma[0]);
+//		output("0","ma(0)" + txtMM1.getText());
+//		txtMM1.setText(me[0]);
+//		txtMC2.setText(ma[1]);
+//		txtMM2.setText(me[1]);
+//		txtMC3.setText(ma[2]);
+//		txtMM3.setText(me[2]);
+//		txtMC4.setText(ma[3]);
+//		txtMM4.setText(me[3]);
+//		txtMC5.setText(ma[4]);
+//		txtMM5.setText(me[4]);
+//		txtMC6.setText(ma[5]);
+//		txtMM6.setText(me[5]);
+//		txtMC7.setText(ma[6]);
+//		txtMM7.setText(me[6]);
+//		txtMC8.setText(ma[7]);
+//		txtMM8.setText(me[7]);
+//		txtMC9.setText(ma[8]);
+//		txtMM9.setText(me[8]);
+//		txtMC10.setText(ma[9]);
+//		txtMM10.setText(me[9]);
+//	}
 
 	public void output(String catagory, String text) {
 		text = "{" + catagory + "}- " + text;
@@ -2035,7 +2031,7 @@ public class Invoice {
 							if(oe[2].isEmpty()) {oe[2] = "0";}
 
 							//							output("0","end");
-							Filli();
+//							Filli();
 
 
 							ol = 1000;
@@ -2100,17 +2096,17 @@ public class Invoice {
 			content += "Y\n" + x.substring(5, 7) + "\n/\n";
 			content += "C\n" + x.substring(10) + "\n/\n";
 
-			//Material
-			content += "M\n";
-			content += txtMC1.getText() + "\n" + txtMM1.getText() + "\n-\n";
-			content += txtMC2.getText() + "\n" + txtMM2.getText() + "\n-\n";
-			content += txtMC3.getText() + "\n" + txtMM3.getText() + "\n-\n";
-			content += txtMC4.getText() + "\n" + txtMM4.getText() + "\n-\n";
-			content += txtMC5.getText() + "\n" + txtMM5.getText() + "\n-\n";
-			content += txtMC6.getText() + "\n" + txtMM6.getText() + "\n-\n";
-			content += txtMC7.getText() + "\n" + txtMM7.getText() + "\n-\n";
-			content += txtMC8.getText() + "\n" + txtMM8.getText() + "\n";
-			content += "/\n";
+//			//Material
+//			content += "M\n";
+//			content += txtMC1.getText() + "\n" + txtMM1.getText() + "\n-\n";
+//			content += txtMC2.getText() + "\n" + txtMM2.getText() + "\n-\n";
+//			content += txtMC3.getText() + "\n" + txtMM3.getText() + "\n-\n";
+//			content += txtMC4.getText() + "\n" + txtMM4.getText() + "\n-\n";
+//			content += txtMC5.getText() + "\n" + txtMM5.getText() + "\n-\n";
+//			content += txtMC6.getText() + "\n" + txtMM6.getText() + "\n-\n";
+//			content += txtMC7.getText() + "\n" + txtMM7.getText() + "\n-\n";
+//			content += txtMC8.getText() + "\n" + txtMM8.getText() + "\n";
+//			content += "/\n";
 
 
 			//Rhinestones

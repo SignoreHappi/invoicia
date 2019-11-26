@@ -13,6 +13,11 @@ import java.util.Formatter;
 import javax.swing.table.DefaultTableModel;
 
 import four.Invoice;
+import Utilities.Strin;
+
+
+
+//ALTER TABLE material AUTO_INCREMENT = 100  - > CODE TO CHANGE ID VALUE
 
 
 public class Database extends Invoice{
@@ -139,7 +144,7 @@ public class Database extends Invoice{
 	public static boolean CreateMaterial(String name, String cost, String type){
 		String material_name = null, material_type = null;
 		String cmdSearch = "SELECT * FROM material WHERE material_name = \"" + name + "\" AND material_type = \"" + type + "\"";
-
+		boolean add = true;
 		try {
 			connect = DBConnect.connectDB();
 			stmt = connect.prepareStatement(cmdSearch);			
@@ -148,55 +153,55 @@ public class Database extends Invoice{
 			stmt.executeQuery(cmdSearch);
 			//For every possible execution, create a rs
 			ResultSet rs = stmt.executeQuery(cmdSearch);
-			System.out.println("Material Name: " + name);
-			System.out.println("Material Type: " + type);
 			//While there's code to be executes, do something
 			while(rs.next()) {//Working
 				material_name = rs.getString(2);
 				material_type = rs.getString(3);
-				System.out.println(material_name + " " + material_type);
-				System.out.println();
-				if(name.equals(material_name)  && type.equals(material_type)) {
-					System.out.println("Doubled material");					
+				if(name.equals(material_name) && type.equals(material_type)) {
+					Invoice.writeMatOutput("Error", "The material is already in the DataBase");
+					add = false;
 					break;
-				}else {
-					System.out.println("Add Material");
 				}
 			}
+			if(add) {
+				String material = name + ", " + type + ", $" + cost;
+				
+				Invoice.writeMatOutput("Added", material + "");
+				String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
+				//In case the user uses , instead of . the program will replace it
+				String newCost = cost.replace(",", ".");		
 
+				double dCost = Double.parseDouble(newCost);
 
-			String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
-			//In case the user uses , instead of . the program will replace it
-			String newCost = cost.replace(",", ".");		
-
-			double dCost = Double.parseDouble(newCost);
-
-			try{
-				connect = DBConnect.connectDB();
-				PreparedStatement pstmt = connect.prepareStatement(cmd);			
-				pstmt.setString(1, name);
-				pstmt.setDouble(2, dCost);
-				pstmt.setString(3, type);
-				pstmt.executeUpdate();
-				return true;
-			} catch (SQLException e) {
-				System.out.println("Create Material");
-				System.out.println(e.getMessage());
-				return false;
-			}finally {
-				try {
-					connect.close();
+				String changedName = Strin.FirstCapital(name);
+				
+//				System.out.println(name);
+//				System.out.println(changedName);
+				try{
+					PreparedStatement pstmt = connect.prepareStatement(cmd);			
+					pstmt.setString(1, changedName);
+					pstmt.setDouble(2, dCost);
+					pstmt.setString(3, type);
+					pstmt.executeUpdate();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
+					System.out.println("Create Material");
+					System.out.println(e.getMessage());
+					return false;
+				}
 			}
-
-
 		}catch(SQLException e){
 			System.out.println(e);
-			return false;
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		}
+
+		
+		return true;
 
 	}
 
@@ -365,6 +370,6 @@ public class Database extends Invoice{
 		} catch (SQLException e) {
 			System.out.print(e);
 		}	
-		
+
 	}	
 }
