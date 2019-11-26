@@ -52,17 +52,20 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
-
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+//
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 
@@ -231,8 +234,10 @@ public class Invoice {
 
 
 	public static DefaultTableModel clientsTable;
-	public static String clientsSearch = null;
+	public static JTable tableClients;
 
+	public static String clientsSearch = null;
+	
 	public static String searching = null;
 
 	public static int result = 0;
@@ -608,17 +613,17 @@ public class Invoice {
 		lblCostumeName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lblCostumeName.setBounds(10, 77, 98, 20);
 		panel_10.add(lblCostumeName);
-		
-				JLabel lblDepositAmmount = new JLabel("Deposit Ammount");
-				lblDepositAmmount.setBounds(10, 107, 109, 20);
-				panel_10.add(lblDepositAmmount);
-				lblDepositAmmount.setHorizontalAlignment(SwingConstants.CENTER);
-				lblDepositAmmount.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-				
-						txtDD = new JTextField();
-						txtDD.setBounds(128, 108, 132, 20);
-						panel_10.add(txtDD);
-						txtDD.setColumns(10);
+
+		JLabel lblDepositAmmount = new JLabel("Deposit Ammount");
+		lblDepositAmmount.setBounds(10, 107, 109, 20);
+		panel_10.add(lblDepositAmmount);
+		lblDepositAmmount.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDepositAmmount.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+
+		txtDD = new JTextField();
+		txtDD.setBounds(128, 108, 132, 20);
+		panel_10.add(txtDD);
+		txtDD.setColumns(10);
 
 
 		JPanel panel_12 = new JPanel();
@@ -804,11 +809,11 @@ public class Invoice {
 		JButton button_4 = new JButton("?2");
 		button_4.setBounds(140, 389, 120, 30);
 		panel_9.add(button_4);
-		
+
 		JButton button_5 = new JButton("?2");
 		button_5.setBounds(10, 225, 120, 30);
 		panel_9.add(button_5);
-		
+
 		JButton button_6 = new JButton("?2");
 		button_6.setBounds(140, 184, 120, 30);
 		panel_9.add(button_6);
@@ -983,80 +988,80 @@ public class Invoice {
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		label_2.setBounds(270, 77, 122, 17);
 		panel_1.add(label_2);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.ORANGE);
 		separator.setBounds(10, 128, 382, 4);
 		panel_1.add(separator);
-		
-				JButton btnSave = new JButton("CALCULATE");
-				btnSave.setBounds(270, 452, 120, 30);
-				panel_1.add(btnSave);
-				
-						JButton btnSave_1 = new JButton("SAVE");
-						btnSave_1.setBounds(270, 411, 120, 30);
-						panel_1.add(btnSave_1);
-						btnSave_1.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								//				Database.EditInvoice();
-							}
-						});
-				btnSave.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent arg0) {
-						//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
-						int studio_id = 0;
-						String studio_name = spnSS.getSelectedItem().toString();
-						switch(studio_name){
-						case "Kids In Dance":
-							studio_id = 0;
-							break;
-						case "Evolve Dance Centre":
-							studio_id = 1;
-							break;
-						case "Maple Dance Acadamy":
-							studio_id = 2;
-							break;
-						case "CB Dance Acadamy":
-							studio_id = 3;
-							break;
-						case "The Eight Count":
-							studio_id = 4;
-							break;
-						}
-						DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
-						LocalDateTime now = LocalDateTime.now();  
 
-						String date = dtf.format(now);
+		JButton btnSave = new JButton("CALCULATE");
+		btnSave.setBounds(270, 452, 120, 30);
+		panel_1.add(btnSave);
 
-						String month = date.substring(3, 5);
-						String year = date.substring(0, 2);
+		JButton btnSave_1 = new JButton("SAVE");
+		btnSave_1.setBounds(270, 411, 120, 30);
+		panel_1.add(btnSave_1);
+		btnSave_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//				Database.EditInvoice();
+			}
+		});
+		btnSave.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
+				int studio_id = 0;
+				String studio_name = spnSS.getSelectedItem().toString();
+				switch(studio_name){
+				case "Kids In Dance":
+					studio_id = 0;
+					break;
+				case "Evolve Dance Centre":
+					studio_id = 1;
+					break;
+				case "Maple Dance Acadamy":
+					studio_id = 2;
+					break;
+				case "CB Dance Acadamy":
+					studio_id = 3;
+					break;
+				case "The Eight Count":
+					studio_id = 4;
+					break;
+				}
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
+				LocalDateTime now = LocalDateTime.now();  
+
+				String date = dtf.format(now);
+
+				String month = date.substring(3, 5);
+				String year = date.substring(0, 2);
 
 
-						int iMonth = Integer.parseInt(month);
-						int iYear = 0;
-						if(iMonth >= 7) {
-							iYear = Integer.parseInt(year);
-							iYear++;
-							year = String.valueOf(iYear);
-						}
+				int iMonth = Integer.parseInt(month);
+				int iYear = 0;
+				if(iMonth >= 7) {
+					iYear = Integer.parseInt(year);
+					iYear++;
+					year = String.valueOf(iYear);
+				}
 
-						result = 0;
+				result = 0;
 
-						int invoice_id = Database.HasInvoice(studio_id);
-						if(invoice_id == 0) {
-							result = Database.CreateNewInvoice(studio_id, iYear);
-						}else {
-							result = Database.CreateInvoice(studio_id, invoice_id, iYear);
-						}
+				int invoice_id = Database.HasInvoice(studio_id);
+				if(invoice_id == 0) {
+					result = Database.CreateNewInvoice(studio_id, iYear);
+				}else {
+					result = Database.CreateInvoice(studio_id, invoice_id, iYear);
+				}
 
-						if(result == 1) {
-							output("Invoice:", "saved");
-						}else if(result == 2) {
-							output("Invoice:", "something went wrong");
-						}
-					}
-				});
+				if(result == 1) {
+					output("Invoice:", "saved");
+				}else if(result == 2) {
+					output("Invoice:", "something went wrong");
+				}
+			}
+		});
 		btnQuoteTax.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -1213,34 +1218,7 @@ public class Invoice {
 		//		table.getColumnModel().getColumn(5).setPreferredWidth(1);
 		table.getColumnModel().getColumn(6).setPreferredWidth(261);
 
-		JPanel panel_15 = new JPanel();
-		panel_15.setBackground(Color.WHITE);
-		panel_15.setBounds(0, 266, 1517, 245);
-		Clients.add(panel_15);
-
-		clientsTable= new DefaultTableModel(); 
-		JTable tableClients= new JTable(clientsTable); 
-		clientsTable.addColumn("ID");
-		clientsTable.addColumn("Name");
-		clientsTable.addColumn("Costumes");
-		clientsTable.addColumn("Total Bill");
-		clientsTable.addColumn("Owner");
-		clientsTable.addColumn("Address");
-		clientsTable.addColumn("Phone Number");
-		clientsTable.addColumn("Email Address");
-
-
-		JPanel clientsTablePanel = new JPanel();
-		clientsTablePanel.setBounds(0, 5, 1507, 506);
-
-		clientsTablePanel.add(new JScrollPane(tableClients));
-		clientsTablePanel.setVisible(true);
-		panel_15.setLayout(null);
-		panel_15.add(clientsTablePanel);
-		Clients.add(panel_15);
-
-		Database.LoadClients();
-
+		
 
 		txtStudio = new JTextField();
 		txtStudio.setBounds(130, 626, 225, 20);
@@ -1331,6 +1309,61 @@ public class Invoice {
 		spinner_1.setBounds(283, 583, 29, 20);
 		Clients.add(spinner_1);
 
+//		TableColumn id, name, email;
+//		id = new TableColumn(0);
+//		id.setHeaderValue("Studio ID"); // set column name
+//		id.setMinWidth(30);
+//		id.setMaxWidth(30);
+//		id.setPreferredWidth(30);		
+//		
+//		name = new TableColumn(1);
+//		name.setHeaderValue("Studio ID"); // set column name
+//		name.setPreferredWidth(100); //set column width 
+//
+//		DefaultTableColumnModel headers = new DefaultTableColumnModel();
+//		headers.addColumn(id);
+//		headers.addColumn(name);
+//
+//		
+//		DefaultTableModel rows = new DefaultTableModel(0,2);
+//		
+//		Object[] v1 = {"Lisa","Reid" };
+//		Object[] v2 = {"Cherry","Spada"}; 
+//		
+//		rows.addRow(v1);
+//		rows.addRow(v2); 
+//		
+//		JTable testTable;
+//		testTable = new JTable(rows);
+//		
+//		JScrollPane scrollTest = new JScrollPane(testTable);
+//		
+//		Clients.add(scrollTest);
+//
+//		scrollTest.setSize(500,300);
+//		scrollTest.setVisible(true); 
+		
+		clientsTable = new DefaultTableModel(){public boolean isCellEditable(int row, int column) {return false;}};
+
+		
+		clientsTable.addColumn("Studio ID");
+		clientsTable.addColumn("Studio Name");
+		clientsTable.addColumn("Total Costumes");
+		clientsTable.addColumn("Total Bill");
+		clientsTable.addColumn("Studio Owner");
+		clientsTable.addColumn("Studio Address");
+		clientsTable.addColumn("Phone Number");
+		clientsTable.addColumn("Email Address");
+		tableClients = new JTable(clientsTable); 
+
+		
+		JScrollPane scrollPane_1 = new JScrollPane(tableClients);
+		scrollPane_1.setBounds(10, 10, 1327, 392);
+		Clients.add(scrollPane_1);
+		Database.LoadClients();
+
+		
+
 		JPanel Material = new JPanel();       
 		Material.setBackground(new Color(255, 204, 255));
 		tabbedPane.addTab("Material", new ImageIcon(Invoice.class.getResource("/images/icon-fabric.png")), Material, null);
@@ -1387,11 +1420,6 @@ public class Invoice {
 				success = Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
 				txtName.setText("");
 				txtCost.setText("");
-//				if(success) {
-//					mOutput("Material", "Added");
-//				}else {
-//					mOutput("Material", "Something went wrong");
-//				}
 				Database.LoadMaterials();
 
 			}
@@ -1494,26 +1522,26 @@ public class Invoice {
 		materialTable.addColumn("Material Type");
 		materialTable.addColumn("Material Cost");
 		panel_14.setLayout(null);
-		
-				JTable tableMaterial= new JTable(materialTable); 
-				
-						tableMaterial.addMouseListener(new MouseAdapter() {
-							public void mouseReleased(MouseEvent me) {
-								int row = table.rowAtPoint(me.getPoint());
-				
-								if(me.getClickCount()>1) {
-				
-									UpdateMaterial update = new UpdateMaterial(0);
-				
-				
-								}
-							}
-						});
-						
-								JScrollPane scrollPane = new JScrollPane(tableMaterial);
-								scrollPane.setLocation(10, 11);
-								panel_14.add(scrollPane);
-								scrollPane.setSize(610, 453);
+
+		JTable tableMaterial= new JTable(materialTable); 
+
+		tableMaterial.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent me) {
+				int row = table.rowAtPoint(me.getPoint());
+
+				if(me.getClickCount()>1) {
+
+					UpdateMaterial update = new UpdateMaterial(0);
+
+
+				}
+			}
+		});
+
+		JScrollPane scrollPane = new JScrollPane(tableMaterial);
+		scrollPane.setLocation(10, 11);
+		panel_14.add(scrollPane);
+		scrollPane.setSize(610, 453);
 		tableMaterial.setSize(600, 800);
 
 		txtSearchMaterial = new JTextField();
@@ -1569,13 +1597,13 @@ public class Invoice {
 		//5. Show it.
 		updateTable.setVisible(true);
 	}
-	
-	
+
+
 	public static void writeMatOutput(String first, String second) {
 		mOutput(first, second);
 	}
-	
-	
+
+
 	private void math() {
 
 	}
@@ -1595,16 +1623,16 @@ public class Invoice {
 
 	protected void Fill() {
 
-//		ma[0] = txtMC1.getText();
-//		ma[1] = txtMC2.getText();
-//		ma[2] = txtMC3.getText();
-//		ma[3] = txtMC4.getText();
-//		ma[4] = txtMC5.getText();
-//		ma[5] = txtMC6.getText();
-//		ma[6] = txtMC7.getText();
-//		ma[7] = txtMC8.getText();
-//		ma[8] = txtMC9.getText();
-//		ma[9] = txtMC10.getText();
+		//		ma[0] = txtMC1.getText();
+		//		ma[1] = txtMC2.getText();
+		//		ma[2] = txtMC3.getText();
+		//		ma[3] = txtMC4.getText();
+		//		ma[4] = txtMC5.getText();
+		//		ma[5] = txtMC6.getText();
+		//		ma[6] = txtMC7.getText();
+		//		ma[7] = txtMC8.getText();
+		//		ma[8] = txtMC9.getText();
+		//		ma[9] = txtMC10.getText();
 
 		me[0] = txtMM1.getText();
 		me[1] = txtMM2.getText();
@@ -1619,30 +1647,30 @@ public class Invoice {
 
 		//		output("0",ma + "");
 	}
-//	private void Filli() {
-//
-//		txtMC1.setText(ma[0]);
-//		output("0","ma(0)" + txtMM1.getText());
-//		txtMM1.setText(me[0]);
-//		txtMC2.setText(ma[1]);
-//		txtMM2.setText(me[1]);
-//		txtMC3.setText(ma[2]);
-//		txtMM3.setText(me[2]);
-//		txtMC4.setText(ma[3]);
-//		txtMM4.setText(me[3]);
-//		txtMC5.setText(ma[4]);
-//		txtMM5.setText(me[4]);
-//		txtMC6.setText(ma[5]);
-//		txtMM6.setText(me[5]);
-//		txtMC7.setText(ma[6]);
-//		txtMM7.setText(me[6]);
-//		txtMC8.setText(ma[7]);
-//		txtMM8.setText(me[7]);
-//		txtMC9.setText(ma[8]);
-//		txtMM9.setText(me[8]);
-//		txtMC10.setText(ma[9]);
-//		txtMM10.setText(me[9]);
-//	}
+	//	private void Filli() {
+	//
+	//		txtMC1.setText(ma[0]);
+	//		output("0","ma(0)" + txtMM1.getText());
+	//		txtMM1.setText(me[0]);
+	//		txtMC2.setText(ma[1]);
+	//		txtMM2.setText(me[1]);
+	//		txtMC3.setText(ma[2]);
+	//		txtMM3.setText(me[2]);
+	//		txtMC4.setText(ma[3]);
+	//		txtMM4.setText(me[3]);
+	//		txtMC5.setText(ma[4]);
+	//		txtMM5.setText(me[4]);
+	//		txtMC6.setText(ma[5]);
+	//		txtMM6.setText(me[5]);
+	//		txtMC7.setText(ma[6]);
+	//		txtMM7.setText(me[6]);
+	//		txtMC8.setText(ma[7]);
+	//		txtMM8.setText(me[7]);
+	//		txtMC9.setText(ma[8]);
+	//		txtMM9.setText(me[8]);
+	//		txtMC10.setText(ma[9]);
+	//		txtMM10.setText(me[9]);
+	//	}
 
 	public void output(String catagory, String text) {
 		text = "{" + catagory + "}- " + text;
@@ -1759,6 +1787,7 @@ public class Invoice {
 	public void write() {
 
 		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx";
+		fille = "C:\\Users\\giova\\Desktop\\KID\\Testing\\024.xlsx";
 
 		//Read the spreadsheet that needs to be updated
 		FileInputStream fsIP;
@@ -2031,7 +2060,7 @@ public class Invoice {
 							if(oe[2].isEmpty()) {oe[2] = "0";}
 
 							//							output("0","end");
-//							Filli();
+							//							Filli();
 
 
 							ol = 1000;
@@ -2096,17 +2125,17 @@ public class Invoice {
 			content += "Y\n" + x.substring(5, 7) + "\n/\n";
 			content += "C\n" + x.substring(10) + "\n/\n";
 
-//			//Material
-//			content += "M\n";
-//			content += txtMC1.getText() + "\n" + txtMM1.getText() + "\n-\n";
-//			content += txtMC2.getText() + "\n" + txtMM2.getText() + "\n-\n";
-//			content += txtMC3.getText() + "\n" + txtMM3.getText() + "\n-\n";
-//			content += txtMC4.getText() + "\n" + txtMM4.getText() + "\n-\n";
-//			content += txtMC5.getText() + "\n" + txtMM5.getText() + "\n-\n";
-//			content += txtMC6.getText() + "\n" + txtMM6.getText() + "\n-\n";
-//			content += txtMC7.getText() + "\n" + txtMM7.getText() + "\n-\n";
-//			content += txtMC8.getText() + "\n" + txtMM8.getText() + "\n";
-//			content += "/\n";
+			//			//Material
+			//			content += "M\n";
+			//			content += txtMC1.getText() + "\n" + txtMM1.getText() + "\n-\n";
+			//			content += txtMC2.getText() + "\n" + txtMM2.getText() + "\n-\n";
+			//			content += txtMC3.getText() + "\n" + txtMM3.getText() + "\n-\n";
+			//			content += txtMC4.getText() + "\n" + txtMM4.getText() + "\n-\n";
+			//			content += txtMC5.getText() + "\n" + txtMM5.getText() + "\n-\n";
+			//			content += txtMC6.getText() + "\n" + txtMM6.getText() + "\n-\n";
+			//			content += txtMC7.getText() + "\n" + txtMM7.getText() + "\n-\n";
+			//			content += txtMC8.getText() + "\n" + txtMM8.getText() + "\n";
+			//			content += "/\n";
 
 
 			//Rhinestones

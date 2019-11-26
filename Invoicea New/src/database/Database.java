@@ -165,7 +165,7 @@ public class Database extends Invoice{
 			}
 			if(add) {
 				String material = name + ", " + type + ", $" + cost;
-				
+
 				Invoice.writeMatOutput("Added", material + "");
 				String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
 				//In case the user uses , instead of . the program will replace it
@@ -174,9 +174,9 @@ public class Database extends Invoice{
 				double dCost = Double.parseDouble(newCost);
 
 				String changedName = Strin.FirstCapital(name);
-				
-//				System.out.println(name);
-//				System.out.println(changedName);
+
+				//				System.out.println(name);
+				//				System.out.println(changedName);
 				try{
 					PreparedStatement pstmt = connect.prepareStatement(cmd);			
 					pstmt.setString(1, changedName);
@@ -200,7 +200,7 @@ public class Database extends Invoice{
 			}		
 		}
 
-		
+
 		return true;
 
 	}
@@ -353,17 +353,17 @@ public class Database extends Invoice{
 
 				address = rs.getString("studio_address");
 				email = rs.getString("studio_email");
+				name = rs.getString("studio_name");
 				owner = rs.getString("studio_owner");
 				phone = rs.getString("studio_phone");
-				name = rs.getString("studio_name");
 
 				bill = rs.getDouble("studio_bill");
 
-				//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
-				//						+ " . " + phone + " . " + email);
+				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
+						+ " . " + phone + " . " + email);
 
-				//								Invoice.clientsTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), Integer.toString(costumes), 
-				//										address, email, owner, phone, name, Double.toString(bill)});
+				Invoice.clientsTable.insertRow(Invoice.clientsTable.getRowCount(), new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
+						Double.toString(bill), owner, address, phone, email});
 			}
 
 			//If there's some error, return it
