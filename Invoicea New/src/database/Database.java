@@ -304,7 +304,7 @@ public class Database extends Invoice{
 				name = rs.getString("material_name");
 				type = rs.getString("material_type");
 				cost = rs.getDouble("material_cost");
-
+//hi
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, Double.toString(cost)});
 			}
