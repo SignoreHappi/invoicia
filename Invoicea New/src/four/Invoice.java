@@ -1021,10 +1021,12 @@ public class Invoice {
 					break;
 				case "The Eight Count":
 					studio_id = 4;
+					
 					break;
 				}
 			}
-		});
+		});					//I found some zippers on Dec 24th 2018 for $1.75 for King Trio
+		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
 		LocalDateTime now = LocalDateTime.now();  
 
