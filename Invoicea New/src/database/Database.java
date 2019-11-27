@@ -321,6 +321,8 @@ public class Database extends Invoice{
 		}
 	}
 
+	
+	//I HATE THIS SCODA
 
 
 	public static void EditInvoice(String code) {
