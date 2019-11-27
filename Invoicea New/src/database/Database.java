@@ -361,7 +361,7 @@ public class Database extends Invoice{
 
 //				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
 //						+ " . " + phone + " . " + email);
-
+//Hi
 //				Invoice.clientsTable.insertRow(Invoice.clientsTable.getRowCount(), new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
 //						Double.toString(bill), owner, address, phone, email});
 				
