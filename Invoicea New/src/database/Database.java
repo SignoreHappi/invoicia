@@ -353,7 +353,7 @@ public class Database extends Invoice{
 
 				address = rs.getString("studio_address");
 				email = rs.getString("studio_email");
-				name = rs.getString("studio_name");
+				name = rs.getString("studio_name");    
 				owner = rs.getString("studio_owner");
 				phone = rs.getString("studio_phone");
 
