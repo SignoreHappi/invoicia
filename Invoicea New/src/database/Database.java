@@ -331,7 +331,7 @@ public class Database extends Invoice{
 	}
 
 	public static void LoadClients() {
-		Invoice.clientsTable.setRowCount(0);
+//		Invoice.testTable.setRowCount(0);
 		String cmd = "SELECT * FROM studio";
 		int id, costumes;
 		String address, email, owner, phone, name;
@@ -355,17 +355,22 @@ public class Database extends Invoice{
 
 				address = rs.getString("studio_address");
 				email = rs.getString("studio_email");
-				name = rs.getString("studio_name");
+				name = rs.getString("studio_name");    
 				owner = rs.getString("studio_owner");
 				phone = rs.getString("studio_phone");
 
 				bill = rs.getDouble("studio_bill");
 
-				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
-						+ " . " + phone + " . " + email);
-
-				Invoice.clientsTable.insertRow(Invoice.clientsTable.getRowCount(), new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
-						Double.toString(bill), owner, address, phone, email});
+//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
+//						+ " . " + phone + " . " + email);
+//Hi
+//				Invoice.clientsTable.insertRow(Invoice.clientsTable.getRowCount(), new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
+//						Double.toString(bill), owner, address, phone, email});
+				
+				Object[] row = new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
+						Double.toString(bill), owner, address, phone, email};
+				Invoice.rows.addRow(row);
+				
 			}
 
 			//If there's some error, return it

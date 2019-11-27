@@ -231,7 +231,9 @@ public class Invoice {
 
 	public static DefaultTableModel clientsTable;
 	public static JTable tableClients;
-
+	public static DefaultTableModel rows;
+	public static JTable testTable;
+	
 	public static String clientsSearch = null;
 
 	public static String searching = null;
@@ -1399,6 +1401,67 @@ public class Invoice {
 		//		scrollTest.setVisible(true); 
 
 		clientsTable = new DefaultTableModel(){public boolean isCellEditable(int row, int column) {return false;}};
+		
+		
+		
+		TableColumn id, name, costumes, bill, owner, address, phone, email;
+		id = new TableColumn(0);
+		id.setHeaderValue("Studio ID");
+		id.setMinWidth(70);
+		id.setMaxWidth(70);
+		id.setPreferredWidth(70);		
+		
+		name = new TableColumn(1);
+		name.setHeaderValue("Studio Name");
+		name.setPreferredWidth(150); 
+		name.setMinWidth(150);
+		name.setMaxWidth(150);
+		
+		costumes = new TableColumn(2);
+		costumes.setHeaderValue("Total Costumes");
+		costumes.setMinWidth(100);
+		costumes.setMaxWidth(100);
+		costumes.setPreferredWidth(100);	
+
+		bill = new TableColumn(3);
+		bill.setHeaderValue("Studio Bill");
+		bill.setMinWidth(80);
+		bill.setMaxWidth(80);
+		bill.setPreferredWidth(80);
+		
+		owner = new TableColumn(4);
+		owner.setHeaderValue("Studio Owner");
+		owner.setMinWidth(120);
+		owner.setMaxWidth(120);
+		owner.setPreferredWidth(120);
+		
+		address = new TableColumn(5);
+		address.setHeaderValue("Studio Address");
+		address.setMinWidth(320);
+		address.setMaxWidth(320);
+		address.setPreferredWidth(320);
+		
+		phone = new TableColumn(6);
+		phone.setHeaderValue("Phone Number");
+		phone.setMinWidth(120);
+		phone.setMaxWidth(120);
+		phone.setPreferredWidth(120);
+		
+		email = new TableColumn(7);
+		email.setHeaderValue("Studio Email");
+//		email.setMinWidth(50);
+//		email.setMaxWidth(50);
+//		email.setPreferredWidth(50);
+		
+		DefaultTableColumnModel headers = new DefaultTableColumnModel();
+		headers.addColumn(id);
+		headers.addColumn(name);
+		headers.addColumn(costumes);
+		headers.addColumn(bill);
+		headers.addColumn(owner);
+		headers.addColumn(address);
+		headers.addColumn(phone);
+		headers.addColumn(email);
 
 
 		clientsTable.addColumn("Studio ID");
@@ -1415,7 +1478,40 @@ public class Invoice {
 		JScrollPane scrollPane_1 = new JScrollPane(tableClients);
 		scrollPane_1.setBounds(10, 10, 1327, 392);
 		Clients.add(scrollPane_1);
+		
+		rows = new DefaultTableModel(0,8);
+		
+		 
+		
+		
+		testTable = new JTable(rows, headers);
+		
+		JScrollPane scrollTest = new JScrollPane(testTable);
+		scrollTest.setLocation(10, 10);
+		
+		Clients.add(scrollTest);
+
+		scrollTest.setSize(1327,280);
+		scrollTest.setVisible(true); 
+		
 		Database.LoadClients();
+		
+//		clientsTable = new DefaultTableModel(){public boolean isCellEditable(int row, int column) {return false;}};		
+//		clientsTable.addColumn("Studio ID");
+//		clientsTable.addColumn("Studio Name");
+//		clientsTable.addColumn("Total Costumes");
+//		clientsTable.addColumn("Total Bill");
+//		clientsTable.addColumn("Studio Owner");
+//		clientsTable.addColumn("Studio Address");
+//		clientsTable.addColumn("Phone Number");
+//		clientsTable.addColumn("Email Address");
+//		tableClients = new JTable(clientsTable); 
+//
+//		
+//		JScrollPane scrollPane_1 = new JScrollPane(tableClients);
+//		scrollPane_1.setBounds(10, 10, 1327, 392);
+//		Clients.add(scrollPane_1);
+//		Database.LoadClients();
 
 
 
