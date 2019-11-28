@@ -90,6 +90,8 @@ import java.awt.List;
 import java.awt.BorderLayout;
 import javax.swing.JFormattedTextField;
 import javax.swing.JToggleButton;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class Invoice {
 
@@ -198,7 +200,8 @@ public class Invoice {
 	public static JLabel lblMCommand2;
 	public static JLabel lblMCommand1;
 
-	private final double TAX = 0.13;
+	private double tax = 0.13;
+	private int hourly = 30;
 	private String FS, FY, FC;
 
 
@@ -1771,6 +1774,13 @@ public class Invoice {
 		panel_2.add(lblHourlyRate);
 		
 		JSpinner spnHourly = new JSpinner();
+		spnHourly.setValue(hourly);
+		spnHourly.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				hourly = (int) spnHourly.getValue();
+//				System.out.println(hourly);
+			}
+		});
 		spnHourly.setBounds(142, 9, 90, 20);
 		panel_2.add(spnHourly);
 		
@@ -1810,7 +1820,15 @@ public class Invoice {
 		tglbtnUnlockBoxA.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		tglbtnUnlockBoxA.setBounds(10, 11, 211, 31);
 		panel_7.add(tglbtnUnlockBoxA);
-	}
+	}			// --------------------------------------------------------------------------------------------------- end of Jframe
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 	public void  UpdateTable(int row) {
