@@ -88,6 +88,7 @@ import java.awt.Choice;
 import java.awt.List;
 import java.awt.BorderLayout;
 import javax.swing.JFormattedTextField;
+import javax.swing.JToggleButton;
 
 public class Invoice {
 
@@ -612,12 +613,6 @@ public class Invoice {
 		lblCostumeName.setBounds(10, 92, 98, 20);
 		panel_10.add(lblCostumeName);
 
-		JLabel lblDepositAmmount = new JLabel("Deposit Ammount");
-		lblDepositAmmount.setBounds(10, 107, 109, 20);
-		panel_10.add(lblDepositAmmount);
-		lblDepositAmmount.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDepositAmmount.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-
 		JPanel panel_12 = new JPanel();
 		panel_12.setLayout(null);
 		panel_12.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -749,8 +744,7 @@ public class Invoice {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				output("?", "Version Incoive Gamma");
-				output("?", "D://Invoice Gamma//");
-				output("?", "Last Modified:     Oct/19");
+				output("?", "Last Modified:     Dec/19");
 				output("?", "- -/End of Information/- - -");
 				output("","");
 			}
@@ -1732,8 +1726,60 @@ public class Invoice {
 		tabbedPane.addTab("Rhinestones", new ImageIcon(Invoice.class.getResource("/images/Rhinestone icon.png")), Rhinestones, null);
 
 		Settings = new JPanel();
+		Settings.setBackground(new Color(255, 228, 225));
 		tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
 		Settings.setLayout(null);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_2.setBackground(new Color(204, 255, 255));
+		panel_2.setBounds(10, 11, 242, 461);
+		Settings.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblHourlyRate = new JLabel("Hourly Rate");
+		lblHourlyRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblHourlyRate.setBounds(10, 11, 76, 14);
+		panel_2.add(lblHourlyRate);
+		
+		JSpinner spnHourly = new JSpinner();
+		spnHourly.setBounds(142, 9, 90, 20);
+		panel_2.add(spnHourly);
+		
+		JSpinner spinner_3 = new JSpinner();
+		spinner_3.setBounds(142, 40, 90, 20);
+		panel_2.add(spinner_3);
+		
+		JLabel label_1 = new JLabel("Hourly Rate");
+		label_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		label_1.setBounds(10, 42, 76, 14);
+		panel_2.add(label_1);
+		
+		JSpinner spinner_4 = new JSpinner();
+		spinner_4.setBounds(142, 71, 90, 20);
+		panel_2.add(spinner_4);
+		
+		JLabel label_3 = new JLabel("Hourly Rate");
+		label_3.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		label_3.setBounds(10, 74, 76, 14);
+		panel_2.add(label_3);
+		
+		JLabel lblA = new JLabel("A");
+		lblA.setHorizontalAlignment(SwingConstants.CENTER);
+		lblA.setFont(new Font("Times New Roman", Font.ITALIC, 35));
+		lblA.setBounds(10, 417, 222, 33);
+		panel_2.add(lblA);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(Color.LIGHT_GRAY);
+		panel_7.setBounds(262, 11, 231, 191);
+		Settings.add(panel_7);
+		panel_7.setLayout(null);
+		
+		JToggleButton tglbtnUnlockBoxA = new JToggleButton("Unlock Box A");
+		tglbtnUnlockBoxA.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		tglbtnUnlockBoxA.setBounds(10, 11, 211, 31);
+		panel_7.add(tglbtnUnlockBoxA);
 	}
 
 
