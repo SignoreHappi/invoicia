@@ -361,16 +361,11 @@ public class Database extends Invoice{
 
 				bill = rs.getDouble("studio_bill");
 
-//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
-//						+ " . " + phone + " . " + email);
-//Hi
-//				Invoice.clientsTable.insertRow(Invoice.clientsTable.getRowCount(), new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
-//						Double.toString(bill), owner, address, phone, email});
-				
+				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
+						+ " . " + phone + " . " + email);
 				Object[] row = new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
 						Double.toString(bill), owner, address, phone, email};
-				Invoice.rows.addRow(row);
-				
+				Invoice.rows.addRow(row);				
 			}
 
 			//If there's some error, return it

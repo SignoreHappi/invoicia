@@ -1457,21 +1457,6 @@ public class Invoice {
 		headers.addColumn(phone);
 		headers.addColumn(email);
 
-
-		clientsTable.addColumn("Studio ID");
-		clientsTable.addColumn("Studio Name");
-		clientsTable.addColumn("Total Costumes");
-		clientsTable.addColumn("Total Bill");
-		clientsTable.addColumn("Studio Owner");
-		clientsTable.addColumn("Studio Address");
-		clientsTable.addColumn("Phone Number");
-		clientsTable.addColumn("Email Address");
-		tableClients = new JTable(clientsTable); 
-
-
-		JScrollPane scrollPane_1 = new JScrollPane(tableClients);
-		scrollPane_1.setBounds(10, 10, 1327, 392);
-		Clients.add(scrollPane_1);
 		
 		rows = new DefaultTableModel(0,8);
 		
