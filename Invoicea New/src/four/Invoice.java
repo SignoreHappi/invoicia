@@ -1750,6 +1750,8 @@ public class Invoice {
 		spinner_3.setBounds(142, 40, 90, 20);
 		panel_2.add(spinner_3);
 		
+		//tis is terrible
+		
 		JLabel label_1 = new JLabel("Hourly Rate");
 		label_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		label_1.setBounds(10, 42, 76, 14);
