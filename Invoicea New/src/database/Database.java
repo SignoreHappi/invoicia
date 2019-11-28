@@ -206,6 +206,7 @@ public class Database extends Invoice{
 	}
 
 	public static void LoadMaterials(){
+		Invoice.homeMaterialTbl.setRowCount(0);
 		Invoice.materialTable.setRowCount(0);
 		Invoice.txtSearchMaterial.setText("");;
 		String cmd = "SELECT * FROM material ORDER BY material_name ASC";
@@ -241,6 +242,7 @@ public class Database extends Invoice{
 
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, fmt});
+				Invoice.homeMaterialTbl.insertRow(Invoice.homeMaterialTbl.getRowCount(), new Object[] {name, type, fmt});
 			}
 
 			//If there's some error, return it
@@ -257,33 +259,34 @@ public class Database extends Invoice{
 		}
 	}
 
-	public static void SearchMaterial(KeyEvent enter, String materialSearch) {
+	public static void SearchMaterial(String materialSearch) {
 		Invoice.materialTable.setRowCount(0);
-		char typed = enter.getKeyChar();
-		//		String letter = typed.substring(55, 56);
-		if(typed == 'a' || typed == 'b' || typed == 'c' || typed == 'd' || typed == 'e'||  typed == 'f' || typed == 'g' || typed == 'h' || typed == 'i' || typed == 'j' || typed == 'k' || typed == 'l' || typed == 'm' || typed == 'n' || typed == 'o' || typed == 'p' || typed == 'q' || typed == 'r' || typed == 's' || typed == 't' || typed == 'u' || typed == 'v' || typed == 'w' || typed == 'x' || typed == 'y' || typed == 'z' ||  
-				typed == 'A' || typed == 'B' || typed == 'C' || typed == 'D' || typed == 'E'||  typed == 'F' || typed == 'G' || typed == 'H' || typed == 'I' || typed == 'J' || typed == 'K' || typed == 'L' || typed == 'M' || typed == 'N' || typed == 'O' || typed == 'P' || typed == 'Q' || typed == 'R' || typed == 'S' || typed == 'T' || typed == 'U' || typed == 'V' || typed == 'W' || typed == 'X' || typed == 'Y' || typed == 'Z' ||
-				typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
-			if(materialSearch == null) {
-				Invoice.materialSearch = Character.toString(typed);
-			}else {
-				Invoice.materialSearch = Invoice.materialSearch + Character.toString(typed);
-			}
-			System.out.println(Invoice.materialSearch);
+		//		char typed = enter.getKeyChar();
+		//		//		String letter = typed.substring(55, 56);
+		//		if(typed == 'a' || typed == 'b' || typed == 'c' || typed == 'd' || typed == 'e'||  typed == 'f' || typed == 'g' || typed == 'h' || typed == 'i' || typed == 'j' || typed == 'k' || typed == 'l' || typed == 'm' || typed == 'n' || typed == 'o' || typed == 'p' || typed == 'q' || typed == 'r' || typed == 's' || typed == 't' || typed == 'u' || typed == 'v' || typed == 'w' || typed == 'x' || typed == 'y' || typed == 'z' ||  
+		//				typed == 'A' || typed == 'B' || typed == 'C' || typed == 'D' || typed == 'E'||  typed == 'F' || typed == 'G' || typed == 'H' || typed == 'I' || typed == 'J' || typed == 'K' || typed == 'L' || typed == 'M' || typed == 'N' || typed == 'O' || typed == 'P' || typed == 'Q' || typed == 'R' || typed == 'S' || typed == 'T' || typed == 'U' || typed == 'V' || typed == 'W' || typed == 'X' || typed == 'Y' || typed == 'Z' ||
+		//				typed == '1' || typed == '2' || typed == '3' || typed == '4' || typed == '5' || typed == '6' || typed == '7' || typed == '8' || typed == '9' || typed == '0') {
+		//			if(materialSearch == null) {
+		//				Invoice.materialSearch = Character.toString(typed);
+		//			}else {
+		//				Invoice.materialSearch = Invoice.materialSearch + Character.toString(typed);
+		//			}
+		//			System.out.println(Invoice.materialSearch);
+		//
+		//		}			
+		//
+		//
+		//		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && Invoice.materialSearch.length() > 0) {
+		//			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
+		//		}
+		//
+		//		if(enter.getKeyCode() == KeyEvent.VK_TAB) {
+		//
+		//		}
 
-		}			
-
-
-		if(enter.getKeyCode() == KeyEvent.VK_BACK_SPACE && Invoice.materialSearch.length() > 0) {
-			Invoice.materialSearch = Invoice.materialSearch.substring(0, Invoice.materialSearch.length()-1);
-		}
-
-		if(enter.getKeyCode() == KeyEvent.VK_TAB) {
-
-		}
-
-		String cmd = "SELECT * FROM material WHERE material_name LIKE " +"\"" + Invoice.materialSearch + "%\" ORDER BY material_name ASC";
-		System.out.print(cmd);
+		String cmd = "SELECT * FROM material WHERE material_name LIKE \"%" + materialSearch + "%\" ORDER BY material_name ASC";
+		//		String cmd = "SELECT * FROM material WHERE material_name = " + "\"" + materialSearch + "\"";
+		System.out.println(cmd);
 		int id;
 		String name, type;
 
@@ -304,7 +307,7 @@ public class Database extends Invoice{
 				name = rs.getString("material_name");
 				type = rs.getString("material_type");
 				cost = rs.getDouble("material_cost");
-//hi
+				//hi
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, Double.toString(cost)});
 			}
@@ -321,7 +324,7 @@ public class Database extends Invoice{
 		}
 	}
 
-	
+
 	//I HATE THIS SCODA
 
 
@@ -331,7 +334,7 @@ public class Database extends Invoice{
 	}
 
 	public static void LoadClients() {
-//		Invoice.testTable.setRowCount(0);
+		//		Invoice.testTable.setRowCount(0);
 		String cmd = "SELECT * FROM studio";
 		int id, costumes;
 		String address, email, owner, phone, name;
@@ -361,8 +364,8 @@ public class Database extends Invoice{
 
 				bill = rs.getDouble("studio_bill");
 
-				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
-						+ " . " + phone + " . " + email);
+				//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
+				//						+ " . " + phone + " . " + email);
 				Object[] row = new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
 						Double.toString(bill), owner, address, phone, email};
 				Invoice.rows.addRow(row);				

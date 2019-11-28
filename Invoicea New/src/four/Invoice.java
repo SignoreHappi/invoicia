@@ -48,6 +48,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.TableColumnModelListener;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
@@ -235,6 +236,7 @@ public class Invoice {
 	public static DefaultTableModel rows;
 	public static JTable testTable;
 	
+	public static DefaultTableModel homeMaterialTbl;	
 	public static String clientsSearch = null;
 
 	public static String searching = null;
@@ -342,6 +344,19 @@ public class Invoice {
 		lblMaterial.setBounds(10, 11, 250, 24);
 		panel_5.add(lblMaterial);
 
+		
+		homeMaterialTbl = new DefaultTableModel();
+		homeMaterialTbl.addColumn("Material Name");
+		homeMaterialTbl.addColumn("Material Type");
+		homeMaterialTbl.addColumn("Material Price");
+		
+		JTable homeMaterialJTbl = new JTable(homeMaterialTbl);
+		JScrollPane homeMaterialScroll = new JScrollPane(homeMaterialJTbl);
+		homeMaterialScroll.setLocation(20,46);
+		panel_5.add(homeMaterialScroll);
+		homeMaterialScroll.setSize(297,302);
+		
+		
 		//		txtMC1 = new JComboBox();
 		//		txtMC1.setBounds(10, 46, 86, 20);
 		//		panel_5.add(txtMC1);
@@ -1645,12 +1660,21 @@ public class Invoice {
 
 
 
-		materialTable = new DefaultTableModel(){public boolean isCellEditable(int row, int column) {return false;}};
+		materialTable = new DefaultTableModel(){
+//			public boolean isCellEditable(int row, int column) {return false;}
+			};
 
 		materialTable.addColumn("Material Id");
 		materialTable.addColumn("Material Name");
 		materialTable.addColumn("Material Type");
 		materialTable.addColumn("Material Cost");
+//		materialTable.addTableModelListener( new MouseAdapter() {
+//			public void mouseReleased(MouseEvent me) {
+//				System.out.println("a");
+//			}
+//			
+//		});
+		
 		panel_14.setLayout(null);
 
 		JTable tableMaterial= new JTable(materialTable); 
@@ -1665,6 +1689,8 @@ public class Invoice {
 
 
 				}
+//				int column = materialTable.get;
+//				System.out.println(column);
 			}
 		});
 
@@ -1681,25 +1707,38 @@ public class Invoice {
 
 		Database.LoadMaterials();
 
-		JButton btnUpdateTable = new JButton("Update Table");
+		JButton btnUpdateTable = new JButton("Search Material");
+		btnUpdateTable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnUpdateTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Database.SearchMaterial(txtSearchMaterial.getText());
+			}
+		});
+
+		btnUpdateTable.setBounds(221, 520, 155, 41);
+		panel_14.add(btnUpdateTable);
+		
+		JButton button_7 = new JButton("Reset Table");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				Database.LoadMaterials();
 			}
 		});
+		button_7.setBounds(221, 577, 155, 41);
+		panel_14.add(button_7);
 
-		btnUpdateTable.setBounds(221, 514, 155, 41);
-		panel_14.add(btnUpdateTable);
-
-		txtSearchMaterial.addKeyListener(new KeyAdapter() {
-			//@Override
-			public void keyTyped(KeyEvent arg0) {
-			}
-			public void keyPressed(KeyEvent arg0) {
-				Database.SearchMaterial(arg0, materialSearch);
-			}
-		});
+//		txtSearchMaterial.addKeyListener(new KeyAdapter() {
+//			//@Override
+//			public void keyTyped(KeyEvent arg0) {
+//			}
+//			public void keyPressed(KeyEvent arg0) {
+//				Database.SearchMaterial(arg0, materialSearch);
+//			}
+//		});
 
 
 
