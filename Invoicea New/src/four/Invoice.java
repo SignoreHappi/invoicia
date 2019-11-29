@@ -1262,39 +1262,6 @@ public class Invoice {
 		tabbedPane.addTab("Clients", new ImageIcon(Invoice.class.getResource("/images/icon-client.png")), Clients, null);
 		Clients.setLayout(null);
 
-		table = new JTable();
-		table.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		table.setBackground(new Color(255, 228, 196));
-		table.setBounds(0, 11, screenSize.width - 10, 561);
-		DefaultTableModel d = new DefaultTableModel();
-		d.addColumn("ONE");
-		table.setModel(new DefaultTableModel(
-				new Object[][] {
-					{"ID", "Name", "№ Costumes", "Total Bill", "Owner", "Address", "Phone Number", "Email Address"},
-					{"Kids In Dance", "0", "0", "Corinne Moore", "100 Penn Dr. Toronto ON, CANADA   L6S 3B3 Unit 5 ", "(416) 571-4863", "corinne.moore@kidsindance.com"},
-					{"Evolve Dance Centre", "0", "0", "Katie Martin", null, null, null},
-					{null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null},
-				},
-				new String[] {
-						"", "No. Costumes", "Total Bill", "Owner", "Address", "Phone Number", "Email Address"
-				}
-				));
-		//		table.getColumnModel().getColumn(0).setPreferredWidth(80);
-		//		table.getColumnModel().getColumn(1).setPreferredWidth(78);
-		table.getColumnModel().getColumn(4).setPreferredWidth(280);
-		//		table.getColumnModel().getColumn(5).setPreferredWidth(1);
-		table.getColumnModel().getColumn(6).setPreferredWidth(261);
-
-
-
 		txtStudio = new JTextField();
 		txtStudio.setBounds(130, 626, 225, 20);
 		Clients.add(txtStudio);
