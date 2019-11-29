@@ -868,6 +868,8 @@ public class Invoice {
 		lblSubtotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSubtotal.setBounds(10, 273, 90, 17);
 		panel_1.add(lblSubtotal);
+		
+		
 
 		JLabel lblTotal = new JLabel("Total");
 		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
