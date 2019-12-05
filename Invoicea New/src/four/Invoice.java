@@ -53,9 +53,9 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 //
 //import java.io.File;
@@ -1748,6 +1748,7 @@ public class Invoice {
 			public void stateChanged(ChangeEvent e) {
 				hourly = (int) spnHourly.getValue();
 //				System.out.println(hourly);
+				//This is a comment
 			}
 		});
 		spnHourly.setBounds(142, 9, 90, 20);
@@ -1996,56 +1997,56 @@ public class Invoice {
 	//-----------------------------------------------------------------------------------------------// W R I T E //-------------------------------------------------------
 
 
-	public void write() {
-
-		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx";
-		fille = "C:\\Users\\giova\\Desktop\\KID\\Testing\\024.xlsx";
-
-		//Read the spreadsheet that needs to be updated
-		FileInputStream fsIP;
-		try {
-
-			fsIP = new FileInputStream(new File(fille));  
-			//Access the workbook                 
-			XSSFWorkbook wb = new XSSFWorkbook(fsIP);
-			//Access the worksheet, so that we can update / modify it. 
-			XSSFSheet worksheet = wb.getSheetAt(0); 
-			// declare a Cell object
-
-
-			Cell cell = null; 
-
-			cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
-			cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
-
-			cell = worksheet.getRow(10).getCell(2);   
-			cell.setCellValue("PT Lyrical Group Cake");
-
-
-			// Get current cell value value and overwrite the value
-
-			//Close the InputStream  
-			fsIP.close(); 
-
-
-			//Open FileOutputStream to write updates
-			FileOutputStream output_file =new FileOutputStream(new File(fille));  
-			//write changes
-			wb.write(output_file);
-
-
-			//close the stream
-			output_file.close();
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+//	public void write() {
+//
+//		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx";
+//		fille = "C:\\Users\\giova\\Desktop\\KID\\Testing\\024.xlsx";
+//
+//		//Read the spreadsheet that needs to be updated
+//		FileInputStream fsIP;
+//		try {
+//
+//			fsIP = new FileInputStream(new File(fille));  
+//			//Access the workbook                 
+//			XSSFWorkbook wb = new XSSFWorkbook(fsIP);
+//			//Access the worksheet, so that we can update / modify it. 
+//			XSSFSheet worksheet = wb.getSheetAt(0); 
+//			// declare a Cell object
+//
+//
+//			Cell cell = null; 
+//
+//			cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
+//			cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
+//
+//			cell = worksheet.getRow(10).getCell(2);   
+//			cell.setCellValue("PT Lyrical Group Cake");
+//
+//
+//			// Get current cell value value and overwrite the value
+//
+//			//Close the InputStream  
+//			fsIP.close(); 
+//
+//
+//			//Open FileOutputStream to write updates
+//			FileOutputStream output_file =new FileOutputStream(new File(fille));  
+//			//write changes
+//			wb.write(output_file);
+//
+//
+//			//close the stream
+//			output_file.close();
+//
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
 
 
 
