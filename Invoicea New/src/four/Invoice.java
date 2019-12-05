@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,15 +49,16 @@ import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 //
 //import java.io.File;
@@ -92,6 +95,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JToggleButton;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
 
 public class Invoice {
 
@@ -1263,12 +1268,12 @@ public class Invoice {
 		Clients.setLayout(null);
 
 		txtStudio = new JTextField();
-		txtStudio.setBounds(130, 626, 225, 20);
+		txtStudio.setBounds(130, 354, 225, 20);
 		Clients.add(txtStudio);
 		txtStudio.setColumns(10);
 
 		txtOwner = new JTextField();
-		txtOwner.setBounds(130, 657, 225, 20);
+		txtOwner.setBounds(130, 384, 225, 20);
 		Clients.add(txtOwner);
 		txtOwner.setColumns(10);
 
@@ -1285,7 +1290,7 @@ public class Invoice {
 				txtPhone.setText("");
 			}
 		});
-		txtPhone.setBounds(130, 688, 225, 20);
+		txtPhone.setBounds(130, 414, 225, 20);
 		Clients.add(txtPhone);
 		txtPhone.setColumns(10);
 
@@ -1297,59 +1302,51 @@ public class Invoice {
 			}
 		});
 		txtAddress.setToolTipText("# street, city province, country, postal-code");
-		txtAddress.setBounds(130, 719, 225, 20);
+		txtAddress.setBounds(130, 444, 225, 20);
 		Clients.add(txtAddress);
 		txtAddress.setColumns(10);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(130, 750, 225, 20);
+		txtEmail.setBounds(130, 474, 225, 20);
 		Clients.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblStudioName = new JLabel("Studio Name");
 		lblStudioName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStudioName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblStudioName.setBounds(10, 626, 110, 20);
+		lblStudioName.setBounds(10, 352, 110, 20);
 		Clients.add(lblStudioName);
 
 		JLabel lblOwnerName = new JLabel("Owner Name\r\n");
 		lblOwnerName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOwnerName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblOwnerName.setBounds(10, 657, 110, 20);
+		lblOwnerName.setBounds(10, 382, 110, 20);
 		Clients.add(lblOwnerName);
 
 		JLabel lblPhoneNumber = new JLabel("Phone Number");
 		lblPhoneNumber.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPhoneNumber.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblPhoneNumber.setBounds(10, 688, 110, 20);
+		lblPhoneNumber.setBounds(10, 415, 110, 20);
 		Clients.add(lblPhoneNumber);
 
 		JLabel lblAddress = new JLabel("Address");
 		lblAddress.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAddress.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblAddress.setBounds(10, 719, 110, 20);
+		lblAddress.setBounds(10, 442, 110, 20);
 		Clients.add(lblAddress);
 
 		JLabel lblEmailAddress = new JLabel("Email Address");
 		lblEmailAddress.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmailAddress.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblEmailAddress.setBounds(10, 750, 110, 20);
+		lblEmailAddress.setBounds(10, 472, 110, 20);
 		Clients.add(lblEmailAddress);
 
-		JLabel lblLineNumber = new JLabel("Line Number");
-		lblLineNumber.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLineNumber.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblLineNumber.setBounds(10, 595, 110, 20);
-		Clients.add(lblLineNumber);
-
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setBackground(Color.RED);
+		btnSubmit.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		btnSubmit.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		btnSubmit.setBounds(245, 795, 110, 33);
+		btnSubmit.setBounds(78, 516, 110, 33);
 		Clients.add(btnSubmit);
-
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setBounds(283, 583, 29, 20);
-		Clients.add(spinner_1);
 
 		//		TableColumn id, name, email;
 		//		id = new TableColumn(0);
@@ -1996,56 +1993,56 @@ public class Invoice {
 	//-----------------------------------------------------------------------------------------------// W R I T E //-------------------------------------------------------
 
 
-	public void write() {
-
-		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx";
-		fille = "C:\\Users\\giova\\Desktop\\KID\\Testing\\024.xlsx";
-
-		//Read the spreadsheet that needs to be updated
-		FileInputStream fsIP;
-		try {
-
-			fsIP = new FileInputStream(new File(fille));  
-			//Access the workbook                 
-			XSSFWorkbook wb = new XSSFWorkbook(fsIP);
-			//Access the worksheet, so that we can update / modify it. 
-			XSSFSheet worksheet = wb.getSheetAt(0); 
-			// declare a Cell object
-
-
-			Cell cell = null; 
-
-			cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
-			cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
-
-			cell = worksheet.getRow(10).getCell(2);   
-			cell.setCellValue("PT Lyrical Group Cake");
-
-
-			// Get current cell value value and overwrite the value
-
-			//Close the InputStream  
-			fsIP.close(); 
-
-
-			//Open FileOutputStream to write updates
-			FileOutputStream output_file =new FileOutputStream(new File(fille));  
-			//write changes
-			wb.write(output_file);
-
-
-			//close the stream
-			output_file.close();
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+//	public void write() {
+//
+//		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx";
+//		fille = "C:\\Users\\giova\\Desktop\\KID\\Testing\\024.xlsx";
+//
+//		//Read the spreadsheet that needs to be updated
+//		FileInputStream fsIP;
+//		try {
+//
+//			fsIP = new FileInputStream(new File(fille));  
+//			//Access the workbook                 
+//			XSSFWorkbook wb = new XSSFWorkbook(fsIP);
+//			//Access the worksheet, so that we can update / modify it. 
+//			XSSFSheet worksheet = wb.getSheetAt(0); 
+//			// declare a Cell object
+//
+//
+//			Cell cell = null; 
+//
+//			cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
+//			cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
+//
+//			cell = worksheet.getRow(10).getCell(2);   
+//			cell.setCellValue("PT Lyrical Group Cake");
+//
+//
+//			// Get current cell value value and overwrite the value
+//
+//			//Close the InputStream  
+//			fsIP.close(); 
+//
+//
+//			//Open FileOutputStream to write updates
+//			FileOutputStream output_file =new FileOutputStream(new File(fille));  
+//			//write changes
+//			wb.write(output_file);
+//
+//
+//			//close the stream
+//			output_file.close();
+//
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
 
 
 
@@ -2385,3 +2382,4 @@ public class Invoice {
 		} catch (IOException e) {  e.printStackTrace();  }
 	}
 }
+
