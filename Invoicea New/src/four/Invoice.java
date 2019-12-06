@@ -1258,6 +1258,7 @@ public class Invoice {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Database.getPrices();
+				math();
 			}
 		});
 		btnSave.addMouseListener(new MouseAdapter() {

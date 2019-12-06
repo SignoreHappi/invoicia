@@ -389,27 +389,31 @@ public class Database extends Invoice{
 			stmt = connect.createStatement();
 			
 			for(int i = 0; i < Invoice.selectedMaterials.length+1; i++) {
-				String name = Invoice.selectedMaterials[0][i];
-				
-				int index = name.indexOf(".");
-				String type = name.substring(index+1); 
-				name = name.substring(0, index);
-				System.out.println(name);
-				System.out.println(type);
-				System.out.println();
-				cmd =  "SELECT * FROM material where material_name = " + "\"" + name + "\" and material_type = " + "\"" + type + "\"";
+				if(Invoice.selectedMaterials[0][i] != null) {
+					
+					String name = Invoice.selectedMaterials[0][i];
+					
+					int index = name.indexOf(".");
+					String type = name.substring(index+1); 
+					name = name.substring(0, index);
+//					Invoice.selectedMaterials[0][i] = name;
+					cmd =  "SELECT * FROM material where material_name = " + "\"" + name + "\" and material_type = " + "\"" + type + "\"";
 //				
 //				//Execute the code
-				stmt.executeQuery(cmd);
+					stmt.executeQuery(cmd);
 //				//For every possible execution, create a rs
-				ResultSet rs = stmt.executeQuery(cmd);
+					ResultSet rs = stmt.executeQuery(cmd);
 //				//While there's code to be executes, do something
 //				
 //				
-				while(rs.next()) {					
-					double price = rs.getDouble("material_cost");
-					System.out.println(price);
+					while(rs.next()) {					
+						double price = rs.getDouble("material_cost");
+						Invoice.selectedMaterials[2][i] = price + "";
+					}
 				}
+				System.out.println(Invoice.selectedMaterials[0][i]);
+				System.out.println(Invoice.selectedMaterials[1][i]);
+				System.out.println(Invoice.selectedMaterials[2][i]);
 			}
 			
 			
