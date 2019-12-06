@@ -472,43 +472,43 @@ public class Invoice {
 		lblMaterialName10.setBounds(327, 276, 133, 13);
 		panel_5.add(lblMaterialName10);
 		
-				lblMaterialAmount1 = new JLabel("0");
+				lblMaterialAmount1 = new JLabel("");
 				lblMaterialAmount1.setBounds(470, 69, 70, 13);
 				panel_5.add(lblMaterialAmount1);
 
-		lblMaterialAmount2 = new JLabel("1");
+		lblMaterialAmount2 = new JLabel("");
 		lblMaterialAmount2.setBounds(470, 92, 70, 13);
 		panel_5.add(lblMaterialAmount2);
 
-		lblMaterialAmount3 = new JLabel("2");
+		lblMaterialAmount3 = new JLabel("");
 		lblMaterialAmount3.setBounds(470, 115, 70, 13);
 		panel_5.add(lblMaterialAmount3);
 
-		lblMaterialAmount4 = new JLabel("3");
+		lblMaterialAmount4 = new JLabel("");
 		lblMaterialAmount4.setBounds(470, 138, 70, 13);
 		panel_5.add(lblMaterialAmount4);
 
-		lblMaterialAmount5 = new JLabel("4");
+		lblMaterialAmount5 = new JLabel("");
 		lblMaterialAmount5.setBounds(470, 161, 70, 13);
 		panel_5.add(lblMaterialAmount5);
 
-		lblMaterialAmount9 = new JLabel("5");
+		lblMaterialAmount9 = new JLabel("");
 		lblMaterialAmount9.setBounds(470, 253, 70, 13);
 		panel_5.add(lblMaterialAmount9);
 
-		lblMaterialAmount6 = new JLabel("6");
+		lblMaterialAmount6 = new JLabel("");
 		lblMaterialAmount6.setBounds(470, 184, 70, 13);
 		panel_5.add(lblMaterialAmount6);
 
-		lblMaterialAmount7 = new JLabel("7");
+		lblMaterialAmount7 = new JLabel("");
 		lblMaterialAmount7.setBounds(470, 207, 70, 13);
 		panel_5.add(lblMaterialAmount7);
 
-		lblMaterialAmount8 = new JLabel("8");
+		lblMaterialAmount8 = new JLabel("");
 		lblMaterialAmount8.setBounds(470, 230, 70, 13);
 		panel_5.add(lblMaterialAmount8);
 
-		lblMaterialAmount10 = new JLabel("9");
+		lblMaterialAmount10 = new JLabel("");
 		lblMaterialAmount10.setBounds(470, 276, 70, 13);
 		panel_5.add(lblMaterialAmount10);
 
