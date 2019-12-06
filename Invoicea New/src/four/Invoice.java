@@ -1745,6 +1745,7 @@ public class Invoice {
 			public void stateChanged(ChangeEvent e) {
 				hourly = (int) spnHourly.getValue();
 //				System.out.println(hourly);
+				//This is a comment
 			}
 		});
 		spnHourly.setBounds(142, 9, 90, 20);
