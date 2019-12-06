@@ -151,9 +151,10 @@ public class Invoice {
 	private JLabel lbsTotal;
 	private JLabel lbsSubtotal;
 	private JLabel lbsDeposit;
+	public JLabel lblLine;
+	
 	public JSpinner spnHH = new JSpinner();
 	public JSpinner spnK = new JSpinner();
-	public JLabel lblLine;
 
 	public JSpinner spnRT1;
 	public JSpinner spnRT2;
@@ -180,7 +181,9 @@ public class Invoice {
 	private String ra[] = new String [4];
 	private String rt[] = new String [4];
 	private String rs[] = new String [4];
+	
 	public int years;
+	
 	public JLabel lblCommand11;
 	public JLabel lblCommand10;
 	public JLabel lblCommand9;
@@ -206,26 +209,27 @@ public class Invoice {
 	public static JLabel lblMCommand2;
 	public static JLabel lblMCommand1;
 	
+	public JLabel lblMaterialName0;
 	public JLabel lblMaterialName1;
 	public JLabel lblMaterialName2;
 	public JLabel lblMaterialName3;
 	public JLabel lblMaterialName4;
-	public JLabel lblMaterialName5;
-	public JLabel lblMaterialName6;
-	public JLabel lblMaterialName7;
 	public JLabel lblMaterialName8;
+	public JLabel lblMaterialName7;
+	public JLabel lblMaterialName6;
+	public JLabel lblMaterialName5;
 	public JLabel lblMaterialName9;
-	public JLabel lblMaterialName10;
+	
+	public JLabel lblMaterialAmount1;
 	public JLabel lblMaterialAmount2;
 	public JLabel lblMaterialAmount3;
 	public JLabel lblMaterialAmount4;
+	public JLabel lblMaterialAmount8;
 	public JLabel lblMaterialAmount5;
-	public JLabel lblMaterialAmount9;
 	public JLabel lblMaterialAmount6;
 	public JLabel lblMaterialAmount7;
-	public JLabel lblMaterialAmount8;
-	public JLabel lblMaterialAmount10;
-	public JLabel lblMaterialAmount1;
+	public JLabel lblMaterialAmount9;
+	public JLabel lblMaterialAmount0;
 	
 
 	private double tax = 0.13;
@@ -391,9 +395,9 @@ public class Invoice {
 						int row = homeMaterialJTbl.getSelectedRow();
 						String name = homeMaterialJTbl.getValueAt(row, 0).toString();
 						
-						if(lblMaterialName1.getText() == "") {
-							lblMaterialName1.setText(name);
-							lblMaterialAmount2.setText(amount);
+						if(lblMaterialName0.getText() == "") {
+							lblMaterialName0.setText(name);
+							lblMaterialAmount1.setText(amount);
 						}
 						
 						System.out.println(row);
@@ -432,85 +436,85 @@ public class Invoice {
 		lblMaterial.setBounds(10, 11, 250, 24);
 		panel_5.add(lblMaterial);
 
+		lblMaterialName0 = new JLabel("");
+		lblMaterialName0.setBounds(327, 69, 133, 13);
+		panel_5.add(lblMaterialName0);
+
 		lblMaterialName1 = new JLabel("");
-		lblMaterialName1.setBounds(327, 69, 133, 13);
+		lblMaterialName1.setBounds(327, 92, 133, 13);
 		panel_5.add(lblMaterialName1);
 
 		lblMaterialName2 = new JLabel("");
-		lblMaterialName2.setBounds(327, 92, 133, 13);
+		lblMaterialName2.setBounds(327, 115, 133, 13);
 		panel_5.add(lblMaterialName2);
 
 		lblMaterialName3 = new JLabel("");
-		lblMaterialName3.setBounds(327, 115, 133, 13);
+		lblMaterialName3.setBounds(327, 138, 133, 13);
 		panel_5.add(lblMaterialName3);
 
 		lblMaterialName4 = new JLabel("");
-		lblMaterialName4.setBounds(327, 138, 133, 13);
+		lblMaterialName4.setBounds(327, 161, 133, 13);
 		panel_5.add(lblMaterialName4);
 
-		lblMaterialName5 = new JLabel("");
-		lblMaterialName5.setBounds(327, 161, 133, 13);
-		panel_5.add(lblMaterialName5);
-
-		lblMaterialName6 = new JLabel("");
-		lblMaterialName6.setBounds(327, 253, 133, 13);
-		panel_5.add(lblMaterialName6);
+		lblMaterialName8 = new JLabel("");
+		lblMaterialName8.setBounds(327, 253, 133, 13);
+		panel_5.add(lblMaterialName8);
 
 		lblMaterialName7 = new JLabel("");
 		lblMaterialName7.setBounds(327, 230, 133, 13);
 		panel_5.add(lblMaterialName7);
 
-		lblMaterialName8 = new JLabel("");
-		lblMaterialName8.setBounds(327, 207, 133, 13);
-		panel_5.add(lblMaterialName8);
+		lblMaterialName6 = new JLabel("");
+		lblMaterialName6.setBounds(327, 207, 133, 13);
+		panel_5.add(lblMaterialName6);
+
+		lblMaterialName5 = new JLabel("");
+		lblMaterialName5.setBounds(327, 184, 133, 13);
+		panel_5.add(lblMaterialName5);
 
 		lblMaterialName9 = new JLabel("");
-		lblMaterialName9.setBounds(327, 184, 133, 13);
+		lblMaterialName9.setBounds(327, 276, 133, 13);
 		panel_5.add(lblMaterialName9);
-
-		lblMaterialName10 = new JLabel("");
-		lblMaterialName10.setBounds(327, 276, 133, 13);
-		panel_5.add(lblMaterialName10);
 		
-				lblMaterialAmount1 = new JLabel("");
-				lblMaterialAmount1.setBounds(470, 69, 70, 13);
-				panel_5.add(lblMaterialAmount1);
+		lblMaterialAmount0 = new JLabel("");
+		lblMaterialAmount0.setBounds(470, 69, 70, 13);
+		panel_5.add(lblMaterialAmount0);
+
+		lblMaterialAmount1 = new JLabel("");
+		lblMaterialAmount1.setBounds(470, 92, 70, 13);
+		panel_5.add(lblMaterialAmount1);
 
 		lblMaterialAmount2 = new JLabel("");
-		lblMaterialAmount2.setBounds(470, 92, 70, 13);
+		lblMaterialAmount2.setBounds(470, 115, 70, 13);
 		panel_5.add(lblMaterialAmount2);
 
 		lblMaterialAmount3 = new JLabel("");
-		lblMaterialAmount3.setBounds(470, 115, 70, 13);
+		lblMaterialAmount3.setBounds(470, 138, 70, 13);
 		panel_5.add(lblMaterialAmount3);
 
 		lblMaterialAmount4 = new JLabel("");
-		lblMaterialAmount4.setBounds(470, 138, 70, 13);
+		lblMaterialAmount4.setBounds(470, 161, 70, 13);
 		panel_5.add(lblMaterialAmount4);
 
+		lblMaterialAmount8 = new JLabel("");
+		lblMaterialAmount8.setBounds(470, 253, 70, 13);
+		panel_5.add(lblMaterialAmount8);
+
 		lblMaterialAmount5 = new JLabel("");
-		lblMaterialAmount5.setBounds(470, 161, 70, 13);
+		lblMaterialAmount5.setBounds(470, 184, 70, 13);
 		panel_5.add(lblMaterialAmount5);
 
-		lblMaterialAmount9 = new JLabel("");
-		lblMaterialAmount9.setBounds(470, 253, 70, 13);
-		panel_5.add(lblMaterialAmount9);
-
 		lblMaterialAmount6 = new JLabel("");
-		lblMaterialAmount6.setBounds(470, 184, 70, 13);
+		lblMaterialAmount6.setBounds(470, 207, 70, 13);
 		panel_5.add(lblMaterialAmount6);
 
 		lblMaterialAmount7 = new JLabel("");
-		lblMaterialAmount7.setBounds(470, 207, 70, 13);
+		lblMaterialAmount7.setBounds(470, 230, 70, 13);
 		panel_5.add(lblMaterialAmount7);
 
-		lblMaterialAmount8 = new JLabel("");
-		lblMaterialAmount8.setBounds(470, 230, 70, 13);
-		panel_5.add(lblMaterialAmount8);
-
-		lblMaterialAmount10 = new JLabel("");
-		lblMaterialAmount10.setBounds(470, 276, 70, 13);
-		panel_5.add(lblMaterialAmount10);
+		lblMaterialAmount9 = new JLabel("");
+		lblMaterialAmount9.setBounds(470, 276, 70, 13);
+		panel_5.add(lblMaterialAmount9);
 
 
 		//		txtMC1 = new JComboBox();
