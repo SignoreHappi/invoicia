@@ -272,6 +272,8 @@ public class Invoice {
 	public static String clientsSearch = null;
 
 	public static String searching = null;
+	
+	public static String[][] selectedMaterials = new String [2][10];
 
 	public static int result = 0;
 	
@@ -391,10 +393,70 @@ public class Invoice {
 						int row = homeMaterialJTbl.getSelectedRow();
 						String name = homeMaterialJTbl.getValueAt(row, 0).toString();
 						
-						if(lblMaterialName1.getText() == "") {
-							lblMaterialName1.setText(name);
-							lblMaterialAmount2.setText(amount);
+						int count = 0;
+						for(count = 0; count < 10; count++) {
+							if(selectedMaterials[0][count] == null) {
+								selectedMaterials[0][count] = name;
+								selectedMaterials[1][count] = amount;
+								break;
+							}
 						}
+						
+						switch(count) {
+						case 0:
+							lblMaterialName1.setText(name);
+							lblMaterialAmount1.setText(amount);
+							break;
+						case 1:
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+						case 4:
+							break;
+						case 5:
+							break;
+						case 6:
+							break;
+						case 7:
+							break;
+						case 8:
+							break;
+						case 9:
+							break;
+						}
+						
+						if(lblMaterialName1.getText() == "") {
+							
+						}else if(lblMaterialName2.getText() == "") {
+							lblMaterialName2.setText(name);
+							lblMaterialAmount2.setText(amount);
+						}else if(lblMaterialName3.getText() == "") {
+							lblMaterialName3.setText(name);
+							lblMaterialAmount3.setText(amount);
+						}else if(lblMaterialName4.getText() == "") {
+							lblMaterialName4.setText(name);
+							lblMaterialAmount4.setText(amount);
+						}else if(lblMaterialName5.getText() == "") {
+							lblMaterialName5.setText(name);
+							lblMaterialAmount5.setText(amount);
+						}else if(lblMaterialName6.getText() == "") {
+							lblMaterialName6.setText(name);
+							lblMaterialAmount6.setText(amount);
+						}else if(lblMaterialName7.getText() == "") {
+							lblMaterialName7.setText(name);
+							lblMaterialAmount7.setText(amount);
+						}else if(lblMaterialName8.getText() == "") {
+							lblMaterialName8.setText(name);
+							lblMaterialAmount8.setText(amount);
+						}else if(lblMaterialName9.getText() == "") {
+							lblMaterialName9.setText(name);
+							lblMaterialAmount9.setText(amount);
+						}else if(lblMaterialName10.getText() == "") {
+							lblMaterialName10.setText(name);
+							lblMaterialAmount10.setText(amount);
+						}else 
 						
 						System.out.println(row);
 					}catch (NumberFormatException ex){
