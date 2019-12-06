@@ -376,5 +376,56 @@ public class Database extends Invoice{
 			System.out.print(e);
 		}	
 
+	}
+
+	public static void getPrices() {
+		// TODO Auto-generated method stub
+		String cmd = null;
+
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			//Create the code
+			stmt = connect.createStatement();
+			
+			for(int i = 0; i < Invoice.selectedMaterials.length+1; i++) {
+				String name = Invoice.selectedMaterials[0][i];
+				
+				int index = name.indexOf(".");
+				String type = name.substring(index+1); 
+				name = name.substring(0, index);
+				System.out.println(name);
+				System.out.println(type);
+				System.out.println();
+				cmd =  "SELECT * FROM material where material_name = " + "\"" + name + "\" and material_type = " + "\"" + type + "\"";
+//				
+//				//Execute the code
+				stmt.executeQuery(cmd);
+//				//For every possible execution, create a rs
+				ResultSet rs = stmt.executeQuery(cmd);
+//				//While there's code to be executes, do something
+//				
+//				
+				while(rs.next()) {					
+					double price = rs.getDouble("material_cost");
+					System.out.println(price);
+				}
+			}
+			
+			
+			
+			
+
+			//If there's some error, return it
+		} catch (SQLException e) {
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}	
 }

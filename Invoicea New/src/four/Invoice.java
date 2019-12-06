@@ -1247,17 +1247,17 @@ public class Invoice {
 		separator.setBounds(10, 128, 382, 4);
 		panel_1.add(separator);
 
-		JButton btnSave = new JButton("CALCULATE");
+		JButton btnSave = new JButton("SAVE");
 		btnSave.setBounds(270, 176, 120, 30);
 		panel_1.add(btnSave);
 
-		JButton btnSave_1 = new JButton("SAVE");
-		btnSave_1.setBounds(270, 133, 120, 30);
-		panel_1.add(btnSave_1);
-		btnSave_1.addMouseListener(new MouseAdapter() {
+		JButton btnCalculate = new JButton("CALCULATE");
+		btnCalculate.setBounds(270, 133, 120, 30);
+		panel_1.add(btnCalculate);
+		btnCalculate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//				Database.EditInvoice();
+				Database.getPrices();
 			}
 		});
 		btnSave.addMouseListener(new MouseAdapter() {
