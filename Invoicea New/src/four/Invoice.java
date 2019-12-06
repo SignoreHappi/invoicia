@@ -409,7 +409,7 @@ public class Invoice {
 
 					}else {
 
-						String amount = JOptionPane.showInputDialog(null, "How much do of " + name + " " + type + "want to use?");
+						String amount = JOptionPane.showInputDialog(null, "How much of " + name + " " + type + " do you want to use?");
 						try {
 							int intAmount = Integer.parseInt(amount);
 							int count = 0;
@@ -536,83 +536,83 @@ public class Invoice {
 		pnlMaterial.add(lblMaterial);
 
 		lblMaterialName0 = new JLabel("");
-		lblMaterialName0.setBounds(327, 69, 133, 13);
+		lblMaterialName0.setBounds(327, 69, 179, 13);
 		pnlMaterial.add(lblMaterialName0);
 
 		lblMaterialName1 = new JLabel("");
-		lblMaterialName1.setBounds(327, 92, 133, 13);
+		lblMaterialName1.setBounds(327, 92, 179, 13);
 		pnlMaterial.add(lblMaterialName1);
 
 		lblMaterialName2 = new JLabel("");
-		lblMaterialName2.setBounds(327, 115, 133, 13);
+		lblMaterialName2.setBounds(327, 115, 179, 13);
 		pnlMaterial.add(lblMaterialName2);
 
 		lblMaterialName3 = new JLabel("");
-		lblMaterialName3.setBounds(327, 138, 133, 13);
+		lblMaterialName3.setBounds(327, 138, 179, 13);
 		pnlMaterial.add(lblMaterialName3);
 
 		lblMaterialName4 = new JLabel("");
-		lblMaterialName4.setBounds(327, 161, 133, 13);
+		lblMaterialName4.setBounds(327, 161, 179, 13);
 		pnlMaterial.add(lblMaterialName4);
 
 		lblMaterialName8 = new JLabel("");
-		lblMaterialName8.setBounds(327, 253, 133, 13);
+		lblMaterialName8.setBounds(327, 253, 179, 13);
 		pnlMaterial.add(lblMaterialName8);
 
 		lblMaterialName7 = new JLabel("");
-		lblMaterialName7.setBounds(327, 230, 133, 13);
+		lblMaterialName7.setBounds(327, 230, 179, 13);
 		pnlMaterial.add(lblMaterialName7);
 
 		lblMaterialName6 = new JLabel("");
-		lblMaterialName6.setBounds(327, 207, 133, 13);
+		lblMaterialName6.setBounds(327, 207, 179, 13);
 		pnlMaterial.add(lblMaterialName6);
 
 		lblMaterialName5 = new JLabel("");
-		lblMaterialName5.setBounds(327, 184, 133, 13);
+		lblMaterialName5.setBounds(327, 184, 179, 13);
 		pnlMaterial.add(lblMaterialName5);
 
 		lblMaterialName9 = new JLabel("");
-		lblMaterialName9.setBounds(327, 276, 133, 13);
+		lblMaterialName9.setBounds(327, 276, 179, 13);
 		pnlMaterial.add(lblMaterialName9);
 
 		lblMaterialAmount0 = new JLabel("");
-		lblMaterialAmount0.setBounds(470, 69, 70, 13);
+		lblMaterialAmount0.setBounds(506, 69, 34, 13);
 		pnlMaterial.add(lblMaterialAmount0);
 
 		lblMaterialAmount1 = new JLabel("");
-		lblMaterialAmount1.setBounds(470, 92, 70, 13);
+		lblMaterialAmount1.setBounds(506, 92, 34, 13);
 		pnlMaterial.add(lblMaterialAmount1);
 
 		lblMaterialAmount2 = new JLabel("");
-		lblMaterialAmount2.setBounds(470, 115, 70, 13);
+		lblMaterialAmount2.setBounds(506, 115, 34, 13);
 		pnlMaterial.add(lblMaterialAmount2);
 
 		lblMaterialAmount3 = new JLabel("");
-		lblMaterialAmount3.setBounds(470, 138, 70, 13);
+		lblMaterialAmount3.setBounds(506, 138, 34, 13);
 		pnlMaterial.add(lblMaterialAmount3);
 
 		lblMaterialAmount4 = new JLabel("");
-		lblMaterialAmount4.setBounds(470, 161, 70, 13);
+		lblMaterialAmount4.setBounds(506, 161, 34, 13);
 		pnlMaterial.add(lblMaterialAmount4);
 
 		lblMaterialAmount8 = new JLabel("");
-		lblMaterialAmount8.setBounds(470, 253, 70, 13);
+		lblMaterialAmount8.setBounds(506, 253, 34, 13);
 		pnlMaterial.add(lblMaterialAmount8);
 
 		lblMaterialAmount5 = new JLabel("");
-		lblMaterialAmount5.setBounds(470, 184, 70, 13);
+		lblMaterialAmount5.setBounds(506, 184, 34, 13);
 		pnlMaterial.add(lblMaterialAmount5);
 
 		lblMaterialAmount6 = new JLabel("");
-		lblMaterialAmount6.setBounds(470, 207, 70, 13);
+		lblMaterialAmount6.setBounds(506, 207, 34, 13);
 		pnlMaterial.add(lblMaterialAmount6);
 
 		lblMaterialAmount7 = new JLabel("");
-		lblMaterialAmount7.setBounds(470, 230, 70, 13);
+		lblMaterialAmount7.setBounds(506, 230, 34, 13);
 		pnlMaterial.add(lblMaterialAmount7);
 
 		lblMaterialAmount9 = new JLabel("");
-		lblMaterialAmount9.setBounds(470, 276, 70, 13);
+		lblMaterialAmount9.setBounds(506, 276, 34, 13);
 		pnlMaterial.add(lblMaterialAmount9);
 
 
