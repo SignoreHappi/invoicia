@@ -138,7 +138,7 @@ public class Invoice {
 
 
 	protected JPanel PInvoice;
-	private JPanel panel_6;
+	private JPanel pnlRhinestones;
 	protected JPanel Settings;
 	private JLabel lblRhynestones;
 
@@ -369,12 +369,12 @@ public class Invoice {
 
 		PInvoice.show();
 
-		JPanel panel_5 = new JPanel();
-		panel_5.setBackground(new Color(250, 128, 114));
-		panel_5.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_5.setBounds(10, 310, 550, 358);
-		PInvoice.add(panel_5);
-		panel_5.setLayout(null);
+		JPanel pnlMaterial = new JPanel();
+		pnlMaterial.setBackground(new Color(250, 128, 114));
+		pnlMaterial.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlMaterial.setBounds(10, 310, 550, 358);
+		PInvoice.add(pnlMaterial);
+		pnlMaterial.setLayout(null);
 
 
 		homeMaterialTbl = new DefaultTableModel();
@@ -410,12 +410,12 @@ public class Invoice {
 		});
 		btnAddMaterial.setEnabled(false);
 		btnAddMaterial.setBounds(351, 25, 133, 23);
-		panel_5.add(btnAddMaterial);
+		pnlMaterial.add(btnAddMaterial);
 
 		homeMaterialJTbl = new JTable(homeMaterialTbl);
 		JScrollPane homeMaterialScroll = new JScrollPane(homeMaterialJTbl);
 		homeMaterialScroll.setLocation(20,46);
-		panel_5.add(homeMaterialScroll);
+		pnlMaterial.add(homeMaterialScroll);
 		homeMaterialScroll.setSize(297,302);
 		
 		homeMaterialJTbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -434,87 +434,87 @@ public class Invoice {
 		lblMaterial.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaterial.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblMaterial.setBounds(10, 11, 250, 24);
-		panel_5.add(lblMaterial);
+		pnlMaterial.add(lblMaterial);
 
 		lblMaterialName0 = new JLabel("");
 		lblMaterialName0.setBounds(327, 69, 133, 13);
-		panel_5.add(lblMaterialName0);
+		pnlMaterial.add(lblMaterialName0);
 
 		lblMaterialName1 = new JLabel("");
 		lblMaterialName1.setBounds(327, 92, 133, 13);
-		panel_5.add(lblMaterialName1);
+		pnlMaterial.add(lblMaterialName1);
 
 		lblMaterialName2 = new JLabel("");
 		lblMaterialName2.setBounds(327, 115, 133, 13);
-		panel_5.add(lblMaterialName2);
+		pnlMaterial.add(lblMaterialName2);
 
 		lblMaterialName3 = new JLabel("");
 		lblMaterialName3.setBounds(327, 138, 133, 13);
-		panel_5.add(lblMaterialName3);
+		pnlMaterial.add(lblMaterialName3);
 
 		lblMaterialName4 = new JLabel("");
 		lblMaterialName4.setBounds(327, 161, 133, 13);
-		panel_5.add(lblMaterialName4);
+		pnlMaterial.add(lblMaterialName4);
 
 		lblMaterialName8 = new JLabel("");
 		lblMaterialName8.setBounds(327, 253, 133, 13);
-		panel_5.add(lblMaterialName8);
+		pnlMaterial.add(lblMaterialName8);
 
 		lblMaterialName7 = new JLabel("");
 		lblMaterialName7.setBounds(327, 230, 133, 13);
-		panel_5.add(lblMaterialName7);
+		pnlMaterial.add(lblMaterialName7);
 
 		lblMaterialName6 = new JLabel("");
 		lblMaterialName6.setBounds(327, 207, 133, 13);
-		panel_5.add(lblMaterialName6);
+		pnlMaterial.add(lblMaterialName6);
 
 		lblMaterialName5 = new JLabel("");
 		lblMaterialName5.setBounds(327, 184, 133, 13);
-		panel_5.add(lblMaterialName5);
+		pnlMaterial.add(lblMaterialName5);
 
 		lblMaterialName9 = new JLabel("");
 		lblMaterialName9.setBounds(327, 276, 133, 13);
-		panel_5.add(lblMaterialName9);
+		pnlMaterial.add(lblMaterialName9);
 		
 		lblMaterialAmount0 = new JLabel("");
 		lblMaterialAmount0.setBounds(470, 69, 70, 13);
-		panel_5.add(lblMaterialAmount0);
+		pnlMaterial.add(lblMaterialAmount0);
 
 		lblMaterialAmount1 = new JLabel("");
 		lblMaterialAmount1.setBounds(470, 92, 70, 13);
-		panel_5.add(lblMaterialAmount1);
+		pnlMaterial.add(lblMaterialAmount1);
 
 		lblMaterialAmount2 = new JLabel("");
 		lblMaterialAmount2.setBounds(470, 115, 70, 13);
-		panel_5.add(lblMaterialAmount2);
+		pnlMaterial.add(lblMaterialAmount2);
 
 		lblMaterialAmount3 = new JLabel("");
 		lblMaterialAmount3.setBounds(470, 138, 70, 13);
-		panel_5.add(lblMaterialAmount3);
+		pnlMaterial.add(lblMaterialAmount3);
 
 		lblMaterialAmount4 = new JLabel("");
 		lblMaterialAmount4.setBounds(470, 161, 70, 13);
-		panel_5.add(lblMaterialAmount4);
+		pnlMaterial.add(lblMaterialAmount4);
 
 		lblMaterialAmount8 = new JLabel("");
 		lblMaterialAmount8.setBounds(470, 253, 70, 13);
-		panel_5.add(lblMaterialAmount8);
+		pnlMaterial.add(lblMaterialAmount8);
 
 		lblMaterialAmount5 = new JLabel("");
 		lblMaterialAmount5.setBounds(470, 184, 70, 13);
-		panel_5.add(lblMaterialAmount5);
+		pnlMaterial.add(lblMaterialAmount5);
 
 		lblMaterialAmount6 = new JLabel("");
 		lblMaterialAmount6.setBounds(470, 207, 70, 13);
-		panel_5.add(lblMaterialAmount6);
+		pnlMaterial.add(lblMaterialAmount6);
 
 		lblMaterialAmount7 = new JLabel("");
 		lblMaterialAmount7.setBounds(470, 230, 70, 13);
-		panel_5.add(lblMaterialAmount7);
+		pnlMaterial.add(lblMaterialAmount7);
 
 		lblMaterialAmount9 = new JLabel("");
 		lblMaterialAmount9.setBounds(470, 276, 70, 13);
-		panel_5.add(lblMaterialAmount9);
+		pnlMaterial.add(lblMaterialAmount9);
 
 
 		//		txtMC1 = new JComboBox();
@@ -667,162 +667,162 @@ public class Invoice {
 		//		lblMcm1.setHorizontalAlignment(SwingConstants.CENTER);
 		//		lblMcm1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
-		panel_6 = new JPanel();
-		panel_6.setLayout(null);
-		panel_6.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_6.setBackground(new Color(255, 204, 102));
-		panel_6.setBounds(290, 11, 270, 170);
-		PInvoice.add(panel_6);
+		pnlRhinestones = new JPanel();
+		pnlRhinestones.setLayout(null);
+		pnlRhinestones.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlRhinestones.setBackground(new Color(255, 204, 102));
+		pnlRhinestones.setBounds(290, 11, 270, 170);
+		PInvoice.add(pnlRhinestones);
 
 		lblRhynestones = new JLabel("RHINESTONES");
 		lblRhynestones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRhynestones.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblRhynestones.setBounds(10, 11, 250, 24);
-		panel_6.add(lblRhynestones);
+		pnlRhinestones.add(lblRhynestones);
 
 		JSpinner spnRT4 = new JSpinner();
 		spnRT4.setModel(new SpinnerListModel(new String[] {"AB", "CRYSTAL"}));
 		spnRT4.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRT4.setBounds(10, 139, 83, 20);
-		panel_6.add(spnRT4);
+		pnlRhinestones.add(spnRT4);
 
 		JSpinner spnRT3 = new JSpinner();
 		spnRT3.setModel(new SpinnerListModel(new String[] {"AB", "CRYSTAL"}));
 		spnRT3.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRT3.setBounds(10, 108, 83, 20);
-		panel_6.add(spnRT3);
+		pnlRhinestones.add(spnRT3);
 
 		JSpinner spnRT2 = new JSpinner();
 		spnRT2.setModel(new SpinnerListModel(new String[] {"AB", "CRYSTAL"}));
 		spnRT2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRT2.setBounds(10, 77, 83, 20);
-		panel_6.add(spnRT2);
+		pnlRhinestones.add(spnRT2);
 
 		JSpinner spnRT1 = new JSpinner();
 		spnRT1.setModel(new SpinnerListModel(new String[] {"AB", "CRYSTAL"}));
 		spnRT1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRT1.setBounds(10, 46, 83, 20);
-		panel_6.add(spnRT1);
+		pnlRhinestones.add(spnRT1);
 
 		JSpinner spnRA1 = new JSpinner();
 		spnRA1.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(50)));
 		spnRA1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRA1.setBounds(177, 46, 83, 20);
-		panel_6.add(spnRA1);
+		pnlRhinestones.add(spnRA1);
 
 		JSpinner spnRA2 = new JSpinner();
 		spnRA2.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(50)));
 		spnRA2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRA2.setBounds(177, 78, 83, 20);
-		panel_6.add(spnRA2);
+		pnlRhinestones.add(spnRA2);
 
 		JSpinner spnRA3 = new JSpinner();
 		spnRA3.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(50)));
 		spnRA3.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRA3.setBounds(177, 109, 83, 20);
-		panel_6.add(spnRA3);
+		pnlRhinestones.add(spnRA3);
 
 		JSpinner spnRA4 = new JSpinner();
 		spnRA4.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(50)));
 		spnRA4.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRA4.setBounds(177, 140, 83, 20);
-		panel_6.add(spnRA4);
+		pnlRhinestones.add(spnRA4);
 
 		JSpinner spnRS1 = new JSpinner();
 		spnRS1.setModel(new SpinnerListModel(new String[] {"20", "30", "34", "40"}));
 		spnRS1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRS1.setBounds(103, 46, 64, 20);
-		panel_6.add(spnRS1);
+		pnlRhinestones.add(spnRS1);
 
 		JSpinner spnRS2 = new JSpinner();
 		spnRS2.setModel(new SpinnerListModel(new String[] {"20", "30", "34", "40"}));
 		spnRS2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRS2.setBounds(103, 78, 64, 20);
-		panel_6.add(spnRS2);
+		pnlRhinestones.add(spnRS2);
 
 		JSpinner spnRS3 = new JSpinner();
 		spnRS3.setModel(new SpinnerListModel(new String[] {"20", "30", "34", "40"}));
 		spnRS3.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRS3.setBounds(103, 109, 64, 20);
-		panel_6.add(spnRS3);
+		pnlRhinestones.add(spnRS3);
 
 		JSpinner spnRS4 = new JSpinner();
 		spnRS4.setModel(new SpinnerListModel(new String[] {"20", "30", "34", "40"}));
 		spnRS4.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnRS4.setBounds(103, 140, 64, 20);
-		panel_6.add(spnRS4);
+		pnlRhinestones.add(spnRS4);
 
-		JPanel panel_10 = new JPanel();
-		panel_10.setLayout(null);
-		panel_10.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_10.setBackground(new Color(255, 255, 102));
-		panel_10.setBounds(10, 11, 270, 143);
-		PInvoice.add(panel_10);
+		JPanel pnlStudio = new JPanel();
+		pnlStudio.setLayout(null);
+		pnlStudio.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlStudio.setBackground(new Color(255, 255, 102));
+		pnlStudio.setBounds(10, 11, 270, 143);
+		PInvoice.add(pnlStudio);
 
 		JLabel lblStudio = new JLabel("STUDIO / DEPOSIT");
 		lblStudio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStudio.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblStudio.setBounds(10, 11, 250, 24);
-		panel_10.add(lblStudio);
+		pnlStudio.add(lblStudio);
 
 		JLabel lblCostumeNo = new JLabel("Studio");
 		lblCostumeNo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCostumeNo.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lblCostumeNo.setBounds(10, 58, 59, 14);
-		panel_10.add(lblCostumeNo);
+		pnlStudio.add(lblCostumeNo);
 
 		spnSS = new JComboBox();
 		spnSS.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnSS.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
 		spnSS.setBounds(79, 55, 181, 20);
-		panel_10.add(spnSS);
+		pnlStudio.add(spnSS);
 
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(118, 93, 142, 20);
-		panel_10.add(textField);
+		pnlStudio.add(textField);
 
 		JLabel lblCostumeName = new JLabel("Costume Name");
 		lblCostumeName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCostumeName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lblCostumeName.setBounds(10, 92, 98, 20);
-		panel_10.add(lblCostumeName);
+		pnlStudio.add(lblCostumeName);
 
-		JPanel panel_12 = new JPanel();
-		panel_12.setLayout(null);
-		panel_12.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_12.setBackground(new Color(153, 255, 255));
-		panel_12.setBounds(12, 165, 268, 134);
-		PInvoice.add(panel_12);
+		JPanel pnlHours = new JPanel();
+		pnlHours.setLayout(null);
+		pnlHours.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlHours.setBackground(new Color(153, 255, 255));
+		pnlHours.setBounds(12, 165, 268, 134);
+		PInvoice.add(pnlHours);
 
 		JLabel lblHours = new JLabel("HOURS");
 		lblHours.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHours.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblHours.setBounds(10, 11, 248, 24);
-		panel_12.add(lblHours);
+		pnlHours.add(lblHours);
 
 		JLabel lblHours_1 = new JLabel("Hours");
 		lblHours_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHours_1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblHours_1.setBounds(10, 48, 122, 14);
-		panel_12.add(lblHours_1);
+		pnlHours.add(lblHours_1);
 
 		//		JSpinner spnHH = new JSpinner();
 		spnHH.setModel(new SpinnerNumberModel(new Double(0), new Double(0), null, new Double(1)));
 		spnHH.setBounds(142, 46, 116, 20);
-		panel_12.add(spnHH);
+		pnlHours.add(spnHH);
 		spnHH.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
 		//		JSpinner spnK = new JSpinner();
 		spnK.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnK.setBounds(142, 77, 116, 20);
-		panel_12.add(spnK);
+		pnlHours.add(spnK);
 
 		JLabel label = new JLabel("Kids");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		label.setBounds(10, 79, 122, 14);
-		panel_12.add(label);
+		pnlHours.add(label);
 		rdbSolo.setBackground(new Color(153, 255, 255));
 
 
@@ -840,7 +840,7 @@ public class Invoice {
 
 		});
 		rdbSolo.setBounds(10, 104, 101, 23);
-		panel_12.add(rdbSolo);
+		pnlHours.add(rdbSolo);
 		rdbGroup.setBackground(new Color(153, 255, 255));
 
 
@@ -858,28 +858,28 @@ public class Invoice {
 		});
 		rdbGroup.setSelected(true);
 		rdbGroup.setBounds(157, 104, 101, 23);
-		panel_12.add(rdbGroup);
+		pnlHours.add(rdbGroup);
 
-		JPanel panel_9 = new JPanel();
-		panel_9.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_9.setBackground(new Color(204, 204, 204));
-		panel_9.setBounds(982, 11, 270, 452);
-		PInvoice.add(panel_9);
-		panel_9.setLayout(null);
+		JPanel pnlFile = new JPanel();
+		pnlFile.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlFile.setBackground(new Color(204, 204, 204));
+		pnlFile.setBounds(982, 238, 270, 430);
+		PInvoice.add(pnlFile);
+		pnlFile.setLayout(null);
 
 		JLabel lblFileSearch = new JLabel("FILE SEARCH  /  LOGIN");
 		lblFileSearch.setBounds(10, 7, 250, 24);
 		lblFileSearch.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFileSearch.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		panel_9.add(lblFileSearch);
+		pnlFile.add(lblFileSearch);
 
 		JButton btnClear = new JButton("RESET");
 		btnClear.setBounds(10, 184, 120, 30);
-		panel_9.add(btnClear);
+		pnlFile.add(btnClear);
 
 		JButton button_2 = new JButton("?2");
 		button_2.setBounds(140, 225, 120, 30);
-		panel_9.add(button_2);
+		pnlFile.add(button_2);
 
 
 
@@ -904,15 +904,15 @@ public class Invoice {
 			}
 		});
 		btnPrintout.setBounds(10, 266, 120, 30);
-		panel_9.add(btnPrintout);
+		pnlFile.add(btnPrintout);
 
 		JButton btnPrintout_1 = new JButton("Printout 2");
 		btnPrintout_1.setBounds(10, 307, 120, 30);
-		panel_9.add(btnPrintout_1);
+		pnlFile.add(btnPrintout_1);
 
 		JButton btnPrintout_2 = new JButton("Printout 3");
 		btnPrintout_2.setBounds(140, 266, 120, 30);
-		panel_9.add(btnPrintout_2);
+		pnlFile.add(btnPrintout_2);
 
 		JButton btnInformation = new JButton("Information");
 		btnInformation.addMouseListener(new MouseAdapter() {
@@ -925,212 +925,212 @@ public class Invoice {
 			}
 		});
 		btnInformation.setBounds(140, 307, 120, 30);
-		panel_9.add(btnInformation);
+		pnlFile.add(btnInformation);
 
 
 
 		JFormattedTextField ftfSearch = new JFormattedTextField(createFormatter("##-##-###"));
 		ftfSearch.setBounds(140, 42, 120, 24);
-		panel_9.add(ftfSearch);
+		pnlFile.add(ftfSearch);
 
 		JLabel lblSearchByNumber = new JLabel("Search by Number");
 		lblSearchByNumber.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lblSearchByNumber.setBounds(10, 47, 120, 14);
-		panel_9.add(lblSearchByNumber);
+		pnlFile.add(lblSearchByNumber);
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
 		comboBox.setSelectedIndex(2);
 		comboBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		comboBox.setBounds(10, 77, 250, 24);
-		panel_9.add(comboBox);
+		pnlFile.add(comboBox);
 
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		comboBox_1.setBounds(10, 112, 250, 24);
-		panel_9.add(comboBox_1);
+		pnlFile.add(comboBox_1);
 
 		JComboBox comboBox_2 = new JComboBox();
 		comboBox_2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		comboBox_2.setBounds(10, 147, 250, 24);
-		panel_9.add(comboBox_2);
+		pnlFile.add(comboBox_2);
 
 		JButton button = new JButton("?2");
 		button.setBounds(10, 348, 120, 30);
-		panel_9.add(button);
+		pnlFile.add(button);
 
 		JButton button_1 = new JButton("?2");
 		button_1.setBounds(140, 348, 120, 30);
-		panel_9.add(button_1);
+		pnlFile.add(button_1);
 
 		JButton button_3 = new JButton("?2");
 		button_3.setBounds(10, 389, 120, 30);
-		panel_9.add(button_3);
+		pnlFile.add(button_3);
 
 		JButton button_4 = new JButton("?2");
 		button_4.setBounds(140, 389, 120, 30);
-		panel_9.add(button_4);
+		pnlFile.add(button_4);
 
 		JButton button_5 = new JButton("?2");
 		button_5.setBounds(10, 225, 120, 30);
-		panel_9.add(button_5);
+		pnlFile.add(button_5);
 
 		JButton button_6 = new JButton("?2");
 		button_6.setBounds(140, 184, 120, 30);
-		panel_9.add(button_6);
+		pnlFile.add(button_6);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_1.setBackground(new Color(255, 255, 204));
-		panel_1.setBounds(570, 11, 402, 415);
-		PInvoice.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel pnlRecipt = new JPanel();
+		pnlRecipt.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlRecipt.setBackground(new Color(255, 255, 204));
+		pnlRecipt.setBounds(570, 11, 402, 415);
+		PInvoice.add(pnlRecipt);
+		pnlRecipt.setLayout(null);
 
 		JLabel lblRecipt = new JLabel("RECIPT");
 		lblRecipt.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblRecipt.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRecipt.setBounds(10, 11, 250, 27);
-		panel_1.add(lblRecipt);
+		pnlRecipt.add(lblRecipt);
 
 		JLabel lblMaterial_1 = new JLabel("Material");
 		lblMaterial_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblMaterial_1.setBounds(10, 133, 90, 17);
-		panel_1.add(lblMaterial_1);
+		pnlRecipt.add(lblMaterial_1);
 
 		JLabel lblHours_2 = new JLabel("Hours");
 		lblHours_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblHours_2.setBounds(10, 161, 90, 17);
-		panel_1.add(lblHours_2);
+		pnlRecipt.add(lblHours_2);
 
 		JLabel lblRhinestone = new JLabel("Rhinestone");
 		lblRhinestone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblRhinestone.setBounds(10, 189, 90, 17);
-		panel_1.add(lblRhinestone);
+		pnlRecipt.add(lblRhinestone);
 
 		JLabel lblOther_1 = new JLabel("Other");
 		lblOther_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblOther_1.setBounds(10, 217, 90, 17);
-		panel_1.add(lblOther_1);
+		pnlRecipt.add(lblOther_1);
 
 		JLabel lblDeposit_1 = new JLabel("Deposit");
 		lblDeposit_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDeposit_1.setBounds(10, 245, 90, 17);
-		panel_1.add(lblDeposit_1);
+		pnlRecipt.add(lblDeposit_1);
 
 		JLabel lblSubtotal = new JLabel("Subtotal");
 		lblSubtotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSubtotal.setBounds(10, 273, 90, 17);
-		panel_1.add(lblSubtotal);
+		pnlRecipt.add(lblSubtotal);
 
 
 
 		JLabel lblTotal = new JLabel("Total");
 		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblTotal.setBounds(10, 329, 90, 17);
-		panel_1.add(lblTotal);
+		pnlRecipt.add(lblTotal);
 
 		JLabel lblCostPerCostume = new JLabel("Cost per Costume");
 		lblCostPerCostume.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCostPerCostume.setBounds(10, 357, 122, 17);
-		panel_1.add(lblCostPerCostume);
+		pnlRecipt.add(lblCostPerCostume);
 
 		JLabel lblStudioName_1 = new JLabel("Studio Name");
 		lblStudioName_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblStudioName_1.setBounds(10, 49, 90, 17);
-		panel_1.add(lblStudioName_1);
+		pnlRecipt.add(lblStudioName_1);
 
 		JLabel lblCostume = new JLabel("Invoice No.");
 		lblCostume.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCostume.setBounds(155, 49, 105, 17);
-		panel_1.add(lblCostume);
+		pnlRecipt.add(lblCostume);
 
 		//		lblStudioX.setText("Xxxx Xxxx");
 		lblStudioX.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblStudioX.setBounds(10, 77, 90, 17);
-		panel_1.add(lblStudioX);
+		pnlRecipt.add(lblStudioX);
 
 		lblCostumeX.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCostumeX.setBounds(155, 77, 105, 17);
-		panel_1.add(lblCostumeX);
+		pnlRecipt.add(lblCostumeX);
 
 		JLabel lblFileType = new JLabel("File Type");
 		lblFileType.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFileType.setBounds(10, 105, 90, 17);
-		panel_1.add(lblFileType);
+		pnlRecipt.add(lblFileType);
 
 		lbsTotal = new JLabel("$ 0.00");
 		lbsTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsTotal.setBounds(170, 329, 90, 17);
-		panel_1.add(lbsTotal);
+		pnlRecipt.add(lbsTotal);
 
 		JLabel label_9 = new JLabel("% 13");
 		label_9.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		label_9.setBounds(170, 301, 90, 17);
-		panel_1.add(label_9);
+		pnlRecipt.add(label_9);
 
 		lbsDeposit = new JLabel("$ 0.00");
 		lbsDeposit.setForeground(new Color(255, 0, 0));
 		lbsDeposit.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsDeposit.setBounds(170, 245, 90, 17);
-		panel_1.add(lbsDeposit);
+		pnlRecipt.add(lbsDeposit);
 
 		lbsSubtotal = new JLabel("$ 0.00");
 		lbsSubtotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsSubtotal.setBounds(170, 273, 90, 17);
-		panel_1.add(lbsSubtotal);
+		pnlRecipt.add(lbsSubtotal);
 
 		lbsRhinestone = new JLabel("$ 0.00");
 		lbsRhinestone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsRhinestone.setBounds(170, 189, 90, 17);
-		panel_1.add(lbsRhinestone);
+		pnlRecipt.add(lbsRhinestone);
 
 		lbsOther = new JLabel("$ 0.00");
 		lbsOther.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsOther.setBounds(170, 217, 90, 17);
-		panel_1.add(lbsOther);
+		pnlRecipt.add(lbsOther);
 
 		lbsMaterial = new JLabel("$ 0.00");
 		lbsMaterial.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsMaterial.setBounds(170, 133, 90, 17);
-		panel_1.add(lbsMaterial);
+		pnlRecipt.add(lbsMaterial);
 
 		lbsHours = new JLabel("$ 0.00");
 		lbsHours.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsHours.setBounds(170, 161, 90, 17);
-		panel_1.add(lbsHours);
+		pnlRecipt.add(lbsHours);
 
 		JLabel lblInvoiceOrQuote = new JLabel("INVOICE or QUOTE ");
 		lblInvoiceOrQuote.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblInvoiceOrQuote.setBounds(138, 105, 122, 17);
-		panel_1.add(lblInvoiceOrQuote);
+		pnlRecipt.add(lblInvoiceOrQuote);
 
 		JLabel lblAmountOwing = new JLabel("Amount Owing");
 		lblAmountOwing.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAmountOwing.setBounds(10, 385, 122, 26);
-		panel_1.add(lblAmountOwing);
+		pnlRecipt.add(lblAmountOwing);
 
 		lbsBottom = new JLabel("$ 0.00");
 		lbsBottom.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lbsBottom.setBounds(138, 385, 122, 27);
-		panel_1.add(lbsBottom);
+		pnlRecipt.add(lbsBottom);
 
 		JLabel lblTotal_1 = new JLabel("Tax");
 		lblTotal_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblTotal_1.setBounds(10, 301, 90, 17);
-		panel_1.add(lblTotal_1);
+		pnlRecipt.add(lblTotal_1);
 
 		lbsCPC = new JLabel("$ 0.00");
 		lbsCPC.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsCPC.setBounds(170, 357, 90, 17);
-		panel_1.add(lbsCPC);
+		pnlRecipt.add(lbsCPC);
 
 		JButton btnQuote = new JButton("QUOTE");
 		btnQuote.setBounds(270, 303, 120, 30);
-		panel_1.add(btnQuote);
+		pnlRecipt.add(btnQuote);
 
 		JButton btnInvoice = new JButton("INVOICE");
 		btnInvoice.setBounds(270, 221, 120, 30);
-		panel_1.add(btnInvoice);
+		pnlRecipt.add(btnInvoice);
 
 		JButton btnInvoiceTax = new JButton("INVOICE TAX");
 		btnInvoiceTax.addActionListener(new ActionListener() {
@@ -1138,36 +1138,36 @@ public class Invoice {
 			}
 		});
 		btnInvoiceTax.setBounds(270, 262, 120, 30);
-		panel_1.add(btnInvoiceTax);
+		pnlRecipt.add(btnInvoiceTax);
 
 		JButton btnQuoteTax = new JButton("QUOTE TAX");
 		btnQuoteTax.setBounds(270, 344, 120, 30);
-		panel_1.add(btnQuoteTax);
+		pnlRecipt.add(btnQuoteTax);
 
 		JLabel lblName_1 = new JLabel("Name");
 		lblName_1.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblName_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblName_1.setBounds(285, 49, 105, 17);
-		panel_1.add(lblName_1);
+		pnlRecipt.add(lblName_1);
 
 		JLabel label_2 = new JLabel("Xxxx Xxxx");
 		label_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		label_2.setBounds(270, 77, 122, 17);
-		panel_1.add(label_2);
+		pnlRecipt.add(label_2);
 
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.ORANGE);
 		separator.setBounds(10, 128, 382, 4);
-		panel_1.add(separator);
+		pnlRecipt.add(separator);
 
 		JButton btnSave = new JButton("CALCULATE");
 		btnSave.setBounds(270, 176, 120, 30);
-		panel_1.add(btnSave);
+		pnlRecipt.add(btnSave);
 
 		JButton btnSave_1 = new JButton("SAVE");
 		btnSave_1.setBounds(270, 133, 120, 30);
-		panel_1.add(btnSave_1);
+		pnlRecipt.add(btnSave_1);
 		btnSave_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1303,58 +1303,58 @@ public class Invoice {
 			}
 		});
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_3.setBackground(Color.DARK_GRAY);
-		panel_3.setBounds(570, 437, 402, 234);
-		PInvoice.add(panel_3);
-		panel_3.setLayout(null);
+		JPanel pnlConsole = new JPanel();
+		pnlConsole.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlConsole.setBackground(Color.DARK_GRAY);
+		pnlConsole.setBounds(570, 434, 402, 234);
+		PInvoice.add(pnlConsole);
+		pnlConsole.setLayout(null);
 
 		lblCommand1 = new JLabel("|");
 		lblCommand1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand1.setForeground(new Color(51, 153, 0));
 		lblCommand1.setBounds(10, 211, 382, 14);
-		panel_3.add(lblCommand1);
+		pnlConsole.add(lblCommand1);
 
 		lblCommand2 = new JLabel("_");
 		lblCommand2.setForeground(new Color(51, 153, 0));
 		lblCommand2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand2.setBounds(10, 191, 382, 14);
-		panel_3.add(lblCommand2);
+		pnlConsole.add(lblCommand2);
 
 		lblCommand3 = new JLabel("_");
 		lblCommand3.setForeground(new Color(51, 153, 0));
 		lblCommand3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand3.setBounds(10, 171, 382, 14);
-		panel_3.add(lblCommand3);
+		pnlConsole.add(lblCommand3);
 
 		lblCommand4 = new JLabel("_");
 		lblCommand4.setForeground(new Color(51, 153, 0));
 		lblCommand4.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand4.setBounds(10, 151, 382, 14);
-		panel_3.add(lblCommand4);
+		pnlConsole.add(lblCommand4);
 
 		lblCommand5 = new JLabel("_");
 		lblCommand5.setForeground(new Color(51, 153, 0));
 		lblCommand5.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand5.setBounds(10, 131, 382, 14);
-		panel_3.add(lblCommand5);
+		pnlConsole.add(lblCommand5);
 
 		lblCommand6 = new JLabel("_");
 		lblCommand6.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand6.setForeground(new Color(51, 153, 0));
 		lblCommand6.setBounds(10, 111, 382, 14);
-		panel_3.add(lblCommand6);
+		pnlConsole.add(lblCommand6);
 
 		lblCommand7 = new JLabel("_");
 		lblCommand7.setForeground(new Color(51, 153, 0));
 		lblCommand7.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand7.setBounds(10, 91, 382, 14);
-		panel_3.add(lblCommand7);
+		pnlConsole.add(lblCommand7);
 
 		lblCommand8 = new JLabel("_");
 		lblCommand8.setBounds(10, 71, 382, 14);
-		panel_3.add(lblCommand8);
+		pnlConsole.add(lblCommand8);
 		lblCommand8.setForeground(new Color(51, 153, 0));
 		lblCommand8.setFont(new Font("Tahoma", Font.BOLD, 11));
 
@@ -1362,53 +1362,49 @@ public class Invoice {
 		lblCommand9.setForeground(new Color(51, 153, 0));
 		lblCommand9.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand9.setBounds(10, 51, 382, 14);
-		panel_3.add(lblCommand9);
+		pnlConsole.add(lblCommand9);
 
 		lblCommand10 = new JLabel("_");
 		lblCommand10.setForeground(new Color(51, 153, 0));
 		lblCommand10.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand10.setBounds(10, 31, 382, 14);
-		panel_3.add(lblCommand10);
+		pnlConsole.add(lblCommand10);
 
 		lblCommand11 = new JLabel("_");
 		lblCommand11.setForeground(new Color(51, 153, 0));
 		lblCommand11.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCommand11.setBounds(10, 11, 382, 14);
-		panel_3.add(lblCommand11);
+		pnlConsole.add(lblCommand11);
 
-		JButton btnTestCommand = new JButton("test - command");
-		btnTestCommand.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				output("0","Salut");
-			}
-		});
-		btnTestCommand.setBounds(1095, 512, 118, 23);
-		PInvoice.add(btnTestCommand);
-
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBackground(new Color(204, 255, 153));
-		panel.setBounds(290, 192, 268, 107);
-		PInvoice.add(panel);
+		JPanel pnlDeposit = new JPanel();
+		pnlDeposit.setLayout(null);
+		pnlDeposit.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlDeposit.setBackground(new Color(204, 255, 153));
+		pnlDeposit.setBounds(290, 192, 268, 107);
+		PInvoice.add(pnlDeposit);
 
 		JLabel lblDeposit = new JLabel("DEPOSIT");
 		lblDeposit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDeposit.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblDeposit.setBounds(10, 11, 248, 24);
-		panel.add(lblDeposit);
+		pnlDeposit.add(lblDeposit);
 
 		JLabel lblDepositAmmount_1 = new JLabel("Deposit Ammount");
 		lblDepositAmmount_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDepositAmmount_1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblDepositAmmount_1.setBounds(10, 48, 153, 14);
-		panel.add(lblDepositAmmount_1);
+		pnlDeposit.add(lblDepositAmmount_1);
 
 		JSpinner spinner = new JSpinner();
 		spinner.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spinner.setBounds(173, 46, 85, 20);
-		panel.add(spinner);
+		pnlDeposit.add(spinner);
+		
+		JPanel pnlOverWrite = new JPanel();
+		pnlOverWrite.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		pnlOverWrite.setBackground(new Color(204, 204, 255));
+		pnlOverWrite.setBounds(982, 11, 270, 217);
+		PInvoice.add(pnlOverWrite);
 
 		JPanel Clients = new JPanel();
 		Clients.setBackground(new Color(255, 228, 225));
