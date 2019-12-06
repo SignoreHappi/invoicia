@@ -140,21 +140,21 @@ public class Invoice {
 	protected JPanel PInvoice;
 	private JPanel pnlRhinestones;
 	protected JPanel Settings;
-	
+
 	private JPanel pnlOverWrite;
 	private JPanel pnlConsole;
 	private JPanel pnlFile;
-	
-	private JLabel lblRhynestones;
-	private JLabel lbsMaterial;
-	private JLabel lbsBottom;
-	private JLabel lbsCPC;
-	private JLabel lbsRhinestone;
-	private JLabel lbsHours;
-	private JLabel lbsOther;
-	private JLabel lbsTotal;
-	private JLabel lbsSubtotal;
-	private JLabel lbsDeposit;
+
+	private static JLabel lblRhynestones;
+	private static JLabel lbsMaterial;
+	private static JLabel lbsBottom;
+	private static JLabel lbsCPC;
+	private static JLabel lbsRhinestone;
+	private static JLabel lbsHours;
+	private static JLabel lbsOther;
+	private static JLabel lbsTotal;
+	private static JLabel lbsSubtotal;
+	private static JLabel lbsDeposit;
 	public JLabel lblLine;
 
 	public JSpinner spnHH = new JSpinner();
@@ -188,17 +188,17 @@ public class Invoice {
 
 	public int years;
 
-	public JLabel lblCommand11;
-	public JLabel lblCommand10;
-	public JLabel lblCommand9;
-	public JLabel lblCommand8;
-	public JLabel lblCommand7;
-	public JLabel lblCommand6;
-	public JLabel lblCommand5;
-	public JLabel lblCommand4;
-	public JLabel lblCommand3;
-	public JLabel lblCommand2;
-	public JLabel lblCommand1;
+	public static JLabel lblCommand11;
+	public static JLabel lblCommand10;
+	public static JLabel lblCommand9;
+	public static JLabel lblCommand8;
+	public static JLabel lblCommand7;
+	public static JLabel lblCommand6;
+	public static JLabel lblCommand5;
+	public static JLabel lblCommand4;
+	public static JLabel lblCommand3;
+	public static JLabel lblCommand2;
+	public static JLabel lblCommand1;
 
 	public static JLabel lblMCommand12;
 	public static JLabel lblMCommand11;
@@ -429,7 +429,7 @@ public class Invoice {
 									selectedMaterials[1][count] = "999";
 									selectedMaterials[2][count] = null;
 									//								}
-									
+
 								}
 								count = 7;
 							}else {
@@ -561,11 +561,11 @@ public class Invoice {
 		lblMaterialName5 = new JLabel("");
 		lblMaterialName5.setBounds(327, 184, 133, 13);
 		pnlMaterial.add(lblMaterialName5);
-		
+
 		lblMaterialName9 = new JLabel("");
 		lblMaterialName9.setBounds(327, 276, 133, 13);
 		pnlMaterial.add(lblMaterialName9);
-		
+
 		lblMaterialAmount0 = new JLabel("");
 		lblMaterialAmount0.setBounds(470, 69, 70, 13);
 		pnlMaterial.add(lblMaterialAmount0);
@@ -1268,6 +1268,7 @@ public class Invoice {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Database.getPrices();
+				Math math = new Math();
 			}
 		});
 		btnSave.addMouseListener(new MouseAdapter() {
@@ -1495,7 +1496,7 @@ public class Invoice {
 		spinner.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spinner.setBounds(173, 46, 85, 20);
 		pnlDeposit.add(spinner);
-		
+
 		pnlOverWrite = new JPanel();
 		pnlOverWrite.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		pnlOverWrite.setBackground(new Color(204, 204, 255));
@@ -1503,10 +1504,10 @@ public class Invoice {
 		pnlOverWrite.setVisible(false);
 		PInvoice.add(pnlOverWrite);
 
-		
-		
-		
-		
+
+
+
+
 		JPanel Clients = new JPanel();
 		Clients.setBackground(new Color(255, 228, 225));
 		tabbedPane.addTab("Clients", new ImageIcon(Invoice.class.getResource("/images/icon-client.png")), Clients, null);
@@ -2037,7 +2038,7 @@ public class Invoice {
 
 
 
-	
+
 	public void AddOverWrite(boolean over) {
 		if(over) {
 			pnlFile.setBounds(982, 238, pnlFile.getWidth(), pnlFile.getHeight());
@@ -2070,8 +2071,14 @@ public class Invoice {
 		mOutput(first, second);
 	}
 
+	public static void writeOutput(String first, String second) {
+		output(first, second);
+	}
+
 
 	private void math() {
+
+
 
 	}
 
@@ -2139,7 +2146,7 @@ public class Invoice {
 	//		txtMM10.setText(me[9]);
 	//	}
 
-	public void output(String catagory, String text) {
+	public static void output(String catagory, String text) {
 		text = "{" + catagory + "}- " + text;
 
 		switch(line) {
@@ -2302,8 +2309,99 @@ public class Invoice {
 
 
 
-	//-----------------------------------------------------------------------------------------------// R E A D A //-------------------------------------------------------
 
+
+
+	public JLabel getLbsMaterial() {
+		return lbsMaterial;
+	}
+	public void setLbsMaterial(JLabel lbsMaterial) {
+		this.lbsMaterial = lbsMaterial;
+	}
+	public static void setLblsMaterialText(String text) {
+		lbsMaterial.setText(text);
+	}
+
+	
+	public JLabel getLbsBottom() {
+		return lbsBottom;
+	}
+	public void setLbsBottom(JLabel lbsBottom) {
+		this.lbsBottom = lbsBottom;
+	}
+	public static void setLblsBottomText(String text) {
+		lbsBottom.setText(text);
+	}
+
+	
+	public JLabel getLbsCPC() {
+		return lbsCPC;
+	}
+	public void setLbsCPC(JLabel lbsCPC) {
+		this.lbsCPC = lbsCPC;
+	}
+	public static void setLblsCPCText(String text) {
+		lbsCPC.setText(text);
+	}
+
+	
+	public JLabel getLbsRhinestone() {
+		return lbsRhinestone;
+	}
+	public void setLbsRhinestone(JLabel lbsRhinestone) {
+		this.lbsRhinestone = lbsRhinestone;
+	}
+	public static void setLblsRhinestoneText(String text) {
+		lbsRhinestone.setText(text);
+	}
+
+	public JLabel getLbsHours() {
+		return lbsHours;
+	}
+	public void setLbsHours(JLabel lbsHours) {
+		this.lbsHours = lbsHours;
+	}
+	public static void setLblsHoursText(String text) {
+		lbsHours.setText(text);
+	}
+	
+
+	public JLabel getLbsTotal() {
+		return lbsTotal;
+	}
+	public void setLbsTotal(JLabel lbsTotal) {
+		this.lbsTotal = lbsTotal;
+	}
+	public static void setLblsTotalText(String text) {
+		lbsTotal.setText(text);
+	}
+	
+	
+	public JLabel getLbsSubtotal() {
+		return lbsSubtotal;
+	}
+	public void setLbsSubtotal(JLabel lbsSubtotal) {
+		this.lbsSubtotal = lbsSubtotal;
+	}
+	public static void setLblsSubtotalText(String text) {
+		lbsSubtotal.setText(text);
+	}
+
+	public JLabel getLbsDeposit() {
+		return lbsDeposit;
+	}
+	public void setLbsDeposit(JLabel lbsDeposit) {
+		this.lbsDeposit = lbsDeposit;
+	}
+	public static void setLblsDepositText(String text) {
+		lbsDeposit.setText(text);
+	}
+
+
+
+
+
+	//-----------------------------------------------------------------------------------------------// R E A D A //-------------------------------------------------------
 
 	public void reada(String x) throws IOException {
 		boolean reality = true;
