@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,6 +49,7 @@ import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.event.TableModelListener;
@@ -93,6 +96,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JToggleButton;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
 
 public class Invoice {
 
@@ -211,16 +216,16 @@ public class Invoice {
 	public JLabel lblMaterialName8;
 	public JLabel lblMaterialName9;
 	public JLabel lblMaterialName10;
-	public JLabel lblMaterialAmount1;
 	public JLabel lblMaterialAmount2;
 	public JLabel lblMaterialAmount3;
 	public JLabel lblMaterialAmount4;
 	public JLabel lblMaterialAmount5;
+	public JLabel lblMaterialAmount9;
 	public JLabel lblMaterialAmount6;
 	public JLabel lblMaterialAmount7;
 	public JLabel lblMaterialAmount8;
-	public JLabel lblMaterialAmount9;
-	public JLabel lblMaterialAmount;
+	public JLabel lblMaterialAmount10;
+	public JLabel lblMaterialAmount1;
 	
 
 	private double tax = 0.13;
@@ -388,7 +393,7 @@ public class Invoice {
 						
 						if(lblMaterialName1.getText() == "") {
 							lblMaterialName1.setText(name);
-							lblMaterialAmount1.setText(amount);
+							lblMaterialAmount2.setText(amount);
 						}
 						
 						System.out.println(row);
@@ -467,45 +472,45 @@ public class Invoice {
 		lblMaterialName10.setBounds(327, 276, 133, 13);
 		panel_5.add(lblMaterialName10);
 		
-				lblMaterialAmount = new JLabel("");
-				lblMaterialAmount.setBounds(470, 69, 70, 13);
-				panel_5.add(lblMaterialAmount);
+				lblMaterialAmount1 = new JLabel("0");
+				lblMaterialAmount1.setBounds(470, 69, 70, 13);
+				panel_5.add(lblMaterialAmount1);
 
-		lblMaterialAmount1 = new JLabel("");
-		lblMaterialAmount1.setBounds(470, 92, 70, 13);
-		panel_5.add(lblMaterialAmount1);
-
-		lblMaterialAmount2 = new JLabel("");
-		lblMaterialAmount2.setBounds(470, 115, 70, 13);
+		lblMaterialAmount2 = new JLabel("1");
+		lblMaterialAmount2.setBounds(470, 92, 70, 13);
 		panel_5.add(lblMaterialAmount2);
 
-		lblMaterialAmount3 = new JLabel("");
-		lblMaterialAmount3.setBounds(470, 138, 70, 13);
+		lblMaterialAmount3 = new JLabel("2");
+		lblMaterialAmount3.setBounds(470, 115, 70, 13);
 		panel_5.add(lblMaterialAmount3);
 
-		lblMaterialAmount4 = new JLabel("");
-		lblMaterialAmount4.setBounds(470, 161, 70, 13);
+		lblMaterialAmount4 = new JLabel("3");
+		lblMaterialAmount4.setBounds(470, 138, 70, 13);
 		panel_5.add(lblMaterialAmount4);
 
-		lblMaterialAmount5 = new JLabel("");
-		lblMaterialAmount5.setBounds(470, 253, 70, 13);
+		lblMaterialAmount5 = new JLabel("4");
+		lblMaterialAmount5.setBounds(470, 161, 70, 13);
 		panel_5.add(lblMaterialAmount5);
 
-		lblMaterialAmount6 = new JLabel("");
-		lblMaterialAmount6.setBounds(470, 230, 70, 13);
+		lblMaterialAmount9 = new JLabel("5");
+		lblMaterialAmount9.setBounds(470, 253, 70, 13);
+		panel_5.add(lblMaterialAmount9);
+
+		lblMaterialAmount6 = new JLabel("6");
+		lblMaterialAmount6.setBounds(470, 184, 70, 13);
 		panel_5.add(lblMaterialAmount6);
 
-		lblMaterialAmount7 = new JLabel("");
+		lblMaterialAmount7 = new JLabel("7");
 		lblMaterialAmount7.setBounds(470, 207, 70, 13);
 		panel_5.add(lblMaterialAmount7);
 
-		lblMaterialAmount8 = new JLabel("");
-		lblMaterialAmount8.setBounds(470, 184, 70, 13);
+		lblMaterialAmount8 = new JLabel("8");
+		lblMaterialAmount8.setBounds(470, 230, 70, 13);
 		panel_5.add(lblMaterialAmount8);
 
-		lblMaterialAmount9 = new JLabel("");
-		lblMaterialAmount9.setBounds(470, 276, 70, 13);
-		panel_5.add(lblMaterialAmount9);
+		lblMaterialAmount10 = new JLabel("9");
+		lblMaterialAmount10.setBounds(470, 276, 70, 13);
+		panel_5.add(lblMaterialAmount10);
 
 
 		//		txtMC1 = new JComboBox();
@@ -1407,12 +1412,12 @@ public class Invoice {
 		Clients.setLayout(null);
 
 		txtStudio = new JTextField();
-		txtStudio.setBounds(130, 626, 225, 20);
+		txtStudio.setBounds(130, 354, 225, 20);
 		Clients.add(txtStudio);
 		txtStudio.setColumns(10);
 
 		txtOwner = new JTextField();
-		txtOwner.setBounds(130, 657, 225, 20);
+		txtOwner.setBounds(130, 384, 225, 20);
 		Clients.add(txtOwner);
 		txtOwner.setColumns(10);
 
@@ -1429,7 +1434,7 @@ public class Invoice {
 				txtPhone.setText("");
 			}
 		});
-		txtPhone.setBounds(130, 688, 225, 20);
+		txtPhone.setBounds(130, 414, 225, 20);
 		Clients.add(txtPhone);
 		txtPhone.setColumns(10);
 
@@ -1441,59 +1446,51 @@ public class Invoice {
 			}
 		});
 		txtAddress.setToolTipText("# street, city province, country, postal-code");
-		txtAddress.setBounds(130, 719, 225, 20);
+		txtAddress.setBounds(130, 444, 225, 20);
 		Clients.add(txtAddress);
 		txtAddress.setColumns(10);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(130, 750, 225, 20);
+		txtEmail.setBounds(130, 474, 225, 20);
 		Clients.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblStudioName = new JLabel("Studio Name");
 		lblStudioName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStudioName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblStudioName.setBounds(10, 626, 110, 20);
+		lblStudioName.setBounds(10, 352, 110, 20);
 		Clients.add(lblStudioName);
 
 		JLabel lblOwnerName = new JLabel("Owner Name\r\n");
 		lblOwnerName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOwnerName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblOwnerName.setBounds(10, 657, 110, 20);
+		lblOwnerName.setBounds(10, 382, 110, 20);
 		Clients.add(lblOwnerName);
 
 		JLabel lblPhoneNumber = new JLabel("Phone Number");
 		lblPhoneNumber.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPhoneNumber.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblPhoneNumber.setBounds(10, 688, 110, 20);
+		lblPhoneNumber.setBounds(10, 415, 110, 20);
 		Clients.add(lblPhoneNumber);
 
 		JLabel lblAddress = new JLabel("Address");
 		lblAddress.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAddress.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblAddress.setBounds(10, 719, 110, 20);
+		lblAddress.setBounds(10, 442, 110, 20);
 		Clients.add(lblAddress);
 
 		JLabel lblEmailAddress = new JLabel("Email Address");
 		lblEmailAddress.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmailAddress.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblEmailAddress.setBounds(10, 750, 110, 20);
+		lblEmailAddress.setBounds(10, 472, 110, 20);
 		Clients.add(lblEmailAddress);
 
-		JLabel lblLineNumber = new JLabel("Line Number");
-		lblLineNumber.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLineNumber.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblLineNumber.setBounds(10, 595, 110, 20);
-		Clients.add(lblLineNumber);
-
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setBackground(Color.RED);
+		btnSubmit.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		btnSubmit.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		btnSubmit.setBounds(245, 795, 110, 33);
+		btnSubmit.setBounds(78, 516, 110, 33);
 		Clients.add(btnSubmit);
-
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setBounds(283, 583, 29, 20);
-		Clients.add(spinner_1);
 
 		//		TableColumn id, name, email;
 		//		id = new TableColumn(0);
@@ -2530,3 +2527,4 @@ public class Invoice {
 		} catch (IOException e) {  e.printStackTrace();  }
 	}
 }
+
