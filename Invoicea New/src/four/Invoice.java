@@ -140,8 +140,12 @@ public class Invoice {
 	protected JPanel PInvoice;
 	private JPanel pnlRhinestones;
 	protected JPanel Settings;
+	
+	private JPanel pnlOverWrite;
+	private JPanel pnlConsole;
+	private JPanel pnlFile;
+	
 	private JLabel lblRhynestones;
-
 	private JLabel lbsMaterial;
 	private JLabel lbsBottom;
 	private JLabel lbsCPC;
@@ -152,7 +156,7 @@ public class Invoice {
 	private JLabel lbsSubtotal;
 	private JLabel lbsDeposit;
 	public JLabel lblLine;
-	
+
 	public JSpinner spnHH = new JSpinner();
 	public JSpinner spnK = new JSpinner();
 
@@ -181,9 +185,9 @@ public class Invoice {
 	private String ra[] = new String [4];
 	private String rt[] = new String [4];
 	private String rs[] = new String [4];
-	
+
 	public int years;
-	
+
 	public JLabel lblCommand11;
 	public JLabel lblCommand10;
 	public JLabel lblCommand9;
@@ -208,7 +212,7 @@ public class Invoice {
 	public static JLabel lblMCommand3;
 	public static JLabel lblMCommand2;
 	public static JLabel lblMCommand1;
-	
+
 	public JLabel lblMaterialName0;
 	public JLabel lblMaterialName1;
 	public JLabel lblMaterialName2;
@@ -219,7 +223,7 @@ public class Invoice {
 	public JLabel lblMaterialName6;
 	public JLabel lblMaterialName5;
 	public JLabel lblMaterialName9;
-	
+
 	public JLabel lblMaterialAmount1;
 	public JLabel lblMaterialAmount2;
 	public JLabel lblMaterialAmount3;
@@ -230,7 +234,7 @@ public class Invoice {
 	public JLabel lblMaterialAmount7;
 	public JLabel lblMaterialAmount9;
 	public JLabel lblMaterialAmount0;
-	
+
 
 	private double tax = 0.13;
 	private int hourly = 30;
@@ -277,8 +281,10 @@ public class Invoice {
 
 	public static String searching = null;
 
+	public static String[][] selectedMaterials = new String [3][10];
+
 	public static int result = 0;
-	
+
 	public static JButton btnAddMaterial;
 
 	public static JFrame updateTable;
@@ -381,30 +387,114 @@ public class Invoice {
 		homeMaterialTbl.addColumn("Material Name");
 		homeMaterialTbl.addColumn("Material Type");
 		homeMaterialTbl.addColumn("Material Price");
-		
-		
+
+
 		btnAddMaterial = new JButton("Add Material");
 		btnAddMaterial.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(btnAddMaterial.isEnabled()) {
-					String amount = JOptionPane.showInputDialog(null, "How much do you want to use?");
-					System.out.println(amount);
-					try {
-						int intAmout = Integer.parseInt(amount);
-						int row = homeMaterialJTbl.getSelectedRow();
-						String name = homeMaterialJTbl.getValueAt(row, 0).toString();
-						
-						if(lblMaterialName0.getText() == "") {
-							lblMaterialName0.setText(name);
-							lblMaterialAmount1.setText(amount);
+					int row = homeMaterialJTbl.getSelectedRow();
+					String name = homeMaterialJTbl.getValueAt(row, 0).toString();
+					String type = homeMaterialJTbl.getValueAt(row, 1).toString();
+					if(selectedMaterials[0][9] != null){
+						JOptionPane.showMessageDialog(null, "Maximum of 10 materials!",  "Error!", JOptionPane.ERROR_MESSAGE);
+
+					}else {
+
+						String amount = JOptionPane.showInputDialog(null, "How much do of " + name + " " + type + "want to use?");
+						try {
+							int intAmount = Integer.parseInt(amount);
+							int count = 0;
+							if(intAmount == 999) {
+								lblMaterialName0.setText(1 + ".    " + "This is a test");
+								lblMaterialAmount0.setText("101");
+								lblMaterialName1.setText(2 + ".    " + "This is a test");
+								lblMaterialAmount1.setText("101");
+								lblMaterialName2.setText(3 + ".    " + "This is a test");
+								lblMaterialAmount2.setText("101");
+								lblMaterialName3.setText(4 + ".    " + "This is a test");
+								lblMaterialAmount3.setText("101");
+								lblMaterialName4.setText(5 + ".    " + "This is a test");
+								lblMaterialAmount4.setText("101");
+								lblMaterialName5.setText(6 + ".    " + "This is a test");
+								lblMaterialAmount5.setText("101");
+								lblMaterialName6.setText(7 + ".    " + "This is a test");
+								lblMaterialAmount6.setText("101");
+								lblMaterialName7.setText(8 + ".    " + "This is a test");
+								lblMaterialAmount7.setText("101");
+								for(count = 0; count < 8; count++) {
+									//								if(selectedMaterials[0][count] == null) {
+									selectedMaterials[0][count] = "This is a test" + "." + "test";
+									selectedMaterials[1][count] = "999";
+									selectedMaterials[2][count] = null;
+									//								}
+									
+								}
+								count = 7;
+							}else {
+								for(count = 0; count < 10; count++) {
+									if(selectedMaterials[0][count] == null) {
+										selectedMaterials[0][count] = name + "." + type;
+										selectedMaterials[1][count] = amount;
+										selectedMaterials[2][count] = null;
+										switch(count) {
+										case 0:
+											lblMaterialName0.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount0.setText(amount);
+											break;
+										case 1:
+											lblMaterialName1.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount1.setText(amount);
+											break;
+										case 2:
+											lblMaterialName2.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount2.setText(amount);
+											break;
+										case 3:
+											lblMaterialName3.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount3.setText(amount);
+											break;
+										case 4:
+											lblMaterialName4.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount4.setText(amount);
+											break;
+										case 5:
+											lblMaterialName5.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount5.setText(amount);
+											break;
+										case 6:
+											lblMaterialName6.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount6.setText(amount);
+											break;
+										case 7:
+											lblMaterialName7.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount7.setText(amount);
+											break;
+										case 8:
+											lblMaterialName8.setText(count+1 + ".    " + name + " " + type);
+											lblMaterialAmount8.setText(amount);
+											break;
+										case 9:
+											lblMaterialName9.setText(count+1 + ".  " + name + " " + type);
+											lblMaterialAmount9.setText(amount);
+											break;
+										}
+
+										break;
+									}
+
+								}
+
+							}
+						}catch (NumberFormatException ex){
+							JOptionPane.showMessageDialog(null, "Give me a number!",  "Error!", JOptionPane.ERROR_MESSAGE);
 						}
-						
-						System.out.println(row);
-					}catch (NumberFormatException ex){
-						JOptionPane.showMessageDialog(null, "Give me a number!",  "Error!", JOptionPane.ERROR_MESSAGE);
+
+
 					}
-					
+
+
 				}
 			}
 		});
@@ -417,17 +507,17 @@ public class Invoice {
 		homeMaterialScroll.setLocation(20,46);
 		pnlMaterial.add(homeMaterialScroll);
 		homeMaterialScroll.setSize(297,302);
-		
+
 		homeMaterialJTbl.addMouseListener(new java.awt.event.MouseAdapter() {
-		    @Override
-		    public void mouseClicked(java.awt.event.MouseEvent evt) {
-		        int row = homeMaterialJTbl.rowAtPoint(evt.getPoint());
-//		        System.out.println(row);
-		        btnAddMaterial.setEnabled(true);
-		    }
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				int row = homeMaterialJTbl.rowAtPoint(evt.getPoint());
+				//		        System.out.println(row);
+				btnAddMaterial.setEnabled(true);
+			}
 		});
-		
-		
+
+
 
 
 		JLabel lblMaterial = new JLabel("MATERIAL");
@@ -471,7 +561,7 @@ public class Invoice {
 		lblMaterialName5 = new JLabel("");
 		lblMaterialName5.setBounds(327, 184, 133, 13);
 		pnlMaterial.add(lblMaterialName5);
-
+		
 		lblMaterialName9 = new JLabel("");
 		lblMaterialName9.setBounds(327, 276, 133, 13);
 		pnlMaterial.add(lblMaterialName9);
@@ -860,10 +950,10 @@ public class Invoice {
 		rdbGroup.setBounds(157, 104, 101, 23);
 		pnlHours.add(rdbGroup);
 
-		JPanel pnlFile = new JPanel();
+		pnlFile = new JPanel();
 		pnlFile.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		pnlFile.setBackground(new Color(204, 204, 204));
-		pnlFile.setBounds(982, 238, 270, 430);
+		pnlFile.setBounds(982, 11, 270, 430);
 		PInvoice.add(pnlFile);
 		pnlFile.setLayout(null);
 
@@ -968,6 +1058,12 @@ public class Invoice {
 		pnlFile.add(button_3);
 
 		JButton button_4 = new JButton("?2");
+		button_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddOverWrite(true);
+			}
+		});
 		button_4.setBounds(140, 389, 120, 30);
 		pnlFile.add(button_4);
 
@@ -1303,7 +1399,7 @@ public class Invoice {
 			}
 		});
 
-		JPanel pnlConsole = new JPanel();
+		pnlConsole = new JPanel();
 		pnlConsole.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		pnlConsole.setBackground(Color.DARK_GRAY);
 		pnlConsole.setBounds(570, 434, 402, 234);
@@ -1400,12 +1496,17 @@ public class Invoice {
 		spinner.setBounds(173, 46, 85, 20);
 		pnlDeposit.add(spinner);
 		
-		JPanel pnlOverWrite = new JPanel();
+		pnlOverWrite = new JPanel();
 		pnlOverWrite.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		pnlOverWrite.setBackground(new Color(204, 204, 255));
 		pnlOverWrite.setBounds(982, 11, 270, 217);
+		pnlOverWrite.setVisible(false);
 		PInvoice.add(pnlOverWrite);
 
+		
+		
+		
+		
 		JPanel Clients = new JPanel();
 		Clients.setBackground(new Color(255, 228, 225));
 		tabbedPane.addTab("Clients", new ImageIcon(Invoice.class.getResource("/images/icon-client.png")), Clients, null);
@@ -1936,6 +2037,16 @@ public class Invoice {
 
 
 
+	
+	public void AddOverWrite(boolean over) {
+		if(over) {
+			pnlFile.setBounds(982, 238, pnlFile.getWidth(), pnlFile.getHeight());
+			pnlOverWrite.setVisible(true);
+		}else {
+			pnlFile.setBounds(982, 11, pnlFile.getWidth(), pnlFile.getHeight());
+			pnlOverWrite.setVisible(false);
+		}
+	}
 
 
 
@@ -2524,7 +2635,10 @@ public class Invoice {
 
 
 
-		} catch (IOException e) {  e.printStackTrace();  }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
+
 
