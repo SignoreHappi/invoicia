@@ -429,7 +429,7 @@ public class Invoice {
 
 		lblMaterialName1 = new JLabel("");
 		lblMaterialName1.setBounds(327, 69, 133, 13);
-		panel_5.add(lblMaterialName1);
+		panel_5.add(lblMaterialName1);//Morning
 
 		lblMaterialName2 = new JLabel("");
 		lblMaterialName2.setBounds(327, 92, 133, 13);
