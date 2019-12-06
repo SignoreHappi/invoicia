@@ -171,7 +171,7 @@ public class Invoice {
 	public JSpinner spnRA3;
 	public JSpinner spnRA4;
 
-	public JComboBox spnSS;
+	public JComboBox cmbCreateInvoice;
 	public JComboBox spnMaterialType;
 
 	private String ma[] = new String [10];
@@ -284,7 +284,12 @@ public class Invoice {
 	public static JButton btnAddMaterial;
 
 	public static JFrame updateTable;
-	private JTextField textField;
+	private JTextField txtCostumeName;
+	
+	public static JComboBox cmbStudioName;
+	public static JComboBox cmbYear;
+	public static JComboBox cmbInvoiceId;
+	
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
@@ -379,7 +384,9 @@ public class Invoice {
 		panel_5.setLayout(null);
 
 
-		homeMaterialTbl = new DefaultTableModel();
+		homeMaterialTbl = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {return false;}
+		};
 		homeMaterialTbl.addColumn("Material Name");
 		homeMaterialTbl.addColumn("Material Type");
 		homeMaterialTbl.addColumn("Material Price");
@@ -403,30 +410,32 @@ public class Invoice {
 							int intAmount = Integer.parseInt(amount);
 							int count = 0;
 							if(intAmount == 999) {
-								lblMaterialName0.setText(1 + ".    " + "This is a test");
+								lblMaterialName0.setText(1 + ".    " + "Assorted Lycra");
 								lblMaterialAmount0.setText("101");
-								lblMaterialName1.setText(2 + ".    " + "This is a test");
+								lblMaterialName1.setText(2 + ".    " + "Assorted Lycra");
 								lblMaterialAmount1.setText("101");
-								lblMaterialName2.setText(3 + ".    " + "This is a test");
+								lblMaterialName2.setText(3 + ".    " + "Assorted Lycra");
 								lblMaterialAmount2.setText("101");
-								lblMaterialName3.setText(4 + ".    " + "This is a test");
+								lblMaterialName3.setText(4 + ".    " + "Assorted Lycra");
 								lblMaterialAmount3.setText("101");
-								lblMaterialName4.setText(5 + ".    " + "This is a test");
+								lblMaterialName4.setText(5 + ".    " + "Assorted Lycra");
 								lblMaterialAmount4.setText("101");
-								lblMaterialName5.setText(6 + ".    " + "This is a test");
+								lblMaterialName5.setText(6 + ".    " + "Assorted Lycra");
 								lblMaterialAmount5.setText("101");
-								lblMaterialName6.setText(7 + ".    " + "This is a test");
+								lblMaterialName6.setText(7 + ".    " + "Assorted Lycra");
 								lblMaterialAmount6.setText("101");
-								lblMaterialName7.setText(8 + ".    " + "This is a test");
+								lblMaterialName7.setText(8 + ".    " + "Assorted Lycra");
 								lblMaterialAmount7.setText("101");
 								for(count = 0; count < 8; count++) {
 									//								if(selectedMaterials[0][count] == null) {
-									selectedMaterials[0][count] = "This is a test" + "." + "test";
-									selectedMaterials[1][count] = "999";
-									selectedMaterials[2][count] = null;
+									selectedMaterials[0][count] = "Assorted" + "." + "Lycra";
+									selectedMaterials[1][count] = "101";
+									selectedMaterials[2][count] = "10";
 									//								}
-									
+									System.out.println(selectedMaterials[0][count]);
+
 								}
+								System.out.println("/////////");
 								count = 7;
 							}else {
 								for(count = 0; count < 10; count++) {
@@ -857,16 +866,17 @@ public class Invoice {
 		lblCostumeNo.setBounds(10, 58, 59, 14);
 		panel_10.add(lblCostumeNo);
 
-		spnSS = new JComboBox();
-		spnSS.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		spnSS.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
-		spnSS.setBounds(79, 55, 181, 20);
-		panel_10.add(spnSS);
+		cmbCreateInvoice = new JComboBox();
+		cmbCreateInvoice.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		cmbCreateInvoice.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
+		cmbCreateInvoice.setBounds(79, 55, 181, 20);
+		panel_10.add(cmbCreateInvoice);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(118, 93, 142, 20);
-		panel_10.add(textField);
+		txtCostumeName = new JTextField();
+		txtCostumeName.setText(null);
+		txtCostumeName.setColumns(10);
+		txtCostumeName.setBounds(118, 93, 142, 20);
+		panel_10.add(txtCostumeName);
 
 		JLabel lblCostumeName = new JLabel("Costume Name");
 		lblCostumeName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1024,22 +1034,23 @@ public class Invoice {
 		lblSearchByNumber.setBounds(10, 47, 120, 14);
 		panel_9.add(lblSearchByNumber);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
-		comboBox.setSelectedIndex(2);
-		comboBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboBox.setBounds(10, 77, 250, 24);
-		panel_9.add(comboBox);
+		
+		cmbStudioName = new JComboBox();
+		cmbStudioName.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
+		cmbStudioName.setSelectedIndex(2);
+		cmbStudioName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		cmbStudioName.setBounds(10, 77, 250, 24);
+		panel_9.add(cmbStudioName);
 
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboBox_1.setBounds(10, 112, 250, 24);
-		panel_9.add(comboBox_1);
+		cmbYear = new JComboBox();
+		cmbYear.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		cmbYear.setBounds(10, 112, 250, 24);
+		panel_9.add(cmbYear);
 
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboBox_2.setBounds(10, 147, 250, 24);
-		panel_9.add(comboBox_2);
+		cmbInvoiceId = new JComboBox();
+		cmbInvoiceId.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		cmbInvoiceId.setBounds(10, 147, 250, 24);
+		panel_9.add(cmbInvoiceId);
 
 		JButton button = new JButton("?2");
 		button.setBounds(10, 348, 120, 30);
@@ -1257,106 +1268,77 @@ public class Invoice {
 		btnCalculate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				output("Material", "Calculating...");
 				Database.getPrices();
 				math();
 			}
 		});
-		btnSave.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
-				int studio_id = 0;
-				String studio_name = spnSS.getSelectedItem().toString();
-				switch(studio_name){
-				case "Kids In Dance":
-					studio_id = 0;
-					break;
-				case "Evolve Dance Centre":
-					studio_id = 1;
-					break;
-				case "Maple Dance Acadamy":
-					studio_id = 2;
-					break;
-				case "CB Dance Acadamy":
-					studio_id = 3;
-					break;
-				case "The Eight Count":
-					studio_id = 4;
-
-					break;
-				}
-			}
-		});					//I found some zippers on Dec 24th 2018 for $1.75 for King Trio
+		
+		
+		
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
 		LocalDateTime now = LocalDateTime.now();  
-
-		//
-		//		JButton btnSave = new JButton("CALCULATE");
-		//		btnSave.setBounds(270, 452, 120, 30);
-		//		panel_1.add(btnSave);
-		//
-		//		JButton btnSave_1 = new JButton("SAVE");
-		//		btnSave_1.setBounds(270, 411, 120, 30);
-		//		panel_1.add(btnSave_1);
-		//		btnSave_1.addMouseListener(new MouseAdapter() {
-		//			@Override
-		//			public void mouseClicked(MouseEvent e) {
-		//				//				Database.EditInvoice();
-		//			}
-		//		});
+		
 		btnSave.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-				//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
-				int studio_id = 0;
-				String studio_name = spnSS.getSelectedItem().toString();
-				switch(studio_name){
-				case "Kids In Dance":
-					studio_id = 0;
-					break;
-				case "Evolve Dance Centre":
-					studio_id = 1;
-					break;
-				case "Maple Dance Acadamy":
-					studio_id = 2;
-					break;
-				case "CB Dance Acadamy":
-					studio_id = 3;
-					break;
-				case "The Eight Count":
-					studio_id = 4;
-					break;
-				}
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
-				LocalDateTime now = LocalDateTime.now();  
-
-				String date = dtf.format(now);
-
-				String month = date.substring(3, 5);
-				String year = date.substring(0, 2);
-
-
-				int iMonth = Integer.parseInt(month);
-				int iYear = 0;
-				if(iMonth >= 7) {
-					iYear = Integer.parseInt(year);
-					iYear++;
-					year = String.valueOf(iYear);
-				}
-
-				result = 0;
-
-				int invoice_id = Database.HasInvoice(studio_id);
-				if(invoice_id == 0) {
-					result = Database.CreateNewInvoice(studio_id, iYear);
+				
+				if(txtCostumeName.getText().length()<1) {
+					JOptionPane.showMessageDialog(null, "Write a name for the Costume!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}else {
-					result = Database.CreateInvoice(studio_id, invoice_id, iYear);
+					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
+					int studio_id = 0;
+					String studio_name = cmbCreateInvoice.getSelectedItem().toString();
+					switch(studio_name){
+					case "Kids In Dance":
+						studio_id = 0;
+						break;
+					case "Evolve Dance Centre":
+						studio_id = 1;
+						break;
+					case "Maple Dance Acadamy":
+						studio_id = 2;
+						break;
+					case "CB Dance Acadamy":
+						studio_id = 3;
+						break;
+					case "The Eight Count":
+						studio_id = 4;
+						break;
+					}
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
+					LocalDateTime now = LocalDateTime.now();  
+					
+					String date = dtf.format(now);
+					
+					String month = date.substring(3, 5);
+					String year = date.substring(0, 2);
+					String invcName = txtCostumeName.getText();
+					
+					int iMonth = Integer.parseInt(month);
+					int iYear = 0;
+					if(iMonth >= 7) {
+						iYear = Integer.parseInt(year);
+						iYear++;
+						year = String.valueOf(iYear);
+					}
+					
+					result = 0;
+					
+					int invoice_id = Database.HasInvoice(studio_id);
+					if(invoice_id == 0) {
+						result = Database.CreateNewInvoice(studio_id, iYear, invcName);
+					}else {
+						result = Database.CreateInvoice(studio_id, invoice_id, iYear, invcName);
+					}
+					
+					if(result == 1) {
+						output("Invoice:", "saved");
+					}else if(result == 2) {
+						output("Invoice:", "something went wrong");
+					}
 				}
-
-				if(result == 1) {
-					output("Invoice:", "saved");
-				}else if(result == 2) {
-					output("Invoice:", "something went wrong");
-				}
+				
 			}
 		});
 		btnQuoteTax.addActionListener(new ActionListener() {
@@ -1869,7 +1851,7 @@ public class Invoice {
 
 
 		materialTable = new DefaultTableModel(){
-			//			public boolean isCellEditable(int row, int column) {return false;}
+						public boolean isCellEditable(int row, int column) {return false;}
 		};
 
 		materialTable.addColumn("Material Id");
@@ -1887,20 +1869,20 @@ public class Invoice {
 
 		JTable tableMaterial= new JTable(materialTable); 
 
-		tableMaterial.addMouseListener(new MouseAdapter() {
-			public void mouseReleased(MouseEvent me) {
-				int row = table.rowAtPoint(me.getPoint());
-
-				if(me.getClickCount()>1) {
-
-					UpdateMaterial update = new UpdateMaterial(0);
-
-
-				}
-				//				int column = materialTable.get;
-				//				System.out.println(column);
-			}
-		});
+//		tableMaterial.addMouseListener(new MouseAdapter() {
+//			public void mouseReleased(MouseEvent me) {
+//				int row = table.rowAtPoint(me.getPoint());
+//
+//				if(me.getClickCount()>1) {
+//
+//					UpdateMaterial update = new UpdateMaterial(0);
+//
+//
+//				}
+//				//				int column = materialTable.get;
+//				//				System.out.println(column);
+//			}
+//		});
 
 		JScrollPane scrollPane = new JScrollPane(tableMaterial);
 		scrollPane.setLocation(10, 11);

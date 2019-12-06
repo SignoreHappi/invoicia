@@ -79,9 +79,9 @@ public class Database extends Invoice{
 	}
 
 	//If the studio has no invoice, create a new one starting from studio_id 1
-	public static int CreateNewInvoice(int studio_id, int iYear) {
+	public static int CreateNewInvoice(int studio_id, int iYear, String invcName) {
 		Invoice.result = 0;
-		String cmd = "INSERT INTO invoice(code, studio_id, invoice_id, year) VALUES(?,?,?, ?)";
+		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year) VALUES(?, ?, ?, ?, ?)";
 		String code = CreateCode(studio_id, iYear, 1);
 
 		try{
@@ -89,15 +89,17 @@ public class Database extends Invoice{
 			PreparedStatement pstmt = connect.prepareStatement(cmd);
 			//Create a new item into the DB in the position 1 with the value defined
 			pstmt.setString(1, code);
-			pstmt.setInt(2, studio_id);
-			pstmt.setInt(3, 1);
-			pstmt.setInt(4, iYear);
+			pstmt.setString(2, invcName);
+			pstmt.setInt(3, studio_id);
+			pstmt.setInt(4, 1);
+			pstmt.setInt(5, iYear);
 			//Update the DB
 			pstmt.executeUpdate();
 			System.out.println("Saved");
 			return 1;
 		} catch (SQLException e) {
 			System.out.println("Create New Invoice");
+			System.out.println(e);
 			System.out.println(e.getMessage());
 			return 2;
 		}finally {
@@ -112,18 +114,19 @@ public class Database extends Invoice{
 	}
 
 	//If the studio has an invoice, create a new one with invoice_id+1
-	public static int CreateInvoice(int studio_id, int invoice_id, int iYear) {
+	public static int CreateInvoice(int studio_id, int invoice_id, int iYear, String invcName) {
 		Invoice.result = 0;
-		String cmd = "INSERT INTO invoice(code, studio_id, invoice_id, year) VALUES(?, ?, ?, ?)";
+		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year) VALUES(?, ?, ?, ?, ?)";
 		int inv = invoice_id+1;
 		String code = CreateCode(studio_id, iYear, inv);
 		try{
 			connect = DBConnect.connectDB();
 			PreparedStatement pstmt = connect.prepareStatement(cmd);
 			pstmt.setString(1, code);
-			pstmt.setInt(2, studio_id);
-			pstmt.setInt(3, inv);
-			pstmt.setInt(4, iYear);
+			pstmt.setString(2, invcName);
+			pstmt.setInt(3, studio_id);
+			pstmt.setInt(4, inv);
+			pstmt.setInt(5, iYear);
 			pstmt.executeUpdate();
 			System.out.print("Saved");
 			return 1;
@@ -388,7 +391,7 @@ public class Database extends Invoice{
 			//Create the code
 			stmt = connect.createStatement();
 			
-			for(int i = 0; i < Invoice.selectedMaterials.length+1; i++) {
+			for(int i = 0; i < 10; i++) {
 				if(Invoice.selectedMaterials[0][i] != null) {
 					
 					String name = Invoice.selectedMaterials[0][i];
@@ -410,17 +413,11 @@ public class Database extends Invoice{
 						double price = rs.getDouble("material_cost");
 						Invoice.selectedMaterials[2][i] = price + "";
 					}
+				}else {
+					break;
 				}
-				System.out.println(Invoice.selectedMaterials[0][i]);
-				System.out.println(Invoice.selectedMaterials[1][i]);
-				System.out.println(Invoice.selectedMaterials[2][i]);
+				
 			}
-			
-			
-			
-			
-
-			//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
 		}finally {
