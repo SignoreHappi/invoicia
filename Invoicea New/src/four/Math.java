@@ -13,16 +13,20 @@ public class Math {
 	private static double Thread;
 	private static double Hours;
 	private static double Hourly;
+	private static double GroupRate;
+	private static double SoloRate;
+	
 	private static double [] Amount = new double[10];
 	private static double [] Cost   = new double[10];
+	
+	private static boolean GroupOrKids;
 	
 	
 
 	public Math() {
-		Invoice.writeOutput("☼", "Getting Information...");
 		getInformation();
-		Invoice.writeOutput("☼", "Building Material...");
 		Material = Material();
+		Labour = Labour();
 		Done();
 	}
 	
@@ -36,7 +40,18 @@ public class Math {
 		
 		Database.GetValues();
 		
-		System.out.println(this.Thread);
+		try {
+			Hours = (double) Invoice.getSpnHHValue();
+		} catch (Exception e) {
+//			e.printStackTrace();
+			Invoice.writeOutput("ERROR", "ERROR IS UNDEFINED");
+		}
+		
+		if(Invoice.getRdbGroupBool()) {
+			GroupOrKids = true;
+		}else {
+			GroupOrKids = false;
+		}
 		
 	}
 	
@@ -53,8 +68,25 @@ public class Math {
 		return total;
 	}
 	
+	private static double Rhinestones() {
+		return 0;
+	}
+	
+	private static double Labour() {
+		
+		double total = 0;
+		
+		if(GroupOrKids) {
+			total = Hours * Hourly * GroupRate;
+		}else {
+			total = Hours * Hourly * SoloRate;
+		}
+		
+		return total;
+	}
+	
 	private static void Done() {
-		Invoice.writeOutput("", "" + Material);
+		Invoice.writeOutput("", "" + Labour);
 		
 		Invoice.setLblsMaterialText("" + Material);
 	}
@@ -91,4 +123,21 @@ public class Math {
 	public static void setHourly(double hourly) {
 		Hourly = hourly;
 	}
+	
+	public static double getGroupRate() {
+		return GroupRate;
+	}
+
+	public static void setGroupRate(double groupRate) {
+		GroupRate = groupRate;
+	}
+
+	public static double getSoloRate() {
+		return SoloRate;
+	}
+
+	public static void setSoloRate(double soloRate) {
+		SoloRate = soloRate;
+	}
+
 }

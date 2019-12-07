@@ -462,6 +462,8 @@ public class Database extends Invoice{
 								four.Math.setTax(rs.getDouble("tax"));
 								four.Math.setHourly(rs.getDouble("hours"));
 								four.Math.setThread(rs.getDouble("thread"));
+								four.Math.setGroupRate(rs.getDouble("groupRate"));
+								four.Math.setSoloRate(rs.getDouble("soloRate"));
 							}
 
 //							four.Math.setTax(taxi);

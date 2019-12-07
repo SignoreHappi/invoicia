@@ -104,8 +104,8 @@ public class Invoice {
 	NumberFormat money = NumberFormat.getCurrencyInstance();
 
 
-	public JRadioButton rdbGroup = new JRadioButton("Group");
-	public JRadioButton rdbSolo = new JRadioButton("Solo, Duet, Trio");
+	public static JRadioButton rdbGroup = new JRadioButton("Group");
+	public static JRadioButton rdbSolo = new JRadioButton("Solo, Duet, Trio");
 
 	private JFrame frame;
 	private JTable table;
@@ -157,8 +157,8 @@ public class Invoice {
 	private static JLabel lbsDeposit;
 	public JLabel lblLine;
 
-	public JSpinner spnHH = new JSpinner();
-	public JSpinner spnK = new JSpinner();
+	public static JSpinner spnHH = new JSpinner();
+	public static JSpinner spnK = new JSpinner();
 
 	public JSpinner spnRT1;
 	public JSpinner spnRT2;
@@ -895,7 +895,7 @@ public class Invoice {
 		pnlHours.setBounds(12, 165, 268, 134);
 		PInvoice.add(pnlHours);
 
-		JLabel lblHours = new JLabel("HOURS");
+		JLabel lblHours = new JLabel("HOURS / GROUPS");
 		lblHours.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHours.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblHours.setBounds(10, 11, 248, 24);
@@ -963,7 +963,7 @@ public class Invoice {
 		pnlFile = new JPanel();
 		pnlFile.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		pnlFile.setBackground(new Color(204, 204, 204));
-		pnlFile.setBounds(982, 11, 270, 430);
+		pnlFile.setBounds(982, 11, 270, 348);
 		PInvoice.add(pnlFile);
 		pnlFile.setLayout(null);
 
@@ -987,33 +987,22 @@ public class Invoice {
 		btnPrintout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				try {
-					output("V", "- -/Printout 1/- - -");
-					Fill();
-					for(int i = 0; i < 10; i++) {
-						if(!ma[i].isEmpty()) {
-							output("V", ma[i] + " * " + me[i] + " = " + Double.parseDouble(ma[i]) * Double.parseDouble(me[i]));
-						}
-					}
-				} catch (NullPointerException e) {
-					// TODO Auto-generated catch block
-					//					e.printStackTrace();
-					output("IX", "Null");
-				}
+				
 
 			}
 		});
 		btnPrintout.setBounds(10, 266, 120, 30);
 		pnlFile.add(btnPrintout);
 
-		JButton btnPrintout_1 = new JButton("Printout 2");
-		btnPrintout_1.setBounds(10, 307, 120, 30);
-		pnlFile.add(btnPrintout_1);
-
-		JButton btnPrintout_2 = new JButton("Printout 3");
-		btnPrintout_2.setBounds(140, 266, 120, 30);
-		pnlFile.add(btnPrintout_2);
-
+		
+		
+		
+		
+		
+		
+		// -------------------------------------------------------------------------  I N F O R M A T I O N ----------------------
+		
+		
 		JButton btnInformation = new JButton("Information");
 		btnInformation.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1024,10 +1013,17 @@ public class Invoice {
 				output("","");
 			}
 		});
-		btnInformation.setBounds(140, 307, 120, 30);
+		btnInformation.setBounds(140, 265, 120, 30);
 		pnlFile.add(btnInformation);
 
 
+		
+		
+		
+		
+		
+		
+		
 
 		JFormattedTextField ftfSearch = new JFormattedTextField(createFormatter("##-##-###"));
 		ftfSearch.setBounds(140, 42, 120, 24);
@@ -1056,16 +1052,8 @@ public class Invoice {
 		pnlFile.add(cmbInvoiceId);
 
 		JButton button = new JButton("?2");
-		button.setBounds(10, 348, 120, 30);
+		button.setBounds(10, 306, 120, 30);
 		pnlFile.add(button);
-
-		JButton button_1 = new JButton("?2");
-		button_1.setBounds(140, 348, 120, 30);
-		pnlFile.add(button_1);
-
-		JButton button_3 = new JButton("?2");
-		button_3.setBounds(10, 389, 120, 30);
-		pnlFile.add(button_3);
 
 		JButton button_4 = new JButton("?2");
 		button_4.addMouseListener(new MouseAdapter() {
@@ -1074,7 +1062,7 @@ public class Invoice {
 				AddOverWrite(true);
 			}
 		});
-		button_4.setBounds(140, 389, 120, 30);
+		button_4.setBounds(140, 306, 120, 30);
 		pnlFile.add(button_4);
 
 		JButton button_5 = new JButton("?2");
@@ -1095,7 +1083,7 @@ public class Invoice {
 		JLabel lblRecipt = new JLabel("RECIPT");
 		lblRecipt.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblRecipt.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRecipt.setBounds(10, 11, 250, 27);
+		lblRecipt.setBounds(10, 11, 380, 27);
 		pnlRecipt.add(lblRecipt);
 
 		JLabel lblMaterial_1 = new JLabel("Material");
@@ -1277,8 +1265,9 @@ public class Invoice {
 		btnCalculate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				output("Material", "Calculating...");
+				output("Material", "Loading Materials...");
 				Database.getPrices();
+				output("Material", "Calculating...");
 				Math math = new Math();
 			}
 		});
@@ -2378,7 +2367,49 @@ public class Invoice {
 		lbsDeposit.setText(text);
 	}
 
+	public JSpinner getSpnHH() {
+		return spnHH;
+	}
+	public void setSpnHH(JSpinner spnHH) {
+		this.spnHH = spnHH;
+	}
+	public static Object getSpnHHValue() {
+		return (spnHH.getValue());
+	}
 
+	public JSpinner getSpnK() {
+		return spnK;
+	}
+	public void setSpnK(JSpinner spnK) {
+		this.spnK = spnK;
+	}
+	public static double getSpnKValue() {
+		return Double.parseDouble((String) spnK.getValue());
+	}
+
+	public JRadioButton getRdbGroup() {		
+		return rdbGroup;
+	}
+	public void setRdbGroup(JRadioButton rdbGroup) {
+		this.rdbGroup = rdbGroup;
+	}
+	public static boolean getRdbGroupBool() {
+		return rdbGroup.isSelected();
+	}
+
+	public JRadioButton getRdbSolo() {
+		return rdbSolo;
+	}
+	public void setRdbSolo(JRadioButton rdbSolo) {
+		this.rdbSolo = rdbSolo;
+	}
+	public static boolean getRdbSoloBool() {
+		return rdbSolo.isSelected();
+	}
+
+	
+
+	
 
 
 
