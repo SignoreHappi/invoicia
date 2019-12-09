@@ -109,11 +109,10 @@ public class Database extends Invoice{
 				//				iYear = Integer.parseInt(year);
 				//				System.out.println(iYear);
 			}
-			System.out.println("101");
 		}else if(invcName.equals("Fill")) {
-			System.out.println("Fill");
+
 		}else if(invcName.equals("Clear all")) {
-			System.out.println("Clear all");
+
 		}
 
 	}
@@ -160,7 +159,7 @@ public class Database extends Invoice{
 	}
 
 	//If the studio has an invoice, create a new one with invoice_id+1
-	public static void CreateInvoice(int studio_id, int invoice_id, int iYear, String invcName) {
+	public static int CreateInvoice(int studio_id, int invoice_id, int iYear, String invcName) {
 		Invoice.result = 0;
 		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year) VALUES(?, ?, ?, ?, ?)";
 		int inv = invoice_id+1;
@@ -168,36 +167,43 @@ public class Database extends Invoice{
 		//\\//FOR TESTING ONLY	 //\\//		//\\//		//\\//		//\\//		//\\//		//\\//
 
 
-		if(invcName.equals("101") || invcName.equals("Fill") || invcName.equals("Clear all")) {
-			SaveInvoices(studio_id, invcName);
-		}else {
-			
-			//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//
-			code = CreateCode(studio_id, iYear, inv);
-			
-			try{
-				connect = DBConnect.connectDB();
-				PreparedStatement pstmt = connect.prepareStatement(cmd);
-				pstmt.setString(1, code);
-				pstmt.setString(2, invcName);
-				pstmt.setInt(3, studio_id);
-				pstmt.setInt(4, inv);
-				pstmt.setInt(5, iYear);
-				pstmt.executeUpdate();
-				//			System.out.print("Saved");
-				
-				Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
-			} catch (SQLException e) {
-				System.out.println("Create Invoice");
-				System.out.println(e.getMessage());
-			}finally {
-				try {
-					connect.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
+		if(invcName.equals("101")) {
+			invcName = "Test" + inv + "";
+			iYear = (int) (Math.random() * 20 );
+			System.out.println("random year: " + iYear);
+			if(iYear < 10) {
+				String year = "0" + iYear;
+				System.out.println(year);
+				iYear = Integer.parseInt(year);
 			}
+		}
+		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//
+		code = CreateCode(studio_id, iYear, inv);
+
+		try{
+			connect = DBConnect.connectDB();
+			PreparedStatement pstmt = connect.prepareStatement(cmd);
+			pstmt.setString(1, code);
+			pstmt.setString(2, invcName);
+			pstmt.setInt(3, studio_id);
+			pstmt.setInt(4, inv);
+			pstmt.setInt(5, iYear);
+			pstmt.executeUpdate();
+			//			System.out.print("Saved");
+
+			Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
+			return 1;
+		} catch (SQLException e) {
+			System.out.println("Create Invoice");
+			System.out.println(e.getMessage());
+			return 2;
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		}
 
 	}
@@ -528,7 +534,6 @@ public class Database extends Invoice{
 
 
 
-			//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
 		}finally {
@@ -543,15 +548,12 @@ public class Database extends Invoice{
 
 	}
 
-	public static void LoadYear(int index) {
+	public static void LoadYear(int studioId) {
+		System.out.println(studioId);		
 		Invoice.cmbYear.removeAllItems();
-		cmbYear.addItem("Select the year");
-
-		int studioId = index, count = 0;
-		String year = null;
-		String cmd = "SELECT * FROM invoice WHERE studio_id = " + "\"" + studioId + "\" ORDER BY year ASC";
-		String previous = "-1";
-
+		String cmd = "SELECT * FROM invoice WHERE studio_id = " + studioId + " ORDER BY year ASC";
+		int previous = -10, year = -1;
+		//
 		try {
 			//Create the code
 			connect = DBConnect.connectDB();
@@ -559,20 +561,17 @@ public class Database extends Invoice{
 			stmt = connect.createStatement();
 			stmt.executeQuery(cmd);
 			ResultSet rs = stmt.executeQuery(cmd);
-			while(rs.next()) {					
-				year = rs.getString("year");
-				System.out.println(year);
-				if(!previous.equals(year)) {
-					Invoice.yearsInvoices[0][count] = index + "";
-					Invoice.yearsInvoices[1][count] = year;					
-//					System.out.println("YEAR ARRAY: " + Invoice.yearsInvoices[1][count]);
-					Invoice.cmbYear.addItem(Invoice.yearsInvoices[1][count]);
+			while(rs.next()) {	
+				year = rs.getInt("year");
+				String sYear = year + "";
+				if(year != previous) {
+					if(year<10) {
+						sYear = "0" + sYear;
+					}
+					Invoice.cmbYear.addItem(sYear+"");
 				}
-				previous = Invoice.yearsInvoices[1][count];
-				count++;
-				//				System.out.println(year);
+				previous = year;
 			}
-//			System.out.println("=====");
 		} catch (SQLException e) {
 			System.out.print(e);
 		}finally {
@@ -590,41 +589,30 @@ public class Database extends Invoice{
 
 	public static void GetCreatedInvoices(int studio_id, String year) {
 		Invoice.cmbInvoiceId.removeAllItems();
-		System.out.println("ID: " + studio_id + " " + " Year: " + year);
-		if(year != null) {
-			String cmd = "SELECT * FROM invoice WHERE studio_id = " + studio_id + " AND year = " + year;
-			System.out.println(cmd);
-			
-			
-			
-			String name;
-			
-			try {
-				//Create the code
-				connect = DBConnect.connectDB();
-				//Create the code
-				stmt = connect.createStatement();
-				stmt.executeQuery(cmd);
-				ResultSet rs = stmt.executeQuery(cmd);
-				while(rs.next()) {					
-					name = rs.getString("invoice_name");
-					Invoice.cmbInvoiceId.addItem(name);
-					
-				}
-//			System.out.println("=====");
-			} catch (SQLException e) {
-				System.out.print(e);
-			}finally {
-				try {
-					connect.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		String cmd = "SELECT * FROM invoice WHERE studio_id = " + studio_id + " AND year = " + year + " ORDER BY invoice_name ASC";
+		String name;
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			//Create the code
+			stmt = connect.createStatement();
+			stmt.executeQuery(cmd);
+			ResultSet rs = stmt.executeQuery(cmd);
+			while(rs.next()) {					
+				name = rs.getString("invoice_name");
+				Invoice.cmbInvoiceId.addItem(name);
+
 			}
-			
-		}
-		
+		} catch (SQLException e) {
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}		
 	}
-	
+
 }
