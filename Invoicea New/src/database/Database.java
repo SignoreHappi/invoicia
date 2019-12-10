@@ -486,4 +486,68 @@ public class Database extends Invoice{
 		
 	}
 	
+	
+	//Insert a new material into the table
+		public static boolean CreateClient(String name, String owner, String address, String phoneNumber, String email){
+			String studio_name = null, studio_owner = null, studio_email = null;
+			String cmdSearch = "SELECT * FROM studio WHERE studio_name = \"" + name + "\" AND studio_owner = \"" + owner + "\"";
+			boolean add = true;
+			try {
+				connect = DBConnect.connectDB();
+				stmt = connect.prepareStatement(cmdSearch);			
+				//Create the code
+				//Execute the code
+				stmt.executeQuery(cmdSearch);
+				//For every possible execution, create a rs
+				ResultSet rs = stmt.executeQuery(cmdSearch);
+				//While there's code to be executes, do something
+				while(rs.next()) {//Working
+					studio_name = rs.getString("studio_name");
+					studio_owner = rs.getString("studio_owner");
+					studio_email = rs.getString("studio_email");
+					if(name.equals(studio_name) || owner.equals(studio_owner) || email.equals(studio_email)) {
+						Invoice.writeMatOutput("Error", "The client is already in the DataBase");
+						add = false;
+						break;
+					}
+				}
+				if(add) {
+					String studio = name + ", " + owner;
+
+					Invoice.writeMatOutput("Added", studio + "");
+					String cmd = "INSERT INTO material(studio_name, studio_owner, studio_email) VALUES(?, ?, ?)";
+					
+					String changedName = Strin.FirstCapital(name);
+					String changedOwner = Strin.FirstCapital(owner);
+
+					//				System.out.println(name);
+					//				System.out.println(changedName);
+					try{
+						PreparedStatement pstmt = connect.prepareStatement(cmd);			
+						pstmt.setString(1, changedName);
+						pstmt.setString(2, changedOwner);
+						pstmt.setString(3, email);
+						pstmt.executeUpdate();
+					} catch (SQLException e) {
+						System.out.println("Create Client");
+						System.out.println(e.getMessage());
+						return false;
+					}
+				}
+			}catch(SQLException e){
+				System.out.println(e);
+			}finally {
+				try {
+					connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+			}
+
+
+			return true;
+
+		}
+	
 }
