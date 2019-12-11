@@ -98,6 +98,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 
 public class Invoice {
 
@@ -294,6 +295,8 @@ public class Invoice {
 	public static JComboBox cmbStudioName;
 	public static JComboBox cmbYear;
 	public static JComboBox cmbInvoiceId;
+	
+	public static JButton btnCreate;
 	
 	/**
 	 * Launch the application.
@@ -497,6 +500,8 @@ public class Invoice {
 								}
 
 							}
+							
+							btnCreate.setEnabled(true);
 						}catch (NumberFormatException ex){
 							JOptionPane.showMessageDialog(null, "Give me a number!",  "Error!", JOptionPane.ERROR_MESSAGE);
 						}
@@ -577,43 +582,43 @@ public class Invoice {
 		pnlMaterial.add(lblMaterialName9);
 
 		lblMaterialAmount0 = new JLabel("");
-		lblMaterialAmount0.setBounds(523, 69, 27, 13);
+		lblMaterialAmount0.setBounds(511, 69, 39, 13);
 		pnlMaterial.add(lblMaterialAmount0);
 
 		lblMaterialAmount1 = new JLabel("");
-		lblMaterialAmount1.setBounds(523, 92, 27, 13);
+		lblMaterialAmount1.setBounds(511, 92, 39, 13);
 		pnlMaterial.add(lblMaterialAmount1);
 
 		lblMaterialAmount2 = new JLabel("");
-		lblMaterialAmount2.setBounds(523, 115, 27, 13);
+		lblMaterialAmount2.setBounds(511, 115, 39, 13);
 		pnlMaterial.add(lblMaterialAmount2);
 
 		lblMaterialAmount3 = new JLabel("");
-		lblMaterialAmount3.setBounds(523, 138, 27, 13);
+		lblMaterialAmount3.setBounds(511, 138, 39, 13);
 		pnlMaterial.add(lblMaterialAmount3);
 
 		lblMaterialAmount4 = new JLabel("");
-		lblMaterialAmount4.setBounds(523, 161, 27, 13);
+		lblMaterialAmount4.setBounds(511, 161, 39, 13);
 		pnlMaterial.add(lblMaterialAmount4);
 
 		lblMaterialAmount8 = new JLabel("");
-		lblMaterialAmount8.setBounds(523, 253, 27, 13);
+		lblMaterialAmount8.setBounds(511, 253, 39, 13);
 		pnlMaterial.add(lblMaterialAmount8);
 
 		lblMaterialAmount5 = new JLabel("");
-		lblMaterialAmount5.setBounds(523, 184, 27, 13);
+		lblMaterialAmount5.setBounds(511, 184, 39, 13);
 		pnlMaterial.add(lblMaterialAmount5);
 
 		lblMaterialAmount6 = new JLabel("");
-		lblMaterialAmount6.setBounds(523, 207, 27, 13);
+		lblMaterialAmount6.setBounds(511, 207, 39, 13);
 		pnlMaterial.add(lblMaterialAmount6);
 
 		lblMaterialAmount7 = new JLabel("");
-		lblMaterialAmount7.setBounds(523, 230, 27, 13);
+		lblMaterialAmount7.setBounds(511, 230, 39, 13);
 		pnlMaterial.add(lblMaterialAmount7);
 
 		lblMaterialAmount9 = new JLabel("");
-		lblMaterialAmount9.setBounds(523, 276, 27, 13);
+		lblMaterialAmount9.setBounds(511, 276, 39, 13);
 		pnlMaterial.add(lblMaterialAmount9);
 
 
@@ -1286,9 +1291,6 @@ public class Invoice {
 		separator.setBounds(10, 128, 382, 4);
 		pnlRecipt.add(separator);
 
-		JButton btnSave = new JButton("SAVE");
-		btnSave.setBounds(270, 176, 120, 30);
-		pnlRecipt.add(btnSave);
 
 		JButton btnCalculate = new JButton("CALCULATE");
 		btnCalculate.setBounds(270, 133, 120, 30);
@@ -1305,17 +1307,23 @@ public class Invoice {
 		
 		
 		
+		btnCreate = new JButton("CREATE");
+		btnCreate.setEnabled(false);
+		btnCreate.setBounds(270, 176, 120, 30);
+		pnlRecipt.add(btnCreate);
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
 		LocalDateTime now = LocalDateTime.now();  
 		
-		btnSave.addMouseListener(new MouseAdapter() {
+		btnCreate.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				if(txtCostumeName.getText().length()<1) {
+					txtCostumeName.setBorder(new LineBorder(Color.red,1));
 					JOptionPane.showMessageDialog(null, "Write a name for the Costume!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}else {
 					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
+					
 					int studio_id = 0;
 					String studio_name = cmbCreateInvoice.getSelectedItem().toString();
 					switch(studio_name){
