@@ -575,7 +575,7 @@ public class Database extends Invoice{
 					String studio = name + ", " + owner;
 
 					Invoice.writeMatOutput("Added", studio + "");
-					String cmd = "INSERT INTO material(studio_name, studio_owner, studio_email) VALUES(?, ?, ?)";
+					String cmd = "INSERT INTO material(studio_name, studio_owner, studio_email, studio_phone, studio_address) VALUES(?, ?, ?, ?, ?)";
 					
 					String changedName = Strin.FirstCapital(name);
 					String changedOwner = Strin.FirstCapital(owner);
@@ -587,6 +587,8 @@ public class Database extends Invoice{
 						pstmt.setString(1, changedName);
 						pstmt.setString(2, changedOwner);
 						pstmt.setString(3, email);
+						pstmt.setString(4, phoneNumber);
+						pstmt.setString(5, address);
 						pstmt.executeUpdate();
 					} catch (SQLException e) {
 						System.out.println("Create Client");

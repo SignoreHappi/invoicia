@@ -1589,6 +1589,12 @@ public class Invoice {
 		Clients.add(lblEmailAddress);
 
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Database.CreateClient(txtStudio.getText(), txtOwner.getText(), txtAddress.getText(), txtPhone.getText(), txtEmail.getText());
+			}
+		});
 		btnSubmit.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnSubmit.setBounds(78, 644, 110, 33);
 		Clients.add(btnSubmit);
