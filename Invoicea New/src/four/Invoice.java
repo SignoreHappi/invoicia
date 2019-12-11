@@ -1598,7 +1598,7 @@ public class Invoice {
 		btnSubmit.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnSubmit.setBounds(78, 644, 110, 33);
 		Clients.add(btnSubmit);
-
+//   adhdafd 
 		//		TableColumn id, name, email;
 		//		id = new TableColumn(0);
 		//		id.setHeaderValue("Studio ID"); // set column name
