@@ -550,7 +550,7 @@ public class Database extends Invoice{
 	//Insert a new material into the table
 		public static boolean CreateClient(String name, String owner, String address, String phoneNumber, String email){
 			String studio_name = null, studio_owner = null, studio_email = null;
-			String cmdSearch = "SELECT * FROM studio WHERE studio_name = \"" + name + "\" AND studio_owner = \"" + owner + "\"";
+			String cmdSearch = "SELECT * FROM studio";
 			boolean add = true;
 			try {
 				connect = DBConnect.connectDB();
@@ -575,7 +575,8 @@ public class Database extends Invoice{
 					String studio = name + ", " + owner;
 
 					Invoice.writeMatOutput("Added", studio + "");
-					String cmd = "INSERT INTO material(studio_name, studio_owner, studio_email, studio_phone, studio_address) VALUES(?, ?, ?, ?, ?)";
+					System.out.println("helo");
+					String cmd = "INSERT INTO studio(studio_name, studio_owner, studio_email, studio_phone, studio_address) VALUES(?, ?, ?, ?, ?)";
 					
 					String changedName = Strin.FirstCapital(name);
 					String changedOwner = Strin.FirstCapital(owner);
@@ -592,7 +593,7 @@ public class Database extends Invoice{
 						pstmt.executeUpdate();
 					} catch (SQLException e) {
 						System.out.println("Create Client");
-						System.out.println(e.getMessage());
+						System.out.println(e);
 						return false;
 					}
 				}
