@@ -40,8 +40,16 @@ public class Database extends Invoice{
 	}
 
 	//Creates the code with the studio_id-year-invoic_id 
-	public static String CreateCode(int studio_id, int year, int invoice_id) {
-		String code = "0" + studio_id + "-" + year + "-00" + invoice_id;
+	public static String CreateCode(int studio_id, int year, int invoice_id) {	
+		String dash = "-00";
+		if(invoice_id > 9) {
+			dash = "-0";
+		}else if(invoice_id > 99) {
+			dash = "-";
+		}
+
+
+		String code = "0" + studio_id + "-" + year + dash + invoice_id;
 		return code;
 	}
 
@@ -78,37 +86,74 @@ public class Database extends Invoice{
 		return invoice_id;	
 	}
 
+	public static void SaveInvoices(int studio_id, String invcName) {
+		/*
+		 * CODES FOR SAVE
+		 * 
+		 * 101  	 - Sets the name of the invoice as Test, gives a random year
+		 * Fill 	 - Creates 5 invoices with name Fill for each studio with random years
+		 * Clear all - Delete all the invoices created by fill, if none, does nothing
+		 * 
+		 * */
+		int year;
+
+
+		if(invcName.equals("101")) {
+			invcName = "Test" + 1 + "";
+			year = (int) (Math.random() * 20 );
+			//			System.out.println("random year: " + iYear);
+			if(year < 10) {
+				//				System.out.println("aaaaaaaaaa");
+				//				String year = "0" + iYear;
+				//				System.out.println(year);
+				//				iYear = Integer.parseInt(year);
+				//				System.out.println(iYear);
+			}
+		}else if(invcName.equals("Fill")) {
+
+		}else if(invcName.equals("Clear all")) {
+
+		}
+
+	}
+
 	//If the studio has no invoice, create a new one starting from studio_id 1
-	public static int CreateNewInvoice(int studio_id, int iYear, String invcName) {
+	public static void CreateNewInvoice(int studio_id, int iYear, String invcName) {
 		Invoice.result = 0;
 		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year) VALUES(?, ?, ?, ?, ?)";
-		String code = CreateCode(studio_id, iYear, 1);
+		String code = null;
 
-		try{
-			connect = DBConnect.connectDB();
-			PreparedStatement pstmt = connect.prepareStatement(cmd);
-			//Create a new item into the DB in the position 1 with the value defined
-			pstmt.setString(1, code);
-			pstmt.setString(2, invcName);
-			pstmt.setInt(3, studio_id);
-			pstmt.setInt(4, 1);
-			pstmt.setInt(5, iYear);
-			//Update the DB
-			pstmt.executeUpdate();
-			System.out.println("Saved");
-			return 1;
-		} catch (SQLException e) {
-			System.out.println("Create New Invoice");
-			System.out.println(e);
-			System.out.println(e.getMessage());
-			return 2;
-		}finally {
-			try {
-				connect.close();
+
+		if(invcName.equals("101") || invcName.equals("Fill") || invcName.equals("Clear all")) {
+			SaveInvoices(studio_id, invcName);
+		}else {
+			code = CreateCode(studio_id, iYear, 0);
+			try{
+				connect = DBConnect.connectDB();
+				PreparedStatement pstmt = connect.prepareStatement(cmd);
+				//Create a new item into the DB in the position 1 with the value defined
+				pstmt.setString(1, code);
+				pstmt.setString(2, invcName);
+				pstmt.setInt(3, studio_id);
+				pstmt.setInt(4, 1);
+				pstmt.setInt(5, iYear);
+				//Update the DB
+				pstmt.executeUpdate();
+
+				Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
+				System.out.println("Create New Invoice");
+				System.out.println(e);
+				System.out.println(e.getMessage());
+			}finally {
+				try {
+					connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+			}
+
 		}
 
 	}
@@ -118,7 +163,23 @@ public class Database extends Invoice{
 		Invoice.result = 0;
 		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year) VALUES(?, ?, ?, ?, ?)";
 		int inv = invoice_id+1;
-		String code = CreateCode(studio_id, iYear, inv);
+		String code = null;
+		//\\//FOR TESTING ONLY	 //\\//		//\\//		//\\//		//\\//		//\\//		//\\//
+
+
+		if(invcName.equals("101")) {
+			invcName = "Test" + inv + "";
+			iYear = (int) (Math.random() * 20 );
+			System.out.println("random year: " + iYear);
+			if(iYear < 10) {
+				String year = "0" + iYear;
+				System.out.println(year);
+				iYear = Integer.parseInt(year);
+			}
+		}
+		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//
+		code = CreateCode(studio_id, iYear, inv);
+
 		try{
 			connect = DBConnect.connectDB();
 			PreparedStatement pstmt = connect.prepareStatement(cmd);
@@ -128,7 +189,9 @@ public class Database extends Invoice{
 			pstmt.setInt(4, inv);
 			pstmt.setInt(5, iYear);
 			pstmt.executeUpdate();
-			System.out.print("Saved");
+			//			System.out.print("Saved");
+
+			Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
 			return 1;
 		} catch (SQLException e) {
 			System.out.println("Create Invoice");
@@ -140,7 +203,9 @@ public class Database extends Invoice{
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		}
+			}		
+		}
+
 	}
 
 	//Insert a new material into the table
@@ -328,7 +393,7 @@ public class Database extends Invoice{
 	}
 
 
-	//I HATE THIS SCODA
+
 
 
 	public static void EditInvoice(String code) {
@@ -390,25 +455,25 @@ public class Database extends Invoice{
 			connect = DBConnect.connectDB();
 			//Create the code
 			stmt = connect.createStatement();
-			
+
 			for(int i = 0; i < 10; i++) {
 				if(Invoice.selectedMaterials[0][i] != null) {
-					
+
 					String name = Invoice.selectedMaterials[0][i];
-					
+
 					int index = name.indexOf(".");
 					String type = name.substring(index+1); 
 					name = name.substring(0, index);
-//					Invoice.selectedMaterials[0][i] = name;
+					//					Invoice.selectedMaterials[0][i] = name;
 					cmd =  "SELECT * FROM material where material_name = " + "\"" + name + "\" and material_type = " + "\"" + type + "\"";
-//				
-//				//Execute the code
+					//				
+					//				//Execute the code
 					stmt.executeQuery(cmd);
-//				//For every possible execution, create a rs
+					//				//For every possible execution, create a rs
 					ResultSet rs = stmt.executeQuery(cmd);
-//				//While there's code to be executes, do something
-//				
-//				
+					//				//While there's code to be executes, do something
+					//				
+					//				
 					while(rs.next()) {					
 						double price = rs.getDouble("material_cost");
 						Invoice.selectedMaterials[2][i] = price + "";
@@ -416,7 +481,7 @@ public class Database extends Invoice{
 				}else {
 					break;
 				}
-				
+
 			}
 		} catch (SQLException e) {
 			System.out.print(e);
@@ -429,61 +494,56 @@ public class Database extends Invoice{
 			}
 		}
 	}	
-	
+
 	public static String GetValues() {
-		
+
 		// TODO Auto-generated method stub
-				String cmd = null;
+		String cmd = null;
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			//Create the code
+			stmt = connect.createStatement();
 
-				try {
-					//Create the code
-					connect = DBConnect.connectDB();
-					//Create the code
-					stmt = connect.createStatement();
-					
-					
-							cmd =  "SELECT * FROM settings";
-							
-//						
-//						//Execute the code
-							stmt.executeQuery(cmd);
-//						//For every possible execution, create a rs
-							ResultSet rs = stmt.executeQuery(cmd);
-//						//While there's code to be executes, do something
-//						
-//						
-//							while(rs.next()) {					
-//								double price = rs.getDouble("material_cost");
-//								Invoice.selectedMaterials[2][i] = price + "";
-//							}
-							
-							
-							while (rs.next()) {
-								four.Math.setTax(rs.getDouble("tax"));
-								four.Math.setHourly(rs.getDouble("hours"));
-								four.Math.setThread(rs.getDouble("thread"));
-								four.Math.setGroupRate(rs.getDouble("groupRate"));
-								four.Math.setSoloRate(rs.getDouble("soloRate"));
-							}
 
-//							four.Math.setTax(taxi);
-					
-					
-					
+			cmd =  "SELECT * FROM settings";
 
-					//If there's some error, return it
-				} catch (SQLException e) {
-					System.out.print(e);
-				}finally {
-					try {
-						connect.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+			//						
+			//						//Execute the code
+			stmt.executeQuery(cmd);
+			//						//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmd);
+			//						//While there's code to be executes, do something
+			//						
+			//						
+			//							while(rs.next()) {					
+			//								double price = rs.getDouble("material_cost");
+			//								Invoice.selectedMaterials[2][i] = price + "";
+			//							}
+
+
+			while (rs.next()) {
+				four.Math.setTax(rs.getDouble("tax"));
+				four.Math.setHourly(rs.getDouble("hours"));
+				four.Math.setThread(rs.getDouble("thread"));
+				four.Math.setGroupRate(rs.getDouble("groupRate"));
+				four.Math.setSoloRate(rs.getDouble("soloRate"));
+			}
+
+			//							four.Math.setTax(taxi);
+
+		} catch (SQLException e) {
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return "";
-		
+
 	}
 	
 	
@@ -550,4 +610,72 @@ public class Database extends Invoice{
 
 		}
 	
+
+	public static void LoadYear(int studioId) {
+		System.out.println(studioId);		
+		Invoice.cmbYear.removeAllItems();
+		String cmd = "SELECT * FROM invoice WHERE studio_id = " + studioId + " ORDER BY year ASC";
+		int previous = -10, year = -1;
+		//
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			//Create the code
+			stmt = connect.createStatement();
+			stmt.executeQuery(cmd);
+			ResultSet rs = stmt.executeQuery(cmd);
+			while(rs.next()) {	
+				year = rs.getInt("year");
+				String sYear = year + "";
+				if(year != previous) {
+					if(year<10) {
+						sYear = "0" + sYear;
+					}
+					Invoice.cmbYear.addItem(sYear+"");
+				}
+				previous = year;
+			}
+		} catch (SQLException e) {
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+
+
+	}
+
+	public static void GetCreatedInvoices(int studio_id, String year) {
+		Invoice.cmbInvoiceId.removeAllItems();
+		String cmd = "SELECT * FROM invoice WHERE studio_id = " + studio_id + " AND year = " + year + " ORDER BY invoice_name ASC";
+		String name;
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			//Create the code
+			stmt = connect.createStatement();
+			stmt.executeQuery(cmd);
+			ResultSet rs = stmt.executeQuery(cmd);
+			while(rs.next()) {					
+				name = rs.getString("invoice_name");
+				Invoice.cmbInvoiceId.addItem(name);
+
+			}
+		} catch (SQLException e) {
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}		
+	}
+
 }

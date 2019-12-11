@@ -31,10 +31,12 @@ public class Math {
 	}
 	
 	private void getInformation() {
-		for (int i = 0; i < Invoice.selectedMaterials.length; i++) {
+		for (int i = 0; i < 10; i++) {
 			if(Invoice.selectedMaterials[1][i] != null) {
 				Amount[i] = Double.parseDouble(Invoice.selectedMaterials[1][i]);
 				Cost[i] = Double.parseDouble(Invoice.selectedMaterials[2][i]);
+			}else {
+				break;
 			}
 		}
 		

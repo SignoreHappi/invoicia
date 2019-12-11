@@ -282,6 +282,7 @@ public class Invoice {
 	public static String searching = null;
 
 	public static String[][] selectedMaterials = new String [3][10];
+	public static int[][] yearsInvoices = new int [2][20];
 
 	public static int result = 0;
 
@@ -1036,21 +1037,51 @@ public class Invoice {
 
 		cmbStudioName = new JComboBox();
 		cmbStudioName.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
-		cmbStudioName.setSelectedIndex(2);
+		cmbStudioName.setSelectedIndex(0);
 		cmbStudioName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		cmbStudioName.setBounds(10, 77, 250, 24);
 		pnlFile.add(cmbStudioName);
+		cmbStudioName.setEditable(false);
+
+		cmbStudioName.addActionListener (new ActionListener () {
+		    public void actionPerformed(ActionEvent e) {
+//		        System.out.println(cmbStudioName.getSelectedItem());
+		    	int studioId = cmbStudioName.getSelectedIndex();
+		    	cmbYear.removeAllItems();
+		    	Database.LoadYear(studioId);
+		    	
+		    }
+		});
 
 		cmbYear = new JComboBox();
+
 		cmbYear.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		cmbYear.setBounds(10, 112, 250, 24);
 		pnlFile.add(cmbYear);
-
+		cmbYear.setEditable(false);
+		cmbYear.addItem("Select the year");
+		
+		
 		cmbInvoiceId = new JComboBox();
+		cmbInvoiceId.setEnabled(false);
 		cmbInvoiceId.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		cmbInvoiceId.setBounds(10, 147, 250, 24);
 		pnlFile.add(cmbInvoiceId);
+		cmbInvoiceId.setEditable(false);
 
+		cmbYear.addActionListener (new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+//		        System.out.println(cmbYear.getSelectedItem());
+				cmbInvoiceId.setEnabled(true);
+//				System.out.println("Studio Name: " + cmbStudioName.getSelectedItem());
+//				Database.LoadYear(cmbStudioName.getSelectedIndex());
+//				String year = cmbYear.getSelectedItem() + "";
+				Database.GetCreatedInvoices(cmbStudioName.getSelectedIndex(), cmbYear.getSelectedItem()+"");
+			}
+		});
+		Database.LoadYear(cmbStudioName.getSelectedIndex());
+		
+		
 		JButton button = new JButton("?2");
 		button.setBounds(10, 306, 120, 30);
 		pnlFile.add(button);
@@ -1325,16 +1356,16 @@ public class Invoice {
 					
 					int invoice_id = Database.HasInvoice(studio_id);
 					if(invoice_id == 0) {
-						result = Database.CreateNewInvoice(studio_id, iYear, invcName);
+						Database.CreateNewInvoice(studio_id, iYear, invcName);
 					}else {
-						result = Database.CreateInvoice(studio_id, invoice_id, iYear, invcName);
+						Database.CreateInvoice(studio_id, invoice_id, iYear, invcName);
 					}
 					
-					if(result == 1) {
-						output("Invoice:", "saved");
-					}else if(result == 2) {
-						output("Invoice:", "something went wrong");
-					}
+//					if(result == 1) {
+//						output("Invoice:", "saved");
+//					}else if(result == 2) {
+//						output("Invoice:", "something went wrong");
+//					}
 				}
 				
 			}
