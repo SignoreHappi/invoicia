@@ -342,6 +342,7 @@ public class Invoice {
 
 		int HpWidth = 1366, HpHeight = 768;
 
+		System.out.println("1");
 
 
 		////		inventoryScreen = ImageLoader.loadImage("/textures/Iventory.png");
@@ -361,6 +362,7 @@ public class Invoice {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				System.out.println("Create Code");
 				DBConnect.CloseDatabase();
 			}
 		});
