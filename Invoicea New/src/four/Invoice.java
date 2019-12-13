@@ -98,6 +98,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 
 public class Invoice {
 
@@ -296,6 +297,8 @@ public class Invoice {
 	public static JComboBox cmbStudioName;
 	public static JComboBox cmbYear;
 	public static JComboBox cmbInvoiceId;
+	
+	public static JButton btnCreate;
 	
 	/**
 	 * Launch the application.
@@ -499,6 +502,8 @@ public class Invoice {
 								}
 
 							}
+							
+							btnCreate.setEnabled(true);
 						}catch (NumberFormatException ex){
 							JOptionPane.showMessageDialog(null, "Give me a number!",  "Error!", JOptionPane.ERROR_MESSAGE);
 						}
@@ -1298,9 +1303,6 @@ public class Invoice {
 		separator.setBounds(10, 128, 382, 4);
 		pnlRecipt.add(separator);
 
-		JButton btnSave = new JButton("SAVE");
-		btnSave.setBounds(270, 176, 120, 30);
-		pnlRecipt.add(btnSave);
 
 		JButton btnCalculate = new JButton("CALCULATE");
 		btnCalculate.setBounds(270, 133, 120, 30);
@@ -1317,17 +1319,23 @@ public class Invoice {
 		
 		
 		
+		btnCreate = new JButton("CREATE");
+		btnCreate.setEnabled(false);
+		btnCreate.setBounds(270, 176, 120, 30);
+		pnlRecipt.add(btnCreate);
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
 		LocalDateTime now = LocalDateTime.now();  
 		
-		btnSave.addMouseListener(new MouseAdapter() {
+		btnCreate.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				if(txtCostumeName.getText().length()<1) {
+					txtCostumeName.setBorder(new LineBorder(Color.red,1));
 					JOptionPane.showMessageDialog(null, "Write a name for the Costume!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}else {
 					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
+					
 					int studio_id = 0;
 					String studio_name = cmbCreateInvoice.getSelectedItem().toString();
 					switch(studio_name){
@@ -2019,7 +2027,7 @@ public class Invoice {
 		txtSearchMaterial.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				txtSearchMaterial.setText("");
+//				txtSearchMaterial.setText("");
 			}
 		});
 		txtSearchMaterial.setForeground(Color.GRAY);
