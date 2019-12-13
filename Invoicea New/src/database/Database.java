@@ -156,11 +156,28 @@ public class Database extends Invoice{
 		}
 
 	}
+	
+	
+	public static String SeparateName(String nameType) {
+		int index = nameType.indexOf(".");
+		
+		String name = nameType.substring(0, index);
+		String type = nameType.substring(index+1);
+		name = name + " " + type;
+		System.out.println(name);
+		return name;
+		
+	}
 
 	//If the studio has an invoice, create a new one with invoice_id+1
 	public static int CreateInvoice(int studio_id, int invoice_id, int iYear, String invcName) {
 		Invoice.result = 0;
-		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year) VALUES(?, ?, ?, ?, ?)";
+		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year, "
+				+ "material_1, amount_1, material_2, amount_2, material_3, amount_3, material_4, amount_4,material_5, amount_5,material_6, amount_6,"
+				+ "material_7, amount_7, material_8, amount_8, material_9, amount_9, material_10, amount_10) "
+				+ "VALUES(?, ?, ?, ?, ?, "
+				+ "?,?, ?,?, ?,?, ?,?, ?,?, ?,?, "
+				+ "?,?, ?,?, ?,?, ?,?)";
 		int inv = invoice_id+1;
 		String code = null;
 		//\\//FOR TESTING ONLY	 //\\//		//\\//		//\\//		//\\//		//\\//		//\\//
@@ -178,7 +195,14 @@ public class Database extends Invoice{
 		}
 		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//
 		code = CreateCode(studio_id, iYear, inv);
-
+		
+		
+		int index = 10;
+		
+		
+		
+		
+		
 		try{
 			connect = DBConnect.connectDB();
 			PreparedStatement pstmt = connect.prepareStatement(cmd);
@@ -187,6 +211,22 @@ public class Database extends Invoice{
 			pstmt.setInt(3, studio_id);
 			pstmt.setInt(4, inv);
 			pstmt.setInt(5, iYear);
+			int count = 1;
+			for(int i = 0; i<10; i++) {
+				if(Invoice.selectedMaterials[0][i] == null) {
+					pstmt.setString(5 + count, null);
+					count++;
+					pstmt.setString(5 + count, null);
+					count++;
+				}else {
+					pstmt.setString(5 + count, SeparateName(selectedMaterials[0][i]));
+					count++;
+					pstmt.setString(5 + count, Invoice.selectedMaterials[1][i]);
+					count++;
+				}
+			}
+			
+			
 			pstmt.executeUpdate();
 			//			System.out.print("Saved");
 
@@ -621,7 +661,7 @@ public class Database extends Invoice{
 	
 
 	public static void LoadYear(int studioId) {
-		System.out.println(studioId);		
+//		System.out.println(studioId);		
 		Invoice.cmbYear.removeAllItems();
 		String cmd = "SELECT * FROM invoice WHERE studio_id = " + studioId + " ORDER BY year ASC";
 		int previous = -10, year = -1;
