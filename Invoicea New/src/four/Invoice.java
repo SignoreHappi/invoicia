@@ -511,7 +511,7 @@ public class Invoice {
 			}
 		});
 		btnAddMaterial.setEnabled(false);
-		btnAddMaterial.setBounds(351, 25, 133, 23);
+		btnAddMaterial.setBounds(351, 46, 133, 23);
 		pnlMaterial.add(btnAddMaterial);
 
 		homeMaterialJTbl = new JTable(homeMaterialTbl);
@@ -539,84 +539,89 @@ public class Invoice {
 		pnlMaterial.add(lblMaterial);
 
 		lblMaterialName0 = new JLabel("");
-		lblMaterialName0.setBounds(327, 69, 197, 13);
+		lblMaterialName0.setBounds(327, 79, 197, 13);
 		pnlMaterial.add(lblMaterialName0);
 
 		lblMaterialName1 = new JLabel("");
-		lblMaterialName1.setBounds(327, 92, 197, 13);
+		lblMaterialName1.setBounds(327, 102, 197, 13);
 		pnlMaterial.add(lblMaterialName1);
 
 		lblMaterialName2 = new JLabel("");
-		lblMaterialName2.setBounds(327, 115, 197, 13);
+		lblMaterialName2.setBounds(327, 125, 197, 13);
 		pnlMaterial.add(lblMaterialName2);
 
 		lblMaterialName3 = new JLabel("");
-		lblMaterialName3.setBounds(327, 138, 197, 13);
+		lblMaterialName3.setBounds(327, 148, 197, 13);
 		pnlMaterial.add(lblMaterialName3);
 
 		lblMaterialName4 = new JLabel("");
-		lblMaterialName4.setBounds(327, 161, 197, 13);
+		lblMaterialName4.setBounds(327, 171, 197, 13);
 		pnlMaterial.add(lblMaterialName4);
 
 		lblMaterialName8 = new JLabel("");
-		lblMaterialName8.setBounds(327, 253, 197, 13);
+		lblMaterialName8.setBounds(327, 263, 197, 13);
 		pnlMaterial.add(lblMaterialName8);
 
 		lblMaterialName7 = new JLabel("");
-		lblMaterialName7.setBounds(327, 230, 197, 13);
+		lblMaterialName7.setBounds(327, 240, 197, 13);
 		pnlMaterial.add(lblMaterialName7);
 
 		lblMaterialName6 = new JLabel("");
-		lblMaterialName6.setBounds(327, 207, 197, 13);
+		lblMaterialName6.setBounds(327, 217, 197, 13);
 		pnlMaterial.add(lblMaterialName6);
 
 		lblMaterialName5 = new JLabel("");
-		lblMaterialName5.setBounds(327, 184, 197, 13);
+		lblMaterialName5.setBounds(327, 194, 197, 13);
 		pnlMaterial.add(lblMaterialName5);
 
 		lblMaterialName9 = new JLabel("");
-		lblMaterialName9.setBounds(327, 276, 197, 13);
+		lblMaterialName9.setBounds(327, 286, 197, 13);
 		pnlMaterial.add(lblMaterialName9);
 
 		lblMaterialAmount0 = new JLabel("");
-		lblMaterialAmount0.setBounds(523, 69, 27, 13);
+		lblMaterialAmount0.setBounds(523, 79, 27, 13);
 		pnlMaterial.add(lblMaterialAmount0);
 
 		lblMaterialAmount1 = new JLabel("");
-		lblMaterialAmount1.setBounds(523, 92, 27, 13);
+		lblMaterialAmount1.setBounds(523, 102, 27, 13);
 		pnlMaterial.add(lblMaterialAmount1);
 
 		lblMaterialAmount2 = new JLabel("");
-		lblMaterialAmount2.setBounds(523, 115, 27, 13);
+		lblMaterialAmount2.setBounds(523, 125, 27, 13);
 		pnlMaterial.add(lblMaterialAmount2);
 
 		lblMaterialAmount3 = new JLabel("");
-		lblMaterialAmount3.setBounds(523, 138, 27, 13);
+		lblMaterialAmount3.setBounds(523, 148, 27, 13);
 		pnlMaterial.add(lblMaterialAmount3);
 
 		lblMaterialAmount4 = new JLabel("");
-		lblMaterialAmount4.setBounds(523, 161, 27, 13);
+		lblMaterialAmount4.setBounds(523, 171, 27, 13);
 		pnlMaterial.add(lblMaterialAmount4);
 
 		lblMaterialAmount8 = new JLabel("");
-		lblMaterialAmount8.setBounds(523, 253, 27, 13);
+		lblMaterialAmount8.setBounds(523, 263, 27, 13);
 		pnlMaterial.add(lblMaterialAmount8);
 
 		lblMaterialAmount5 = new JLabel("");
-		lblMaterialAmount5.setBounds(523, 184, 27, 13);
+		lblMaterialAmount5.setBounds(523, 194, 27, 13);
 		pnlMaterial.add(lblMaterialAmount5);
 
 		lblMaterialAmount6 = new JLabel("");
-		lblMaterialAmount6.setBounds(523, 207, 27, 13);
+		lblMaterialAmount6.setBounds(523, 217, 27, 13);
 		pnlMaterial.add(lblMaterialAmount6);
 
 		lblMaterialAmount7 = new JLabel("");
-		lblMaterialAmount7.setBounds(523, 230, 27, 13);
+		lblMaterialAmount7.setBounds(523, 240, 27, 13);
 		pnlMaterial.add(lblMaterialAmount7);
 
 		lblMaterialAmount9 = new JLabel("");
-		lblMaterialAmount9.setBounds(523, 276, 27, 13);
+		lblMaterialAmount9.setBounds(523, 286, 27, 13);
 		pnlMaterial.add(lblMaterialAmount9);
+		
+		JButton btnDelete = new JButton("Delete Material");
+		btnDelete.setEnabled(false);
+		btnDelete.setBounds(351, 325, 133, 23);
+		pnlMaterial.add(btnDelete);
 
 
 		//		txtMC1 = new JComboBox();
@@ -1107,9 +1112,9 @@ public class Invoice {
 		button_5.setBounds(10, 225, 120, 30);
 		pnlFile.add(button_5);
 
-		JButton button_6 = new JButton("?2");
-		button_6.setBounds(140, 184, 120, 30);
-		pnlFile.add(button_6);
+		JButton btnRetrieve = new JButton("RETRIEVE");
+		btnRetrieve.setBounds(140, 184, 120, 30);
+		pnlFile.add(btnRetrieve);
 
 		JPanel pnlRecipt = new JPanel();
 		pnlRecipt.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -2011,7 +2016,16 @@ public class Invoice {
 		tableMaterial.setSize(600, 800);
 
 		txtSearchMaterial = new JTextField();
-		txtSearchMaterial.setBounds(254, 475, 96, 19);
+		txtSearchMaterial.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+//				txtSearchMaterial.setText("");
+			}
+		});
+		txtSearchMaterial.setForeground(Color.GRAY);
+		txtSearchMaterial.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSearchMaterial.setText("Search");
+		txtSearchMaterial.setBounds(231, 590, 123, 28);
 		panel_14.add(txtSearchMaterial);
 		txtSearchMaterial.setColumns(10);
 
@@ -2029,7 +2043,7 @@ public class Invoice {
 			}
 		});
 
-		btnUpdateTable.setBounds(221, 520, 155, 41);
+		btnUpdateTable.setBounds(364, 590, 123, 28);
 		panel_14.add(btnUpdateTable);
 
 		JButton button_7 = new JButton("Reset Table");
@@ -2038,7 +2052,7 @@ public class Invoice {
 				Database.LoadMaterials();
 			}
 		});
-		button_7.setBounds(221, 577, 155, 41);
+		button_7.setBounds(497, 590, 123, 28);
 		panel_14.add(button_7);
 
 		//		txtSearchMaterial.addKeyListener(new KeyAdapter() {
