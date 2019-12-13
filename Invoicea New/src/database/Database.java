@@ -24,20 +24,20 @@ public class Database extends Invoice{
 	public static Connection connect;
 	public static Statement stmt = null;
 
-//	public static void ExportDB() throws InterruptedException, IOException {
-//		String cmd = "mysqldump -h remotemysql.com -P 3306 -u ZYebHXfmH9 -p AIRtr96APu –database ZYebHXfmH9 > backup.sql";		
-//		Process runtimeProcess =Runtime.getRuntime().exec(cmd);
-//		int processComplete = runtimeProcess.waitFor();
-//		if(processComplete == 0){
-//
-//			System.out.println("Backup taken successfully");
-//
-//		} else {
-//
-//			System.out.println("Could not take mysql backup");
-//
-//		}
-//	}
+	//	public static void ExportDB() throws InterruptedException, IOException {
+	//		String cmd = "mysqldump -h remotemysql.com -P 3306 -u ZYebHXfmH9 -p AIRtr96APu –database ZYebHXfmH9 > backup.sql";		
+	//		Process runtimeProcess =Runtime.getRuntime().exec(cmd);
+	//		int processComplete = runtimeProcess.waitFor();
+	//		if(processComplete == 0){
+	//
+	//			System.out.println("Backup taken successfully");
+	//
+	//		} else {
+	//
+	//			System.out.println("Could not take mysql backup");
+	//
+	//		}
+	//	}
 
 	//Creates the code with the studio_id-year-invoic_id 
 	public static String CreateCode(int studio_id, int year, int invoice_id) {	
@@ -119,8 +119,12 @@ public class Database extends Invoice{
 	//If the studio has no invoice, create a new one starting from studio_id 1
 	public static void CreateNewInvoice(int studio_id, int iYear, String invcName) {
 		Invoice.result = 0;
-		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year) VALUES(?, ?, ?, ?, ?)";
-		String code = null;
+		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year, "
+				+ "material_1, amount_1, material_2, amount_2, material_3, amount_3, material_4, amount_4,material_5, amount_5,material_6, amount_6,"
+				+ "material_7, amount_7, material_8, amount_8, material_9, amount_9, material_10, amount_10) "
+				+ "VALUES(?, ?, ?, ?, ?, "
+				+ "?,?, ?,?, ?,?, ?,?, ?,?, ?,?, "
+				+ "?,?, ?,?, ?,?, ?,?)";		String code = null;
 
 
 		if(invcName.equals("101") || invcName.equals("Fill") || invcName.equals("Clear all")) {
@@ -130,15 +134,30 @@ public class Database extends Invoice{
 			try{
 				connect = DBConnect.connectDB();
 				PreparedStatement pstmt = connect.prepareStatement(cmd);
-				//Create a new item into the DB in the position 1 with the value defined
 				pstmt.setString(1, code);
 				pstmt.setString(2, invcName);
 				pstmt.setInt(3, studio_id);
 				pstmt.setInt(4, 1);
 				pstmt.setInt(5, iYear);
-				//Update the DB
-				pstmt.executeUpdate();
-
+				int count = 1;
+				for(int i = 0; i<10; i++) {
+					if(Invoice.selectedMaterials[0][i] == null) {
+						pstmt.setString(5 + count, null);
+						count++;
+						pstmt.setString(5 + count, null);
+						count++;
+					}else {
+						String name = Invoice.selectedMaterials[0][i];
+						if(selectedMaterials[0][i].contains("\"")) {						
+							name = selectedMaterials[0][i].replace("\"", "#");
+						}
+						name = SeparateName(name);
+						pstmt.setString(5 + count, name);
+						count++;
+						pstmt.setString(5 + count, Invoice.selectedMaterials[1][i]);
+						count++;
+					}
+				}
 				Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
 			} catch (SQLException e) {
 				System.out.println("Create New Invoice");
@@ -152,21 +171,20 @@ public class Database extends Invoice{
 					e.printStackTrace();
 				}		
 			}
-
 		}
 
 	}
-	
-	
+
+
 	public static String SeparateName(String nameType) {
-		int index = nameType.indexOf(".");
-		
-		String name = nameType.substring(0, index);
-		String type = nameType.substring(index+1);
-		name = name + " " + type;
-		System.out.println(name);
-		return name;
-		
+//		int index = nameType.indexOf(".");
+
+//		String name = nameType.substring(0, index);
+//		String type = nameType.substring(index+1);
+//		name = name + " " + type;
+//		System.out.println(name);
+		return nameType.replace(".", " ");
+
 	}
 
 	//If the studio has an invoice, create a new one with invoice_id+1
@@ -175,6 +193,8 @@ public class Database extends Invoice{
 		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year, "
 				+ "material_1, amount_1, material_2, amount_2, material_3, amount_3, material_4, amount_4,material_5, amount_5,material_6, amount_6,"
 				+ "material_7, amount_7, material_8, amount_8, material_9, amount_9, material_10, amount_10) "
+				
+				
 				+ "VALUES(?, ?, ?, ?, ?, "
 				+ "?,?, ?,?, ?,?, ?,?, ?,?, ?,?, "
 				+ "?,?, ?,?, ?,?, ?,?)";
@@ -189,20 +209,12 @@ public class Database extends Invoice{
 			System.out.println("random year: " + iYear);
 			if(iYear < 10) {
 				String year = "0" + iYear;
-				System.out.println(year);
 				iYear = Integer.parseInt(year);
 			}
 		}
 		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//		//\\//
 		code = CreateCode(studio_id, iYear, inv);
-		
-		
-		int index = 10;
-		
-		
-		
-		
-		
+
 		try{
 			connect = DBConnect.connectDB();
 			PreparedStatement pstmt = connect.prepareStatement(cmd);
@@ -219,14 +231,21 @@ public class Database extends Invoice{
 					pstmt.setString(5 + count, null);
 					count++;
 				}else {
-					pstmt.setString(5 + count, SeparateName(selectedMaterials[0][i]));
+					String name = Invoice.selectedMaterials[0][i];
+					if(selectedMaterials[0][i].contains("\"")) {						
+						name = selectedMaterials[0][i].replace("\"", "#");
+					}
+					name = SeparateName(name);
+					
+					
+					pstmt.setString(5 + count, name);
 					count++;
 					pstmt.setString(5 + count, Invoice.selectedMaterials[1][i]);
 					count++;
 				}
 			}
-			
-			
+
+
 			pstmt.executeUpdate();
 			//			System.out.print("Saved");
 
@@ -347,6 +366,13 @@ public class Database extends Invoice{
 				Formatter fmt = new Formatter(sbuf);
 				fmt.format("$%.2f%n", cost);
 
+				if(name.contains("#")) {
+					int index = name.indexOf("#");
+					String subName = name;
+					name = subName.substring(0, index);
+					name = name + "\" " + subName .substring(index+1);
+				}
+				
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, fmt});
 				Invoice.homeMaterialTbl.insertRow(Invoice.homeMaterialTbl.getRowCount(), new Object[] {name, type, fmt});
@@ -591,77 +617,77 @@ public class Database extends Invoice{
 		return "";
 
 	}
-	
-	
+
+
 	//Insert a new material into the table
-		public static boolean CreateClient(String name, String owner, String address, String phoneNumber, String email){
-			String studio_name = null, studio_owner = null, studio_email = null;
-			String cmdSearch = "SELECT * FROM studio";
-			boolean add = true;
-			try {
-				connect = DBConnect.connectDB();
-				stmt = connect.prepareStatement(cmdSearch);			
-				//Create the code
-				//Execute the code
-				stmt.executeQuery(cmdSearch);
-				//For every possible execution, create a rs
-				ResultSet rs = stmt.executeQuery(cmdSearch);
-				//While there's code to be executes, do something
-				while(rs.next()) {//Working
-					studio_name = rs.getString("studio_name");
-					studio_owner = rs.getString("studio_owner");
-					studio_email = rs.getString("studio_email");
-					if(name.equals(studio_name) || owner.equals(studio_owner) || email.equals(studio_email)) {
-						Invoice.writeMatOutput("Error", "The client is already in the DataBase");
-						add = false;
-						break;
-					}
+	public static boolean CreateClient(String name, String owner, String address, String phoneNumber, String email){
+		String studio_name = null, studio_owner = null, studio_email = null;
+		String cmdSearch = "SELECT * FROM studio";
+		boolean add = true;
+		try {
+			connect = DBConnect.connectDB();
+			stmt = connect.prepareStatement(cmdSearch);			
+			//Create the code
+			//Execute the code
+			stmt.executeQuery(cmdSearch);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmdSearch);
+			//While there's code to be executes, do something
+			while(rs.next()) {//Working
+				studio_name = rs.getString("studio_name");
+				studio_owner = rs.getString("studio_owner");
+				studio_email = rs.getString("studio_email");
+				if(name.equals(studio_name) || owner.equals(studio_owner) || email.equals(studio_email)) {
+					Invoice.writeMatOutput("Error", "The client is already in the DataBase");
+					add = false;
+					break;
 				}
-				if(add) {
-					String studio = name + ", " + owner;
-
-					Invoice.writeMatOutput("Added", studio + "");
-					System.out.println("helo");
-					String cmd = "INSERT INTO studio(studio_name, studio_owner, studio_email, studio_phone, studio_address) VALUES(?, ?, ?, ?, ?)";
-					
-					String changedName = Strin.FirstCapital(name);
-					String changedOwner = Strin.FirstCapital(owner);
-
-					//				System.out.println(name);
-					//				System.out.println(changedName);
-					try{
-						PreparedStatement pstmt = connect.prepareStatement(cmd);			
-						pstmt.setString(1, changedName);
-						pstmt.setString(2, changedOwner);
-						pstmt.setString(3, email);
-						pstmt.setString(4, phoneNumber);
-						pstmt.setString(5, address);
-						pstmt.executeUpdate();
-					} catch (SQLException e) {
-						System.out.println("Create Client");
-						System.out.println(e);
-						return false;
-					}
-				}
-			}catch(SQLException e){
-				System.out.println(e);
-			}finally {
-				try {
-					connect.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
 			}
+			if(add) {
+				String studio = name + ", " + owner;
 
+				Invoice.writeMatOutput("Added", studio + "");
+				System.out.println("helo");
+				String cmd = "INSERT INTO studio(studio_name, studio_owner, studio_email, studio_phone, studio_address) VALUES(?, ?, ?, ?, ?)";
 
-			return true;
+				String changedName = Strin.FirstCapital(name);
+				String changedOwner = Strin.FirstCapital(owner);
 
+				//				System.out.println(name);
+				//				System.out.println(changedName);
+				try{
+					PreparedStatement pstmt = connect.prepareStatement(cmd);			
+					pstmt.setString(1, changedName);
+					pstmt.setString(2, changedOwner);
+					pstmt.setString(3, email);
+					pstmt.setString(4, phoneNumber);
+					pstmt.setString(5, address);
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					System.out.println("Create Client");
+					System.out.println(e);
+					return false;
+				}
+			}
+		}catch(SQLException e){
+			System.out.println(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		}
-	
+
+
+		return true;
+
+	}
+
 
 	public static void LoadYear(int studioId) {
-//		System.out.println(studioId);		
+		//		System.out.println(studioId);		
 		Invoice.cmbYear.removeAllItems();
 		String cmd = "SELECT * FROM invoice WHERE studio_id = " + studioId + " ORDER BY year ASC";
 		int previous = -10, year = -1;
