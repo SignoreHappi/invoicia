@@ -48,7 +48,6 @@ public class Database extends Invoice{
 			dash = "-";
 		}
 
-
 		String code = "0" + studio_id + "-" + year + dash + invoice_id;
 		return code;
 	}
@@ -442,7 +441,14 @@ public class Database extends Invoice{
 			//If there's some error, return it
 		} catch (SQLException e) {
 			System.out.print(e);
-		}	
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
@@ -635,7 +641,7 @@ public class Database extends Invoice{
 						sYear = "0" + sYear;
 					}
 					Invoice.cmbYear.addItem(sYear+"");
-				}
+				}//aaa
 				previous = year;
 			}
 		} catch (SQLException e) {
