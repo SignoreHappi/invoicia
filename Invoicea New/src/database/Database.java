@@ -621,7 +621,7 @@ public class Database extends Invoice{
 	
 
 	public static void LoadYear(int studioId) {
-		System.out.println(studioId);		
+//		System.out.println(studioId);		
 		Invoice.cmbYear.removeAllItems();
 		String cmd = "SELECT * FROM invoice WHERE studio_id = " + studioId + " ORDER BY year ASC";
 		int previous = -10, year = -1;

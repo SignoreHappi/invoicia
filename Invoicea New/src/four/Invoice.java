@@ -174,6 +174,8 @@ public class Invoice {
 	public JSpinner spnRA2;
 	public JSpinner spnRA3;
 	public JSpinner spnRA4;
+	
+	public JSpinner spnDeposit;
 
 	public JComboBox cmbCreateInvoice;
 	public JComboBox spnMaterialType;
@@ -342,7 +344,6 @@ public class Invoice {
 
 		int HpWidth = 1366, HpHeight = 768;
 
-		System.out.println("1");
 
 
 		////		inventoryScreen = ImageLoader.loadImage("/textures/Iventory.png");
@@ -362,7 +363,6 @@ public class Invoice {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.out.println("Create Code");
 				DBConnect.CloseDatabase();
 			}
 		});
@@ -915,6 +915,11 @@ public class Invoice {
 		spnHH.setBounds(142, 46, 116, 20);
 		pnlHours.add(spnHH);
 		spnHH.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		spnK.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				spnDeposit.setValue((int)spnK.getValue() * 50);
+			}
+		});
 
 		//		JSpinner spnK = new JSpinner();
 		spnK.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -1495,10 +1500,10 @@ public class Invoice {
 		lblDepositAmmount_1.setBounds(10, 48, 153, 14);
 		pnlDeposit.add(lblDepositAmmount_1);
 
-		JSpinner spinner = new JSpinner();
-		spinner.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		spinner.setBounds(173, 46, 85, 20);
-		pnlDeposit.add(spinner);
+		spnDeposit = new JSpinner();
+		spnDeposit.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		spnDeposit.setBounds(173, 46, 85, 20);
+		pnlDeposit.add(spnDeposit);
 
 		pnlOverWrite = new JPanel();
 		pnlOverWrite.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));

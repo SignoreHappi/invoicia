@@ -16,6 +16,8 @@ public class Math {
 	private static double GroupRate;
 	private static double SoloRate;
 	
+	private static int kids;
+	
 	private static double [] Amount = new double[10];
 	private static double [] Cost   = new double[10];
 	
@@ -39,6 +41,8 @@ public class Math {
 				break;
 			}
 		}
+		
+		kids = (int)Invoice.spnK.getValue();
 		
 		Database.GetValues();
 		
@@ -77,6 +81,14 @@ public class Math {
 	private static double Labour() {
 		
 		double total = 0;
+		
+		if(Hours == 0 && GroupOrKids == true) {
+			Hours = kids * GroupRate;
+			Invoice.spnHH.setValue(Hours);
+		}else if(Hours == 0 && GroupOrKids == false) {
+			Hours = kids * SoloRate;
+			Invoice.spnHH.setValue(Hours);
+		}
 		
 		if(GroupOrKids) {
 			total = Hours * Hourly * GroupRate;
