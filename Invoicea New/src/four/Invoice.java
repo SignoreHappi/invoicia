@@ -2019,7 +2019,7 @@ public class Invoice {
 		txtSearchMaterial.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-//				txtSearchMaterial.setText("");
+				txtSearchMaterial.setText("");
 			}
 		});
 		txtSearchMaterial.setForeground(Color.GRAY);
