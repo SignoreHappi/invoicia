@@ -56,6 +56,10 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 //import org.apache.poi.ss.usermodel.Cell;
 //import org.apache.poi.xssf.usermodel.XSSFSheet;
 //import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -160,6 +164,9 @@ public class Invoice {
 
 	public static JSpinner spnHH = new JSpinner();
 	public static JSpinner spnK = new JSpinner();
+	public static JSpinner spnGroup;
+	public static JSpinner spnSolo;
+	public static JSpinner spnHourly;
 
 	public JSpinner spnRT1;
 	public JSpinner spnRT2;
@@ -338,6 +345,7 @@ public class Invoice {
 	 */
 	public Invoice() {
 		initialize();
+		Database.StartInvoice();
 	}
 
 	/**
@@ -353,6 +361,8 @@ public class Invoice {
 		//		dancer = loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		
 
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Invoice.class.getResource("/images/KIDLogo.png")));
@@ -417,7 +427,7 @@ public class Invoice {
 
 						String amount = JOptionPane.showInputDialog(null, "How much of " + name + " " + type + " do you want to use?");
 						try {
-							int intAmount = Integer.parseInt(amount);
+							double intAmount = Double.parseDouble(amount);
 							int count = 0;
 							if(intAmount == 999) {
 								lblMaterialName0.setText(1 + ".    " + "Assorted Lycra");
@@ -1544,12 +1554,9 @@ public class Invoice {
 		Clients.add(txtOwner);
 		txtOwner.setColumns(10);
 
-
-
-
-		txtPhone = new JTextField();
-		txtPhone.setToolTipText("Phone Number eg 1234567890 [123 456 7890]");
-		txtPhone.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		txtPhone = new JFormattedTextField(createFormatter("(###) ### - ####"));
+		txtPhone.setToolTipText("(000) 000-0000");
 		txtPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtPhone.addFocusListener(new FocusAdapter() {
 			@Override
@@ -1559,7 +1566,21 @@ public class Invoice {
 		});
 		txtPhone.setBounds(130, 542, 225, 20);
 		Clients.add(txtPhone);
-		txtPhone.setColumns(10);
+
+
+//		txtPhone = new JTextField();
+//		txtPhone.setToolTipText("Phone Number eg 1234567890 [123 456 7890]");
+//		txtPhone.setHorizontalAlignment(SwingConstants.CENTER);
+//		txtPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
+//		txtPhone.addFocusListener(new FocusAdapter() {
+//			@Override
+//			public void focusGained(FocusEvent arg0) {
+//				txtPhone.setText("");
+//			}
+//		});
+//		txtPhone.setBounds(130, 542, 225, 20);
+//		
+//		txtPhone.setColumns(10);
 
 		txtAddress = new JTextField();
 		txtAddress.addFocusListener(new FocusAdapter() {
@@ -1840,7 +1861,7 @@ public class Invoice {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_4.setBackground(new Color(255, 255, 153));
-		panel_4.setBounds(1064, 11, 271, 172);
+		panel_4.setBounds(785, 46, 271, 172);
 		Material.add(panel_4);
 		panel_4.setLayout(null);
 
@@ -1977,7 +1998,7 @@ public class Invoice {
 		panel_11.add(lblMCommand12);
 
 		JPanel panel_14 = new JPanel();
-		panel_14.setBounds(10, 46, 630, 628);
+		panel_14.setBounds(10, 10, 765, 664);
 		Material.add(panel_14);
 
 
@@ -2020,20 +2041,13 @@ public class Invoice {
 		JScrollPane scrollPane = new JScrollPane(tableMaterial);
 		scrollPane.setLocation(10, 11);
 		panel_14.add(scrollPane);
-		scrollPane.setSize(610, 453);
+		scrollPane.setSize(745, 606);
 		tableMaterial.setSize(600, 800);
 
 		txtSearchMaterial = new JTextField();
-		txtSearchMaterial.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-//				txtSearchMaterial.setText("");
-			}
-		});
 		txtSearchMaterial.setForeground(Color.GRAY);
 		txtSearchMaterial.setHorizontalAlignment(SwingConstants.CENTER);
-		txtSearchMaterial.setText("Search");
-		txtSearchMaterial.setBounds(231, 590, 123, 28);
+		txtSearchMaterial.setBounds(276, 627, 213, 28);
 		panel_14.add(txtSearchMaterial);
 		txtSearchMaterial.setColumns(10);
 
@@ -2051,7 +2065,7 @@ public class Invoice {
 			}
 		});
 
-		btnUpdateTable.setBounds(364, 590, 123, 28);
+		btnUpdateTable.setBounds(499, 626, 123, 28);
 		panel_14.add(btnUpdateTable);
 
 		JButton button_7 = new JButton("Reset Table");
@@ -2060,8 +2074,16 @@ public class Invoice {
 				Database.LoadMaterials();
 			}
 		});
-		button_7.setBounds(497, 590, 123, 28);
+		button_7.setBounds(632, 626, 123, 28);
 		panel_14.add(button_7);
+		
+		JButton button_1 = new JButton("Search Material");
+		button_1.setBounds(10, 626, 123, 28);
+		panel_14.add(button_1);
+		
+		JButton button_3 = new JButton("Search Material");
+		button_3.setBounds(143, 626, 123, 28);
+		panel_14.add(button_3);
 
 		//		txtSearchMaterial.addKeyListener(new KeyAdapter() {
 		//			//@Override
@@ -2085,7 +2107,7 @@ public class Invoice {
 		Settings.setBackground(new Color(255, 228, 225));
 		tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
 		Settings.setLayout(null);
-
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_2.setBackground(new Color(204, 255, 255));
@@ -2098,54 +2120,35 @@ public class Invoice {
 		lblHourlyRate.setBounds(10, 11, 76, 14);
 		panel_2.add(lblHourlyRate);
 
-		JSpinner spnHourly = new JSpinner();
+		spnHourly = new JSpinner();
 		spnHourly.setValue(hourly);
 		spnHourly.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				hourly = (int) spnHourly.getValue();
 				//				System.out.println(hourly);
-				//This is a comment
 			}
 		});
 		spnHourly.setBounds(142, 9, 90, 20);
 		panel_2.add(spnHourly);
 
-		JSpinner spinner_3 = new JSpinner();
-		spinner_3.setBounds(142, 40, 90, 20);
-		panel_2.add(spinner_3);
+		spnGroup = new JSpinner();
+		spnGroup.setBounds(142, 40, 90, 20);
+		panel_2.add(spnGroup);
 
-		//tis is terrible
+		JLabel lblGroupRate = new JLabel("Group Rate");
+		lblGroupRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblGroupRate.setBounds(10, 42, 76, 14);
+		panel_2.add(lblGroupRate);
 
-		JLabel label_1 = new JLabel("Hourly Rate");
-		label_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		label_1.setBounds(10, 42, 76, 14);
-		panel_2.add(label_1);
+		spnSolo = new JSpinner();
+		spnSolo.setBounds(142, 71, 90, 20);
+		panel_2.add(spnSolo);
 
-		JSpinner spinner_4 = new JSpinner();
-		spinner_4.setBounds(142, 71, 90, 20);
-		panel_2.add(spinner_4);
-
-		JLabel label_3 = new JLabel("Hourly Rate");
-		label_3.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		label_3.setBounds(10, 74, 76, 14);
-		panel_2.add(label_3);
-
-		JLabel lblA = new JLabel("A");
-		lblA.setHorizontalAlignment(SwingConstants.CENTER);
-		lblA.setFont(new Font("Times New Roman", Font.ITALIC, 35));
-		lblA.setBounds(10, 417, 222, 33);
-		panel_2.add(lblA);
-
-		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(Color.LIGHT_GRAY);
-		panel_7.setBounds(262, 11, 231, 191);
-		Settings.add(panel_7);
-		panel_7.setLayout(null);
-
-		JToggleButton tglbtnUnlockBoxA = new JToggleButton("Unlock Box A");
-		tglbtnUnlockBoxA.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		tglbtnUnlockBoxA.setBounds(10, 11, 211, 31);
-		panel_7.add(tglbtnUnlockBoxA);
+		JLabel lblSoloRate = new JLabel("Solo Rate");
+		lblSoloRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblSoloRate.setBounds(10, 74, 76, 14);
+		panel_2.add(lblSoloRate);
+		
 	}			// --------------------------------------------------------------------------------------------------- end of Jframe
 
 
@@ -2369,56 +2372,55 @@ public class Invoice {
 	//-----------------------------------------------------------------------------------------------// W R I T E //-------------------------------------------------------
 
 
-	//	public void write() {
-	//
-	//		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx";
-	//		fille = "C:\\Users\\giova\\Desktop\\KID\\Testing\\024.xlsx";
-	//
-	//		//Read the spreadsheet that needs to be updated
-	//		FileInputStream fsIP;
-	//		try {
-	//
-	//			fsIP = new FileInputStream(new File(fille));  
-	//			//Access the workbook                 
-	//			XSSFWorkbook wb = new XSSFWorkbook(fsIP);
-	//			//Access the worksheet, so that we can update / modify it. 
-	//			XSSFSheet worksheet = wb.getSheetAt(0); 
-	//			// declare a Cell object
-	//
-	//
-	//			Cell cell = null; 
-	//
-	//			cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
-	//			cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
-	//
-	//			cell = worksheet.getRow(10).getCell(2);   
-	//			cell.setCellValue("PT Lyrical Group Cake");
-	//
-	//
-	//			// Get current cell value value and overwrite the value
-	//
-	//			//Close the InputStream  
-	//			fsIP.close(); 
-	//
-	//
-	//			//Open FileOutputStream to write updates
-	//			FileOutputStream output_file =new FileOutputStream(new File(fille));  
-	//			//write changes
-	//			wb.write(output_file);
-	//
-	//
-	//			//close the stream
-	//			output_file.close();
-	//
-	//		} catch (FileNotFoundException e) {
-	//			// TODO Auto-generated catch block
-	//			e.printStackTrace();
-	//		} catch (IOException e) {
-	//			// TODO Auto-generated catch block
-	//			e.printStackTrace();
-	//		}
-	//
-	//	}
+		public void write() {
+	
+			String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx"; 
+	
+			//Read the spreadsheet that needs to be updated
+			FileInputStream fsIP;
+			try {
+	
+				fsIP = new FileInputStream(new File(fille));  
+				//Access the workbook                 
+				XSSFWorkbook wb = new XSSFWorkbook(fsIP);
+				//Access the worksheet, so that we can update / modify it. 
+				XSSFSheet worksheet = wb.getSheetAt(0); 
+				// declare a Cell object
+	
+	
+				Cell cell = null; 
+	
+				cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
+				cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
+	
+				cell = worksheet.getRow(10).getCell(2);   
+				cell.setCellValue("PT Lyrical Group Cake");
+	
+	
+				// Get current cell value value and overwrite the value
+	
+				//Close the InputStream  
+				fsIP.close(); 
+	
+	
+				//Open FileOutputStream to write updates
+				FileOutputStream output_file =new FileOutputStream(new File(fille));  
+				//write changes
+				wb.write(output_file);
+	
+	
+				//close the stream
+				output_file.close();
+	
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+		}
 
 
 

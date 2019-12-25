@@ -617,6 +617,49 @@ public class Database extends Invoice{
 		return "";
 
 	}
+	
+	public static String StartInvoice() {
+
+		// TODO Auto-generated method stub
+		String cmd = null;
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			//Create the code
+			stmt = connect.createStatement();
+
+
+			cmd =  "SELECT * FROM settings";
+
+			//						
+			//						//Execute the code
+			stmt.executeQuery(cmd);
+			//						//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmd);
+
+
+			while (rs.next()) {
+				four.Invoice.spnSolo.setValue(rs.getDouble("soloRate"));
+				four.Invoice.spnGroup.setValue(rs.getDouble("groupRate"));
+				
+				four.Math.setHourly(rs.getDouble("hours"));
+			}
+
+			//							four.Math.setTax(taxi);
+
+		} catch (SQLException e) {
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "";
+
+	}
 
 
 	//Insert a new material into the table
