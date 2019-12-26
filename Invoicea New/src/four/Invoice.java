@@ -2,6 +2,7 @@ package four;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -244,7 +245,17 @@ public class Invoice {
 	public JLabel lblMaterialAmount7;
 	public JLabel lblMaterialAmount9;
 	public JLabel lblMaterialAmount0;
-
+	
+	public JLabel lblX0;
+	public JLabel lblX1;
+	public JLabel lblX2;
+	public JLabel lblX3;
+	public JLabel lblX4;
+	public JLabel lblX5;
+	public JLabel lblX6;
+	public JLabel lblX7;
+	public JLabel lblX8;
+	public JLabel lblX9;
 
 	private double tax = 0.13;
 	private int hourly = 30;
@@ -467,42 +478,53 @@ public class Invoice {
 										case 0:
 											lblMaterialName0.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount0.setText(amount);
+											lblX0.setText(" X");
+											
 											break;
 										case 1:
 											lblMaterialName1.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount1.setText(amount);
+											lblX1.setText(" X");
 											break;
 										case 2:
 											lblMaterialName2.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount2.setText(amount);
+											lblX2.setText(" X");
 											break;
 										case 3:
 											lblMaterialName3.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount3.setText(amount);
+											lblX3.setText(" X");
 											break;
 										case 4:
 											lblMaterialName4.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount4.setText(amount);
+											lblX4.setText(" X");
 											break;
 										case 5:
 											lblMaterialName5.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount5.setText(amount);
+											lblX5.setText(" X");
 											break;
 										case 6:
 											lblMaterialName6.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount6.setText(amount);
+											lblX6.setText(" X");
 											break;
 										case 7:
 											lblMaterialName7.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount7.setText(amount);
+											lblX7.setText(" X");
 											break;
 										case 8:
 											lblMaterialName8.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount8.setText(amount);
+											lblX8.setText(" X");
 											break;
 										case 9:
 											lblMaterialName9.setText(count+1 + ".  " + name + " " + type);
 											lblMaterialAmount9.setText(amount);
+											lblX9.setText(" X");
 											break;
 										}
 
@@ -554,43 +576,43 @@ public class Invoice {
 		pnlMaterial.add(lblMaterial);
 
 		lblMaterialName0 = new JLabel("");
-		lblMaterialName0.setBounds(327, 79, 197, 13);
+		lblMaterialName0.setBounds(345, 79, 179, 13);
 		pnlMaterial.add(lblMaterialName0);
 
 		lblMaterialName1 = new JLabel("");
-		lblMaterialName1.setBounds(327, 102, 197, 13);
+		lblMaterialName1.setBounds(345, 102, 179, 13);
 		pnlMaterial.add(lblMaterialName1);
 
 		lblMaterialName2 = new JLabel("");
-		lblMaterialName2.setBounds(327, 125, 197, 13);
+		lblMaterialName2.setBounds(345, 125, 179, 13);
 		pnlMaterial.add(lblMaterialName2);
 
 		lblMaterialName3 = new JLabel("");
-		lblMaterialName3.setBounds(327, 148, 197, 13);
+		lblMaterialName3.setBounds(345, 148, 179, 13);
 		pnlMaterial.add(lblMaterialName3);
 
 		lblMaterialName4 = new JLabel("");
-		lblMaterialName4.setBounds(327, 171, 197, 13);
+		lblMaterialName4.setBounds(345, 171, 179, 13);
 		pnlMaterial.add(lblMaterialName4);
 
 		lblMaterialName8 = new JLabel("");
-		lblMaterialName8.setBounds(327, 263, 197, 13);
+		lblMaterialName8.setBounds(345, 263, 179, 13);
 		pnlMaterial.add(lblMaterialName8);
 
 		lblMaterialName7 = new JLabel("");
-		lblMaterialName7.setBounds(327, 240, 197, 13);
+		lblMaterialName7.setBounds(345, 240, 179, 13);
 		pnlMaterial.add(lblMaterialName7);
 
 		lblMaterialName6 = new JLabel("");
-		lblMaterialName6.setBounds(327, 217, 197, 13);
+		lblMaterialName6.setBounds(345, 217, 179, 13);
 		pnlMaterial.add(lblMaterialName6);
 
 		lblMaterialName5 = new JLabel("");
-		lblMaterialName5.setBounds(327, 194, 197, 13);
+		lblMaterialName5.setBounds(345, 194, 179, 13);
 		pnlMaterial.add(lblMaterialName5);
 
 		lblMaterialName9 = new JLabel("");
-		lblMaterialName9.setBounds(327, 286, 197, 13);
+		lblMaterialName9.setBounds(345, 286, 179, 13);
 		pnlMaterial.add(lblMaterialName9);
 
 		lblMaterialAmount0 = new JLabel("");
@@ -637,7 +659,138 @@ public class Invoice {
 		btnDelete.setEnabled(false);
 		btnDelete.setBounds(351, 325, 133, 23);
 		pnlMaterial.add(btnDelete);
+		
+		lblX0 = new JLabel("");
+		lblX0.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(0);			}
+		});
+		lblX0.setToolTipText("Delete material");
+		lblX0.setForeground(Color.WHITE);
+		lblX0.setBounds(327, 78, 12, 14);
+		pnlMaterial.add(lblX0);
+		lblX0.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		
+		
+		lblX1 = new JLabel("");
+		lblX1.setToolTipText("Delete material");
+		lblX1.setForeground(Color.WHITE);
+		lblX1.setBounds(327, 101, 12, 14);
+		pnlMaterial.add(lblX1);
+		lblX1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+		lblX1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(1);			}
+		});
+		
+		
+		lblX2 = new JLabel("");
+		lblX2.setToolTipText("Delete material");
+		lblX2.setForeground(Color.WHITE);
+		lblX2.setBounds(327, 126, 12, 14);
+		pnlMaterial.add(lblX2);
+		lblX2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblX2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(2);			}
+		});
+		
+		
+		lblX3 = new JLabel("");
+		lblX3.setToolTipText("Delete material");
+		lblX3.setForeground(Color.WHITE);
+		lblX3.setBounds(327, 149, 12, 14);
+		pnlMaterial.add(lblX3);
+		lblX3.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblX3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(3);			}
+		});
+		
+		
+		lblX4 = new JLabel("");
+		lblX4.setToolTipText("Delete material");
+		lblX4.setForeground(Color.WHITE);
+		lblX4.setBounds(327, 172, 12, 14);
+		pnlMaterial.add(lblX4);
+		lblX4.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblX4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(4);			}
+		});
+		
+		
+		lblX5 = new JLabel("");
+		lblX5.setToolTipText("Delete material");
+		lblX5.setForeground(Color.WHITE);
+		lblX5.setBounds(327, 195, 12, 14);
+		pnlMaterial.add(lblX5);
+		lblX5.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblX5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(5);			}
+		});
+		
+		
+		lblX6 = new JLabel("");
+		lblX6.setToolTipText("Delete material");
+		lblX6.setForeground(Color.WHITE);
+		lblX6.setBounds(327, 216, 12, 14);
+		pnlMaterial.add(lblX6);
+		lblX6.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblX6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(6);			}
+		});
+		
+		lblX7 = new JLabel("");
+		lblX7.setToolTipText("Delete material");
+		lblX7.setForeground(Color.WHITE);
+		lblX7.setBounds(327, 239, 12, 14);
+		pnlMaterial.add(lblX7);
+		lblX7.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblX7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(7);			}
+		});
+		
+		
+		lblX8 = new JLabel("");
+		lblX8.setToolTipText("Delete material");
+		lblX8.setForeground(Color.WHITE);
+		lblX8.setBounds(327, 263, 12, 14);
+		pnlMaterial.add(lblX8);
+		lblX8.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblX8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(8);			}
+		});
+		
+
+		
+		lblX9 = new JLabel("");
+		lblX9.setToolTipText("Delete material");
+		lblX9.setForeground(Color.WHITE);
+		lblX9.setBounds(327, 286, 12, 14);
+		pnlMaterial.add(lblX9);
+		lblX9.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblX9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DeleteSelectedMaterial(9);
+			}
+		});
 
 		//		txtMC1 = new JComboBox();
 		//		txtMC1.setBounds(10, 46, 86, 20);
@@ -2151,6 +2304,88 @@ public class Invoice {
 		
 	}			// --------------------------------------------------------------------------------------------------- end of Jframe
 
+
+
+
+
+	protected void DeleteSelectedMaterial(int item) {
+		// TODO Auto-generated method stub
+		if(selectedMaterials[0][item] != null) {
+			if(selectedMaterials[0][item+1] != null) {
+				
+				String currentName = selectedMaterials[0][item];
+				String currentAmount = selectedMaterials[1][item];
+				
+				
+				System.out.println("Current Name: " + currentName);
+				System.out.println("Current Amount: " + currentAmount);
+				System.out.println();
+				for(int i = item; i<10; i++) {
+					
+					String nextName = selectedMaterials[0][i+1];
+					String nextAmount = selectedMaterials[1][i+1];
+					if(nextName != null) {
+						currentName = nextName;
+						currentAmount = nextAmount;
+						System.out.println("Current Name: " + currentName);
+						System.out.println("Current Amount: " + currentAmount);		
+						
+//						System.out.println(selectedMaterials[0][i]);
+						
+						
+						switch(i) {
+						case 0:
+							lblMaterialName0.setText(currentName);
+							lblMaterialAmount0.setText(currentAmount);
+							break;
+						case 1:
+							lblMaterialName1.setText(currentName);
+							lblMaterialAmount1.setText(currentAmount);
+							break;
+						case 2:
+							lblMaterialName2.setText(currentName);
+							lblMaterialAmount2.setText(currentAmount);
+							break;
+						case 3:
+							lblMaterialName3.setText(currentName);
+							lblMaterialAmount3.setText(currentAmount);
+							break;
+						case 4:
+							lblMaterialName4.setText(currentName);
+							lblMaterialAmount4.setText(currentAmount);
+							break;
+						case 5:
+							lblMaterialName5.setText(currentName);
+							lblMaterialAmount5.setText(currentAmount);
+							break;
+						case 6:
+							lblMaterialName6.setText(currentName);
+							lblMaterialAmount6.setText(currentAmount);
+							break;
+						case 7:
+							lblMaterialName7.setText(currentName);
+							lblMaterialAmount7.setText(currentAmount);
+							break;
+						case 8:
+							lblMaterialName8.setText(currentName);
+							lblMaterialAmount8.setText(currentAmount);
+							break;
+						case 9:
+							lblMaterialName9.setText("");
+							lblMaterialAmount9.setText("");
+							break;
+						}
+					}else {
+						break;
+					}
+					
+				}
+			}
+		}
+		
+		
+		
+	}
 
 
 
