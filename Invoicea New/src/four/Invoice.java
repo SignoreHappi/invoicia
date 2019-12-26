@@ -183,7 +183,7 @@ public class Invoice {
 	public JSpinner spnRA2;
 	public JSpinner spnRA3;
 	public JSpinner spnRA4;
-	
+
 	public JSpinner spnDeposit;
 
 	public JComboBox cmbCreateInvoice;
@@ -245,7 +245,7 @@ public class Invoice {
 	public JLabel lblMaterialAmount7;
 	public JLabel lblMaterialAmount9;
 	public JLabel lblMaterialAmount0;
-	
+
 	public JLabel lblX0;
 	public JLabel lblX1;
 	public JLabel lblX2;
@@ -311,13 +311,13 @@ public class Invoice {
 
 	public static JFrame updateTable;
 	private JTextField txtCostumeName;
-	
+
 	public static JComboBox cmbStudioName;
 	public static JComboBox cmbYear;
 	public static JComboBox cmbInvoiceId;
-	
+
 	public static JButton btnCreate;
-	
+
 	/**
 	 * Launch the application.
 	 * @throws SQLException 
@@ -372,8 +372,8 @@ public class Invoice {
 		//		dancer = loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		
+
+
 
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Invoice.class.getResource("/images/KIDLogo.png")));
@@ -457,16 +457,24 @@ public class Invoice {
 								lblMaterialAmount6.setText("101");
 								lblMaterialName7.setText(8 + ".    " + "Assorted Lycra");
 								lblMaterialAmount7.setText("101");
+
+								lblX0.setText(" X");
+								lblX1.setText(" X");
+								lblX2.setText(" X");
+								lblX3.setText(" X");
+								lblX4.setText(" X");
+								lblX5.setText(" X");
+								lblX6.setText(" X");
+								lblX7.setText(" X");
+
 								for(count = 0; count < 8; count++) {
 									//								if(selectedMaterials[0][count] == null) {
 									selectedMaterials[0][count] = "Assorted" + "." + "Lycra";
 									selectedMaterials[1][count] = "101";
 									selectedMaterials[2][count] = "10";
 									//								}
-									System.out.println(selectedMaterials[0][count]);
 
 								}
-								System.out.println("/////////");
 								count = 7;
 							}else {
 								for(count = 0; count < 10; count++) {
@@ -479,7 +487,7 @@ public class Invoice {
 											lblMaterialName0.setText(count+1 + ".    " + name + " " + type);
 											lblMaterialAmount0.setText(amount);
 											lblX0.setText(" X");
-											
+
 											break;
 										case 1:
 											lblMaterialName1.setText(count+1 + ".    " + name + " " + type);
@@ -534,7 +542,7 @@ public class Invoice {
 								}
 
 							}
-							
+
 							btnCreate.setEnabled(true);
 						}catch (NumberFormatException ex){
 							JOptionPane.showMessageDialog(null, "Give me a number!",  "Error!", JOptionPane.ERROR_MESSAGE);
@@ -654,12 +662,12 @@ public class Invoice {
 		lblMaterialAmount9 = new JLabel("");
 		lblMaterialAmount9.setBounds(523, 286, 27, 13);
 		pnlMaterial.add(lblMaterialAmount9);
-		
+
 		JButton btnDelete = new JButton("Delete Material");
 		btnDelete.setEnabled(false);
 		btnDelete.setBounds(351, 325, 133, 23);
 		pnlMaterial.add(btnDelete);
-		
+
 		lblX0 = new JLabel("");
 		lblX0.addMouseListener(new MouseAdapter() {
 			@Override
@@ -671,9 +679,9 @@ public class Invoice {
 		lblX0.setBounds(327, 78, 12, 14);
 		pnlMaterial.add(lblX0);
 		lblX0.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
-		
-		
+
+
+
 		lblX1 = new JLabel("");
 		lblX1.setToolTipText("Delete material");
 		lblX1.setForeground(Color.WHITE);
@@ -686,8 +694,8 @@ public class Invoice {
 			public void mouseClicked(MouseEvent e) {
 				DeleteSelectedMaterial(1);			}
 		});
-		
-		
+
+
 		lblX2 = new JLabel("");
 		lblX2.setToolTipText("Delete material");
 		lblX2.setForeground(Color.WHITE);
@@ -699,8 +707,8 @@ public class Invoice {
 			public void mouseClicked(MouseEvent e) {
 				DeleteSelectedMaterial(2);			}
 		});
-		
-		
+
+
 		lblX3 = new JLabel("");
 		lblX3.setToolTipText("Delete material");
 		lblX3.setForeground(Color.WHITE);
@@ -712,8 +720,8 @@ public class Invoice {
 			public void mouseClicked(MouseEvent e) {
 				DeleteSelectedMaterial(3);			}
 		});
-		
-		
+
+
 		lblX4 = new JLabel("");
 		lblX4.setToolTipText("Delete material");
 		lblX4.setForeground(Color.WHITE);
@@ -725,8 +733,8 @@ public class Invoice {
 			public void mouseClicked(MouseEvent e) {
 				DeleteSelectedMaterial(4);			}
 		});
-		
-		
+
+
 		lblX5 = new JLabel("");
 		lblX5.setToolTipText("Delete material");
 		lblX5.setForeground(Color.WHITE);
@@ -738,8 +746,8 @@ public class Invoice {
 			public void mouseClicked(MouseEvent e) {
 				DeleteSelectedMaterial(5);			}
 		});
-		
-		
+
+
 		lblX6 = new JLabel("");
 		lblX6.setToolTipText("Delete material");
 		lblX6.setForeground(Color.WHITE);
@@ -751,7 +759,7 @@ public class Invoice {
 			public void mouseClicked(MouseEvent e) {
 				DeleteSelectedMaterial(6);			}
 		});
-		
+
 		lblX7 = new JLabel("");
 		lblX7.setToolTipText("Delete material");
 		lblX7.setForeground(Color.WHITE);
@@ -763,8 +771,8 @@ public class Invoice {
 			public void mouseClicked(MouseEvent e) {
 				DeleteSelectedMaterial(7);			}
 		});
-		
-		
+
+
 		lblX8 = new JLabel("");
 		lblX8.setToolTipText("Delete material");
 		lblX8.setForeground(Color.WHITE);
@@ -776,9 +784,9 @@ public class Invoice {
 			public void mouseClicked(MouseEvent e) {
 				DeleteSelectedMaterial(8);			}
 		});
-		
 
-		
+
+
 		lblX9 = new JLabel("");
 		lblX9.setToolTipText("Delete material");
 		lblX9.setForeground(Color.WHITE);
@@ -1168,22 +1176,22 @@ public class Invoice {
 		btnPrintout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+
 
 			}
 		});
 		btnPrintout.setBounds(10, 266, 120, 30);
 		pnlFile.add(btnPrintout);
 
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 		// -------------------------------------------------------------------------  I N F O R M A T I O N ----------------------
-		
-		
+
+
 		JButton btnInformation = new JButton("Information");
 		btnInformation.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1198,13 +1206,13 @@ public class Invoice {
 		pnlFile.add(btnInformation);
 
 
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
 
 		JFormattedTextField ftfSearch = new JFormattedTextField(createFormatter("##-##-###"));
 		ftfSearch.setBounds(140, 42, 120, 24);
@@ -1224,13 +1232,13 @@ public class Invoice {
 		cmbStudioName.setEditable(false);
 
 		cmbStudioName.addActionListener (new ActionListener () {
-		    public void actionPerformed(ActionEvent e) {
-//		        System.out.println(cmbStudioName.getSelectedItem());
-		    	int studioId = cmbStudioName.getSelectedIndex();
-		    	cmbYear.removeAllItems();
-		    	Database.LoadYear(studioId);
-		    	
-		    }
+			public void actionPerformed(ActionEvent e) {
+				//		        System.out.println(cmbStudioName.getSelectedItem());
+				int studioId = cmbStudioName.getSelectedIndex();
+				cmbYear.removeAllItems();
+				Database.LoadYear(studioId);
+
+			}
 		});
 
 		cmbYear = new JComboBox();
@@ -1240,8 +1248,8 @@ public class Invoice {
 		pnlFile.add(cmbYear);
 		cmbYear.setEditable(false);
 		cmbYear.addItem("Select the year");
-		
-		
+
+
 		cmbInvoiceId = new JComboBox();
 		cmbInvoiceId.setEnabled(false);
 		cmbInvoiceId.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -1251,17 +1259,17 @@ public class Invoice {
 
 		cmbYear.addActionListener (new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
-//		        System.out.println(cmbYear.getSelectedItem());
+				//		        System.out.println(cmbYear.getSelectedItem());
 				cmbInvoiceId.setEnabled(true);
-//				System.out.println("Studio Name: " + cmbStudioName.getSelectedItem());
-//				Database.LoadYear(cmbStudioName.getSelectedIndex());
-//				String year = cmbYear.getSelectedItem() + "";
+				//				System.out.println("Studio Name: " + cmbStudioName.getSelectedItem());
+				//				Database.LoadYear(cmbStudioName.getSelectedIndex());
+				//				String year = cmbYear.getSelectedItem() + "";
 				Database.GetCreatedInvoices(cmbStudioName.getSelectedIndex(), cmbYear.getSelectedItem()+"");
 			}
 		});
 		Database.LoadYear(cmbStudioName.getSelectedIndex());
-		
-		
+
+
 		JButton button = new JButton("?2");
 		button.setBounds(10, 306, 120, 30);
 		pnlFile.add(button);
@@ -1479,9 +1487,9 @@ public class Invoice {
 				Math math = new Math();
 			}
 		});
-		
-		
-		
+
+
+
 		btnCreate = new JButton("CREATE");
 		btnCreate.setEnabled(false);
 		btnCreate.setBounds(270, 176, 120, 30);
@@ -1489,16 +1497,16 @@ public class Invoice {
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
 		LocalDateTime now = LocalDateTime.now();  
-		
+
 		btnCreate.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-				
+
 				if(txtCostumeName.getText().length()<1) {
 					txtCostumeName.setBorder(new LineBorder(Color.red,1));
 					JOptionPane.showMessageDialog(null, "Write a name for the Costume!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}else {
 					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
-					
+
 					int studio_id = 0;
 					String studio_name = cmbCreateInvoice.getSelectedItem().toString();
 					switch(studio_name){
@@ -1520,13 +1528,13 @@ public class Invoice {
 					}
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
 					LocalDateTime now = LocalDateTime.now();  
-					
+
 					String date = dtf.format(now);
-					
+
 					String month = date.substring(3, 5);
 					String year = date.substring(0, 2);
 					String invcName = txtCostumeName.getText();
-					
+
 					int iMonth = Integer.parseInt(month);
 					int iYear = 0;
 					if(iMonth >= 7) {
@@ -1534,23 +1542,23 @@ public class Invoice {
 						iYear++;
 						year = String.valueOf(iYear);
 					}
-					
+
 					result = 0;
-					
+
 					int invoice_id = Database.HasInvoice(studio_id);
 					if(invoice_id == 0) {
 						Database.CreateNewInvoice(studio_id, iYear, invcName);
 					}else {
 						Database.CreateInvoice(studio_id, invoice_id, iYear, invcName);
 					}
-					
-//					if(result == 1) {
-//						output("Invoice:", "saved");
-//					}else if(result == 2) {
-//						output("Invoice:", "something went wrong");
-//					}
+
+					//					if(result == 1) {
+					//						output("Invoice:", "saved");
+					//					}else if(result == 2) {
+					//						output("Invoice:", "something went wrong");
+					//					}
 				}
-				
+
 			}
 		});
 		btnQuoteTax.addActionListener(new ActionListener() {
@@ -1707,7 +1715,7 @@ public class Invoice {
 		Clients.add(txtOwner);
 		txtOwner.setColumns(10);
 
-		
+
 		txtPhone = new JFormattedTextField(createFormatter("(###) ### - ####"));
 		txtPhone.setToolTipText("(000) 000-0000");
 		txtPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -1721,19 +1729,19 @@ public class Invoice {
 		Clients.add(txtPhone);
 
 
-//		txtPhone = new JTextField();
-//		txtPhone.setToolTipText("Phone Number eg 1234567890 [123 456 7890]");
-//		txtPhone.setHorizontalAlignment(SwingConstants.CENTER);
-//		txtPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
-//		txtPhone.addFocusListener(new FocusAdapter() {
-//			@Override
-//			public void focusGained(FocusEvent arg0) {
-//				txtPhone.setText("");
-//			}
-//		});
-//		txtPhone.setBounds(130, 542, 225, 20);
-//		
-//		txtPhone.setColumns(10);
+		//		txtPhone = new JTextField();
+		//		txtPhone.setToolTipText("Phone Number eg 1234567890 [123 456 7890]");
+		//		txtPhone.setHorizontalAlignment(SwingConstants.CENTER);
+		//		txtPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//		txtPhone.addFocusListener(new FocusAdapter() {
+		//			@Override
+		//			public void focusGained(FocusEvent arg0) {
+		//				txtPhone.setText("");
+		//			}
+		//		});
+		//		txtPhone.setBounds(130, 542, 225, 20);
+		//		
+		//		txtPhone.setColumns(10);
 
 		txtAddress = new JTextField();
 		txtAddress.addFocusListener(new FocusAdapter() {
@@ -1792,7 +1800,7 @@ public class Invoice {
 		btnSubmit.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnSubmit.setBounds(78, 644, 110, 33);
 		Clients.add(btnSubmit);
-//   a
+		//   a
 		//		TableColumn id, name, email;
 		//		id = new TableColumn(0);
 		//		id.setHeaderValue("Studio ID"); // set column name
@@ -1904,80 +1912,80 @@ public class Invoice {
 		Clients.add(scrollTest);
 
 		scrollTest.setSize(1327,402);
-		
+
 		JPanel pnlClntConsole = new JPanel();
 		pnlClntConsole.setLayout(null);
 		pnlClntConsole.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		pnlClntConsole.setBackground(Color.DARK_GRAY);
 		pnlClntConsole.setBounds(394, 422, 550, 255);
 		Clients.add(pnlClntConsole);
-		
+
 		JLabel lblClntCommand1 = new JLabel("|");
 		lblClntCommand1.setForeground(new Color(51, 153, 0));
 		lblClntCommand1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblClntCommand1.setBounds(10, 230, 530, 14);
 		pnlClntConsole.add(lblClntCommand1);
-		
+
 		JLabel lblClntCommand2 = new JLabel("_");
 		lblClntCommand2.setForeground(new Color(51, 153, 0));
 		lblClntCommand2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblClntCommand2.setBounds(10, 210, 530, 14);
 		pnlClntConsole.add(lblClntCommand2);
-		
+
 		JLabel label_6 = new JLabel("_");
 		label_6.setForeground(new Color(51, 153, 0));
 		label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_6.setBounds(10, 190, 530, 14);
 		pnlClntConsole.add(label_6);
-		
+
 		JLabel label_7 = new JLabel("_");
 		label_7.setForeground(new Color(51, 153, 0));
 		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_7.setBounds(10, 170, 530, 14);
 		pnlClntConsole.add(label_7);
-		
+
 		JLabel label_8 = new JLabel("_");
 		label_8.setForeground(new Color(51, 153, 0));
 		label_8.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_8.setBounds(10, 150, 530, 14);
 		pnlClntConsole.add(label_8);
-		
+
 		JLabel label_10 = new JLabel("_");
 		label_10.setForeground(new Color(51, 153, 0));
 		label_10.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_10.setBounds(10, 130, 530, 14);
 		pnlClntConsole.add(label_10);
-		
+
 		JLabel label_11 = new JLabel("_");
 		label_11.setForeground(new Color(51, 153, 0));
 		label_11.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_11.setBounds(10, 110, 530, 14);
 		pnlClntConsole.add(label_11);
-		
+
 		JLabel label_12 = new JLabel("_");
 		label_12.setForeground(new Color(51, 153, 0));
 		label_12.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_12.setBounds(10, 90, 530, 14);
 		pnlClntConsole.add(label_12);
-		
+
 		JLabel label_13 = new JLabel("_");
 		label_13.setForeground(new Color(51, 153, 0));
 		label_13.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_13.setBounds(10, 70, 530, 14);
 		pnlClntConsole.add(label_13);
-		
+
 		JLabel label_14 = new JLabel("_");
 		label_14.setForeground(new Color(51, 153, 0));
 		label_14.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_14.setBounds(10, 50, 530, 14);
 		pnlClntConsole.add(label_14);
-		
+
 		JLabel label_15 = new JLabel("_");
 		label_15.setForeground(new Color(51, 153, 0));
 		label_15.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_15.setBounds(10, 30, 530, 14);
 		pnlClntConsole.add(label_15);
-		
+
 		JLabel label_16 = new JLabel("_");
 		label_16.setForeground(new Color(51, 153, 0));
 		label_16.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -2158,7 +2166,7 @@ public class Invoice {
 
 
 		materialTable = new DefaultTableModel(){
-						public boolean isCellEditable(int row, int column) {return false;}
+			public boolean isCellEditable(int row, int column) {return false;}
 		};
 
 		materialTable.addColumn("Material Id");
@@ -2176,20 +2184,20 @@ public class Invoice {
 
 		JTable tableMaterial= new JTable(materialTable); 
 
-//		tableMaterial.addMouseListener(new MouseAdapter() {
-//			public void mouseReleased(MouseEvent me) {
-//				int row = table.rowAtPoint(me.getPoint());
-//
-//				if(me.getClickCount()>1) {
-//
-//					UpdateMaterial update = new UpdateMaterial(0);
-//
-//
-//				}
-//				//				int column = materialTable.get;
-//				//				System.out.println(column);
-//			}
-//		});
+		//		tableMaterial.addMouseListener(new MouseAdapter() {
+		//			public void mouseReleased(MouseEvent me) {
+		//				int row = table.rowAtPoint(me.getPoint());
+		//
+		//				if(me.getClickCount()>1) {
+		//
+		//					UpdateMaterial update = new UpdateMaterial(0);
+		//
+		//
+		//				}
+		//				//				int column = materialTable.get;
+		//				//				System.out.println(column);
+		//			}
+		//		});
 
 		JScrollPane scrollPane = new JScrollPane(tableMaterial);
 		scrollPane.setLocation(10, 11);
@@ -2229,11 +2237,11 @@ public class Invoice {
 		});
 		button_7.setBounds(632, 626, 123, 28);
 		panel_14.add(button_7);
-		
+
 		JButton button_1 = new JButton("Search Material");
 		button_1.setBounds(10, 626, 123, 28);
 		panel_14.add(button_1);
-		
+
 		JButton button_3 = new JButton("Search Material");
 		button_3.setBounds(143, 626, 123, 28);
 		panel_14.add(button_3);
@@ -2260,7 +2268,7 @@ public class Invoice {
 		Settings.setBackground(new Color(255, 228, 225));
 		tabbedPane.addTab("Settings", new ImageIcon(Invoice.class.getResource("/images/Settings icon.png")), Settings, null);
 		Settings.setLayout(null);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_2.setBackground(new Color(204, 255, 255));
@@ -2301,7 +2309,7 @@ public class Invoice {
 		lblSoloRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lblSoloRate.setBounds(10, 74, 76, 14);
 		panel_2.add(lblSoloRate);
-		
+
 	}			// --------------------------------------------------------------------------------------------------- end of Jframe
 
 
@@ -2312,79 +2320,170 @@ public class Invoice {
 		// TODO Auto-generated method stub
 		if(selectedMaterials[0][item] != null) {
 			if(selectedMaterials[0][item+1] != null) {
-				
-				String currentName = selectedMaterials[0][item];
-				String currentAmount = selectedMaterials[1][item];
-				
-				
-				System.out.println("Current Name: " + currentName);
-				System.out.println("Current Amount: " + currentAmount);
-				System.out.println();
-				for(int i = item; i<10; i++) {
-					
-					String nextName = selectedMaterials[0][i+1];
-					String nextAmount = selectedMaterials[1][i+1];
-					if(nextName != null) {
-						currentName = nextName;
-						currentAmount = nextAmount;
-						System.out.println("Current Name: " + currentName);
-						System.out.println("Current Amount: " + currentAmount);		
-						
-//						System.out.println(selectedMaterials[0][i]);
-						
-						
-						switch(i) {
-						case 0:
-							lblMaterialName0.setText(currentName);
-							lblMaterialAmount0.setText(currentAmount);
-							break;
-						case 1:
-							lblMaterialName1.setText(currentName);
-							lblMaterialAmount1.setText(currentAmount);
-							break;
-						case 2:
-							lblMaterialName2.setText(currentName);
-							lblMaterialAmount2.setText(currentAmount);
-							break;
-						case 3:
-							lblMaterialName3.setText(currentName);
-							lblMaterialAmount3.setText(currentAmount);
-							break;
-						case 4:
-							lblMaterialName4.setText(currentName);
-							lblMaterialAmount4.setText(currentAmount);
-							break;
-						case 5:
-							lblMaterialName5.setText(currentName);
-							lblMaterialAmount5.setText(currentAmount);
-							break;
-						case 6:
-							lblMaterialName6.setText(currentName);
-							lblMaterialAmount6.setText(currentAmount);
-							break;
-						case 7:
-							lblMaterialName7.setText(currentName);
-							lblMaterialAmount7.setText(currentAmount);
-							break;
-						case 8:
-							lblMaterialName8.setText(currentName);
-							lblMaterialAmount8.setText(currentAmount);
-							break;
-						case 9:
-							lblMaterialName9.setText("");
-							lblMaterialAmount9.setText("");
+
+				for(int i = item; i < 10; i++) {
+
+					if(i < 9) {
+//						if(selectedMaterials[0][i+1] != null) {
+
+							selectedMaterials[0][i] = selectedMaterials[0][i+1];
+							selectedMaterials[1][i] = selectedMaterials[1][i+1];
+
+
+
+							switch(i) {
+							case 0:
+								lblMaterialName0.setText("1.   " + selectedMaterials[0][i]);
+								lblMaterialAmount0.setText(selectedMaterials[1][i]);
+								break;
+							case 1:
+								lblMaterialName1.setText("2.   " + selectedMaterials[0][i]);
+								lblMaterialAmount1.setText(selectedMaterials[1][i]);
+								break;
+							case 2:
+								lblMaterialName2.setText("3.   " + selectedMaterials[0][i]);
+								lblMaterialAmount2.setText(selectedMaterials[1][i]);
+								break;
+							case 3:
+								lblMaterialName3.setText("4.   " + selectedMaterials[0][i]);
+								lblMaterialAmount3.setText(selectedMaterials[1][i]);
+								break;
+							case 4:
+								lblMaterialName4.setText("5.   " + selectedMaterials[0][i]);
+								lblMaterialAmount4.setText(selectedMaterials[1][i]);
+								break;
+							case 5:
+								lblMaterialName5.setText("6.   " + selectedMaterials[0][i]);
+								lblMaterialAmount5.setText(selectedMaterials[1][i]);
+								break;
+							case 6:
+								lblMaterialName6.setText("7.   " + selectedMaterials[0][i]);
+								lblMaterialAmount6.setText(selectedMaterials[1][i]);
+								break;
+							case 7:
+								lblMaterialName7.setText("8.   " + selectedMaterials[0][i]);
+								lblMaterialAmount7.setText(selectedMaterials[1][i]);
+								break;
+							case 8:
+								lblMaterialName8.setText("9.   " + selectedMaterials[0][i]);
+								lblMaterialAmount8.setText(selectedMaterials[1][i]);
+								break;
+							case 9:
+								lblMaterialName9.setText("");
+								lblMaterialAmount9.setText("");
+								break;
+							}
+						}else {
+							selectedMaterials[0][i] = null;
+							selectedMaterials[1][i] = null;
+							switch(i) {
+							case 1:
+								lblMaterialName1.setText("");
+								lblMaterialAmount1.setText("");
+								lblX1.setText("");
+								break;
+							case 2:
+								lblMaterialName2.setText("");
+								lblMaterialAmount2.setText("");
+								lblX2.setText("");
+								break;
+							case 3:
+								lblMaterialName3.setText("");
+								lblMaterialAmount3.setText("");
+								lblX3.setText("");
+								break;
+							case 4:
+								lblMaterialName4.setText("");
+								lblMaterialAmount4.setText("");
+								lblX4.setText("");
+								break;
+							case 5:
+								lblMaterialName5.setText("");
+								lblMaterialAmount5.setText("");
+								lblX5.setText("");
+								break;
+							case 6:
+								lblMaterialName6.setText("");
+								lblMaterialAmount6.setText("");
+								lblX6.setText("");
+								break;
+							case 7:
+								lblMaterialName7.setText("");
+								lblMaterialAmount7.setText("");
+								lblX7.setText("");
+								break;
+							case 8:
+								lblMaterialName8.setText("");
+								lblMaterialAmount8.setText("");
+								lblX8.setText("");
+								break;
+							case 9:
+								lblMaterialName9.setText("");
+								lblMaterialAmount9.setText("");
+								lblX9.setText("");
+								break;
+							}
 							break;
 						}
-					}else {
-						break;
-					}
-					
+
+//					}else {
+//						lblMaterialName9.setText("");
+//						lblMaterialAmount9.setText("");
+//						lblX9.setText("");
+//					}
+				}
+			}else {
+				switch(item) {
+				case 1:
+					lblMaterialName1.setText("");
+					lblMaterialAmount1.setText("");
+					lblX1.setText("");
+					break;
+				case 2:
+					lblMaterialName2.setText("");
+					lblMaterialAmount2.setText("");
+					lblX2.setText("");
+					break;
+				case 3:
+					lblMaterialName3.setText("");
+					lblMaterialAmount3.setText("");
+					lblX3.setText("");
+					break;
+				case 4:
+					lblMaterialName4.setText("");
+					lblMaterialAmount4.setText("");
+					lblX4.setText("");
+					break;
+				case 5:
+					lblMaterialName5.setText("");
+					lblMaterialAmount5.setText("");
+					lblX5.setText("");
+					break;
+				case 6:
+					lblMaterialName6.setText("");
+					lblMaterialAmount6.setText("");
+					lblX6.setText("");
+					break;
+				case 7:
+					lblMaterialName7.setText("");
+					lblMaterialAmount7.setText("");
+					lblX7.setText("");
+					break;
+				case 8:
+					lblMaterialName8.setText("");
+					lblMaterialAmount8.setText("");
+					lblX8.setText("");
+					break;
+				case 9:
+					lblMaterialName9.setText("");
+					lblMaterialAmount9.setText("");
+					lblX9.setText("");
+					break;
 				}
 			}
+
 		}
-		
-		
-		
+
 	}
 
 
@@ -2607,55 +2706,55 @@ public class Invoice {
 	//-----------------------------------------------------------------------------------------------// W R I T E //-------------------------------------------------------
 
 
-		public void write() {
-	
-			String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx"; 
-	
-			//Read the spreadsheet that needs to be updated
-			FileInputStream fsIP;
-			try {
-	
-				fsIP = new FileInputStream(new File(fille));  
-				//Access the workbook                 
-				XSSFWorkbook wb = new XSSFWorkbook(fsIP);
-				//Access the worksheet, so that we can update / modify it. 
-				XSSFSheet worksheet = wb.getSheetAt(0); 
-				// declare a Cell object
-	
-	
-				Cell cell = null; 
-	
-				cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
-				cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
-	
-				cell = worksheet.getRow(10).getCell(2);   
-				cell.setCellValue("PT Lyrical Group Cake");
-	
-	
-				// Get current cell value value and overwrite the value
-	
-				//Close the InputStream  
-				fsIP.close(); 
-	
-	
-				//Open FileOutputStream to write updates
-				FileOutputStream output_file =new FileOutputStream(new File(fille));  
-				//write changes
-				wb.write(output_file);
-	
-	
-				//close the stream
-				output_file.close();
-	
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	
+	public void write() {
+
+		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx"; 
+
+		//Read the spreadsheet that needs to be updated
+		FileInputStream fsIP;
+		try {
+
+			fsIP = new FileInputStream(new File(fille));  
+			//Access the workbook                 
+			XSSFWorkbook wb = new XSSFWorkbook(fsIP);
+			//Access the worksheet, so that we can update / modify it. 
+			XSSFSheet worksheet = wb.getSheetAt(0); 
+			// declare a Cell object
+
+
+			Cell cell = null; 
+
+			cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
+			cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
+
+			cell = worksheet.getRow(10).getCell(2);   
+			cell.setCellValue("PT Lyrical Group Cake");
+
+
+			// Get current cell value value and overwrite the value
+
+			//Close the InputStream  
+			fsIP.close(); 
+
+
+			//Open FileOutputStream to write updates
+			FileOutputStream output_file =new FileOutputStream(new File(fille));  
+			//write changes
+			wb.write(output_file);
+
+
+			//close the stream
+			output_file.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+	}
 
 
 
@@ -2672,7 +2771,7 @@ public class Invoice {
 		lbsMaterial.setText(text);
 	}
 
-	
+
 	public JLabel getLbsBottom() {
 		return lbsBottom;
 	}
@@ -2683,7 +2782,7 @@ public class Invoice {
 		lbsBottom.setText(text);
 	}
 
-	
+
 	public JLabel getLbsCPC() {
 		return lbsCPC;
 	}
@@ -2694,7 +2793,7 @@ public class Invoice {
 		lbsCPC.setText(text);
 	}
 
-	
+
 	public JLabel getLbsRhinestone() {
 		return lbsRhinestone;
 	}
@@ -2714,7 +2813,7 @@ public class Invoice {
 	public static void setLblsHoursText(String text) {
 		lbsHours.setText(text);
 	}
-	
+
 
 	public JLabel getLbsTotal() {
 		return lbsTotal;
@@ -2725,8 +2824,8 @@ public class Invoice {
 	public static void setLblsTotalText(String text) {
 		lbsTotal.setText(text);
 	}
-	
-	
+
+
 	public JLabel getLbsSubtotal() {
 		return lbsSubtotal;
 	}
@@ -2787,9 +2886,9 @@ public class Invoice {
 		return rdbSolo.isSelected();
 	}
 
-	
 
-	
+
+
 
 
 
