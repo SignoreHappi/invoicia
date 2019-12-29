@@ -1305,6 +1305,13 @@ public class Invoice {
 		pnlFile.add(button_5);
 
 		JButton btnRetrieve = new JButton("RETRIEVE");
+		btnRetrieve.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		
 		btnRetrieve.setBounds(140, 184, 120, 30);
 		pnlFile.add(btnRetrieve);
 
@@ -1315,7 +1322,7 @@ public class Invoice {
 		PInvoice.add(pnlRecipt);
 		pnlRecipt.setLayout(null);
 
-		JLabel lblRecipt = new JLabel("RECIPT");
+		JLabel lblRecipt = new JLabel("RECEIPT");
 		lblRecipt.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblRecipt.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRecipt.setBounds(10, 11, 380, 27);
