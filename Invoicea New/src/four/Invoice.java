@@ -186,7 +186,7 @@ public class Invoice {
 
 	public JSpinner spnDeposit;
 
-	public JComboBox cmbCreateInvoice;
+	public JComboBox cmbStudio;
 	public JComboBox spnMaterialType;
 
 	private String ma[] = new String [10];
@@ -316,6 +316,10 @@ public class Invoice {
 	public static JComboBox cmbYear;
 	public static JComboBox cmbInvoiceId;
 
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss"); 
+	private Date date = new Date();
+	private LocalDateTime now = LocalDateTime.now(); 
+	
 	public static JButton btnCreate;
 
 	/**
@@ -358,11 +362,20 @@ public class Invoice {
 		initialize();
 		Database.StartInvoice();
 	}
+	
+	private int Close() {
+		
+		Database.CreateDate(dtf.format(now) + "");
+		
+		return 1;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		 
 
 		int HpWidth = 1366, HpHeight = 768;
 
@@ -377,7 +390,7 @@ public class Invoice {
 
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Invoice.class.getResource("/images/KIDLogo.png")));
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(Close());
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		//		frame.setBounds(0, 5, screenSize.width, screenSize.height - 50);	// Screen Auto Detect
@@ -1054,11 +1067,11 @@ public class Invoice {
 		lblCostumeNo.setBounds(10, 58, 59, 14);
 		pnlStudio.add(lblCostumeNo);
 
-		cmbCreateInvoice = new JComboBox();
-		cmbCreateInvoice.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		cmbCreateInvoice.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
-		cmbCreateInvoice.setBounds(79, 55, 181, 20);
-		pnlStudio.add(cmbCreateInvoice);
+		cmbStudio = new JComboBox();
+		cmbStudio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		cmbStudio.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
+		cmbStudio.setBounds(79, 55, 181, 20);
+		pnlStudio.add(cmbStudio);
 
 		txtCostumeName = new JTextField();
 		txtCostumeName.setText(null);
@@ -1098,7 +1111,9 @@ public class Invoice {
 		spnHH.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnK.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				spnDeposit.setValue((int)spnK.getValue() * 50);
+				if(cmbStudio.getSelectedItem() == "Evolve Dance Centre") {
+					spnDeposit.setValue((int)spnK.getValue() * 50);
+				}
 			}
 		});
 
@@ -1185,7 +1200,7 @@ public class Invoice {
 
 
 
-
+		
 
 
 
@@ -1197,6 +1212,7 @@ public class Invoice {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				output("?", "Version Incoive Gamma");
+				output("?", "Last Operated:     " + dtf.format(now));
 				output("?", "Last Modified:     Dec/19");
 				output("?", "- -/End of Information/- - -");
 				output("","");
@@ -1484,7 +1500,7 @@ public class Invoice {
 				output("Material", "Loading Materials...");
 				Database.getPrices();
 				output("Material", "Calculating...");
-				Math math = new Math();
+				Mathe math = new Mathe();
 			}
 		});
 
@@ -1495,8 +1511,7 @@ public class Invoice {
 		btnCreate.setBounds(270, 176, 120, 30);
 		pnlRecipt.add(btnCreate);
 
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
-		LocalDateTime now = LocalDateTime.now();  
+		
 
 		btnCreate.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
@@ -1508,7 +1523,7 @@ public class Invoice {
 					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
 
 					int studio_id = 0;
-					String studio_name = cmbCreateInvoice.getSelectedItem().toString();
+					String studio_name = cmbStudio.getSelectedItem().toString();
 					switch(studio_name){
 					case "Kids In Dance":
 						studio_id = 0;

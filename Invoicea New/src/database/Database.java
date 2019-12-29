@@ -127,62 +127,62 @@ public class Database extends Invoice{
 				+ "?,?, ?,?, ?,?, ?,?)";		String code = null;
 
 
-		if(invcName.equals("101") || invcName.equals("Fill") || invcName.equals("Clear all")) {
-			SaveInvoices(studio_id, invcName);
-		}else {
-			code = CreateCode(studio_id, iYear, 0);
-			try{
-				connect = DBConnect.connectDB();
-				PreparedStatement pstmt = connect.prepareStatement(cmd);
-				pstmt.setString(1, code);
-				pstmt.setString(2, invcName);
-				pstmt.setInt(3, studio_id);
-				pstmt.setInt(4, 1);
-				pstmt.setInt(5, iYear);
-				int count = 1;
-				for(int i = 0; i<10; i++) {
-					if(Invoice.selectedMaterials[0][i] == null) {
-						pstmt.setString(5 + count, null);
-						count++;
-						pstmt.setString(5 + count, null);
-						count++;
-					}else {
-						String name = Invoice.selectedMaterials[0][i];
-						if(selectedMaterials[0][i].contains("\"")) {						
-							name = selectedMaterials[0][i].replace("\"", "#");
+				if(invcName.equals("101") || invcName.equals("Fill") || invcName.equals("Clear all")) {
+					SaveInvoices(studio_id, invcName);
+				}else {
+					code = CreateCode(studio_id, iYear, 0);
+					try{
+						connect = DBConnect.connectDB();
+						PreparedStatement pstmt = connect.prepareStatement(cmd);
+						pstmt.setString(1, code);
+						pstmt.setString(2, invcName);
+						pstmt.setInt(3, studio_id);
+						pstmt.setInt(4, 1);
+						pstmt.setInt(5, iYear);
+						int count = 1;
+						for(int i = 0; i<10; i++) {
+							if(Invoice.selectedMaterials[0][i] == null) {
+								pstmt.setString(5 + count, null);
+								count++;
+								pstmt.setString(5 + count, null);
+								count++;
+							}else {
+								String name = Invoice.selectedMaterials[0][i];
+								if(selectedMaterials[0][i].contains("\"")) {						
+									name = selectedMaterials[0][i].replace("\"", "#");
+								}
+								name = SeparateName(name);
+								pstmt.setString(5 + count, name);
+								count++;
+								pstmt.setString(5 + count, Invoice.selectedMaterials[1][i]);
+								count++;
+							}
 						}
-						name = SeparateName(name);
-						pstmt.setString(5 + count, name);
-						count++;
-						pstmt.setString(5 + count, Invoice.selectedMaterials[1][i]);
-						count++;
+						Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
+					} catch (SQLException e) {
+						System.out.println("Create New Invoice");
+						System.out.println(e);
+						System.out.println(e.getMessage());
+					}finally {
+						try {
+							connect.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
 					}
 				}
-				Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
-			} catch (SQLException e) {
-				System.out.println("Create New Invoice");
-				System.out.println(e);
-				System.out.println(e.getMessage());
-			}finally {
-				try {
-					connect.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
-			}
-		}
 
 	}
 
 
 	public static String SeparateName(String nameType) {
-//		int index = nameType.indexOf(".");
+		//		int index = nameType.indexOf(".");
 
-//		String name = nameType.substring(0, index);
-//		String type = nameType.substring(index+1);
-//		name = name + " " + type;
-//		System.out.println(name);
+		//		String name = nameType.substring(0, index);
+		//		String type = nameType.substring(index+1);
+		//		name = name + " " + type;
+		//		System.out.println(name);
 		return nameType.replace(".", " ");
 
 	}
@@ -193,8 +193,8 @@ public class Database extends Invoice{
 		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year, "
 				+ "material_1, amount_1, material_2, amount_2, material_3, amount_3, material_4, amount_4,material_5, amount_5,material_6, amount_6,"
 				+ "material_7, amount_7, material_8, amount_8, material_9, amount_9, material_10, amount_10) "
-				
-				
+
+
 				+ "VALUES(?, ?, ?, ?, ?, "
 				+ "?,?, ?,?, ?,?, ?,?, ?,?, ?,?, "
 				+ "?,?, ?,?, ?,?, ?,?)";
@@ -236,8 +236,8 @@ public class Database extends Invoice{
 						name = selectedMaterials[0][i].replace("\"", "#");
 					}
 					name = SeparateName(name);
-					
-					
+
+
 					pstmt.setString(5 + count, name);
 					count++;
 					pstmt.setString(5 + count, Invoice.selectedMaterials[1][i]);
@@ -372,7 +372,7 @@ public class Database extends Invoice{
 					name = subName.substring(0, index);
 					name = name + "\" " + subName .substring(index+1);
 				}
-				
+
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, fmt});
 				Invoice.homeMaterialTbl.insertRow(Invoice.homeMaterialTbl.getRowCount(), new Object[] {name, type, fmt});
@@ -595,11 +595,12 @@ public class Database extends Invoice{
 
 
 			while (rs.next()) {
-				four.Math.setTax(rs.getDouble("tax"));
-				four.Math.setHourly(rs.getDouble("hours"));
-				four.Math.setThread(rs.getDouble("thread"));
-				four.Math.setGroupRate(rs.getDouble("groupRate"));
-				four.Math.setSoloRate(rs.getDouble("soloRate"));
+				four.Mathe.setTax(rs.getDouble("tax"));
+				four.Mathe.setHourly(rs.getDouble("hours"));
+				four.Mathe.setThread(rs.getDouble("thread"));
+				four.Mathe.setGroupRate(rs.getDouble("groupRate"));
+				four.Mathe.setSoloRate(rs.getDouble("soloRate"));
+
 			}
 
 			//							four.Math.setTax(taxi);
@@ -617,7 +618,7 @@ public class Database extends Invoice{
 		return "";
 
 	}
-	
+
 	public static String StartInvoice() {
 
 		// TODO Auto-generated method stub
@@ -641,14 +642,15 @@ public class Database extends Invoice{
 			while (rs.next()) {
 				four.Invoice.spnSolo.setValue(rs.getDouble("soloRate"));
 				four.Invoice.spnGroup.setValue(rs.getDouble("groupRate"));
-				
-				four.Math.setHourly(rs.getDouble("hours"));
+
+				four.Mathe.setHourly(rs.getDouble("hours"));
 			}
 
 			//							four.Math.setTax(taxi);
 
 		} catch (SQLException e) {
 			System.out.print(e);
+			
 		}finally {
 			try {
 				connect.close();
@@ -660,6 +662,8 @@ public class Database extends Invoice{
 		return "";
 
 	}
+
+
 
 
 	//Insert a new material into the table
@@ -794,6 +798,50 @@ public class Database extends Invoice{
 				e.printStackTrace();
 			}
 		}		
+	}
+
+
+	public static boolean CreateDate(String date){
+		String cmdSearch = "SELECT * FROM settings";
+		boolean add = true;
+		try {
+			connect = DBConnect.connectDB();
+			stmt = connect.prepareStatement(cmdSearch);			
+			//Create the code
+			//Execute the code
+			stmt.executeQuery(cmdSearch);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmdSearch);
+			while(rs.next()) {//Working
+//				material_name = rs.getString(2);
+				
+			}
+			String cmd = "UPDATE `settings` SET `lastDate`= ? WHERE 1";
+			
+			try{
+				PreparedStatement pstmt = connect.prepareStatement(cmd);			
+				pstmt.setString(1, date);
+				pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("Create Date ERROR");
+				System.out.println(e.getMessage());
+				return false;
+			}	
+		}catch(SQLException e){
+			System.out.println(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
+
+
+		return true;
+
 	}
 
 }

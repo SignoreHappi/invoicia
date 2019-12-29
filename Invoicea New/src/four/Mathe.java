@@ -1,8 +1,10 @@
 package four;
 
 import database.Database;
+import java.math.*;
+import java.text.DecimalFormat;
 
-public class Math {
+public class Mathe {
 
 	private static double Material;
 	private static double Rhinestone;
@@ -28,11 +30,27 @@ public class Math {
 	private static double CostPerCostume;
 
 	/*		TEST CASE SCENARIO
-	 * 10m 
+	 * 10m cream mesh $8
+	 * 10m foil mesh  $10
+	 * 5m teal mesh   $7.50
+	 * 
+	 * 4 kids
+	 * 7 hours
+	 * 
+	 * 		RESULTS 
+	 * Material 445
+	 * Labour 210
+	 * Subtotal 655
+	 * Tax 85
+	 * Total 740
+	 * CPC 185
 	 * 
 	 */
+	
 
-	public Math() {
+	DecimalFormat format = new DecimalFormat("###,###,###.00");
+
+	public Mathe() {
 		getInformation();
 		Material = Material();
 		Labour = Labour();
@@ -50,6 +68,8 @@ public class Math {
 				break;
 			}
 		}
+		
+		Deposit = (double) Invoice.getSpnHHValue();
 
 		kids = (int)Invoice.spnK.getValue();
 
@@ -117,20 +137,24 @@ public class Math {
 		
 		Subtotal = Labour + Material + Rhinestone;
 		
-		Total = Subtotal + TAX;
+		Total = (Subtotal * (1 + TAX));
 		
 		CostPerCostume = Total / kids;
+	
+		
+				
 	}
 	
 	
 
 	private static void Done() {
-		Invoice.writeOutput("", "" + Subtotal);
-		Invoice.writeOutput("", "" + Total);
-		Invoice.writeOutput("", "" + CostPerCostume);
 		
-		Invoice.setLblsMaterialText("" + Material);
-		Invoice.setLblsHoursText("" + Labour);
+		Invoice.setLblsSubtotalText("" + Math.round(Subtotal));
+		Invoice.setLblsMaterialText("" + Math.round(Material));
+		Invoice.setLblsTotalText("" + Math.round(Total));
+		Invoice.setLblsCPCText("" + Math.round(CostPerCostume));
+		Invoice.setLblsHoursText("" + Math.round(Labour));
+		Invoice.setLblsBottomText("" + Math.round(Total - Deposit));
 	}
 
 	//--------------------------------------------------------// Getters and Setters //-------------------------------
@@ -139,8 +163,8 @@ public class Math {
 		return TAX;
 	}
 
-	public static void setTax(double a) {
-		TAX = a;
+	public static void setTax(double tax) {
+		TAX = tax;
 	}
 
 	public static double getThread() {
