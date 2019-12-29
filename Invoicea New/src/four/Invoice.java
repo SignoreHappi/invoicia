@@ -2253,13 +2253,13 @@ public class Invoice {
 		button_7.setBounds(632, 626, 123, 28);
 		panel_14.add(button_7);
 
-		JButton button_1 = new JButton("Search Material");
-		button_1.setBounds(10, 626, 123, 28);
-		panel_14.add(button_1);
+		JButton btnSortBy = new JButton("Sort by Type");
+		btnSortBy.setBounds(10, 626, 123, 28);
+		panel_14.add(btnSortBy);
 
-		JButton button_3 = new JButton("Search Material");
-		button_3.setBounds(143, 626, 123, 28);
-		panel_14.add(button_3);
+		JButton btnSortByMaterial = new JButton("Sort by Material");
+		btnSortByMaterial.setBounds(143, 626, 123, 28);
+		panel_14.add(btnSortByMaterial);
 
 		//		txtSearchMaterial.addKeyListener(new KeyAdapter() {
 		//			//@Override
