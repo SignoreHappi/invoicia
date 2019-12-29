@@ -2085,7 +2085,7 @@ public class Invoice {
 				success = Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
 				txtName.setText("");
 				txtCost.setText("");
-				Database.LoadMaterials();
+				Database.LoadMaterials(false);
 
 			}
 		});
@@ -2227,7 +2227,7 @@ public class Invoice {
 		panel_14.add(txtSearchMaterial);
 		txtSearchMaterial.setColumns(10);
 
-		Database.LoadMaterials();
+		Database.LoadMaterials(false);
 
 		JButton btnUpdateTable = new JButton("Search Material");
 		btnUpdateTable.addActionListener(new ActionListener() {
@@ -2247,17 +2247,30 @@ public class Invoice {
 		JButton button_7 = new JButton("Reset Table");
 		button_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Database.LoadMaterials();
+				Database.LoadMaterials(false);
 			}
 		});
 		button_7.setBounds(632, 626, 123, 28);
 		panel_14.add(button_7);
 
 		JButton btnSortBy = new JButton("Sort by Type");
+		btnSortBy.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Database.LoadMaterials(true);
+			}
+		});
 		btnSortBy.setBounds(10, 626, 123, 28);
 		panel_14.add(btnSortBy);
 
 		JButton btnSortByMaterial = new JButton("Sort by Material");
+		btnSortByMaterial.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Database.LoadMaterials(false);
+				
+			}
+		});
 		btnSortByMaterial.setBounds(143, 626, 123, 28);
 		panel_14.add(btnSortByMaterial);
 

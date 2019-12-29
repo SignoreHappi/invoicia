@@ -331,11 +331,17 @@ public class Database extends Invoice{
 
 	}
 
-	public static void LoadMaterials(){
+	public static void LoadMaterials(boolean typers){
 		Invoice.homeMaterialTbl.setRowCount(0);
 		Invoice.materialTable.setRowCount(0);
 		Invoice.txtSearchMaterial.setText("");;
-		String cmd = "SELECT * FROM material ORDER BY material_name ASC";
+		String cmd;
+		
+		if(typers == false) {
+			cmd = "SELECT * FROM material ORDER BY material_name ASC";
+		}else {
+			cmd = "SELECT * FROM material ORDER BY material_type ASC";
+		}
 		int id;
 		String name, type;
 		double cost;
