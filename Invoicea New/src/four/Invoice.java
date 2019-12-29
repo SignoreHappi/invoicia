@@ -57,9 +57,9 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 //import org.apache.poi.ss.usermodel.Cell;
 //import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -319,7 +319,7 @@ public class Invoice {
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss"); 
 	private Date date = new Date();
 	private LocalDateTime now = LocalDateTime.now(); 
-	
+
 	public static JButton btnCreate;
 
 	/**
@@ -362,11 +362,11 @@ public class Invoice {
 		initialize();
 		Database.StartInvoice();
 	}
-	
+
 	private int Close() {
-		
+
 		Database.CreateDate(dtf.format(now) + "");
-		
+
 		return 1;
 	}
 
@@ -374,8 +374,8 @@ public class Invoice {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		 
+
+
 
 		int HpWidth = 1366, HpHeight = 768;
 
@@ -680,6 +680,7 @@ public class Invoice {
 		btnDelete.setEnabled(false);
 		btnDelete.setBounds(351, 325, 133, 23);
 		pnlMaterial.add(btnDelete);
+		btnDelete.setVisible(false);
 
 		lblX0 = new JLabel("");
 		lblX0.addMouseListener(new MouseAdapter() {
@@ -1200,7 +1201,7 @@ public class Invoice {
 
 
 
-		
+
 
 
 
@@ -1308,10 +1309,10 @@ public class Invoice {
 		btnRetrieve.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
 		});
-		
+
 		btnRetrieve.setBounds(140, 184, 120, 30);
 		pnlFile.add(btnRetrieve);
 
@@ -1518,7 +1519,7 @@ public class Invoice {
 		btnCreate.setBounds(270, 176, 120, 30);
 		pnlRecipt.add(btnCreate);
 
-		
+
 
 		btnCreate.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
@@ -2195,12 +2196,7 @@ public class Invoice {
 		materialTable.addColumn("Material Name");
 		materialTable.addColumn("Material Type");
 		materialTable.addColumn("Material Cost");
-		//		materialTable.addTableModelListener( new MouseAdapter() {
-		//			public void mouseReleased(MouseEvent me) {
-		//				System.out.println("a");
-		//			}
-		//			
-		//		});
+				
 
 		panel_14.setLayout(null);
 
@@ -2275,7 +2271,7 @@ public class Invoice {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Database.LoadMaterials(false);
-				
+
 			}
 		});
 		btnSortByMaterial.setBounds(143, 626, 123, 28);
@@ -2348,177 +2344,193 @@ public class Invoice {
 	}			// --------------------------------------------------------------------------------------------------- end of Jframe
 
 
-
+	protected String GetMaterialName(String name) {
+		int i = name.indexOf(".");
+		String type = name.substring(i+1);
+		name = name.substring(0, i);
+		
+		return name + " " + type;
+	}
 
 
 	protected void DeleteSelectedMaterial(int item) {
-		// TODO Auto-generated method stub
-		if(selectedMaterials[0][item] != null) {
-			if(selectedMaterials[0][item+1] != null) {
-
-				for(int i = item; i < 10; i++) {
-
-					if(i < 9) {
-//						if(selectedMaterials[0][i+1] != null) {
-
-							selectedMaterials[0][i] = selectedMaterials[0][i+1];
-							selectedMaterials[1][i] = selectedMaterials[1][i+1];
-
-
-
-							switch(i) {
-							case 0:
-								lblMaterialName0.setText("1.   " + selectedMaterials[0][i]);
-								lblMaterialAmount0.setText(selectedMaterials[1][i]);
-								break;
-							case 1:
-								lblMaterialName1.setText("2.   " + selectedMaterials[0][i]);
-								lblMaterialAmount1.setText(selectedMaterials[1][i]);
-								break;
-							case 2:
-								lblMaterialName2.setText("3.   " + selectedMaterials[0][i]);
-								lblMaterialAmount2.setText(selectedMaterials[1][i]);
-								break;
-							case 3:
-								lblMaterialName3.setText("4.   " + selectedMaterials[0][i]);
-								lblMaterialAmount3.setText(selectedMaterials[1][i]);
-								break;
-							case 4:
-								lblMaterialName4.setText("5.   " + selectedMaterials[0][i]);
-								lblMaterialAmount4.setText(selectedMaterials[1][i]);
-								break;
-							case 5:
-								lblMaterialName5.setText("6.   " + selectedMaterials[0][i]);
-								lblMaterialAmount5.setText(selectedMaterials[1][i]);
-								break;
-							case 6:
-								lblMaterialName6.setText("7.   " + selectedMaterials[0][i]);
-								lblMaterialAmount6.setText(selectedMaterials[1][i]);
-								break;
-							case 7:
-								lblMaterialName7.setText("8.   " + selectedMaterials[0][i]);
-								lblMaterialAmount7.setText(selectedMaterials[1][i]);
-								break;
-							case 8:
-								lblMaterialName8.setText("9.   " + selectedMaterials[0][i]);
-								lblMaterialAmount8.setText(selectedMaterials[1][i]);
-								break;
-							case 9:
-								lblMaterialName9.setText("");
-								lblMaterialAmount9.setText("");
-								break;
-							}
-						}else {
-							selectedMaterials[0][i] = null;
-							selectedMaterials[1][i] = null;
-							switch(i) {
-							case 1:
-								lblMaterialName1.setText("");
-								lblMaterialAmount1.setText("");
-								lblX1.setText("");
-								break;
-							case 2:
-								lblMaterialName2.setText("");
-								lblMaterialAmount2.setText("");
-								lblX2.setText("");
-								break;
-							case 3:
-								lblMaterialName3.setText("");
-								lblMaterialAmount3.setText("");
-								lblX3.setText("");
-								break;
-							case 4:
-								lblMaterialName4.setText("");
-								lblMaterialAmount4.setText("");
-								lblX4.setText("");
-								break;
-							case 5:
-								lblMaterialName5.setText("");
-								lblMaterialAmount5.setText("");
-								lblX5.setText("");
-								break;
-							case 6:
-								lblMaterialName6.setText("");
-								lblMaterialAmount6.setText("");
-								lblX6.setText("");
-								break;
-							case 7:
-								lblMaterialName7.setText("");
-								lblMaterialAmount7.setText("");
-								lblX7.setText("");
-								break;
-							case 8:
-								lblMaterialName8.setText("");
-								lblMaterialAmount8.setText("");
-								lblX8.setText("");
-								break;
-							case 9:
-								lblMaterialName9.setText("");
-								lblMaterialAmount9.setText("");
-								lblX9.setText("");
-								break;
-							}
+		if(selectedMaterials[0][item+1] != null) {
+			for(int i = item; i< 10; i++) {
+//				System.out.println("Original Array: " + selectedMaterials[0][i]);
+				if(selectedMaterials[0][i+1] != null) {
+					selectedMaterials[0][i] = selectedMaterials[0][i+1];
+					String materialName = GetMaterialName(selectedMaterials[0][i]);
+					selectedMaterials[1][i] = selectedMaterials[1][i+1];
+//					System.out.println("Changed Array: " + selectedMaterials[0][i]);
+					switch(i) {
+						case 0:
+							lblMaterialName0.setText("1.    " + materialName);
+							lblMaterialAmount0.setText(selectedMaterials[1][0]);
+	
 							break;
-						}
+						case 1: 
+							lblMaterialName1.setText("2.    " + materialName);
+							lblMaterialAmount1.setText(selectedMaterials[1][1]);
+	
+							break;
+						case 2: 
+							lblMaterialName2.setText("3.    " + materialName);
+							lblMaterialAmount2.setText(selectedMaterials[1][2]);
+	
+							break;
+						case 3: 
+							lblMaterialName3.setText("4.    " + materialName);
+							lblMaterialAmount3.setText(selectedMaterials[1][3]);
+	
+							break;
+						case 4: 
+							lblMaterialName4.setText("5.    " + materialName);
+							lblMaterialAmount4.setText(selectedMaterials[1][4]);
+	
+							break;
+						case 5: 
+							lblMaterialName5.setText("6.    " + materialName);
+							lblMaterialAmount5.setText(selectedMaterials[1][5]);
+	
+							break;
+						case 6: 
+							lblMaterialName6.setText("7.    " + materialName);
+							lblMaterialAmount6.setText(selectedMaterials[1][6]);
+	
+							break;
+						case 7: 
+							lblMaterialName7.setText("8.    " + materialName);
+							lblMaterialAmount7.setText(selectedMaterials[1][7]);
+	
+							break;
+						case 8: 
+							lblMaterialName8.setText("9.    " + materialName);
+							lblMaterialAmount8.setText(selectedMaterials[1][8]);
+	
+							break;
+						case 9: 
+							lblMaterialName0.setText("");
+	
+							break;
 
-//					}else {
-//						lblMaterialName9.setText("");
-//						lblMaterialAmount9.setText("");
-//						lblX9.setText("");
-//					}
+					}
+				}else {
+					selectedMaterials[0][i] = null;
+					selectedMaterials[1][i] = null;
+					switch(i) {
+						case 0:
+							lblMaterialName0.setText("");
+							lblMaterialAmount0.setText("");
+							lblX0.setText("");
+							break;
+						case 1: 
+							lblMaterialName1.setText("");
+							lblMaterialAmount1.setText("");
+							lblX1.setText("");
+							break;
+						case 2: 
+							lblMaterialName2.setText("");
+							lblMaterialAmount2.setText("");
+							lblX2.setText("");
+							break;
+						case 3: 
+							lblMaterialName3.setText("");
+							lblMaterialAmount3.setText("");
+							lblX3.setText("");
+							break;
+						case 4: 
+							lblMaterialName4.setText("");
+							lblMaterialAmount4.setText("");
+							lblX4.setText("");
+							break;
+						case 5: 
+							lblMaterialName5.setText("");
+							lblMaterialAmount5.setText("");
+							lblX5.setText("");
+							break;
+						case 6: 
+							lblMaterialName6.setText("");
+							lblMaterialAmount6.setText("");
+							lblX6.setText("");
+							break;
+						case 7: 
+							lblMaterialName7.setText("");
+							lblMaterialAmount7.setText("");
+							lblX7.setText("");
+							break;
+						case 8: 
+							lblMaterialName8.setText("");
+							lblMaterialAmount8.setText("");
+							lblX8.setText("");
+							break;
+						case 9: 
+							lblMaterialName9.setText("");
+							lblMaterialAmount9.setText("");
+							lblX9.setText("");
+							break;
+							
+					}
+					break;
 				}
-			}else {
-				switch(item) {
-				case 1:
+
+			}
+		}else {
+			selectedMaterials[0][item] = null;
+			selectedMaterials[1][item] = null;
+			switch(item) {
+				case 0:
+					lblMaterialName0.setText("");
+					lblMaterialAmount0.setText("");
+					lblX0.setText("");
+					break;
+				case 1: 
 					lblMaterialName1.setText("");
 					lblMaterialAmount1.setText("");
 					lblX1.setText("");
 					break;
-				case 2:
+				case 2: 
 					lblMaterialName2.setText("");
 					lblMaterialAmount2.setText("");
 					lblX2.setText("");
 					break;
-				case 3:
+				case 3: 
 					lblMaterialName3.setText("");
 					lblMaterialAmount3.setText("");
 					lblX3.setText("");
 					break;
-				case 4:
+				case 4: 
 					lblMaterialName4.setText("");
 					lblMaterialAmount4.setText("");
 					lblX4.setText("");
 					break;
-				case 5:
+				case 5: 
 					lblMaterialName5.setText("");
 					lblMaterialAmount5.setText("");
 					lblX5.setText("");
 					break;
-				case 6:
+				case 6: 
 					lblMaterialName6.setText("");
 					lblMaterialAmount6.setText("");
 					lblX6.setText("");
 					break;
-				case 7:
+				case 7: 
 					lblMaterialName7.setText("");
 					lblMaterialAmount7.setText("");
 					lblX7.setText("");
 					break;
-				case 8:
+				case 8: 
 					lblMaterialName8.setText("");
 					lblMaterialAmount8.setText("");
 					lblX8.setText("");
 					break;
-				case 9:
+				case 9: 
 					lblMaterialName9.setText("");
 					lblMaterialAmount9.setText("");
 					lblX9.setText("");
 					break;
-				}
+					
 			}
-
 		}
-
 	}
 
 
@@ -2741,55 +2753,55 @@ public class Invoice {
 	//-----------------------------------------------------------------------------------------------// W R I T E //-------------------------------------------------------
 
 
-	public void write() {
-
-		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx"; 
-
-		//Read the spreadsheet that needs to be updated
-		FileInputStream fsIP;
-		try {
-
-			fsIP = new FileInputStream(new File(fille));  
-			//Access the workbook                 
-			XSSFWorkbook wb = new XSSFWorkbook(fsIP);
-			//Access the worksheet, so that we can update / modify it. 
-			XSSFSheet worksheet = wb.getSheetAt(0); 
-			// declare a Cell object
-
-
-			Cell cell = null; 
-
-			cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
-			cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
-
-			cell = worksheet.getRow(10).getCell(2);   
-			cell.setCellValue("PT Lyrical Group Cake");
-
-
-			// Get current cell value value and overwrite the value
-
-			//Close the InputStream  
-			fsIP.close(); 
-
-
-			//Open FileOutputStream to write updates
-			FileOutputStream output_file =new FileOutputStream(new File(fille));  
-			//write changes
-			wb.write(output_file);
-
-
-			//close the stream
-			output_file.close();
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+	//	public void write() {
+	//
+	//		String fille = "C:\\Users\\Embit User\\Desktop\\KID\\Testing\\024.xlsx"; 
+	//
+	//		//Read the spreadsheet that needs to be updated
+	//		FileInputStream fsIP;
+	//		try {
+	//
+	//			fsIP = new FileInputStream(new File(fille));  
+	//			//Access the workbook                 
+	//			XSSFWorkbook wb = new XSSFWorkbook(fsIP);
+	//			//Access the worksheet, so that we can update / modify it. 
+	//			XSSFSheet worksheet = wb.getSheetAt(0); 
+	//			// declare a Cell object
+	//
+	//
+	//			Cell cell = null; 
+	//
+	//			cell = worksheet.getRow(10).getCell(2);      // Access the second cell in second row to update the value
+	//			cell.setCellValue("PT Lyrical Group Cake");     // Get current cell value value and overwrite the value
+	//
+	//			cell = worksheet.getRow(10).getCell(2);   
+	//			cell.setCellValue("PT Lyrical Group Cake");
+	//
+	//
+	//			// Get current cell value value and overwrite the value
+	//
+	//			//Close the InputStream  
+	//			fsIP.close(); 
+	//
+	//
+	//			//Open FileOutputStream to write updates
+	//			FileOutputStream output_file =new FileOutputStream(new File(fille));  
+	//			//write changes
+	//			wb.write(output_file);
+	//
+	//
+	//			//close the stream
+	//			output_file.close();
+	//
+	//		} catch (FileNotFoundException e) {
+	//			// TODO Auto-generated catch block
+	//			e.printStackTrace();
+	//		} catch (IOException e) {
+	//			// TODO Auto-generated catch block
+	//			e.printStackTrace();
+	//		}
+	//
+	//	}
 
 
 
