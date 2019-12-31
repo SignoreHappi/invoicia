@@ -167,7 +167,7 @@ public class Invoice {
 	public JLabel lblLine;
 
 	public static JSpinner spnHH = new JSpinner();
-	public static JSpinner spnKids = new JSpinner();
+	public static JSpinner spnK = new JSpinner();
 	public static JSpinner spnGroup;
 	public static JSpinner spnSolo;
 	public static JSpinner spnHourly;
@@ -1114,18 +1114,18 @@ public class Invoice {
 		pnlHours.add(spnHH);
 		spnHH.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 //		spnKids.setEnabled(false);
-		spnKids.addChangeListener(new ChangeListener() {
+		spnK.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				if(cmbStudio.getSelectedItem() == "Evolve Dance Centre") {
-					spnDeposit.setValue((int)spnKids.getValue() * 50);
+					spnDeposit.setValue((int)spnK.getValue() * 50);
 				}
 			}
 		});
 
 		//		JSpinner spnK = new JSpinner();
-		spnKids.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		spnKids.setBounds(142, 77, 116, 20);
-		pnlHours.add(spnKids);
+		spnK.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		spnK.setBounds(142, 77, 116, 20);
+		pnlHours.add(spnK);
 
 		JLabel label = new JLabel("Kids");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2911,13 +2911,13 @@ public class Invoice {
 	}
 
 	public JSpinner getSpnK() {
-		return spnKids;
+		return spnK;
 	}
 	public void setSpnK(JSpinner spnK) {
-		this.spnKids = spnK;
+		this.spnK = spnK;
 	}
 	public static double getSpnKValue() {
-		return Double.parseDouble((String) spnKids.getValue());
+		return Double.parseDouble((String) spnK.getValue());
 	}
 
 	public JRadioButton getRdbGroup() {		
@@ -3081,7 +3081,7 @@ public class Invoice {
 
 						}else if(strCurrentLine.equals("K")){
 							strCurrentLine = br.readLine();
-							spnKids.setValue(Double.parseDouble(strCurrentLine));
+							spnK.setValue(Double.parseDouble(strCurrentLine));
 							//							output("", (strCurrentLine));
 							strCurrentLine = br.readLine();
 
@@ -3254,7 +3254,7 @@ public class Invoice {
 			content += "/\n";
 
 
-			content += "G\n" + spnKids.getValue() + "\n/\n";
+			content += "G\n" + spnK.getValue() + "\n/\n";
 			content += "H\n" + spnHH.getValue() + "\n/\n";
 			//			content += "D\n" + Double.valueOf(txtDD.getText()) + "\n/\n";
 
