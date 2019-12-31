@@ -163,7 +163,7 @@ public class Invoice {
 	private static JLabel lbsOther;
 	private static JLabel lbsTotal;
 	private static JLabel lbsSubtotal;
-	private static JLabel lbsDeposit;
+	public static JLabel lbsDeposit;
 	public JLabel lblLine;
 
 	public static JSpinner spnHH = new JSpinner();
@@ -187,7 +187,7 @@ public class Invoice {
 	public JSpinner spnRA3;
 	public JSpinner spnRA4;
 
-	public JSpinner spnDeposit;
+	public static JSpinner spnDeposit;
 
 	public static JComboBox cmbStudio;
 	public static JComboBox spnMaterialType;

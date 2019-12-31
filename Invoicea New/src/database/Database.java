@@ -193,12 +193,17 @@ public class Database extends Invoice{
 		Invoice.result = 0;
 		String cmd = "INSERT INTO invoice(code, invoice_name, studio_id, invoice_id, year, "
 				+ "material_1, amount_1, material_2, amount_2, material_3, amount_3, material_4, amount_4,material_5, amount_5,material_6, amount_6,"
-				+ "material_7, amount_7, material_8, amount_8, material_9, amount_9, material_10, amount_10) "
+				+ "material_7, amount_7, material_8, amount_8, material_9, amount_9, material_10, amount_10,"
+				+ "kids, deposit, hours, is_group, rhinestone_1, rhinestone_2, rhinestone_3, rhinestone_4) "
 
-
+						//1  2  3  4  5
 				+ "VALUES(?, ?, ?, ?, ?, "
-				+ "?,?, ?,?, ?,?, ?,?, ?,?, ?,?, "
-				+ "?,?, ?,?, ?,?, ?,?)";
+				 //6 7  8 9  10 11 12 13 14 15 16 17 
+				+ "?,?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, "
+				 //18 19 20 21 22 23 24 25
+				+ "?, ?, ?, ?, ?, ?, ?, ?,"
+				 //26 27 28 29 30 31 32 33
+ 				+ "?, ?, ?, ?, ?, ?, ?, ?)";
 		int inv = invoice_id+1;
 		String code = null;
 		//\\//FOR TESTING ONLY	 //\\//		//\\//		//\\//		//\\//		//\\//		//\\//
@@ -245,7 +250,22 @@ public class Database extends Invoice{
 					count++;
 				}
 			}
-
+			
+			pstmt.setInt(26, (int) Invoice.spnK.getValue());
+			String deposit =  Invoice.spnDeposit.getValue() + "";
+			pstmt.setDouble(27, Double.parseDouble(deposit));
+			pstmt.setDouble(28, (double) Invoice.spnHH.getValue());
+			if(Invoice.rdbGroup.isSelected()) {
+				pstmt.setBoolean(29, true);
+			}else if(Invoice.rdbSolo.isSelected()) {
+				pstmt.setBoolean(29, false);
+			}
+			
+			pstmt.setString(30, null);
+			pstmt.setString(31, null);
+			pstmt.setString(32, null);
+			pstmt.setString(33, null);
+			
 
 			pstmt.executeUpdate();
 			//			System.out.print("Saved");
@@ -546,6 +566,7 @@ public class Database extends Invoice{
 					int index = name.indexOf(".");
 					String type = name.substring(index+1); 
 					name = name.substring(0, index);
+					name = name.replace("\"", "#");
 					//					Invoice.selectedMaterials[0][i] = name;
 					cmd =  "SELECT * FROM material where material_name = " + "\"" + name + "\" and material_type = " + "\"" + type + "\"";
 					//				
@@ -559,6 +580,8 @@ public class Database extends Invoice{
 					while(rs.next()) {					
 						double price = rs.getDouble("material_cost");
 						Invoice.selectedMaterials[2][i] = price + "";
+						System.out.println(Invoice.selectedMaterials[2][i]);
+						System.out.println();
 					}
 				}else {
 					break;
