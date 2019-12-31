@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -17,6 +18,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -96,6 +98,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.sql.*;
 import java.awt.Choice;
 import java.awt.List;
+import java.awt.Point;
 import java.awt.BorderLayout;
 import javax.swing.JFormattedTextField;
 import javax.swing.JToggleButton;
@@ -164,7 +167,7 @@ public class Invoice {
 	public JLabel lblLine;
 
 	public static JSpinner spnHH = new JSpinner();
-	public static JSpinner spnK = new JSpinner();
+	public static JSpinner spnKids = new JSpinner();
 	public static JSpinner spnGroup;
 	public static JSpinner spnSolo;
 	public static JSpinner spnHourly;
@@ -186,8 +189,8 @@ public class Invoice {
 
 	public JSpinner spnDeposit;
 
-	public JComboBox cmbStudio;
-	public JComboBox spnMaterialType;
+	public static JComboBox cmbStudio;
+	public static JComboBox spnMaterialType;
 
 	private String ma[] = new String [10];
 	private String me[] = new String [10];
@@ -224,38 +227,38 @@ public class Invoice {
 	public static JLabel lblMCommand2;
 	public static JLabel lblMCommand1;
 
-	public JLabel lblMaterialName0;
-	public JLabel lblMaterialName1;
-	public JLabel lblMaterialName2;
-	public JLabel lblMaterialName3;
-	public JLabel lblMaterialName4;
-	public JLabel lblMaterialName8;
-	public JLabel lblMaterialName7;
-	public JLabel lblMaterialName6;
-	public JLabel lblMaterialName5;
-	public JLabel lblMaterialName9;
+	public static JLabel lblMaterialName0;
+	public static JLabel lblMaterialName1;
+	public static JLabel lblMaterialName2;
+	public static JLabel lblMaterialName3;
+	public static JLabel lblMaterialName4;
+	public static  JLabel lblMaterialName8;
+	public static  JLabel lblMaterialName7;
+	public static  JLabel lblMaterialName6;
+	public static  JLabel lblMaterialName5;
+	public static  JLabel lblMaterialName9;
 
-	public JLabel lblMaterialAmount1;
-	public JLabel lblMaterialAmount2;
-	public JLabel lblMaterialAmount3;
-	public JLabel lblMaterialAmount4;
-	public JLabel lblMaterialAmount8;
-	public JLabel lblMaterialAmount5;
-	public JLabel lblMaterialAmount6;
-	public JLabel lblMaterialAmount7;
-	public JLabel lblMaterialAmount9;
-	public JLabel lblMaterialAmount0;
+	public static  JLabel lblMaterialAmount0;
+	public static  JLabel lblMaterialAmount1;
+	public static  JLabel lblMaterialAmount2;
+	public static  JLabel lblMaterialAmount3;
+	public static  JLabel lblMaterialAmount4;
+	public static  JLabel lblMaterialAmount8;
+	public static  JLabel lblMaterialAmount5;
+	public static  JLabel lblMaterialAmount6;
+	public static  JLabel lblMaterialAmount7;
+	public static  JLabel lblMaterialAmount9;
 
-	public JLabel lblX0;
-	public JLabel lblX1;
-	public JLabel lblX2;
-	public JLabel lblX3;
-	public JLabel lblX4;
-	public JLabel lblX5;
-	public JLabel lblX6;
-	public JLabel lblX7;
-	public JLabel lblX8;
-	public JLabel lblX9;
+	public static  JLabel lblX0;
+	public static  JLabel lblX1;
+	public static  JLabel lblX2;
+	public static  JLabel lblX3;
+	public static  JLabel lblX4;
+	public static  JLabel lblX5;
+	public static  JLabel lblX6;
+	public static  JLabel lblX7;
+	public static  JLabel lblX8;
+	public static  JLabel lblX9;
 
 	private double tax = 0.13;
 	private int hourly = 30;
@@ -310,7 +313,7 @@ public class Invoice {
 	public static JButton btnAddMaterial;
 
 	public static JFrame updateTable;
-	private JTextField txtCostumeName;
+	public static JTextField txtCostumeName;
 
 	public static JComboBox cmbStudioName;
 	public static JComboBox cmbYear;
@@ -1070,7 +1073,7 @@ public class Invoice {
 
 		cmbStudio = new JComboBox();
 		cmbStudio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		cmbStudio.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
+//		cmbStudio.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
 		cmbStudio.setBounds(79, 55, 181, 20);
 		pnlStudio.add(cmbStudio);
 
@@ -1110,18 +1113,19 @@ public class Invoice {
 		spnHH.setBounds(142, 46, 116, 20);
 		pnlHours.add(spnHH);
 		spnHH.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		spnK.addChangeListener(new ChangeListener() {
+//		spnKids.setEnabled(false);
+		spnKids.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				if(cmbStudio.getSelectedItem() == "Evolve Dance Centre") {
-					spnDeposit.setValue((int)spnK.getValue() * 50);
+					spnDeposit.setValue((int)spnKids.getValue() * 50);
 				}
 			}
 		});
 
 		//		JSpinner spnK = new JSpinner();
-		spnK.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		spnK.setBounds(142, 77, 116, 20);
-		pnlHours.add(spnK);
+		spnKids.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		spnKids.setBounds(142, 77, 116, 20);
+		pnlHours.add(spnKids);
 
 		JLabel label = new JLabel("Kids");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1241,8 +1245,8 @@ public class Invoice {
 		pnlFile.add(lblSearchByNumber);
 
 		cmbStudioName = new JComboBox();
-		cmbStudioName.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
-		cmbStudioName.setSelectedIndex(0);
+//		cmbStudioName.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
+//		cmbStudioName.setSelectedIndex(0);
 		cmbStudioName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		cmbStudioName.setBounds(10, 77, 250, 24);
 		pnlFile.add(cmbStudioName);
@@ -1309,7 +1313,7 @@ public class Invoice {
 		btnRetrieve.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				Database.RetrieveInvoice(cmbStudioName.getSelectedIndex()+"", cmbYear.getSelectedItem()+"", cmbInvoiceId.getSelectedItem()+"");
 			}
 		});
 
@@ -2198,10 +2202,13 @@ public class Invoice {
 		materialTable.addColumn("Material Cost");
 				
 
+		
 		panel_14.setLayout(null);
 
 		JTable tableMaterial= new JTable(materialTable); 
-
+		
+		
+		
 		//		tableMaterial.addMouseListener(new MouseAdapter() {
 		//			public void mouseReleased(MouseEvent me) {
 		//				int row = table.rowAtPoint(me.getPoint());
@@ -2904,13 +2911,13 @@ public class Invoice {
 	}
 
 	public JSpinner getSpnK() {
-		return spnK;
+		return spnKids;
 	}
 	public void setSpnK(JSpinner spnK) {
-		this.spnK = spnK;
+		this.spnKids = spnK;
 	}
 	public static double getSpnKValue() {
-		return Double.parseDouble((String) spnK.getValue());
+		return Double.parseDouble((String) spnKids.getValue());
 	}
 
 	public JRadioButton getRdbGroup() {		
@@ -3074,7 +3081,7 @@ public class Invoice {
 
 						}else if(strCurrentLine.equals("K")){
 							strCurrentLine = br.readLine();
-							spnK.setValue(Double.parseDouble(strCurrentLine));
+							spnKids.setValue(Double.parseDouble(strCurrentLine));
 							//							output("", (strCurrentLine));
 							strCurrentLine = br.readLine();
 
@@ -3247,7 +3254,7 @@ public class Invoice {
 			content += "/\n";
 
 
-			content += "G\n" + spnK.getValue() + "\n/\n";
+			content += "G\n" + spnKids.getValue() + "\n/\n";
 			content += "H\n" + spnHH.getValue() + "\n/\n";
 			//			content += "D\n" + Double.valueOf(txtDD.getText()) + "\n/\n";
 

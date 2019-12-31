@@ -124,54 +124,55 @@ public class Database extends Invoice{
 				+ "material_7, amount_7, material_8, amount_8, material_9, amount_9, material_10, amount_10) "
 				+ "VALUES(?, ?, ?, ?, ?, "
 				+ "?,?, ?,?, ?,?, ?,?, ?,?, ?,?, "
-				+ "?,?, ?,?, ?,?, ?,?)";		String code = null;
+				+ "?,?, ?,?, ?,?, ?,?)";		
+		String code = null;
 
 
-				if(invcName.equals("101") || invcName.equals("Fill") || invcName.equals("Clear all")) {
-					SaveInvoices(studio_id, invcName);
-				}else {
-					code = CreateCode(studio_id, iYear, 0);
-					try{
-						connect = DBConnect.connectDB();
-						PreparedStatement pstmt = connect.prepareStatement(cmd);
-						pstmt.setString(1, code);
-						pstmt.setString(2, invcName);
-						pstmt.setInt(3, studio_id);
-						pstmt.setInt(4, 1);
-						pstmt.setInt(5, iYear);
-						int count = 1;
-						for(int i = 0; i<10; i++) {
-							if(Invoice.selectedMaterials[0][i] == null) {
-								pstmt.setString(5 + count, null);
-								count++;
-								pstmt.setString(5 + count, null);
-								count++;
-							}else {
-								String name = Invoice.selectedMaterials[0][i];
-								if(selectedMaterials[0][i].contains("\"")) {						
-									name = selectedMaterials[0][i].replace("\"", "#");
-								}
-								name = SeparateName(name);
-								pstmt.setString(5 + count, name);
-								count++;
-								pstmt.setString(5 + count, Invoice.selectedMaterials[1][i]);
-								count++;
-							}
+		if(invcName.equals("101") || invcName.equals("Fill") || invcName.equals("Clear all")) {
+			SaveInvoices(studio_id, invcName);
+		}else {
+			code = CreateCode(studio_id, iYear, 0);
+			try{
+				connect = DBConnect.connectDB();
+				PreparedStatement pstmt = connect.prepareStatement(cmd);
+				pstmt.setString(1, code);
+				pstmt.setString(2, invcName);
+				pstmt.setInt(3, studio_id);
+				pstmt.setInt(4, 1);
+				pstmt.setInt(5, iYear);
+				int count = 1;
+				for(int i = 0; i<10; i++) {
+					if(Invoice.selectedMaterials[0][i] == null) {
+						pstmt.setString(5 + count, null);
+						count++;
+						pstmt.setString(5 + count, null);
+						count++;
+					}else {
+						String name = Invoice.selectedMaterials[0][i];
+						if(selectedMaterials[0][i].contains("\"")) {						
+							name = selectedMaterials[0][i].replace("\"", "#");
 						}
-						Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
-					} catch (SQLException e) {
-						System.out.println("Create New Invoice");
-						System.out.println(e);
-						System.out.println(e.getMessage());
-					}finally {
-						try {
-							connect.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}		
+						name = SeparateName(name);
+						pstmt.setString(5 + count, name);
+						count++;
+						pstmt.setString(5 + count, Invoice.selectedMaterials[1][i]);
+						count++;
 					}
 				}
+				Invoice.writeOutput("Invoice Saved", "Studio ID: " + studio_id + "; Name: " + invcName + "; Year: " + iYear);
+			} catch (SQLException e) {
+				System.out.println("Create New Invoice");
+				System.out.println(e);
+				System.out.println(e.getMessage());
+			}finally {
+				try {
+					connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+			}
+		}
 
 	}
 
@@ -336,7 +337,7 @@ public class Database extends Invoice{
 		Invoice.materialTable.setRowCount(0);
 		Invoice.txtSearchMaterial.setText("");;
 		String cmd;
-		
+
 		if(typers == false) {
 			cmd = "SELECT * FROM material ORDER BY material_name ASC";
 		}else {
@@ -507,7 +508,10 @@ public class Database extends Invoice{
 				//						+ " . " + phone + " . " + email);
 				Object[] row = new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
 						Double.toString(bill), owner, address, phone, email};
-				Invoice.rows.addRow(row);				
+				Invoice.rows.addRow(row);	
+				Invoice.cmbStudio.addItem(name);
+				Invoice.cmbStudioName.addItem(name);
+
 			}
 
 			//If there's some error, return it
@@ -656,7 +660,7 @@ public class Database extends Invoice{
 
 		} catch (SQLException e) {
 			System.out.print(e);
-			
+
 		}finally {
 			try {
 				connect.close();
@@ -819,16 +823,16 @@ public class Database extends Invoice{
 			//For every possible execution, create a rs
 			ResultSet rs = stmt.executeQuery(cmdSearch);
 			while(rs.next()) {//Working
-//				material_name = rs.getString(2);
-				
+				//				material_name = rs.getString(2);
+
 			}
 			String cmd = "UPDATE `settings` SET `lastDate`= ? WHERE 1";
-			
+
 			try{
 				PreparedStatement pstmt = connect.prepareStatement(cmd);			
 				pstmt.setString(1, date);
 				pstmt.executeUpdate();
-				
+
 			} catch (SQLException e) {
 				System.out.println("Create Date ERROR");
 				System.out.println(e.getMessage());
@@ -847,6 +851,118 @@ public class Database extends Invoice{
 
 
 		return true;
+
+	}
+
+	public static void RetrieveInvoice(String studio, String year, String invoice) {
+		String cmd = "SELECT * FROM invoice WHERE studio_id = " + studio + " AND invoice_name = \"" + invoice + "\" AND year = " + year;
+
+		try {
+			connect = DBConnect.connectDB();
+			stmt = connect.prepareStatement(cmd);			
+			//Create the code
+			//Execute the code
+			stmt.executeQuery(cmd);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmd);
+			while(rs.next()) {//Working
+				
+				//Get the Invoice name
+				Invoice.txtCostumeName.setText(rs.getString(3));
+				
+				
+				//Get all the materials/amounts 
+				int count = 1;
+				for(int i = 0; i<10; i++) {
+					if(rs.getString(5 + count) != null) {
+						String name = rs.getString(5+count);
+						name = name.replace("#", "\"");
+
+
+						switch(i) {
+						case 0:
+							Invoice.lblMaterialName0.setText("1.    " + name);
+							count++;
+							Invoice.lblMaterialAmount0.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX0.setText(" X");
+							break;
+						case 1:
+							Invoice.lblMaterialName1.setText("2.    " + name);
+							count++;
+							Invoice.lblMaterialAmount1.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX1.setText(" X");
+							break;
+						case 2:
+							Invoice.lblMaterialName2.setText("3.    " + name);
+							count++;
+							Invoice.lblMaterialAmount2.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX2.setText(" X");
+							break;
+						case 3:
+							Invoice.lblMaterialName3.setText("4.    " + name);
+							count++;
+							Invoice.lblMaterialAmount3.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX3.setText(" X");
+							break;
+						case 4:
+							Invoice.lblMaterialName4.setText("5.    " + name);
+							count++;
+							Invoice.lblMaterialAmount4.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX4.setText(" X");
+							break;
+						case 6:
+							Invoice.lblMaterialName6.setText("7.    " + name);
+							count++;
+							Invoice.lblMaterialAmount6.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX6.setText(" X");
+							break;
+						case 7:
+							Invoice.lblMaterialName7.setText("8.    " + name);
+							count++;
+							Invoice.lblMaterialAmount7.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX7.setText(" X");
+							break;
+						case 8:
+							Invoice.lblMaterialName8.setText("9.    " + name);
+							count++;
+							Invoice.lblMaterialAmount8.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX0.setText(" X");
+							break;
+						case 9:
+							Invoice.lblMaterialName9.setText("10.    " + name);
+							count++;
+							Invoice.lblMaterialAmount9.setText(rs.getString(5+count));
+							count++;
+							Invoice.lblX9.setText(" X");
+							break;
+						}
+					}else {
+						break;
+					}
+				}
+				
+				
+			}
+
+		}catch(SQLException e){
+			System.out.println(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
+
 
 	}
 
