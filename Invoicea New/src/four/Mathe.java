@@ -141,7 +141,6 @@ public class Mathe {
 		
 		CostPerCostume = Total / kids;
 	
-		
 				
 	}
 	
