@@ -190,7 +190,7 @@ public class Invoice {
 	public static JSpinner spnDeposit;
 
 	public static JComboBox cmbStudio;
-	public static JComboBox spnMaterialType;
+	public JComboBox spnMaterialType;
 
 	private String ma[] = new String [10];
 	private String me[] = new String [10];
@@ -2074,7 +2074,21 @@ public class Invoice {
 		lblCost.setBounds(10, 59, 155, 17);
 		panel_4.add(lblCost);
 
-		JButton btnMaterial = new JButton("S U B M I T");
+//		JButton btnMaterial = new JButton("S U B M I T");
+		JButton btnMaterial = new JButton("B R O K E N");
+		btnMaterial.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				boolean success;
+//				System.out.println("Hello");
+				success = Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
+				txtName.setText("");
+				txtCost.setText("");
+				Database.LoadMaterials(false);
+
+			}
+		});
+		btnMaterial.setVisible(false);
 		btnMaterial.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnMaterial.setBounds(67, 129, 134, 32);
 		panel_4.add(btnMaterial);
@@ -2085,22 +2099,12 @@ public class Invoice {
 		panel_4.add(lblMaterialType);
 
 		spnMaterialType = new JComboBox();
-		spnMaterialType.setMaximumRowCount(30);
+//		spnMaterialType.setMaximumRowCount(30);
 		spnMaterialType.setModel(new DefaultComboBoxModel(new String[] {"Chiffon", "Cosmo", "Cracked Ice", "Fringe", "Georgette", "Hologram", "Lace", "Lycra", "Mesh", "Mystique", "Organdy", "Print", "Sequin", "Supplex", "Toulle", "Trim", "Velvet", "Unknown"}));
 		spnMaterialType.setBounds(125, 98, 136, 20);
 		panel_4.add(spnMaterialType);
 
-		btnMaterial.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				boolean success;
-				success = Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
-				txtName.setText("");
-				txtCost.setText("");
-				Database.LoadMaterials(false);
-
-			}
-		});
+		
 
 
 
