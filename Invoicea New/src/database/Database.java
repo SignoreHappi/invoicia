@@ -911,9 +911,12 @@ public class Database extends Invoice{
 				Invoice.lblInvoiceNumberR.setText(rs.getString("code"));
 				
 				//Get the Invoice Hours & Kids
-				Invoice.spnK.setValue(rs.getString("kids"));
-				Invoice.spnDeposit.setValue(rs.getString("deposit"));
-				Invoice.spnHH.setValue(rs.getString("hours"));
+				
+				System.out.println(rs.getString("kids"));
+				Invoice.spnK.setValue(Integer.parseInt(rs.getString("kids")));
+				
+				Invoice.spnDeposit.setValue(Double.parseDouble(rs.getString("deposit")));
+				Invoice.spnHH.setValue(Double.parseDouble(rs.getString("hours")));
 				
 				
 				//Get all the materials/amounts 

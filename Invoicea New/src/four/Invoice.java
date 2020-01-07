@@ -59,24 +59,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
-//import org.apache.poi.ss.usermodel.Cell;
-//import org.apache.poi.xssf.usermodel.XSSFSheet;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-//import org.apache.poi.ss.usermodel.Cell;
-//import org.apache.poi.xssf.usermodel.XSSFSheet;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-//
-//import java.io.File;
-//import java.io.FileInputStream;
-//import java.io.FileNotFoundException;
-//import java.io.FileOutputStream;
-//import java.io.IOException;
-//
-//import org.apache.poi.ss.usermodel.Cell;
-//import org.apache.poi.xssf.usermodel.XSSFSheet;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 
@@ -228,7 +210,7 @@ public class Invoice {
 	public static JLabel lblMCommand3;
 	public static JLabel lblMCommand2;
 	public static JLabel lblMCommand1;
-	
+
 	public static JLabel lblCCommand12;
 	public static JLabel lblCCommand11;
 	public static JLabel lblCCommand10;
@@ -335,7 +317,7 @@ public class Invoice {
 	public static JComboBox cmbInvoiceId;
 
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss"); 
-	
+
 	private Date date = new Date();
 	private LocalDateTime now = LocalDateTime.now(); 
 
@@ -469,115 +451,117 @@ public class Invoice {
 					}else {
 
 						String amount = JOptionPane.showInputDialog(null, "How much of " + name + " " + type + " do you want to use?");
-						try {
-							double intAmount = Double.parseDouble(amount);
-							int count = 0;
-							if(intAmount == 999) {
-								lblMaterialName0.setText(1 + ".    " + "Assorted Lycra");
-								lblMaterialAmount0.setText("101");
-								lblMaterialName1.setText(2 + ".    " + "Assorted Lycra");
-								lblMaterialAmount1.setText("101");
-								lblMaterialName2.setText(3 + ".    " + "Assorted Lycra");
-								lblMaterialAmount2.setText("101");
-								lblMaterialName3.setText(4 + ".    " + "Assorted Lycra");
-								lblMaterialAmount3.setText("101");
-								lblMaterialName4.setText(5 + ".    " + "Assorted Lycra");
-								lblMaterialAmount4.setText("101");
-								lblMaterialName5.setText(6 + ".    " + "Assorted Lycra");
-								lblMaterialAmount5.setText("101");
-								lblMaterialName6.setText(7 + ".    " + "Assorted Lycra");
-								lblMaterialAmount6.setText("101");
-								lblMaterialName7.setText(8 + ".    " + "Assorted Lycra");
-								lblMaterialAmount7.setText("101");
+						if(amount != null) {							
+							try {
+								double intAmount = Double.parseDouble(amount);
+								int count = 0;
+								if(intAmount == 999) {
+									lblMaterialName0.setText(1 + ".    " + "Assorted Lycra");
+									lblMaterialAmount0.setText("101");
+									lblMaterialName1.setText(2 + ".    " + "Assorted Lycra");
+									lblMaterialAmount1.setText("101");
+									lblMaterialName2.setText(3 + ".    " + "Assorted Lycra");
+									lblMaterialAmount2.setText("101");
+									lblMaterialName3.setText(4 + ".    " + "Assorted Lycra");
+									lblMaterialAmount3.setText("101");
+									lblMaterialName4.setText(5 + ".    " + "Assorted Lycra");
+									lblMaterialAmount4.setText("101");
+									lblMaterialName5.setText(6 + ".    " + "Assorted Lycra");
+									lblMaterialAmount5.setText("101");
+									lblMaterialName6.setText(7 + ".    " + "Assorted Lycra");
+									lblMaterialAmount6.setText("101");
+									lblMaterialName7.setText(8 + ".    " + "Assorted Lycra");
+									lblMaterialAmount7.setText("101");
 
-								lblX0.setText(" X");
-								lblX1.setText(" X");
-								lblX2.setText(" X");
-								lblX3.setText(" X");
-								lblX4.setText(" X");
-								lblX5.setText(" X");
-								lblX6.setText(" X");
-								lblX7.setText(" X");
+									lblX0.setText(" X");
+									lblX1.setText(" X");
+									lblX2.setText(" X");
+									lblX3.setText(" X");
+									lblX4.setText(" X");
+									lblX5.setText(" X");
+									lblX6.setText(" X");
+									lblX7.setText(" X");
 
-								for(count = 0; count < 8; count++) {
-									//								if(selectedMaterials[0][count] == null) {
-									selectedMaterials[0][count] = "Assorted" + "." + "Lycra";
-									selectedMaterials[1][count] = "101";
-									selectedMaterials[2][count] = "10";
-									//								}
+									for(count = 0; count < 8; count++) {
+										//								if(selectedMaterials[0][count] == null) {
+										selectedMaterials[0][count] = "Assorted" + "." + "Lycra";
+										selectedMaterials[1][count] = "101";
+										selectedMaterials[2][count] = "10";
+										//								}
 
-								}
-								count = 7;
-							}else {
-								for(count = 0; count < 10; count++) {
-									if(selectedMaterials[0][count] == null) {
-										selectedMaterials[0][count] = name + "." + type;
-										selectedMaterials[1][count] = amount;
-										selectedMaterials[2][count] = null;
-										switch(count) {
-										case 0:
-											lblMaterialName0.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount0.setText(amount);
-											lblX0.setText(" X");
+									}
+									count = 7;
+								}else {
+									for(count = 0; count < 10; count++) {
+										if(selectedMaterials[0][count] == null) {
+											selectedMaterials[0][count] = name + "." + type;
+											selectedMaterials[1][count] = amount;
+											selectedMaterials[2][count] = null;
+											switch(count) {
+											case 0:
+												lblMaterialName0.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount0.setText(amount);
+												lblX0.setText(" X");
 
-											break;
-										case 1:
-											lblMaterialName1.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount1.setText(amount);
-											lblX1.setText(" X");
-											break;
-										case 2:
-											lblMaterialName2.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount2.setText(amount);
-											lblX2.setText(" X");
-											break;
-										case 3:
-											lblMaterialName3.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount3.setText(amount);
-											lblX3.setText(" X");
-											break;
-										case 4:
-											lblMaterialName4.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount4.setText(amount);
-											lblX4.setText(" X");
-											break;
-										case 5:
-											lblMaterialName5.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount5.setText(amount);
-											lblX5.setText(" X");
-											break;
-										case 6:
-											lblMaterialName6.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount6.setText(amount);
-											lblX6.setText(" X");
-											break;
-										case 7:
-											lblMaterialName7.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount7.setText(amount);
-											lblX7.setText(" X");
-											break;
-										case 8:
-											lblMaterialName8.setText(count+1 + ".    " + name + " " + type);
-											lblMaterialAmount8.setText(amount);
-											lblX8.setText(" X");
-											break;
-										case 9:
-											lblMaterialName9.setText(count+1 + ".  " + name + " " + type);
-											lblMaterialAmount9.setText(amount);
-											lblX9.setText(" X");
+												break;
+											case 1:
+												lblMaterialName1.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount1.setText(amount);
+												lblX1.setText(" X");
+												break;
+											case 2:
+												lblMaterialName2.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount2.setText(amount);
+												lblX2.setText(" X");
+												break;
+											case 3:
+												lblMaterialName3.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount3.setText(amount);
+												lblX3.setText(" X");
+												break;
+											case 4:
+												lblMaterialName4.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount4.setText(amount);
+												lblX4.setText(" X");
+												break;
+											case 5:
+												lblMaterialName5.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount5.setText(amount);
+												lblX5.setText(" X");
+												break;
+											case 6:
+												lblMaterialName6.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount6.setText(amount);
+												lblX6.setText(" X");
+												break;
+											case 7:
+												lblMaterialName7.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount7.setText(amount);
+												lblX7.setText(" X");
+												break;
+											case 8:
+												lblMaterialName8.setText(count+1 + ".    " + name + " " + type);
+												lblMaterialAmount8.setText(amount);
+												lblX8.setText(" X");
+												break;
+											case 9:
+												lblMaterialName9.setText(count+1 + ".  " + name + " " + type);
+												lblMaterialAmount9.setText(amount);
+												lblX9.setText(" X");
+												break;
+											}
+
 											break;
 										}
 
-										break;
 									}
 
 								}
 
+								btnCreate.setEnabled(true);
+							}catch (NumberFormatException ex){
+								JOptionPane.showMessageDialog(null, "Give me a number!",  "Error!", JOptionPane.ERROR_MESSAGE);
 							}
-
-							btnCreate.setEnabled(true);
-						}catch (NumberFormatException ex){
-							JOptionPane.showMessageDialog(null, "Give me a number!",  "Error!", JOptionPane.ERROR_MESSAGE);
 						}
 
 
@@ -593,9 +577,18 @@ public class Invoice {
 
 		homeMaterialJTbl = new JTable(homeMaterialTbl);
 		JScrollPane homeMaterialScroll = new JScrollPane(homeMaterialJTbl);
+		homeMaterialScroll.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(e.equals(KeyEvent.VK_ADD)) {
+					System.out.println("Enter");
+				}
+			}
+		});
 		homeMaterialScroll.setLocation(20,46);
 		pnlMaterial.add(homeMaterialScroll);
 		homeMaterialScroll.setSize(297,302);
+
 
 		homeMaterialJTbl.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
@@ -1089,7 +1082,7 @@ public class Invoice {
 
 		cmbStudio = new JComboBox();
 		cmbStudio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-//		cmbStudio.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
+		//		cmbStudio.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
 		cmbStudio.setBounds(79, 55, 181, 20);
 		cmbStudio.setMaximumRowCount(20);
 		pnlStudio.add(cmbStudio);
@@ -1138,7 +1131,7 @@ public class Invoice {
 				}
 			}
 		});
-		
+
 		spnK.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1272,8 +1265,8 @@ public class Invoice {
 		pnlFile.add(lblSearchByNumber);
 
 		cmbStudioName = new JComboBox();
-//		cmbStudioName.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
-//		cmbStudioName.setSelectedIndex(0);
+		//		cmbStudioName.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
+		//		cmbStudioName.setSelectedIndex(0);
 		cmbStudioName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		cmbStudioName.setBounds(10, 77, 250, 24);
 		pnlFile.add(cmbStudioName);
@@ -1855,12 +1848,12 @@ public class Invoice {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Database.CreateClient(txtStudio.getText(), txtOwner.getText(), txtAddress.getText(), txtPhone.getText(), txtEmail.getText());
-		
+
 				while(clientsTable.getRowCount() > 0) {
 					clientsTable.removeRow(clientsTable.getRowCount());
 					System.out.println(clientsTable.getRowCount() + "*" );
 				}
-				
+
 				Database.LoadClients();
 				cOutput("","Client " + txtStudio.getText() + " added to Client's Table");
 				txtEmail.setText("");
@@ -1911,8 +1904,8 @@ public class Invoice {
 		clientsTable = new DefaultTableModel(){
 			public boolean isCellEditable(int row, int column) {
 				return false;
-				}
-			};
+			}
+		};
 
 
 
@@ -2125,12 +2118,12 @@ public class Invoice {
 		panel_4.add(lblCost);
 
 		JButton btnMaterial = new JButton("S U B M I T");
-//		JButton btnMaterial = new JButton("B R O K E N");
+		//		JButton btnMaterial = new JButton("B R O K E N");
 		btnMaterial.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				boolean success;
-//				System.out.println("Hello");
+				//				System.out.println("Hello");
 				success = Database.CreateMaterial(txtName.getText(), txtCost.getText(), spnMaterialType.getSelectedItem().toString());
 				txtName.setText("");
 				txtCost.setText("");
@@ -2138,7 +2131,7 @@ public class Invoice {
 
 			}
 		});
-//		btnMaterial.setVisible(false);
+		//		btnMaterial.setVisible(false);
 		btnMaterial.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnMaterial.setBounds(67, 129, 134, 32);
 		panel_4.add(btnMaterial);
@@ -2154,7 +2147,7 @@ public class Invoice {
 		spnMaterialType.setBounds(125, 98, 136, 20);
 		panel_4.add(spnMaterialType);
 
-		
+
 
 
 
@@ -2254,29 +2247,28 @@ public class Invoice {
 		materialTable.addColumn("Material Name");
 		materialTable.addColumn("Material Type");
 		materialTable.addColumn("Material Cost");
-				
 
-		
+
+
 		panel_14.setLayout(null);
 
 		JTable tableMaterial= new JTable(materialTable); 
-		
-		
-		
-		//		tableMaterial.addMouseListener(new MouseAdapter() {
-		//			public void mouseReleased(MouseEvent me) {
-		//				int row = table.rowAtPoint(me.getPoint());
-		//
-		//				if(me.getClickCount()>1) {
-		//
-		//					UpdateMaterial update = new UpdateMaterial(0);
-		//
-		//
-		//				}
-		//				//				int column = materialTable.get;
-		//				//				System.out.println(column);
-		//			}
-		//		});
+
+
+
+		tableMaterial.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent me) {
+				int row = table.rowAtPoint(me.getPoint());
+
+				if(me.getClickCount() == 2) {
+
+
+
+				}
+				//				int column = materialTable.get;
+				//				System.out.println(column);
+			}
+		});
 
 		JScrollPane scrollPane = new JScrollPane(tableMaterial);
 		scrollPane.setLocation(10, 11);
@@ -2409,7 +2401,7 @@ public class Invoice {
 		int i = name.indexOf(".");
 		String type = name.substring(i+1);
 		name = name.substring(0, i);
-		
+
 		return name + " " + type;
 	}
 
@@ -2417,119 +2409,119 @@ public class Invoice {
 	protected void DeleteSelectedMaterial(int item) {
 		if(selectedMaterials[0][item+1] != null) {
 			for(int i = item; i< 10; i++) {
-//				System.out.println("Original Array: " + selectedMaterials[0][i]);
+				//				System.out.println("Original Array: " + selectedMaterials[0][i]);
 				if(selectedMaterials[0][i+1] != null) {
 					selectedMaterials[0][i] = selectedMaterials[0][i+1];
 					String materialName = GetMaterialName(selectedMaterials[0][i]);
 					selectedMaterials[1][i] = selectedMaterials[1][i+1];
-//					System.out.println("Changed Array: " + selectedMaterials[0][i]);
+					//					System.out.println("Changed Array: " + selectedMaterials[0][i]);
 					switch(i) {
-						case 0:
-							lblMaterialName0.setText("1.    " + materialName);
-							lblMaterialAmount0.setText(selectedMaterials[1][0]);
-	
-							break;
-						case 1: 
-							lblMaterialName1.setText("2.    " + materialName);
-							lblMaterialAmount1.setText(selectedMaterials[1][1]);
-	
-							break;
-						case 2: 
-							lblMaterialName2.setText("3.    " + materialName);
-							lblMaterialAmount2.setText(selectedMaterials[1][2]);
-	
-							break;
-						case 3: 
-							lblMaterialName3.setText("4.    " + materialName);
-							lblMaterialAmount3.setText(selectedMaterials[1][3]);
-	
-							break;
-						case 4: 
-							lblMaterialName4.setText("5.    " + materialName);
-							lblMaterialAmount4.setText(selectedMaterials[1][4]);
-	
-							break;
-						case 5: 
-							lblMaterialName5.setText("6.    " + materialName);
-							lblMaterialAmount5.setText(selectedMaterials[1][5]);
-	
-							break;
-						case 6: 
-							lblMaterialName6.setText("7.    " + materialName);
-							lblMaterialAmount6.setText(selectedMaterials[1][6]);
-	
-							break;
-						case 7: 
-							lblMaterialName7.setText("8.    " + materialName);
-							lblMaterialAmount7.setText(selectedMaterials[1][7]);
-	
-							break;
-						case 8: 
-							lblMaterialName8.setText("9.    " + materialName);
-							lblMaterialAmount8.setText(selectedMaterials[1][8]);
-	
-							break;
-						case 9: 
-							lblMaterialName0.setText("");
-	
-							break;
+					case 0:
+						lblMaterialName0.setText("1.    " + materialName);
+						lblMaterialAmount0.setText(selectedMaterials[1][0]);
+
+						break;
+					case 1: 
+						lblMaterialName1.setText("2.    " + materialName);
+						lblMaterialAmount1.setText(selectedMaterials[1][1]);
+
+						break;
+					case 2: 
+						lblMaterialName2.setText("3.    " + materialName);
+						lblMaterialAmount2.setText(selectedMaterials[1][2]);
+
+						break;
+					case 3: 
+						lblMaterialName3.setText("4.    " + materialName);
+						lblMaterialAmount3.setText(selectedMaterials[1][3]);
+
+						break;
+					case 4: 
+						lblMaterialName4.setText("5.    " + materialName);
+						lblMaterialAmount4.setText(selectedMaterials[1][4]);
+
+						break;
+					case 5: 
+						lblMaterialName5.setText("6.    " + materialName);
+						lblMaterialAmount5.setText(selectedMaterials[1][5]);
+
+						break;
+					case 6: 
+						lblMaterialName6.setText("7.    " + materialName);
+						lblMaterialAmount6.setText(selectedMaterials[1][6]);
+
+						break;
+					case 7: 
+						lblMaterialName7.setText("8.    " + materialName);
+						lblMaterialAmount7.setText(selectedMaterials[1][7]);
+
+						break;
+					case 8: 
+						lblMaterialName8.setText("9.    " + materialName);
+						lblMaterialAmount8.setText(selectedMaterials[1][8]);
+
+						break;
+					case 9: 
+						lblMaterialName0.setText("");
+
+						break;
 
 					}
 				}else {
 					selectedMaterials[0][i] = null;
 					selectedMaterials[1][i] = null;
 					switch(i) {
-						case 0:
-							lblMaterialName0.setText("");
-							lblMaterialAmount0.setText("");
-							lblX0.setText("");
-							break;
-						case 1: 
-							lblMaterialName1.setText("");
-							lblMaterialAmount1.setText("");
-							lblX1.setText("");
-							break;
-						case 2: 
-							lblMaterialName2.setText("");
-							lblMaterialAmount2.setText("");
-							lblX2.setText("");
-							break;
-						case 3: 
-							lblMaterialName3.setText("");
-							lblMaterialAmount3.setText("");
-							lblX3.setText("");
-							break;
-						case 4: 
-							lblMaterialName4.setText("");
-							lblMaterialAmount4.setText("");
-							lblX4.setText("");
-							break;
-						case 5: 
-							lblMaterialName5.setText("");
-							lblMaterialAmount5.setText("");
-							lblX5.setText("");
-							break;
-						case 6: 
-							lblMaterialName6.setText("");
-							lblMaterialAmount6.setText("");
-							lblX6.setText("");
-							break;
-						case 7: 
-							lblMaterialName7.setText("");
-							lblMaterialAmount7.setText("");
-							lblX7.setText("");
-							break;
-						case 8: 
-							lblMaterialName8.setText("");
-							lblMaterialAmount8.setText("");
-							lblX8.setText("");
-							break;
-						case 9: 
-							lblMaterialName9.setText("");
-							lblMaterialAmount9.setText("");
-							lblX9.setText("");
-							break;
-							
+					case 0:
+						lblMaterialName0.setText("");
+						lblMaterialAmount0.setText("");
+						lblX0.setText("");
+						break;
+					case 1: 
+						lblMaterialName1.setText("");
+						lblMaterialAmount1.setText("");
+						lblX1.setText("");
+						break;
+					case 2: 
+						lblMaterialName2.setText("");
+						lblMaterialAmount2.setText("");
+						lblX2.setText("");
+						break;
+					case 3: 
+						lblMaterialName3.setText("");
+						lblMaterialAmount3.setText("");
+						lblX3.setText("");
+						break;
+					case 4: 
+						lblMaterialName4.setText("");
+						lblMaterialAmount4.setText("");
+						lblX4.setText("");
+						break;
+					case 5: 
+						lblMaterialName5.setText("");
+						lblMaterialAmount5.setText("");
+						lblX5.setText("");
+						break;
+					case 6: 
+						lblMaterialName6.setText("");
+						lblMaterialAmount6.setText("");
+						lblX6.setText("");
+						break;
+					case 7: 
+						lblMaterialName7.setText("");
+						lblMaterialAmount7.setText("");
+						lblX7.setText("");
+						break;
+					case 8: 
+						lblMaterialName8.setText("");
+						lblMaterialAmount8.setText("");
+						lblX8.setText("");
+						break;
+					case 9: 
+						lblMaterialName9.setText("");
+						lblMaterialAmount9.setText("");
+						lblX9.setText("");
+						break;
+
 					}
 					break;
 				}
@@ -2539,57 +2531,57 @@ public class Invoice {
 			selectedMaterials[0][item] = null;
 			selectedMaterials[1][item] = null;
 			switch(item) {
-				case 0:
-					lblMaterialName0.setText("");
-					lblMaterialAmount0.setText("");
-					lblX0.setText("");
-					break;
-				case 1: 
-					lblMaterialName1.setText("");
-					lblMaterialAmount1.setText("");
-					lblX1.setText("");
-					break;
-				case 2: 
-					lblMaterialName2.setText("");
-					lblMaterialAmount2.setText("");
-					lblX2.setText("");
-					break;
-				case 3: 
-					lblMaterialName3.setText("");
-					lblMaterialAmount3.setText("");
-					lblX3.setText("");
-					break;
-				case 4: 
-					lblMaterialName4.setText("");
-					lblMaterialAmount4.setText("");
-					lblX4.setText("");
-					break;
-				case 5: 
-					lblMaterialName5.setText("");
-					lblMaterialAmount5.setText("");
-					lblX5.setText("");
-					break;
-				case 6: 
-					lblMaterialName6.setText("");
-					lblMaterialAmount6.setText("");
-					lblX6.setText("");
-					break;
-				case 7: 
-					lblMaterialName7.setText("");
-					lblMaterialAmount7.setText("");
-					lblX7.setText("");
-					break;
-				case 8: 
-					lblMaterialName8.setText("");
-					lblMaterialAmount8.setText("");
-					lblX8.setText("");
-					break;
-				case 9: 
-					lblMaterialName9.setText("");
-					lblMaterialAmount9.setText("");
-					lblX9.setText("");
-					break;
-					
+			case 0:
+				lblMaterialName0.setText("");
+				lblMaterialAmount0.setText("");
+				lblX0.setText("");
+				break;
+			case 1: 
+				lblMaterialName1.setText("");
+				lblMaterialAmount1.setText("");
+				lblX1.setText("");
+				break;
+			case 2: 
+				lblMaterialName2.setText("");
+				lblMaterialAmount2.setText("");
+				lblX2.setText("");
+				break;
+			case 3: 
+				lblMaterialName3.setText("");
+				lblMaterialAmount3.setText("");
+				lblX3.setText("");
+				break;
+			case 4: 
+				lblMaterialName4.setText("");
+				lblMaterialAmount4.setText("");
+				lblX4.setText("");
+				break;
+			case 5: 
+				lblMaterialName5.setText("");
+				lblMaterialAmount5.setText("");
+				lblX5.setText("");
+				break;
+			case 6: 
+				lblMaterialName6.setText("");
+				lblMaterialAmount6.setText("");
+				lblX6.setText("");
+				break;
+			case 7: 
+				lblMaterialName7.setText("");
+				lblMaterialAmount7.setText("");
+				lblX7.setText("");
+				break;
+			case 8: 
+				lblMaterialName8.setText("");
+				lblMaterialAmount8.setText("");
+				lblX8.setText("");
+				break;
+			case 9: 
+				lblMaterialName9.setText("");
+				lblMaterialAmount9.setText("");
+				lblX9.setText("");
+				break;
+
 			}
 		}
 	}
@@ -2813,7 +2805,7 @@ public class Invoice {
 		}
 	}
 
-	
+
 	public void material(){
 		double answer = 0;
 		for(int i = 0; i < 10; i++) {
