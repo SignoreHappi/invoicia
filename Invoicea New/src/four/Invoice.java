@@ -107,6 +107,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class Invoice {
 
@@ -226,6 +228,19 @@ public class Invoice {
 	public static JLabel lblMCommand3;
 	public static JLabel lblMCommand2;
 	public static JLabel lblMCommand1;
+	
+	public static JLabel lblCCommand12;
+	public static JLabel lblCCommand11;
+	public static JLabel lblCCommand10;
+	public static JLabel lblCCommand9;
+	public static JLabel lblCCommand8;
+	public static JLabel lblCCommand7;
+	public static JLabel lblCCommand6;
+	public static JLabel lblCCommand5;
+	public static JLabel lblCCommand4;
+	public static JLabel lblCCommand3;
+	public static JLabel lblCCommand2;
+	public static JLabel lblCCommand1;
 
 	public static JLabel lblMaterialName0;
 	public static JLabel lblMaterialName1;
@@ -265,8 +280,8 @@ public class Invoice {
 	private String FS, FY, FC;
 
 
-	public JLabel lblCostumeX = new JLabel("** - ** - ***");
-	public JLabel lblStudioX  = new JLabel("Xxxx Xxxx");
+	public static JLabel lblInvoiceNumberR = new JLabel("** - ** - ***");
+	public static JLabel lblStudioNameR  = new JLabel("Xxxx Xxxx");
 
 	private String com = "";
 
@@ -320,6 +335,7 @@ public class Invoice {
 	public static JComboBox cmbInvoiceId;
 
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss"); 
+	
 	private Date date = new Date();
 	private LocalDateTime now = LocalDateTime.now(); 
 
@@ -1059,7 +1075,7 @@ public class Invoice {
 		pnlStudio.setBounds(10, 11, 270, 143);
 		PInvoice.add(pnlStudio);
 
-		JLabel lblStudio = new JLabel("STUDIO / DEPOSIT");
+		JLabel lblStudio = new JLabel("STUDIO");
 		lblStudio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStudio.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblStudio.setBounds(10, 11, 250, 24);
@@ -1075,6 +1091,7 @@ public class Invoice {
 		cmbStudio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 //		cmbStudio.setModel(new DefaultComboBoxModel(new String[] {"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"}));
 		cmbStudio.setBounds(79, 55, 181, 20);
+		cmbStudio.setMaximumRowCount(20);
 		pnlStudio.add(cmbStudio);
 
 		txtCostumeName = new JTextField();
@@ -1113,9 +1130,19 @@ public class Invoice {
 		spnHH.setBounds(142, 46, 116, 20);
 		pnlHours.add(spnHH);
 		spnHH.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-//		spnKids.setEnabled(false);
 		spnK.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
+				System.out.println(cmbStudio.getSelectedItem());
+				if(cmbStudio.getSelectedItem() == "Evolve Dance Centre") {
+					spnDeposit.setValue((int)spnK.getValue() * 50);
+				}
+			}
+		});
+		
+		spnK.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(cmbStudio.getSelectedItem());
 				if(cmbStudio.getSelectedItem() == "Evolve Dance Centre") {
 					spnDeposit.setValue((int)spnK.getValue() * 50);
 				}
@@ -1306,6 +1333,12 @@ public class Invoice {
 		pnlFile.add(button_4);
 
 		JButton button_5 = new JButton("?2");
+		button_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Mathe.InvoiceNumber();
+			}
+		});
 		button_5.setBounds(10, 225, 120, 30);
 		pnlFile.add(button_5);
 
@@ -1386,13 +1419,13 @@ public class Invoice {
 		pnlRecipt.add(lblCostume);
 
 		//		lblStudioX.setText("Xxxx Xxxx");
-		lblStudioX.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblStudioX.setBounds(10, 77, 90, 17);
-		pnlRecipt.add(lblStudioX);
+		lblStudioNameR.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblStudioNameR.setBounds(10, 77, 90, 17);
+		pnlRecipt.add(lblStudioNameR);
 
-		lblCostumeX.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCostumeX.setBounds(155, 77, 105, 17);
-		pnlRecipt.add(lblCostumeX);
+		lblInvoiceNumberR.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblInvoiceNumberR.setBounds(155, 77, 105, 17);
+		pnlRecipt.add(lblInvoiceNumberR);
 
 		JLabel lblFileType = new JLabel("File Type");
 		lblFileType.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -1491,11 +1524,11 @@ public class Invoice {
 		lblName_1.setBounds(285, 49, 105, 17);
 		pnlRecipt.add(lblName_1);
 
-		JLabel label_2 = new JLabel("Xxxx Xxxx");
-		label_2.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_2.setBounds(270, 77, 122, 17);
-		pnlRecipt.add(label_2);
+		JLabel lblCostumeNameR = new JLabel("Xxxx Xxxx");
+		lblCostumeNameR.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblCostumeNameR.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCostumeNameR.setBounds(270, 77, 122, 17);
+		pnlRecipt.add(lblCostumeNameR);
 
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.ORANGE);
@@ -1822,6 +1855,19 @@ public class Invoice {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Database.CreateClient(txtStudio.getText(), txtOwner.getText(), txtAddress.getText(), txtPhone.getText(), txtEmail.getText());
+		
+				while(clientsTable.getRowCount() > 0) {
+					clientsTable.removeRow(clientsTable.getRowCount());
+					System.out.println(clientsTable.getRowCount() + "*" );
+				}
+				
+				Database.LoadClients();
+				cOutput("","Client " + txtStudio.getText() + " added to Client's Table");
+				txtEmail.setText("");
+				txtAddress.setText("");
+				txtOwner.setText("");
+				txtPhone.setText("");
+				txtStudio.setText("");
 			}
 		});
 		btnSubmit.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -1862,7 +1908,11 @@ public class Invoice {
 		//		scrollTest.setSize(500,300);
 		//		scrollTest.setVisible(true); 
 
-		clientsTable = new DefaultTableModel(){public boolean isCellEditable(int row, int column) {return false;}};
+		clientsTable = new DefaultTableModel(){
+			public boolean isCellEditable(int row, int column) {
+				return false;
+				}
+			};
 
 
 
@@ -1947,77 +1997,77 @@ public class Invoice {
 		pnlClntConsole.setBounds(394, 422, 550, 255);
 		Clients.add(pnlClntConsole);
 
-		JLabel lblClntCommand1 = new JLabel("|");
-		lblClntCommand1.setForeground(new Color(51, 153, 0));
-		lblClntCommand1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblClntCommand1.setBounds(10, 230, 530, 14);
-		pnlClntConsole.add(lblClntCommand1);
+		lblCCommand1 = new JLabel("|");
+		lblCCommand1.setForeground(new Color(51, 153, 0));
+		lblCCommand1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand1.setBounds(10, 230, 530, 14);
+		pnlClntConsole.add(lblCCommand1);
 
-		JLabel lblClntCommand2 = new JLabel("_");
-		lblClntCommand2.setForeground(new Color(51, 153, 0));
-		lblClntCommand2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblClntCommand2.setBounds(10, 210, 530, 14);
-		pnlClntConsole.add(lblClntCommand2);
+		lblCCommand2 = new JLabel("_");
+		lblCCommand2.setForeground(new Color(51, 153, 0));
+		lblCCommand2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand2.setBounds(10, 210, 530, 14);
+		pnlClntConsole.add(lblCCommand2);
 
-		JLabel label_6 = new JLabel("_");
-		label_6.setForeground(new Color(51, 153, 0));
-		label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_6.setBounds(10, 190, 530, 14);
-		pnlClntConsole.add(label_6);
+		lblCCommand3 = new JLabel("_");
+		lblCCommand3.setForeground(new Color(51, 153, 0));
+		lblCCommand3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand3.setBounds(10, 190, 530, 14);
+		pnlClntConsole.add(lblCCommand3);
 
-		JLabel label_7 = new JLabel("_");
-		label_7.setForeground(new Color(51, 153, 0));
-		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_7.setBounds(10, 170, 530, 14);
-		pnlClntConsole.add(label_7);
+		lblCCommand4 = new JLabel("_");
+		lblCCommand4.setForeground(new Color(51, 153, 0));
+		lblCCommand4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand4.setBounds(10, 170, 530, 14);
+		pnlClntConsole.add(lblCCommand4);
 
-		JLabel label_8 = new JLabel("_");
-		label_8.setForeground(new Color(51, 153, 0));
-		label_8.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_8.setBounds(10, 150, 530, 14);
-		pnlClntConsole.add(label_8);
+		lblCCommand5 = new JLabel("_");
+		lblCCommand5.setForeground(new Color(51, 153, 0));
+		lblCCommand5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand5.setBounds(10, 150, 530, 14);
+		pnlClntConsole.add(lblCCommand5);
 
-		JLabel label_10 = new JLabel("_");
-		label_10.setForeground(new Color(51, 153, 0));
-		label_10.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_10.setBounds(10, 130, 530, 14);
-		pnlClntConsole.add(label_10);
+		lblCCommand6 = new JLabel("_");
+		lblCCommand6.setForeground(new Color(51, 153, 0));
+		lblCCommand6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand6.setBounds(10, 130, 530, 14);
+		pnlClntConsole.add(lblCCommand6);
 
-		JLabel label_11 = new JLabel("_");
-		label_11.setForeground(new Color(51, 153, 0));
-		label_11.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_11.setBounds(10, 110, 530, 14);
-		pnlClntConsole.add(label_11);
+		lblCCommand7 = new JLabel("_");
+		lblCCommand7.setForeground(new Color(51, 153, 0));
+		lblCCommand7.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand7.setBounds(10, 110, 530, 14);
+		pnlClntConsole.add(lblCCommand7);
 
-		JLabel label_12 = new JLabel("_");
-		label_12.setForeground(new Color(51, 153, 0));
-		label_12.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_12.setBounds(10, 90, 530, 14);
-		pnlClntConsole.add(label_12);
+		lblCCommand8 = new JLabel("_");
+		lblCCommand8.setForeground(new Color(51, 153, 0));
+		lblCCommand8.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand8.setBounds(10, 90, 530, 14);
+		pnlClntConsole.add(lblCCommand8);
 
-		JLabel label_13 = new JLabel("_");
-		label_13.setForeground(new Color(51, 153, 0));
-		label_13.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_13.setBounds(10, 70, 530, 14);
-		pnlClntConsole.add(label_13);
+		lblCCommand9 = new JLabel("_");
+		lblCCommand9.setForeground(new Color(51, 153, 0));
+		lblCCommand9.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand9.setBounds(10, 70, 530, 14);
+		pnlClntConsole.add(lblCCommand9);
 
-		JLabel label_14 = new JLabel("_");
-		label_14.setForeground(new Color(51, 153, 0));
-		label_14.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_14.setBounds(10, 50, 530, 14);
-		pnlClntConsole.add(label_14);
+		lblCCommand10 = new JLabel("_");
+		lblCCommand10.setForeground(new Color(51, 153, 0));
+		lblCCommand10.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand10.setBounds(10, 50, 530, 14);
+		pnlClntConsole.add(lblCCommand10);
 
-		JLabel label_15 = new JLabel("_");
-		label_15.setForeground(new Color(51, 153, 0));
-		label_15.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_15.setBounds(10, 30, 530, 14);
-		pnlClntConsole.add(label_15);
+		lblCCommand11 = new JLabel("_");
+		lblCCommand11.setForeground(new Color(51, 153, 0));
+		lblCCommand11.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand11.setBounds(10, 30, 530, 14);
+		pnlClntConsole.add(lblCCommand11);
 
-		JLabel label_16 = new JLabel("_");
-		label_16.setForeground(new Color(51, 153, 0));
-		label_16.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_16.setBounds(10, 11, 530, 14);
-		pnlClntConsole.add(label_16);
+		lblCCommand12 = new JLabel("_");
+		lblCCommand12.setForeground(new Color(51, 153, 0));
+		lblCCommand12.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCCommand12.setBounds(10, 11, 530, 14);
+		pnlClntConsole.add(lblCCommand12);
 		scrollTest.setVisible(true); 
 
 		Database.LoadClients();
@@ -2074,8 +2124,8 @@ public class Invoice {
 		lblCost.setBounds(10, 59, 155, 17);
 		panel_4.add(lblCost);
 
-//		JButton btnMaterial = new JButton("S U B M I T");
-		JButton btnMaterial = new JButton("B R O K E N");
+		JButton btnMaterial = new JButton("S U B M I T");
+//		JButton btnMaterial = new JButton("B R O K E N");
 		btnMaterial.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -2088,7 +2138,7 @@ public class Invoice {
 
 			}
 		});
-		btnMaterial.setVisible(false);
+//		btnMaterial.setVisible(false);
 		btnMaterial.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnMaterial.setBounds(67, 129, 134, 32);
 		panel_4.add(btnMaterial);
@@ -2099,7 +2149,7 @@ public class Invoice {
 		panel_4.add(lblMaterialType);
 
 		spnMaterialType = new JComboBox();
-//		spnMaterialType.setMaximumRowCount(30);
+		spnMaterialType.setMaximumRowCount(30);
 		spnMaterialType.setModel(new DefaultComboBoxModel(new String[] {"Chiffon", "Cosmo", "Cracked Ice", "Fringe", "Georgette", "Hologram", "Lace", "Lycra", "Mesh", "Mystique", "Organdy", "Print", "Sequin", "Supplex", "Toulle", "Trim", "Velvet", "Unknown"}));
 		spnMaterialType.setBounds(125, 98, 136, 20);
 		panel_4.add(spnMaterialType);
@@ -2726,6 +2776,44 @@ public class Invoice {
 		}
 	}
 
+	public static void cOutput(String catagory, String text) {
+		text = "{" + catagory + "}- " + text;
+
+		switch(line) {
+		case 0: lblCCommand12.setText(text);break;
+		case 1: lblCCommand11.setText(text);break;
+		case 2: lblCCommand10.setText(text);break;
+		case 3: lblCCommand9.setText(text);break;
+		case 4: lblCCommand8.setText(text);break;
+		case 5: lblCCommand8.setText(text);break;
+		case 6: lblCCommand7.setText(text);break;
+		case 7: lblCCommand6.setText(text);break;
+		case 8: lblCCommand5.setText(text);break;
+		case 9: lblCCommand4.setText(text);break;
+		case 10: lblCCommand3.setText(text);break;
+		case 11: lblCCommand2.setText(text);break;
+		case 12: lblCCommand1.setText(text);break;
+		}
+
+		line++;
+
+		if(line >= 14) {
+			lblCCommand12.setText(lblCCommand11.getText());
+			lblCCommand11.setText(lblCCommand10.getText());
+			lblCCommand10.setText(lblCCommand9.getText());
+			lblCCommand9.setText(lblCCommand8.getText());
+			lblCCommand8.setText(lblCCommand7.getText());
+			lblCCommand7.setText(lblCCommand6.getText());
+			lblCCommand6.setText(lblCCommand5.getText());
+			lblCCommand5.setText(lblCCommand4.getText());
+			lblCCommand4.setText(lblCCommand3.getText());
+			lblCCommand3.setText(lblCCommand2.getText());
+			lblCCommand2.setText(lblCCommand1.getText());
+			lblCCommand1.setText(text);
+		}
+	}
+
+	
 	public void material(){
 		double answer = 0;
 		for(int i = 0; i < 10; i++) {
@@ -3097,20 +3185,20 @@ public class Invoice {
 
 						}else if(strCurrentLine.equals("C")){
 							strCurrentLine = br.readLine();
-							lblCostumeX.setText(lblCostumeX.getText() + strCurrentLine);
+							lblInvoiceNumberR.setText(lblInvoiceNumberR.getText() + strCurrentLine);
 							strCurrentLine = br.readLine();
 
 
 						}else if(strCurrentLine.equals("Y")){
 							strCurrentLine = br.readLine();
-							lblCostumeX.setText(lblCostumeX.getText() + strCurrentLine + " - ");
+							lblInvoiceNumberR.setText(lblInvoiceNumberR.getText() + strCurrentLine + " - ");
 							years = Integer.parseInt(strCurrentLine);
 							strCurrentLine = br.readLine();
 
 
 						}else if(strCurrentLine.equals("S")){
 							strCurrentLine = br.readLine();
-							lblCostumeX.setText(strCurrentLine + " - ");
+							lblInvoiceNumberR.setText(strCurrentLine + " - ");
 							strCurrentLine = br.readLine();
 
 
@@ -3179,7 +3267,7 @@ public class Invoice {
 							//						System.out.println(strCurrentLine);
 						}
 					}
-					lblCostumeX.setText(x.substring(0, 2) + " - " + x.substring(3, 5) + " - " + x.substring(6));
+					lblInvoiceNumberR.setText(x.substring(0, 2) + " - " + x.substring(3, 5) + " - " + x.substring(6));
 					output("II", "Read Successful");
 
 					//			

@@ -13,6 +13,7 @@ import java.util.Formatter;
 import javax.swing.table.DefaultTableModel;
 
 import four.Invoice;
+import four.Mathe;
 import Utilities.Strin;
 
 
@@ -511,6 +512,11 @@ public class Database extends Invoice{
 			//For every possible execution, create a rs
 			ResultSet rs = stmt.executeQuery(cmd);
 			//While there's code to be executes, do something
+			
+			//Create a counter for Mathe
+			int count = 0;
+			String counter = "";
+			
 			while(rs.next()) {
 
 				id = rs.getInt("studio_id");
@@ -531,8 +537,16 @@ public class Database extends Invoice{
 				Invoice.rows.addRow(row);	
 				Invoice.cmbStudio.addItem(name);
 				Invoice.cmbStudioName.addItem(name);
-
+				
+				if(count < 10) {
+					counter = "0" + count;
+				}else {
+					counter = count + "";
+				}
+				Mathe.setLists(counter, name);
+				count++;
 			}
+			
 
 			//If there's some error, return it
 		} catch (SQLException e) {
@@ -816,11 +830,13 @@ public class Database extends Invoice{
 			stmt = connect.createStatement();
 			stmt.executeQuery(cmd);
 			ResultSet rs = stmt.executeQuery(cmd);
+			int count = 0;
 			while(rs.next()) {					
 				name = rs.getString("invoice_name");
 				Invoice.cmbInvoiceId.addItem(name);
-
+				count++;
 			}
+			Mathe.setCostumeCount(count);
 		} catch (SQLException e) {
 			System.out.print(e);
 		}finally {
@@ -890,8 +906,14 @@ public class Database extends Invoice{
 			ResultSet rs = stmt.executeQuery(cmd);
 			while(rs.next()) {//Working
 				
-				//Get the Invoice name
+				//Get the Invoice name & Number
 				Invoice.txtCostumeName.setText(rs.getString(3));
+				Invoice.lblInvoiceNumberR.setText(rs.getString("code"));
+				
+				//Get the Invoice Hours & Kids
+				Invoice.spnK.setValue(rs.getString("kids"));
+				Invoice.spnDeposit.setValue(rs.getString("deposit"));
+				Invoice.spnHH.setValue(rs.getString("hours"));
 				
 				
 				//Get all the materials/amounts 

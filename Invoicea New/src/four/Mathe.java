@@ -3,6 +3,9 @@ package four;
 import database.Database;
 import java.math.*;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Mathe {
 
@@ -10,6 +13,11 @@ public class Mathe {
 	private static double Rhinestone;
 	private static double Labour;
 	private static double Deposit;
+
+	private static String code;
+	private static int CostumeCount;
+	
+	public static String [][] list = new String [2][150];
 
 	private static double TAX;
 	private static double Thread;
@@ -24,10 +32,15 @@ public class Mathe {
 	private static double [] Cost   = new double[10];
 
 	private static boolean GroupOrKids;
-	
+
 	private static double Total;
 	private static double Subtotal;
 	private static double CostPerCostume;
+	
+	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy"); 
+	private static DateTimeFormatter mtf = DateTimeFormatter.ofPattern("MM");
+	private static Date date = new Date();
+	private static LocalDateTime now = LocalDateTime.now(); 
 
 	/*		TEST CASE SCENARIO
 	 * 10m cream mesh $8
@@ -46,7 +59,7 @@ public class Mathe {
 	 * CPC 185
 	 * 
 	 */
-	
+
 
 	DecimalFormat format = new DecimalFormat("###,###,###.00");
 
@@ -68,7 +81,7 @@ public class Mathe {
 				break;
 			}
 		}
-		
+
 		Deposit = (double) Invoice.getSpnHHValue();
 
 		kids = (int)Invoice.spnK.getValue();
@@ -106,8 +119,44 @@ public class Mathe {
 	private static double Rhinestones() {
 
 		double total = 0;
-		
+
 		return total;
+	}
+
+	public static String InvoiceNumber() {
+
+		String invoice, studio, year, costume;
+
+		studio = (String) Invoice.cmbStudio.getSelectedItem();
+		
+		for(int i = 0; i < 150; i++) {
+			if(list[1][i] == studio) {
+				studio = list[0][i];
+				break;
+			}
+		}
+		
+		
+		if(Integer.parseInt(mtf.format(now)) > 6) {
+			year = Integer.parseInt(dtf.format(now)) + 1 + "";
+		}else {
+			year = dtf.format(now);
+		}
+		
+		
+		if(CostumeCount < 100) {
+			if(CostumeCount < 10) {
+				costume = "00" + CostumeCount;
+			}else {
+				costume = "0" + CostumeCount;
+			}
+		}else {
+			costume = CostumeCount + "";
+		}
+		
+		
+		System.out.println(studio + "-" + year + "-" + costume);
+		return "";
 	}
 
 	private static double Labour() {
@@ -131,23 +180,23 @@ public class Mathe {
 
 		return total;
 	}
-	
-	
+
+
 	private static void Totaling() {
-		
+
 		Subtotal = Labour + Material + Rhinestone;
-		
+
 		Total = (Subtotal * (1 + TAX));
-		
+
 		CostPerCostume = Total / kids;
-	
-				
+
+
 	}
-	
-	
+
+
 
 	private static void Done() {
-		
+
 		Invoice.setLblsSubtotalText("" + Math.round(Subtotal));
 		Invoice.setLblsMaterialText("" + Math.round(Material));
 		Invoice.setLblsTotalText("" + Math.round(Total));
@@ -156,6 +205,12 @@ public class Mathe {
 		Invoice.setLblsBottomText("" + Math.round(Total - Deposit));
 	}
 
+	public static void setLists(String a, String b) {
+		
+		list[0][Integer.parseInt(a)] = a;
+		list[1][Integer.parseInt(a)] = b;
+	}
+	
 	//--------------------------------------------------------// Getters and Setters //-------------------------------
 
 	public static double getTax() {
@@ -203,6 +258,14 @@ public class Mathe {
 
 	public static void setSoloRate(double soloRate) {
 		SoloRate = soloRate;
+	}
+
+	public static int getCostumeCount() {
+		return CostumeCount;
+	}
+
+	public static void setCostumeCount(int costumeCount) {
+		CostumeCount = costumeCount;
 	}
 
 }
