@@ -13,6 +13,7 @@ public class Mathe {
 	private static double Rhinestone;
 	private static double Labour;
 	private static double Deposit;
+	private static String Number;
 
 	private static String code;
 	private static int CostumeCount;
@@ -68,6 +69,7 @@ public class Mathe {
 		Material = Material();
 		Labour = Labour();
 		Rhinestone = Rhinestones();
+		Number = InvoiceNumber();
 		Totaling();
 		Done();
 	}
@@ -145,6 +147,8 @@ public class Mathe {
 		
 		Database.GetCreatedInvoices(Integer.parseInt(studio), year);
 		
+		CostumeCount++;
+		
 		if(CostumeCount < 100) {
 			if(CostumeCount < 10) {
 				costume = "00" + CostumeCount;
@@ -155,9 +159,10 @@ public class Mathe {
 			costume = CostumeCount + "";
 		}
 		
+		invoice = studio + "-" + year + "-" + costume ;
 		
-		System.out.println(studio + "-" + year + "-" + costume);
-		return "";
+//		System.out.println(studio + "-" + year + "-" + costume);
+		return invoice;
 	}
 
 	private static double Labour() {
@@ -204,6 +209,7 @@ public class Mathe {
 		Invoice.setLblsCPCText("" + Math.round(CostPerCostume));
 		Invoice.setLblsHoursText("" + Math.round(Labour));
 		Invoice.setLblsBottomText("" + Math.round(Total - Deposit));
+		Invoice.lblInvoiceNumberR.setText(Number);
 	}
 
 	public static void setLists(String a, String b) {

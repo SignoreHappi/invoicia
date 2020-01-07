@@ -532,7 +532,7 @@ public class Database extends Invoice{
 
 				//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
 				//						+ " . " + phone + " . " + email);
-				Object[] row = new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
+				Object[] row = new Object[] {Integer.toString(id - 1), name, Integer.toString(costumes), 
 						Double.toString(bill), owner, address, phone, email};
 				Invoice.rows.addRow(row);	
 				Invoice.cmbStudio.addItem(name);
@@ -911,9 +911,9 @@ public class Database extends Invoice{
 				Invoice.lblInvoiceNumberR.setText(rs.getString("code"));
 				
 				//Get the Invoice Hours & Kids
-				Invoice.spnK.setValue(rs.getString("kids"));
-				Invoice.spnDeposit.setValue(rs.getString("deposit"));
-				Invoice.spnHH.setValue(rs.getString("hours"));
+				Invoice.spnK.setValue(Integer.parseInt(rs.getString("kids")));
+				Invoice.spnDeposit.setValue(Double.parseDouble(rs.getString("deposit")));
+				Invoice.spnHH.setValue(Double.parseDouble(rs.getString("hours")));
 				
 				
 				//Get all the materials/amounts 
