@@ -143,6 +143,7 @@ public class Mathe {
 			year = dtf.format(now);
 		}
 		
+		Database.GetCreatedInvoices(Integer.parseInt(studio), year);
 		
 		if(CostumeCount < 100) {
 			if(CostumeCount < 10) {
