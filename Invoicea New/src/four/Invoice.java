@@ -265,15 +265,7 @@ public class Invoice {
 	public static JLabel lblInvoiceNumberR = new JLabel("** - ** - ***");
 	public static JLabel lblStudioNameR  = new JLabel("Xxxx Xxxx");
 
-	private String com = "";
-
-
-	private int a, c;
-
-
 	private static int line = 0;
-	private double b;
-	private String s;
 
 
 	public int customer, dateGiven, monthGiven, year, costume, dateDone, monthDone, check;
@@ -288,8 +280,6 @@ public class Invoice {
 	public static Connection connect;
 	public static JTextField txtSearchMaterial;
 	public static String materialSearch = null;
-
-
 
 	public static DefaultTableModel clientsTable;
 	public static JTable tableClients;
@@ -315,13 +305,30 @@ public class Invoice {
 	public static JComboBox cmbStudioName;
 	public static JComboBox cmbYear;
 	public static JComboBox cmbInvoiceId;
-
-	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss"); 
+	
+	public static String datee = "dd/MM/yy", timee = "HH:mm:ss";
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datee + "  " + timee); 
 
 	private Date date = new Date();
 	private LocalDateTime now = LocalDateTime.now(); 
 
 	public static JButton btnCreate;
+	public static JSpinner spnWidth;
+	public static JSpinner spnHeight;
+	public static JSpinner spnTAX;
+	public static JSpinner spnMonth;
+	public static JSpinner spnThread;
+	public static JSpinner spnList;
+	public static JLabel lblMonth;
+	public static JLabel lblTax;
+	public static JLabel lblScreenHeight;
+	public static JLabel lblScreenWidth;
+	public static JLabel lblDateFormat;
+	public static JTextField txtDatee;
+	public static JTextField txtTimee;
+	
+
+	public static int HpWidth = 1366, HpHeight = 786;
 
 	/**
 	 * Launch the application.
@@ -334,6 +341,7 @@ public class Invoice {
 		//		Database.ExportDB();
 
 		try {
+			Database.Start();
 			Invoice window = new Invoice();
 			window.frame.setVisible(true);
 		} catch (Exception e) {
@@ -378,7 +386,6 @@ public class Invoice {
 
 
 
-		int HpWidth = 1366, HpHeight = 768;
 
 
 
@@ -1236,9 +1243,9 @@ public class Invoice {
 		btnInformation.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				output("?", "Version Incoive Gamma");
+				output("?", "Version Invoice Gamma");
 				output("?", "Last Operated:     " + dtf.format(now));
-				output("?", "Last Modified:     Dec/19");
+				output("?", "Last Modified:      Dec/19");
 				output("?", "- -/End of Information/- - -");
 				output("","");
 			}
@@ -2401,6 +2408,98 @@ public class Invoice {
 		lblSoloRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lblSoloRate.setBounds(10, 74, 76, 14);
 		panel_2.add(lblSoloRate);
+		
+		JLabel lblThread = new JLabel("Thread\r\n");
+		lblThread.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblThread.setBounds(10, 135, 76, 14);
+		panel_2.add(lblThread);
+		
+		JLabel lblListCount = new JLabel("List Count");
+		lblListCount.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblListCount.setBounds(10, 103, 76, 14);
+		panel_2.add(lblListCount);
+		
+		spnList = new JSpinner();
+		spnList.setBounds(142, 101, 90, 20);
+		panel_2.add(spnList);
+		
+		spnThread = new JSpinner();
+		spnThread.setBounds(142, 132, 90, 20);
+		panel_2.add(spnThread);
+		
+		spnWidth = new JSpinner();
+		spnWidth.setBounds(142, 254, 90, 20);
+		panel_2.add(spnWidth);
+		
+		spnHeight = new JSpinner();
+		spnHeight.setBounds(142, 223, 90, 20);
+		panel_2.add(spnHeight);
+		
+		spnTAX = new JSpinner();
+		spnTAX.setBounds(142, 193, 90, 20);
+		panel_2.add(spnTAX);
+		
+		spnMonth = new JSpinner();
+		spnMonth.setBounds(142, 162, 90, 20);
+		panel_2.add(spnMonth);
+		
+		lblMonth = new JLabel("Month");
+		lblMonth.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblMonth.setBounds(10, 164, 76, 14);
+		panel_2.add(lblMonth);
+		
+		lblTax = new JLabel("TAX");
+		lblTax.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblTax.setBounds(10, 196, 76, 14);
+		panel_2.add(lblTax);
+		
+		lblScreenHeight = new JLabel("Screen Height");
+		lblScreenHeight.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblScreenHeight.setBounds(10, 225, 96, 14);
+		panel_2.add(lblScreenHeight);
+		
+		lblScreenWidth = new JLabel("Screen Width");
+		lblScreenWidth.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblScreenWidth.setBounds(10, 257, 96, 14);
+		panel_2.add(lblScreenWidth);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(204, 255, 204));
+		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel.setBounds(262, 11, 242, 461);
+		Settings.add(panel);
+		panel.setLayout(null);
+		
+		lblDateFormat = new JLabel("Date Format");
+		lblDateFormat.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblDateFormat.setBounds(10, 10, 76, 14);
+		panel.add(lblDateFormat);
+		
+		txtDatee = new JTextField();
+		txtDatee.setBounds(136, 9, 96, 19);
+		panel.add(txtDatee);
+		txtDatee.setColumns(10);
+		
+		txtTimee = new JTextField();
+		txtTimee.setColumns(10);
+		txtTimee.setBounds(136, 38, 96, 19);
+		panel.add(txtTimee);
+		
+		JLabel lblTimeFormat = new JLabel("Time Format");
+		lblTimeFormat.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblTimeFormat.setBounds(10, 39, 76, 14);
+		panel.add(lblTimeFormat);
+		
+		JButton btnNewButton = new JButton("S U B M I T");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnNewButton.setBounds(172, 544, 168, 39);
+		Settings.add(btnNewButton);
 
 	}			// --------------------------------------------------------------------------------------------------- end of Jframe
 

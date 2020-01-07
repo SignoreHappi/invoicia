@@ -9,6 +9,9 @@ import java.util.Date;
 
 public class Mathe {
 
+	private static int ListCount;
+	private static int Month;
+	
 	private static double Material;
 	private static double Rhinestone;
 	private static double Labour;
@@ -273,6 +276,22 @@ public class Mathe {
 
 	public static void setCostumeCount(int costumeCount) {
 		CostumeCount = costumeCount;
+	}
+
+	public static int getListCount() {
+		return ListCount;
+	}
+
+	public static void setListCount(int listCount) {
+		ListCount = listCount;
+	}
+
+	public static int getMonth() {
+		return Month;
+	}
+
+	public static void setMonth(int month) {
+		Month = month;
 	}
 
 }

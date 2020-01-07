@@ -52,6 +52,39 @@ public class Database extends Invoice{
 		String code = "0" + studio_id + "-" + year + dash + invoice_id;
 		return code;
 	}
+	
+	public static void Start() {
+		String cmd = "SELECT * FROM settings";
+		try {
+			connect = DBConnect.connectDB();
+			//Create the code
+			stmt = connect.createStatement();
+			//Execute the code
+			stmt.executeQuery(cmd);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmd);
+			//While there's code to be executes, do something
+			while(rs.next()) {
+				four.Invoice.datee = rs.getString("datee");
+				four.Invoice.timee = rs.getString("timee");
+				
+				four.Invoice.HpHeight = rs.getInt("screenHeight");
+				four.Invoice.HpWidth = rs.getInt("screenWidth");
+			}
+			//If there's some error, return it
+		} catch (SQLException e) {
+			System.out.println("Has Invoice");
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
 
 	//Search into the DB if the studio has any invoice, if not, create invoice_id 1
 	public static int HasInvoice(int studio_id) {
@@ -647,7 +680,9 @@ public class Database extends Invoice{
 				four.Mathe.setThread(rs.getDouble("thread"));
 				four.Mathe.setGroupRate(rs.getDouble("groupRate"));
 				four.Mathe.setSoloRate(rs.getDouble("soloRate"));
-
+				four.Mathe.setListCount(rs.getInt("listCount"));
+				four.Mathe.setMonth(rs.getInt("month"));
+				
 			}
 
 			//							four.Math.setTax(taxi);
@@ -689,6 +724,18 @@ public class Database extends Invoice{
 			while (rs.next()) {
 				four.Invoice.spnSolo.setValue(rs.getDouble("soloRate"));
 				four.Invoice.spnGroup.setValue(rs.getDouble("groupRate"));
+				four.Invoice.spnTAX.setValue(rs.getDouble("tax"));
+				
+				four.Invoice.spnHourly.setValue(rs.getInt("hours"));
+				four.Invoice.spnMonth.setValue(rs.getInt("month"));
+				four.Invoice.spnThread.setValue(rs.getInt("thread"));
+				four.Invoice.spnHeight.setValue(rs.getInt("screenHeight"));
+				four.Invoice.spnWidth.setValue(rs.getInt("screenWidth"));
+				four.Invoice.spnList.setValue(rs.getInt("listCount"));
+				
+				four.Invoice.txtDatee.setText(rs.getString("datee"));
+				four.Invoice.txtTimee.setText(rs.getString("timee"));
+				
 
 				four.Mathe.setHourly(rs.getDouble("hours"));
 			}
