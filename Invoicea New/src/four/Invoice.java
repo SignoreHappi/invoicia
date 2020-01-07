@@ -2258,10 +2258,18 @@ public class Invoice {
 
 		tableMaterial.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent me) {
-				int row = table.rowAtPoint(me.getPoint());
+				int row = tableMaterial.rowAtPoint(me.getPoint());
+				
 
 				if(me.getClickCount() == 2) {
-
+					
+					try {
+						UpdateMaterial update = new UpdateMaterial(row);
+						update.frame.setVisible(true);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 
 				}
