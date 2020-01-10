@@ -756,6 +756,11 @@ public class Database extends Invoice{
 		return "";
 
 	}
+	
+	
+	public static void UpdateSettings() {
+		
+	}
 
 
 
