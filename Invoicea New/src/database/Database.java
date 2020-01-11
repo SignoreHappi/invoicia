@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Formatter;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import four.Invoice;
@@ -38,7 +40,7 @@ public class Database extends Invoice{
 	//			System.out.println("Could not take mysql backup");
 	//
 	//		}
-	//	}
+	//	}aaaaa
 
 	//Creates the code with the studio_id-year-invoic_id 
 	public static String CreateCode(int studio_id, int year, int invoice_id) {	
@@ -51,39 +53,6 @@ public class Database extends Invoice{
 
 		String code = "0" + studio_id + "-" + year + dash + invoice_id;
 		return code;
-	}
-	
-	public static void Start() {
-		String cmd = "SELECT * FROM settings";
-		try {
-			connect = DBConnect.connectDB();
-			//Create the code
-			stmt = connect.createStatement();
-			//Execute the code
-			stmt.executeQuery(cmd);
-			//For every possible execution, create a rs
-			ResultSet rs = stmt.executeQuery(cmd);
-			//While there's code to be executes, do something
-			while(rs.next()) {
-				four.Invoice.datee = rs.getString("datee");
-				four.Invoice.timee = rs.getString("timee");
-				
-				four.Invoice.HpHeight = rs.getInt("screenHeight");
-				four.Invoice.HpWidth = rs.getInt("screenWidth");
-			}
-			//If there's some error, return it
-		} catch (SQLException e) {
-			System.out.println("Has Invoice");
-			System.out.print(e);
-		}finally {
-			try {
-				connect.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 	//Search into the DB if the studio has any invoice, if not, create invoice_id 1
@@ -565,7 +534,7 @@ public class Database extends Invoice{
 
 				//				System.out.println(id + " . " + name + " . " + costumes + " . " + bill + " . " + owner + " . " + address
 				//						+ " . " + phone + " . " + email);
-				Object[] row = new Object[] {Integer.toString(id - 1), name, Integer.toString(costumes), 
+				Object[] row = new Object[] {Integer.toString(id), name, Integer.toString(costumes), 
 						Double.toString(bill), owner, address, phone, email};
 				Invoice.rows.addRow(row);	
 				Invoice.cmbStudio.addItem(name);
@@ -680,9 +649,7 @@ public class Database extends Invoice{
 				four.Mathe.setThread(rs.getDouble("thread"));
 				four.Mathe.setGroupRate(rs.getDouble("groupRate"));
 				four.Mathe.setSoloRate(rs.getDouble("soloRate"));
-				four.Mathe.setListCount(rs.getInt("listCount"));
-				four.Mathe.setMonth(rs.getInt("month"));
-				
+
 			}
 
 			//							four.Math.setTax(taxi);
@@ -724,18 +691,6 @@ public class Database extends Invoice{
 			while (rs.next()) {
 				four.Invoice.spnSolo.setValue(rs.getDouble("soloRate"));
 				four.Invoice.spnGroup.setValue(rs.getDouble("groupRate"));
-				four.Invoice.spnTAX.setValue(rs.getDouble("tax"));
-				
-				four.Invoice.spnHourly.setValue(rs.getInt("hours"));
-				four.Invoice.spnMonth.setValue(rs.getInt("month"));
-				four.Invoice.spnThread.setValue(rs.getInt("thread"));
-				four.Invoice.spnHeight.setValue(rs.getInt("screenHeight"));
-				four.Invoice.spnWidth.setValue(rs.getInt("screenWidth"));
-				four.Invoice.spnList.setValue(rs.getInt("listCount"));
-				
-				four.Invoice.txtDatee.setText(rs.getString("datee"));
-				four.Invoice.txtTimee.setText(rs.getString("timee"));
-				
 
 				four.Mathe.setHourly(rs.getDouble("hours"));
 			}
@@ -963,8 +918,10 @@ public class Database extends Invoice{
 				Invoice.lblInvoiceNumberR.setText(rs.getString("code"));
 				
 				//Get the Invoice Hours & Kids
+				
 				System.out.println(rs.getString("kids"));
 				Invoice.spnK.setValue(Integer.parseInt(rs.getString("kids")));
+				
 				Invoice.spnDeposit.setValue(Double.parseDouble(rs.getString("deposit")));
 				Invoice.spnHH.setValue(Double.parseDouble(rs.getString("hours")));
 				
@@ -1063,5 +1020,80 @@ public class Database extends Invoice{
 
 
 	}
+
+	public static String LoadMatInfo(String row) {
+		String cmd = "SELECT * FROM material WHERE material_id = " + row;
+		String name, type, cost, sentence = null;
+		try {
+			connect = DBConnect.connectDB();
+			stmt = connect.prepareStatement(cmd);			
+			//Create the code
+			//Execute the code
+			stmt.executeQuery(cmd);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmd);
+			while(rs.next()) {//Working
+				//				material_name = rs.getString(2);
+				name = rs.getString(2);
+				type = rs.getString(3);
+				cost = rs.getDouble(4) + "";
+				sentence = name + "." + type + "$" + cost;
+			
+			}
+		}catch(SQLException e){
+			System.out.println(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
+		return sentence;
+	}
+
+	public static int UpdateMaterial(String sentence, String row) {
+		String name, type, price;
+		
+		boolean saved = false;
+		
+		
+		int index1 = sentence.indexOf(".");
+		name = sentence.substring(0, index1);
+		int index2 = sentence.indexOf("$");
+		type = sentence.substring(index1+1,index2);
+		price = sentence.substring(index2+1);
+		System.out.println(price);
+		
+		String cmd = "UPDATE material SET material_name = \"" + name + "\", material_type = \"" + 
+				type + "\", material_cost = " + price + " WHERE material_id = " + row;
+		try {
+			connect = DBConnect.connectDB();
+			stmt = connect.prepareStatement(cmd);	
+			PreparedStatement pstmt = connect.prepareStatement(cmd);			
+			stmt.executeUpdate(cmd);
+			LoadMaterials(false);
+			saved = true;
+		}catch(SQLException e){
+			System.out.println(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}		//aaaa
+		}
+		
+		if(saved) {
+			JOptionPane.showMessageDialog(null, "Material updated succesfully", "Uhuul", JOptionPane.INFORMATION_MESSAGE);
+			return 0;
+		}else {
+			JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+			return 1;
+		}
+	}
+
+	
 
 }
