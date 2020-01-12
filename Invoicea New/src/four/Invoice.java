@@ -91,6 +91,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.beans.VetoableChangeListener;
 
 public class Invoice {
 
@@ -144,7 +145,6 @@ public class Invoice {
 	private static JLabel lbsCPC;
 	private static JLabel lbsRhinestone;
 	private static JLabel lbsHours;
-	private static JLabel lbsOther;
 	private static JLabel lbsTotal;
 	private static JLabel lbsSubtotal;
 	public static JLabel lbsDeposit;
@@ -258,7 +258,7 @@ public class Invoice {
 	public static  JLabel lblX9;
 
 	private double tax = 0.13;
-	private int hourly = 30;
+	private int hourly = 30, Evolve = 50;
 	private String FS, FY, FC;
 
 
@@ -1125,22 +1125,13 @@ public class Invoice {
 		spnHH.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnK.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				System.out.println(cmbStudio.getSelectedItem());
-				if(cmbStudio.getSelectedItem() == "Evolve Dance Centre") {
-					spnDeposit.setValue((int)spnK.getValue() * 50);
+//				System.out.println(cmbStudio.getSelectedItem());
+				if(cmbStudio.getSelectedItem().equals("Evolve Dance Centre")) {
+					spnDeposit.setValue((int)spnK.getValue() * Evolve);
 				}
 			}
 		});
 
-		spnK.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println(cmbStudio.getSelectedItem());
-				if(cmbStudio.getSelectedItem() == "Evolve Dance Centre") {
-					spnDeposit.setValue((int)spnK.getValue() * 50);
-				}
-			}
-		});
 
 		//		JSpinner spnK = new JSpinner();
 		spnK.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -1374,31 +1365,26 @@ public class Invoice {
 		lblRhinestone.setBounds(10, 189, 90, 17);
 		pnlRecipt.add(lblRhinestone);
 
-		JLabel lblOther_1 = new JLabel("Other");
-		lblOther_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblOther_1.setBounds(10, 217, 90, 17);
-		pnlRecipt.add(lblOther_1);
-
 		JLabel lblDeposit_1 = new JLabel("Deposit");
 		lblDeposit_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDeposit_1.setBounds(10, 245, 90, 17);
+		lblDeposit_1.setBounds(10, 216, 90, 17);
 		pnlRecipt.add(lblDeposit_1);
 
 		JLabel lblSubtotal = new JLabel("Subtotal");
 		lblSubtotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSubtotal.setBounds(10, 273, 90, 17);
+		lblSubtotal.setBounds(10, 244, 90, 17);
 		pnlRecipt.add(lblSubtotal);
 
 
 
 		JLabel lblTotal = new JLabel("Total");
 		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTotal.setBounds(10, 329, 90, 17);
+		lblTotal.setBounds(10, 300, 90, 17);
 		pnlRecipt.add(lblTotal);
 
 		JLabel lblCostPerCostume = new JLabel("Cost per Costume");
 		lblCostPerCostume.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCostPerCostume.setBounds(10, 357, 122, 17);
+		lblCostPerCostume.setBounds(10, 328, 122, 17);
 		pnlRecipt.add(lblCostPerCostume);
 
 		JLabel lblStudioName_1 = new JLabel("Studio Name");
@@ -1427,34 +1413,29 @@ public class Invoice {
 
 		lbsTotal = new JLabel("$ 0.00");
 		lbsTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbsTotal.setBounds(170, 329, 90, 17);
+		lbsTotal.setBounds(170, 300, 90, 17);
 		pnlRecipt.add(lbsTotal);
 
 		JLabel label_9 = new JLabel("% 13");
 		label_9.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_9.setBounds(170, 301, 90, 17);
+		label_9.setBounds(170, 272, 90, 17);
 		pnlRecipt.add(label_9);
 
 		lbsDeposit = new JLabel("$ 0.00");
 		lbsDeposit.setForeground(new Color(255, 0, 0));
 		lbsDeposit.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbsDeposit.setBounds(170, 245, 90, 17);
+		lbsDeposit.setBounds(170, 216, 90, 17);
 		pnlRecipt.add(lbsDeposit);
 
 		lbsSubtotal = new JLabel("$ 0.00");
 		lbsSubtotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbsSubtotal.setBounds(170, 273, 90, 17);
+		lbsSubtotal.setBounds(170, 244, 90, 17);
 		pnlRecipt.add(lbsSubtotal);
 
 		lbsRhinestone = new JLabel("$ 0.00");
 		lbsRhinestone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbsRhinestone.setBounds(170, 189, 90, 17);
 		pnlRecipt.add(lbsRhinestone);
-
-		lbsOther = new JLabel("$ 0.00");
-		lbsOther.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbsOther.setBounds(170, 217, 90, 17);
-		pnlRecipt.add(lbsOther);
 
 		lbsMaterial = new JLabel("$ 0.00");
 		lbsMaterial.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -1483,33 +1464,13 @@ public class Invoice {
 
 		JLabel lblTotal_1 = new JLabel("Tax");
 		lblTotal_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTotal_1.setBounds(10, 301, 90, 17);
+		lblTotal_1.setBounds(10, 272, 90, 17);
 		pnlRecipt.add(lblTotal_1);
 
 		lbsCPC = new JLabel("$ 0.00");
 		lbsCPC.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbsCPC.setBounds(170, 357, 90, 17);
+		lbsCPC.setBounds(170, 328, 90, 17);
 		pnlRecipt.add(lbsCPC);
-
-		JButton btnQuote = new JButton("QUOTE");
-		btnQuote.setBounds(270, 303, 120, 30);
-		pnlRecipt.add(btnQuote);
-
-		JButton btnInvoice = new JButton("INVOICE");
-		btnInvoice.setBounds(270, 221, 120, 30);
-		pnlRecipt.add(btnInvoice);
-
-		JButton btnInvoiceTax = new JButton("INVOICE TAX");
-		btnInvoiceTax.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnInvoiceTax.setBounds(270, 262, 120, 30);
-		pnlRecipt.add(btnInvoiceTax);
-
-		JButton btnQuoteTax = new JButton("QUOTE TAX");
-		btnQuoteTax.setBounds(270, 344, 120, 30);
-		pnlRecipt.add(btnQuoteTax);
 
 		JLabel lblName_1 = new JLabel("Name");
 		lblName_1.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -1544,7 +1505,7 @@ public class Invoice {
 
 
 
-		btnCreate = new JButton("CREATE");
+		btnCreate = new JButton("SAVE");
 		btnCreate.setEnabled(false);
 		btnCreate.setBounds(270, 176, 120, 30);
 		pnlRecipt.add(btnCreate);
@@ -1557,28 +1518,29 @@ public class Invoice {
 				if(txtCostumeName.getText().length()<1) {
 					txtCostumeName.setBorder(new LineBorder(Color.red,1));
 					JOptionPane.showMessageDialog(null, "Write a name for the Costume!", "Error!", JOptionPane.ERROR_MESSAGE);
-				}else {
-					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
-
-					int studio_id = 0;
-					String studio_name = cmbStudio.getSelectedItem().toString();
-					switch(studio_name){
-					case "Kids In Dance":
-						studio_id = 0;
-						break;
-					case "Evolve Dance Centre":
-						studio_id = 1;
-						break;
-					case "Maple Dance Acadamy":
-						studio_id = 2;
-						break;
-					case "CB Dance Acadamy":
-						studio_id = 3;
-						break;
-					case "The Eight Count":
-						studio_id = 4;
-						break;
-					}
+				}
+				else {
+//					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
+//
+//					int studio_id = 0;
+//					String studio_name = cmbStudio.getSelectedItem().toString();
+//					switch(studio_name){
+//					case "Kids In Dance":
+//						studio_id = 0;
+//						break;
+//					case "Evolve Dance Centre":
+//						studio_id = 1;
+//						break;
+//					case "Maple Dance Acadamy":
+//						studio_id = 2;
+//						break;
+//					case "CB Dance Acadamy":
+//						studio_id = 3;
+//						break;
+//					case "The Eight Count":
+//						studio_id = 4;
+//						break;
+//					}
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
 					LocalDateTime now = LocalDateTime.now();  
 
@@ -1597,6 +1559,7 @@ public class Invoice {
 					}
 
 					result = 0;
+					int studio_id = cmbStudio.getSelectedIndex();
 
 					int invoice_id = Database.HasInvoice(studio_id);
 					if(invoice_id == 0) {
@@ -1612,36 +1575,6 @@ public class Invoice {
 					//					}
 				}
 
-			}
-		});
-		btnQuoteTax.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnQuoteTax.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				output("I","Starting Invoice Taxed");
-			}
-		});
-		btnInvoiceTax.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				output("I","Starting Invoice");
-			}
-		});
-		btnInvoice.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				output("I","Starting Invoice");
-			}
-		});
-		btnQuote.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				output("I","Starting Quote");
-				Fill();
-				material();
 			}
 		});
 

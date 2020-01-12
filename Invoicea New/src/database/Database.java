@@ -200,13 +200,13 @@ public class Database extends Invoice{
 				+ "kids, deposit, hours, is_group, rhinestone_1, rhinestone_2, rhinestone_3, rhinestone_4) "
 
 						//1  2  3  4  5
-				+ "VALUES(?, ?, ?, ?, ?, "
-				 //6 7  8 9  10 11 12 13 14 15 16 17 
-				+ "?,?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, "
-				 //18 19 20 21 22 23 24 25
-				+ "?, ?, ?, ?, ?, ?, ?, ?,"
-				 //26 27 28 29 30 31 32 33
- 				+ "?, ?, ?, ?, ?, ?, ?, ?)";
+						+ "VALUES(?, ?, ?, ?, ?, "
+						//6 7  8 9  10 11 12 13 14 15 16 17 
+						+ "?,?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, "
+						//18 19 20 21 22 23 24 25
+						+ "?, ?, ?, ?, ?, ?, ?, ?,"
+						//26 27 28 29 30 31 32 33
+						+ "?, ?, ?, ?, ?, ?, ?, ?)";
 		int inv = invoice_id+1;
 		String code = null;
 		//\\//FOR TESTING ONLY	 //\\//		//\\//		//\\//		//\\//		//\\//		//\\//
@@ -253,7 +253,7 @@ public class Database extends Invoice{
 					count++;
 				}
 			}
-			
+
 			pstmt.setInt(26, (int) Invoice.spnK.getValue());
 			String deposit =  Invoice.spnDeposit.getValue() + "";
 			pstmt.setDouble(27, Double.parseDouble(deposit));
@@ -263,12 +263,12 @@ public class Database extends Invoice{
 			}else if(Invoice.rdbSolo.isSelected()) {
 				pstmt.setBoolean(29, false);
 			}
-			
+
 			pstmt.setString(30, null);
 			pstmt.setString(31, null);
 			pstmt.setString(32, null);
 			pstmt.setString(33, null);
-			
+
 
 			pstmt.executeUpdate();
 			//			System.out.print("Saved");
@@ -292,66 +292,80 @@ public class Database extends Invoice{
 
 	//Insert a new material into the table
 	public static boolean CreateMaterial(String name, String cost, String type){
-		String material_name = null, material_type = null;
-		String cmdSearch = "SELECT * FROM material WHERE material_name = \"" + name + "\" AND material_type = \"" + type + "\"";
-		boolean add = true;
-		try {
-			connect = DBConnect.connectDB();
-			stmt = connect.prepareStatement(cmdSearch);			
-			//Create the code
-			//Execute the code
-			stmt.executeQuery(cmdSearch);
-			//For every possible execution, create a rs
-			ResultSet rs = stmt.executeQuery(cmdSearch);
-			//While there's code to be executes, do something
-			while(rs.next()) {//Working
-				material_name = rs.getString(2);
-				material_type = rs.getString(3);
-				if(name.equals(material_name) && type.equals(material_type)) {
-					Invoice.writeMatOutput("Error", "The material is already in the DataBase");
-					add = false;
-					break;
-				}
-			}
-			if(add) {
-				String material = name + ", " + type + ", $" + cost;
+		if(!name.equals("") && !cost.equals("") && !type.equals("")) {
+			name = name.replace("\"", "#");
 
-				Invoice.writeMatOutput("Added", material + "");
-				String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
-				//In case the user uses , instead of . the program will replace it
-				String newCost = cost.replace(",", ".");		
-
-				double dCost = Double.parseDouble(newCost);
-
-				String changedName = Strin.FirstCapital(name);
-
-				//				System.out.println(name);
-				//				System.out.println(changedName);
-				try{
-					PreparedStatement pstmt = connect.prepareStatement(cmd);			
-					pstmt.setString(1, changedName);
-					pstmt.setDouble(2, dCost);
-					pstmt.setString(3, type);
-					pstmt.executeUpdate();
-				} catch (SQLException e) {
-					System.out.println("Create Material");
-					System.out.println(e.getMessage());
-					return false;
-				}
-			}
-		}catch(SQLException e){
-			System.out.println(e);
-		}finally {
+			String material_name = null, material_type = null;
+			String cmdSearch = "SELECT * FROM material WHERE material_name = \"" + name + "\" AND material_type = \"" + type + "\"";
+			System.out.println(cmdSearch);
+			boolean add = true;
 			try {
-				connect.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
+				connect = DBConnect.connectDB();
+				stmt = connect.prepareStatement(cmdSearch);			
+				//Create the code
+				//Execute the code
+				stmt.executeQuery(cmdSearch);
+				//For every possible execution, create a rs
+				ResultSet rs = stmt.executeQuery(cmdSearch);
+				//While there's code to be executes, do something
+				while(rs.next()) {//Working
+					material_name = rs.getString(2);
+					material_type = rs.getString(3);
+					if(name.equals(material_name) && type.equals(material_type)) {
+						Invoice.writeMatOutput("Error", "The material is already in the DataBase");
+						add = false;
+						break;
+					}
+				}
+				if(add) {
+					String material = name + ", " + type + ", $" + cost;
+
+					System.out.println(material);
+					
+					String cmd = "INSERT INTO material(material_name, material_cost, material_type) VALUES(?, ?, ?)";
+					//In case the user uses , instead of . the program will replace it
+					String newCost = cost.replace(",", ".");		
+
+					double dCost = Double.parseDouble(newCost);
+
+					String changedName = Strin.FirstCapital(name);
+
+					//				System.out.println(name);
+					//				System.out.println(changedName);
+					try{
+						PreparedStatement pstmt = connect.prepareStatement(cmd);			
+						pstmt.setString(1, changedName);
+						pstmt.setDouble(2, dCost);
+						pstmt.setString(3, type);
+						pstmt.executeUpdate();
+					} catch (SQLException e) {
+						System.out.println("Create Material");
+						System.out.println(e.getMessage());
+						return false;
+					}
+					name = name.replace("#", "\"");
+
+					Invoice.writeMatOutput("Added", material + "");
+
+				}
+			}catch(SQLException e){
+				System.out.println(e);
+			}finally {
+				try {
+					connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+			}
+
+
+			return true;
+
+		}else {
+			JOptionPane.showMessageDialog(null, "All the fields should have a value", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
-
-
-		return true;
 
 	}
 
@@ -514,11 +528,11 @@ public class Database extends Invoice{
 			//For every possible execution, create a rs
 			ResultSet rs = stmt.executeQuery(cmd);
 			//While there's code to be executes, do something
-			
+
 			//Create a counter for Mathe
 			int count = 0;
 			String counter = "";
-			
+
 			while(rs.next()) {
 
 				id = rs.getInt("studio_id");
@@ -539,7 +553,7 @@ public class Database extends Invoice{
 				Invoice.rows.addRow(row);	
 				Invoice.cmbStudio.addItem(name);
 				Invoice.cmbStudioName.addItem(name);
-				
+
 				if(count < 10) {
 					counter = "0" + count;
 				}else {
@@ -548,7 +562,7 @@ public class Database extends Invoice{
 				Mathe.setLists(counter, name);
 				count++;
 			}
-			
+
 
 			//If there's some error, return it
 		} catch (SQLException e) {
@@ -912,20 +926,20 @@ public class Database extends Invoice{
 			//For every possible execution, create a rs
 			ResultSet rs = stmt.executeQuery(cmd);
 			while(rs.next()) {//Working
-				
+
 				//Get the Invoice name & Number
 				Invoice.txtCostumeName.setText(rs.getString(3));
 				Invoice.lblInvoiceNumberR.setText(rs.getString("code"));
-				
+
 				//Get the Invoice Hours & Kids
-				
+
 				System.out.println(rs.getString("kids"));
 				Invoice.spnK.setValue(Integer.parseInt(rs.getString("kids")));
-				
+
 				Invoice.spnDeposit.setValue(Double.parseDouble(rs.getString("deposit")));
 				Invoice.spnHH.setValue(Double.parseDouble(rs.getString("hours")));
-				
-				
+
+
 				//Get all the materials/amounts 
 				int count = 1;
 				for(int i = 0; i<10; i++) {
@@ -1003,8 +1017,8 @@ public class Database extends Invoice{
 						break;
 					}
 				}
-				
-				
+
+
 			}
 
 		}catch(SQLException e){
@@ -1038,7 +1052,7 @@ public class Database extends Invoice{
 				type = rs.getString(3);
 				cost = rs.getDouble(4) + "";
 				sentence = name + "." + type + "$" + cost;
-			
+
 			}
 		}catch(SQLException e){
 			System.out.println(e);
@@ -1055,17 +1069,17 @@ public class Database extends Invoice{
 
 	public static int UpdateMaterial(String sentence, String row) {
 		String name, type, price;
-		
+
 		boolean saved = false;
-		
-		
+
+
 		int index1 = sentence.indexOf(".");
 		name = sentence.substring(0, index1);
 		int index2 = sentence.indexOf("$");
 		type = sentence.substring(index1+1,index2);
 		price = sentence.substring(index2+1);
 		System.out.println(price);
-		
+
 		String cmd = "UPDATE material SET material_name = \"" + name + "\", material_type = \"" + 
 				type + "\", material_cost = " + price + " WHERE material_id = " + row;
 		try {
@@ -1084,7 +1098,7 @@ public class Database extends Invoice{
 				e.printStackTrace();
 			}		//aaaa
 		}
-		
+
 		if(saved) {
 			JOptionPane.showMessageDialog(null, "Material updated succesfully", "Uhuul", JOptionPane.INFORMATION_MESSAGE);
 			return 0;
@@ -1094,6 +1108,6 @@ public class Database extends Invoice{
 		}
 	}
 
-	
+
 
 }
