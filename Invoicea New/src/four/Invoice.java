@@ -439,6 +439,48 @@ public class Invoice {
 		lblCommand9.setText("-");
 		lblCommand10.setText("-");
 		lblCommand11.setText("-");
+		
+		
+		
+		// M A T E R I A L S//
+		for(int i = 0; i < selectedMaterials.length; i++) {
+			selectedMaterials[i][i] = null;
+		}
+		
+		lblMaterialName0.setText("");
+		lblMaterialName1.setText("");
+		lblMaterialName2.setText("");
+		lblMaterialName3.setText("");
+		lblMaterialName4.setText("");
+		lblMaterialName5.setText("");
+		lblMaterialName6.setText("");
+		lblMaterialName7.setText("");
+		lblMaterialName8.setText("");
+		lblMaterialName9.setText("");
+		
+		lblMaterialAmount0.setText("");
+		lblMaterialAmount1.setText("");
+		lblMaterialAmount2.setText("");
+		lblMaterialAmount3.setText("");
+		lblMaterialAmount4.setText("");
+		lblMaterialAmount5.setText("");
+		lblMaterialAmount6.setText("");
+		lblMaterialAmount7.setText("");
+		lblMaterialAmount8.setText("");
+		lblMaterialAmount9.setText("");
+		
+		
+		lblX0.setVisible(false);
+		lblX1.setVisible(false);
+		lblX2.setVisible(false);
+		lblX3.setVisible(false);
+		lblX4.setVisible(false);
+		lblX5.setVisible(false);
+		lblX6.setVisible(false);
+		lblX7.setVisible(false);
+		lblX8.setVisible(false);
+		lblX9.setVisible(false);
+		
 	}
 
 	/**
