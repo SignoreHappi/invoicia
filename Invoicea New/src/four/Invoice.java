@@ -264,7 +264,9 @@ public class Invoice {
 
 	public static JLabel lblInvoiceNumberR = new JLabel("** - ** - ***");
 	public static JLabel lblStudioNameR  = new JLabel("Xxxx Xxxx");
-
+	public static JLabel lblCostumeNameR  = new JLabel("Xxxx Xxxx");
+	public static JLabel lblInvoiceOrQuote  = new JLabel("INVOICE or QUOTE");
+	
 	private String com = "";
 
 
@@ -315,6 +317,8 @@ public class Invoice {
 	public static JComboBox cmbStudioName;
 	public static JComboBox cmbYear;
 	public static JComboBox cmbInvoiceId;
+	
+	private JFormattedTextField ftfSearch;
 
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss"); 
 
@@ -369,6 +373,72 @@ public class Invoice {
 		Database.CreateDate(dtf.format(now) + "");
 
 		return 1;
+	}
+	
+	private void Clear() {
+		txtStudio.setText(null);
+		txtOwner.setText(null);
+		
+		// R E C E I P T//
+		lblStudioNameR.setText("Xxxx Xxxx");
+		lblInvoiceNumberR.setText("** - ** - ***");
+		lblCostumeNameR.setText("Xxxx Xxxx");
+		lblInvoiceOrQuote.setText("INVOICE or QUOTE");
+		//-------------------------------------------
+		lbsMaterial.setText("$ 0.00");
+		lbsHours.setText("$ 0.00");
+		lbsRhinestone.setText("$ 0.00");
+		lbsDeposit.setText("$ 0.00");
+		lbsSubtotal.setText("$ 0.00");
+		lbsTotal.setText("$ 0.00");
+		lbsCPC.setText("$ 0.00");
+		lbsBottom.setText("$ 0.00");
+		
+		// S T U D I O//
+		cmbStudio.setSelectedIndex(0);
+		txtCostumeName.setText(null);
+		
+		// 	H O U R S  /  G R O U P S//
+		spnHH.setValue("0");
+		spnK.setValue("0");
+		rdbGroup.setSelected(true);
+		rdbSolo.setSelected(false);
+		
+		// R H I N E S T O N E S//
+		spnRT4.setValue("AB");
+		spnRT3.setValue("AB");
+		spnRT2.setValue("AB");
+		spnRT1.setValue("AB");
+		
+		spnRA4.setValue("0");
+		spnRA3.setValue("0");
+		spnRA2.setValue("0");
+		spnRA1.setValue("0");
+		
+		spnRS4.setValue("20");
+		spnRS3.setValue("20");
+		spnRS2.setValue("20");
+		spnRS1.setValue("20");
+		
+		// D E P O S I T//
+		spnDeposit.setValue("0");
+		
+		// F I L E   S E A R C H//
+		ftfSearch.setText(null);
+		cmbStudioName.setSelectedIndex(0);
+		
+		// C O M M A N D//
+		lblCommand1.setText("-");
+		lblCommand2.setText("-");
+		lblCommand3.setText("-");
+		lblCommand4.setText("-");
+		lblCommand5.setText("-");
+		lblCommand6.setText("-");
+		lblCommand7.setText("-");
+		lblCommand8.setText("-");
+		lblCommand9.setText("-");
+		lblCommand10.setText("-");
+		lblCommand11.setText("-");
 	}
 
 	/**
@@ -1194,6 +1264,12 @@ public class Invoice {
 		pnlFile.add(lblFileSearch);
 
 		JButton btnClear = new JButton("RESET");
+		btnClear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Clear();
+			}
+		});
 		btnClear.setBounds(10, 184, 120, 30);
 		pnlFile.add(btnClear);
 
@@ -1246,7 +1322,7 @@ public class Invoice {
 
 
 
-		JFormattedTextField ftfSearch = new JFormattedTextField(createFormatter("##-##-###"));
+		ftfSearch = new JFormattedTextField(createFormatter("##-##-###"));
 		ftfSearch.setBounds(140, 42, 120, 24);
 		pnlFile.add(ftfSearch);
 
@@ -1447,9 +1523,9 @@ public class Invoice {
 		lbsHours.setBounds(170, 161, 90, 17);
 		pnlRecipt.add(lbsHours);
 
-		JLabel lblInvoiceOrQuote = new JLabel("INVOICE or QUOTE ");
+		lblInvoiceOrQuote = new JLabel("INVOICE or QUOTE ");
 		lblInvoiceOrQuote.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblInvoiceOrQuote.setBounds(138, 105, 122, 17);
+		lblInvoiceOrQuote.setBounds(138, 105, 136, 17);
 		pnlRecipt.add(lblInvoiceOrQuote);
 
 		JLabel lblAmountOwing = new JLabel("Amount Owing");
@@ -1478,7 +1554,7 @@ public class Invoice {
 		lblName_1.setBounds(285, 49, 105, 17);
 		pnlRecipt.add(lblName_1);
 
-		JLabel lblCostumeNameR = new JLabel("Xxxx Xxxx");
+		lblCostumeNameR = new JLabel("Xxxx Xxxx");
 		lblCostumeNameR.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblCostumeNameR.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCostumeNameR.setBounds(270, 77, 122, 17);
