@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class DBConnect {
 	public static Connection connectDB() throws SQLException{
 		Connection connection = null;
-		String url = "jdbc:mysql://remotemysql.com:3306/ZYebHXfmH9?useSSL=false";
-		String user = "ZYebHXfmH9";
-		String password = "AIRtr96APu";
+		String url = "jdbc:mysql://sql305.epizy.com:3306/epiz_25185035_invoicia?useSSL=false";
+		String user = "epiz_25185035";
+		String password = "Kidsindance";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url,user,password);
