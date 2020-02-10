@@ -861,12 +861,12 @@ public class Database extends Invoice{
 		} catch (SQLException e) {
 			System.out.print(e);
 		}finally {
-			try {
-				connect.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				//connect.close();
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}		
 	}
 

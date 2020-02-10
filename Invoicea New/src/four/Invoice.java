@@ -370,7 +370,7 @@ public class Invoice {
 
 	private int Close() {
 
-		Database.CreateDate(dtf.format(now) + "");
+//		Database.CreateDate(dtf.format(now) + "");
 
 		return 1;
 	}
