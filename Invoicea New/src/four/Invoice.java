@@ -102,33 +102,33 @@ public class Invoice {
 	public static JRadioButton rdbSolo = new JRadioButton("Solo, Duet, Trio");
 
 	private JFrame frame;
-	private JTable table;
+	//	private JTable table;
 
 	protected JTextField txtStudio;
 	public JTextField txtOwner;
 	public JTextField txtPhone;
 	public JTextField txtAddress;
 	public JTextField txtEmail;
-	protected JComboBox txtMC1;
+	//	protected JComboBox txtMC1;
 	public JTextField txtMM1;
 	public JTextField txtMM2;
-	public JComboBox txtMC2;
+	//	public JComboBox txtMC2;
 	public JTextField txtMM3;
-	public JComboBox txtMC3;
+	//	public JComboBox txtMC3;
 	public JTextField txtMM4;
-	public JComboBox txtMC4;
+	//	public JComboBox txtMC4;
 	public JTextField txtMM5;
-	public JComboBox txtMC5;
+	//	public JComboBox txtMC5;
 	public JTextField txtMM6;
-	public JComboBox txtMC6;
+	//	public JComboBox txtMC6;
 	public JTextField txtMM7;
-	public JComboBox txtMC7;
+	//	public JComboBox txtMC7;
 	public JTextField txtMM8;
-	public JComboBox txtMC8;
+	//	public JComboBox txtMC8;
 	public JTextField txtMM9;
-	public JComboBox txtMC9;
+	//	public JComboBox txtMC9;
 	public JTextField txtMM10;
-	public JComboBox txtMC10;
+	//	public JComboBox txtMC10;
 
 
 	protected JPanel PInvoice;
@@ -257,25 +257,25 @@ public class Invoice {
 	public static  JLabel lblX8;
 	public static  JLabel lblX9;
 
-	private double tax = 0.13;
+	//	private double tax = 0.13;
 	private int hourly = 30, Evolve = 50;
-	private String FS, FY, FC;
+	//	private String FS, FY, FC;
 
 
 	public static JLabel lblInvoiceNumberR = new JLabel("** - ** - ***");
 	public static JLabel lblStudioNameR  = new JLabel("Xxxx Xxxx");
 	public static JLabel lblCostumeNameR  = new JLabel("Xxxx Xxxx");
 	public static JLabel lblInvoiceOrQuote  = new JLabel("INVOICE or QUOTE");
-	
-	private String com = "";
+
+	//	private String com = "";
 
 
-	private int a, c;
+	//	private int a, c;
 
 
 	private static int line = 0;
-	private double b;
-	private String s;
+	//	private double b;
+	//	private String s;
 
 
 	public int customer, dateGiven, monthGiven, year, costume, dateDone, monthDone, check;
@@ -283,7 +283,7 @@ public class Invoice {
 	public static BufferedImage dancer, icon;
 	private JTextField txtName;
 	private JTextField txtCost;
-	private JTable table_1;
+	//	private JTable table_1;
 
 
 	public static DefaultTableModel materialTable;
@@ -317,7 +317,7 @@ public class Invoice {
 	public static JComboBox cmbStudioName;
 	public static JComboBox cmbYear;
 	public static JComboBox cmbInvoiceId;
-	
+
 	private JFormattedTextField ftfSearch;
 
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss"); 
@@ -374,11 +374,11 @@ public class Invoice {
 
 		return 1;
 	}
-	
+
 	private void Clear() {
 		txtStudio.setText(null);
 		txtOwner.setText(null);
-		
+
 		// R E C E I P T//
 		lblStudioNameR.setText("Xxxx Xxxx");
 		lblInvoiceNumberR.setText("** - ** - ***");
@@ -393,40 +393,40 @@ public class Invoice {
 		lbsTotal.setText("$ 0.00");
 		lbsCPC.setText("$ 0.00");
 		lbsBottom.setText("$ 0.00");
-		
+
 		// S T U D I O//
 		cmbStudio.setSelectedIndex(0);
 		txtCostumeName.setText(null);
-		
+
 		// 	H O U R S  /  G R O U P S//
 		spnHH.setValue("0");
 		spnK.setValue("0");
 		rdbGroup.setSelected(true);
 		rdbSolo.setSelected(false);
-		
+
 		// R H I N E S T O N E S//
 		spnRT4.setValue("AB");
 		spnRT3.setValue("AB");
 		spnRT2.setValue("AB");
 		spnRT1.setValue("AB");
-		
+
 		spnRA4.setValue("0");
 		spnRA3.setValue("0");
 		spnRA2.setValue("0");
 		spnRA1.setValue("0");
-		
+
 		spnRS4.setValue("20");
 		spnRS3.setValue("20");
 		spnRS2.setValue("20");
 		spnRS1.setValue("20");
-		
+
 		// D E P O S I T//
 		spnDeposit.setValue("0");
-		
+
 		// F I L E   S E A R C H//
 		ftfSearch.setText(null);
 		cmbStudioName.setSelectedIndex(0);
-		
+
 		// C O M M A N D//
 		lblCommand1.setText("-");
 		lblCommand2.setText("-");
@@ -439,14 +439,14 @@ public class Invoice {
 		lblCommand9.setText("-");
 		lblCommand10.setText("-");
 		lblCommand11.setText("-");
-		
-		
-		
+
+
+
 		// M A T E R I A L S//
 		for(int i = 0; i < selectedMaterials.length; i++) {
 			selectedMaterials[i][i] = null;
 		}
-		
+
 		lblMaterialName0.setText("");
 		lblMaterialName1.setText("");
 		lblMaterialName2.setText("");
@@ -457,7 +457,7 @@ public class Invoice {
 		lblMaterialName7.setText("");
 		lblMaterialName8.setText("");
 		lblMaterialName9.setText("");
-		
+
 		lblMaterialAmount0.setText("");
 		lblMaterialAmount1.setText("");
 		lblMaterialAmount2.setText("");
@@ -468,8 +468,8 @@ public class Invoice {
 		lblMaterialAmount7.setText("");
 		lblMaterialAmount8.setText("");
 		lblMaterialAmount9.setText("");
-		
-		
+
+
 		lblX0.setVisible(false);
 		lblX1.setVisible(false);
 		lblX2.setVisible(false);
@@ -480,7 +480,7 @@ public class Invoice {
 		lblX7.setVisible(false);
 		lblX8.setVisible(false);
 		lblX9.setVisible(false);
-		
+
 	}
 
 	/**
@@ -497,7 +497,7 @@ public class Invoice {
 		////		inventoryScreen = ImageLoader.loadImage("/textures/Iventory.png");
 		//		dancer = loadImage("/images/Canada-Leaf-Free-PNG-Image.png");
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 
 
@@ -1237,7 +1237,7 @@ public class Invoice {
 		spnHH.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		spnK.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-//				System.out.println(cmbStudio.getSelectedItem());
+				//				System.out.println(cmbStudio.getSelectedItem());
 				if(cmbStudio.getSelectedItem().equals("Evolve Dance Centre")) {
 					spnDeposit.setValue((int)spnK.getValue() * Evolve);
 				}
@@ -1632,59 +1632,69 @@ public class Invoice {
 
 		btnCreate.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-
+				System.out.println("A");
 				if(txtCostumeName.getText().length()<1) {
+					System.out.println("AAA");
 					txtCostumeName.setBorder(new LineBorder(Color.red,1));
 					JOptionPane.showMessageDialog(null, "Write a name for the Costume!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-//					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
+					//					//"Kids In Dance", "Evolve Dance Centre", "Maple Dance Acadamy", "CB Dance Acadamy", "The Eight Count"
+					//
+					//					int studio_id = 0;
+					//					String studio_name = cmbStudio.getSelectedItem().toString();
+					//					switch(studio_name){
+					//					case "Kids In Dance":
+					//						studio_id = 0;
+					//						break;
+					//					case "Evolve Dance Centre":
+					//						studio_id = 1;
+					//						break;
+					//					case "Maple Dance Acadamy":
+					//						studio_id = 2;
+					//						break;
+					//					case "CB Dance Acadamy":
+					//						studio_id = 3;
+					//						break;
+					//					case "The Eight Count":
+					//						studio_id = 4;
+					//						break;
+					//					}
+//					System.out.println("B");
+//					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
+//					LocalDateTime now = LocalDateTime.now();  
 //
-//					int studio_id = 0;
-//					String studio_name = cmbStudio.getSelectedItem().toString();
-//					switch(studio_name){
-//					case "Kids In Dance":
-//						studio_id = 0;
-//						break;
-//					case "Evolve Dance Centre":
-//						studio_id = 1;
-//						break;
-//					case "Maple Dance Acadamy":
-//						studio_id = 2;
-//						break;
-//					case "CB Dance Acadamy":
-//						studio_id = 3;
-//						break;
-//					case "The Eight Count":
-//						studio_id = 4;
-//						break;
-//					}
-					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy/MM");  
-					LocalDateTime now = LocalDateTime.now();  
-
-					String date = dtf.format(now);
-
-					String month = date.substring(3, 5);
-					String year = date.substring(0, 2);
+//					String date = dtf.format(now);
+//
+//					String month = date.substring(3, 5);
+//					String year = date.substring(0, 2);
 					String invcName = txtCostumeName.getText();
-
-					int iMonth = Integer.parseInt(month);
-					int iYear = 0;
-					if(iMonth >= 7) {
-						iYear = Integer.parseInt(year);
-						iYear++;
-						year = String.valueOf(iYear);
-					}
-
+//					System.out.println("C");
+//					int iMonth = Integer.parseInt(month);
+//					int iYear = 0;
+//					if(iMonth >= 7) {
+//						iYear = Integer.parseInt(year);
+//						iYear++;
+//						year = String.valueOf(iYear);
+//					}
+					
+					int year = Integer.parseInt(Mathe.InvoiceNumber().substring(3, 5));
+					
+					
+					System.out.println("D");
 					result = 0;
 					int studio_id = cmbStudio.getSelectedIndex();
 
 					int invoice_id = Database.HasInvoice(studio_id);
+					System.out.println(invoice_id);
 					if(invoice_id == 0) {
-						Database.CreateNewInvoice(studio_id, iYear, invcName);
+						Database.CreateNewInvoice(studio_id, year, invcName);
+						System.out.println("D1");
 					}else {
-						Database.CreateInvoice(studio_id, invoice_id, iYear, invcName);
+						Database.CreateInvoice(studio_id, invoice_id, year, invcName);
+						System.out.println("D2");
 					}
+					System.out.println("E");
 
 					//					if(result == 1) {
 					//						output("Invoice:", "saved");
@@ -2310,16 +2320,16 @@ public class Invoice {
 		tableMaterial.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
 				int row = tableMaterial.rowAtPoint(me.getPoint());
-				
+
 				if(me.getClickCount() > 1) {
-//					System.out.println("Double Clicked");
-					
+					//					System.out.println("Double Clicked");
+
 					UpdateMaterial.Initialize(tableMaterial.getValueAt(row, 0)+"");
 				}
-				
+
 				//				int column = materialTable.get;
 				//				System.out.println(column);
-			
+
 			}
 		});
 
@@ -2447,7 +2457,7 @@ public class Invoice {
 		lblSoloRate.setBounds(10, 74, 76, 14);
 		panel_2.add(lblSoloRate);
 
-		
+
 		frame.setLocationRelativeTo(null);
 	}			// --------------------------------------------------------------------------------------------------- end of Jframe
 
@@ -2458,7 +2468,7 @@ public class Invoice {
 		name = name.substring(0, i);
 
 		return name + " " + type;
-	
+
 	}
 
 
