@@ -97,7 +97,7 @@ public class Invoice {
 
 	NumberFormat money = NumberFormat.getCurrencyInstance();
 
-
+//hey
 	public static JRadioButton rdbGroup = new JRadioButton("Group");
 	public static JRadioButton rdbSolo = new JRadioButton("Solo, Duet, Trio");
 
