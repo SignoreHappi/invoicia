@@ -70,6 +70,7 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractListModel;
+import javax.swing.BorderFactory;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JMenuBar;
@@ -333,6 +334,13 @@ public class Invoice {
 	public static JButton btnRetrieve;
 	public static JButton btnClear;
 	public static JButton btnPrintout;
+	private JTextField txtFabricNumber;
+	private JTextField txtFabricDate;
+	private JTextField txtFabricName;
+	private JTextField txtFabricAmount;
+	private JTextField txtFabricStudio;
+	
+	private int fabricCount = 0;
 
 	/**
 	 * Launch the application.
@@ -2483,6 +2491,137 @@ public class Invoice {
 		
 		Fabric = new JPanel();
 		tabbedPane.addTab("Fabric", null, Fabric, null);
+		Fabric.setLayout(null);
+		
+		JPanel fabricPanel = new JPanel();
+		fabricPanel.setBounds(35, 25, 402, 273);
+		Fabric.add(fabricPanel);
+		fabricPanel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Add a new Fabric");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblNewLabel.setBounds(33, 27, 107, 14);
+		fabricPanel.add(lblNewLabel);
+		
+		JLabel lblName_2 = new JLabel("Name:");
+		lblName_2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblName_2.setBounds(33, 125, 107, 14);
+		fabricPanel.add(lblName_2);
+		
+		JLabel lblName_2_1 = new JLabel("Number:");
+		lblName_2_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblName_2_1.setBounds(33, 52, 107, 14);
+		fabricPanel.add(lblName_2_1);
+		
+		JLabel lblName_2_1_1 = new JLabel("Date:");
+		lblName_2_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblName_2_1_1.setBounds(33, 77, 107, 14);
+		fabricPanel.add(lblName_2_1_1);
+		
+		JLabel lblName_2_2 = new JLabel("Amount:");
+		lblName_2_2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblName_2_2.setBounds(33, 150, 107, 14);
+		fabricPanel.add(lblName_2_2);
+		
+		JButton btnAddFabric = new JButton("Add");
+		btnAddFabric.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean proceed = true;
+				string date = txtFabricDate.getText();
+		        if(date == null || txtFabricNumber.getText().isEmpty()) {
+		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
+		        	txtFabricNumber.setBorder(border);
+		        	proceed = false;
+		        }else {
+		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
+		        	txtFabricNumber.setBorder(border);
+		        	txtFabricNumber.setBorder(border);
+		        }
+		        
+		        if(date == null || txtFabricDate.getText().isEmpty()) {
+		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
+		        	txtFabricDate.setBorder(border);
+		        	proceed = false;
+		        }else {
+		        	int day = 0, month = 0;
+		        	if(!date.contains("/")) {
+		        		if(txtFabricDate.getText().length() == 9) {
+//			        		day = 
+			        	}	
+		        	}
+		        	Border border = BorderFactory.createLineBorder(Color.GRAY, 1);
+		        	txtFabricDate.setBorder(border);
+		        	
+		        }
+		        
+		        if(proceed == true) {
+		        	
+		        }else {
+		        	
+		        }
+
+			}
+		});
+		btnAddFabric.setBounds(33, 215, 89, 23);
+		fabricPanel.add(btnAddFabric);
+		
+		txtFabricNumber = new JTextField();
+		txtFabricNumber.setBounds(130, 50, 155, 20);
+		fabricPanel.add(txtFabricNumber);
+		txtFabricNumber.setColumns(10);
+		
+		txtFabricDate = new JTextField();
+		txtFabricDate.setColumns(10);
+		txtFabricDate.setBounds(130, 75, 155, 20);
+		fabricPanel.add(txtFabricDate);
+		
+		txtFabricName = new JTextField();
+		txtFabricName.setColumns(10);
+		txtFabricName.setBounds(130, 123, 155, 20);
+		fabricPanel.add(txtFabricName);
+		
+		txtFabricAmount = new JTextField();
+		txtFabricAmount.setColumns(10);
+		txtFabricAmount.setBounds(130, 150, 155, 20);
+		fabricPanel.add(txtFabricAmount);
+		
+		JLabel lblName_2_1_1_1 = new JLabel("Studio:");
+		lblName_2_1_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblName_2_1_1_1.setBounds(33, 177, 107, 14);
+		fabricPanel.add(lblName_2_1_1_1);
+		
+		txtFabricStudio = new JTextField();
+		txtFabricStudio.setColumns(10);
+		txtFabricStudio.setBounds(130, 175, 155, 20);
+		fabricPanel.add(txtFabricStudio);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(495, 25, 557, 614);
+		Fabric.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblFabricName1 = new JLabel("Fabric 1:.......");
+		lblFabricName1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblFabricName1.setBounds(32, 11, 153, 14);
+		panel.add(lblFabricName1);
+		
+		JLabel lblFabricAmount1 = new JLabel("Amount 1:.......");
+		lblFabricAmount1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblFabricAmount1.setBounds(195, 11, 84, 14);
+		panel.add(lblFabricAmount1);
+		
+		JLabel lblFabricX1 = new JLabel("X");
+		lblFabricX1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblFabricX1.setBounds(10, 11, 19, 14);
+		panel.add(lblFabricX1);
+		
+		JButton btnNewButton = new JButton("Finish");
+		btnNewButton.setBounds(231, 555, 89, 23);
+		panel.add(btnNewButton);
+		
+		JLabel lblFabricTotal = new JLabel("Total: $000.00");
+		lblFabricTotal.setBounds(47, 522, 121, 14);
+		panel.add(lblFabricTotal);
 
 
 		frame.setLocationRelativeTo(null);
