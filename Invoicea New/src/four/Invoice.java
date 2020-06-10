@@ -2527,7 +2527,7 @@ public class Invoice {
 		btnAddFabric.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean proceed = true;
-				string date = txtFabricDate.getText();
+				String date = txtFabricDate.getText();
 		        if(date == null || txtFabricNumber.getText().isEmpty()) {
 		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		        	txtFabricNumber.setBorder(border);
@@ -2546,7 +2546,7 @@ public class Invoice {
 		        	int day = 0, month = 0;
 		        	if(!date.contains("/")) {
 		        		if(txtFabricDate.getText().length() == 9) {
-//			        		day = 
+//			        		day = date.substring(0, date.indexOf(('/')));
 			        	}	
 		        	}
 		        	Border border = BorderFactory.createLineBorder(Color.GRAY, 1);
