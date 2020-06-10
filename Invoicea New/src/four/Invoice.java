@@ -2527,7 +2527,7 @@ public class Invoice {
 		btnAddFabric.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean proceed = true;
-				string date = txtFabricDate.getText();
+				String date = txtFabricDate.getText();
 		        if(date == null || txtFabricNumber.getText().isEmpty()) {
 		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		        	txtFabricNumber.setBorder(border);
