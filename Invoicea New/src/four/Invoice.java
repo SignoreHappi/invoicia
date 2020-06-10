@@ -134,7 +134,7 @@ public class Invoice {
 	protected JPanel PInvoice;
 	private JPanel pnlRhinestones;
 	protected JPanel Settings;
-
+	private JPanel Fabric;
 	private JPanel pnlOverWrite;
 	private JPanel pnlConsole;
 	private JPanel pnlFile;
@@ -2478,6 +2478,11 @@ public class Invoice {
 		lblSoloRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lblSoloRate.setBounds(10, 74, 76, 14);
 		panel_2.add(lblSoloRate);
+		
+		
+		
+		Fabric = new JPanel();
+		tabbedPane.addTab("Fabric", null, Fabric, null);
 
 
 		frame.setLocationRelativeTo(null);
