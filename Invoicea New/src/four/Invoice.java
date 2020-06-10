@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
 
@@ -139,6 +140,7 @@ public class Invoice {
 	private JPanel pnlOverWrite;
 	private JPanel pnlConsole;
 	private JPanel pnlFile;
+	private JPanel fabricReceiptPanel;
 
 	private static JLabel lblRhynestones;
 	private static JLabel lbsMaterial;
@@ -309,7 +311,10 @@ public class Invoice {
 	public static int[][] yearsInvoices = new int [2][20];
 
 	public static int result = 0;
-
+	public static int fabricY = 11;
+	public static double totalFabric = 0;
+	public static String[][] materials = null;
+	
 	public static JButton btnAddMaterial;
 
 	public static JFrame updateTable;
@@ -2523,41 +2528,140 @@ public class Invoice {
 		lblName_2_2.setBounds(33, 150, 107, 14);
 		fabricPanel.add(lblName_2_2);
 		
+		
+		fabricReceiptPanel = new JPanel();
+		fabricReceiptPanel.setBounds(495, 25, 557, 614);
+		Fabric.add(fabricReceiptPanel);
+		fabricReceiptPanel.setLayout(null);
+		
+        
+		
 		JButton btnAddFabric = new JButton("Add");
 		btnAddFabric.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+
+				
+				if(materials == null) {
+					
+					materials = new String[500][2];	
+					Database.GetMaterialPrices();
+					for(int i = 0; i < 500; i++) {
+						if(materials[i][0] == null) {
+							break;
+						}
+						System.out.print(materials[i][0]);
+
+						System.out.println(materials[i][1]);
+					}
+				}
+				
+				
 				boolean proceed = true;
 				String date = txtFabricDate.getText();
-		        if(date == null || txtFabricNumber.getText().isEmpty()) {
+		        if(date == null || date.isEmpty()) {
 		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		        	txtFabricNumber.setBorder(border);
 		        	proceed = false;
 		        }else {
-		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
-		        	txtFabricNumber.setBorder(border);
+		        	Border border = BorderFactory.createLineBorder(Color.GRAY, 1);
 		        	txtFabricNumber.setBorder(border);
 		        }
 		        
-		        if(date == null || txtFabricDate.getText().isEmpty()) {
+		        if(date == null || date.isEmpty()) {
 		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		        	txtFabricDate.setBorder(border);
 		        	proceed = false;
 		        }else {
-		        	int day = 0, month = 0;
-		        	if(!date.contains("/")) {
-		        		if(txtFabricDate.getText().length() == 9) {
-//			        		day = date.substring(0, date.indexOf(('/')));
-			        	}	
-		        	}
+//		        	int day = 0, month = 0;
+//		        	if(!date.contains("/")) {
+//		        		if(txtFabricDate.getText().length() == 9) {
+//			        		day = Integer.parseInt(date.substring(0, date.indexOf(('/'))));
+//			        	}	
+//		        	}
 		        	Border border = BorderFactory.createLineBorder(Color.GRAY, 1);
 		        	txtFabricDate.setBorder(border);
 		        	
 		        }
 		        
-		        if(proceed == true) {
-		        	
+		        if(txtFabricName.getText() == null || txtFabricName.getText().isEmpty()) {
+		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
+		        	txtFabricName.setBorder(border);
+		        	proceed = false;
 		        }else {
-		        	
+		        	Border border = BorderFactory.createLineBorder(Color.GRAY, 1);
+		        	txtFabricName.setBorder(border);
+		        }
+		        
+		        if(txtFabricAmount.getText() == null || txtFabricAmount.getText().isEmpty()) {
+		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
+		        	txtFabricAmount.setBorder(border);
+		        	proceed = false;
+		        }else {
+		        	Border border = BorderFactory.createLineBorder(Color.GRAY, 1);
+		        	txtFabricAmount.setBorder(border);
+		        }
+		        
+		        if(txtFabricStudio.getText() == null || txtFabricStudio.getText().isEmpty()) {
+		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
+		        	txtFabricStudio.setBorder(border);
+		        	proceed = false;
+		        }else {
+		        	Border border = BorderFactory.createLineBorder(Color.GRAY, 1);
+		        	txtFabricStudio.setBorder(border);
+		        }
+		        
+		        if(proceed == true) {
+		        	if(fabricCount == 0) {
+		        		txtFabricNumber.setEditable(false);
+		        		txtFabricDate.setEditable(false);
+		        		
+		        		int distanceLabel = 25;
+
+						int totalJLs = 10;
+						
+						JLabel[] fabrics = new JLabel[totalJLs];
+						String fabricData = "X " + txtFabricName.getText();
+						fabrics[fabricCount] = new JLabel();
+
+						fabricReceiptPanel.add(fabrics[fabricCount]);
+
+						
+						
+							
+						for(int k = 0; k < (20 - txtFabricName.getText().length()); k+=2) {
+							fabricData += " ";
+						}
+						fabricData += " " + txtFabricAmount.getText();
+						for(int k = 0; k < 4; k++) {
+							fabricData += "    ";
+						}
+						fabricData += " " + txtFabricStudio.getText();
+						
+						fabrics[fabricCount].setText(fabricData);
+						
+						fabrics[fabricCount].setFont(new Font("Times New Roman", Font.PLAIN, 14));
+						fabrics[fabricCount].setBounds(20, fabricY, 800, 14);
+						fabricY += distanceLabel;
+						
+//						totalFabric
+						int index = -10;
+						
+						for(int i = 0; i < 500; i++) {
+							if(materials[i][0] == null) {
+								break;
+							}
+							if(materials[i][0] == txtFabricName.getText()) {
+								index = i;
+								break;
+							}
+							
+						}
+						System.out.println(index);
+						
+		        	}
+		        }else {
+//		        	System.out.println("Error");
 		        }
 
 			}
@@ -2595,33 +2699,16 @@ public class Invoice {
 		txtFabricStudio.setBounds(130, 175, 155, 20);
 		fabricPanel.add(txtFabricStudio);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(495, 25, 557, 614);
-		Fabric.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblFabricName1 = new JLabel("Fabric 1:.......");
-		lblFabricName1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblFabricName1.setBounds(32, 11, 153, 14);
-		panel.add(lblFabricName1);
-		
-		JLabel lblFabricAmount1 = new JLabel("Amount 1:.......");
-		lblFabricAmount1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblFabricAmount1.setBounds(195, 11, 84, 14);
-		panel.add(lblFabricAmount1);
-		
-		JLabel lblFabricX1 = new JLabel("X");
-		lblFabricX1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblFabricX1.setBounds(10, 11, 19, 14);
-		panel.add(lblFabricX1);
+	
 		
 		JButton btnNewButton = new JButton("Finish");
-		btnNewButton.setBounds(231, 555, 89, 23);
-		panel.add(btnNewButton);
+		btnNewButton.setBounds(436, 267, 89, 23);
+		fabricReceiptPanel.add(btnNewButton);
 		
-		JLabel lblFabricTotal = new JLabel("Total: $000.00");
-		lblFabricTotal.setBounds(47, 522, 121, 14);
-		panel.add(lblFabricTotal);
+		JLabel lblNewLabel_1 = new JLabel("Total: $00.00");
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(436, 242, 89, 14);
+		fabricReceiptPanel.add(lblNewLabel_1);
 
 
 		frame.setLocationRelativeTo(null);
