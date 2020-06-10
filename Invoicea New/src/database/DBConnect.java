@@ -7,9 +7,12 @@ import java.sql.SQLException;
 public class DBConnect {
 	public static Connection connectDB() throws SQLException{
 		Connection connection = null;
-		String url = "jdbc:mysql://sql305.epizy.com:3306/epiz_25185035_invoicia?useSSL=false";
-		String user = "epiz_25185035";
-		String password = "Kidsindance";
+//		String url = "jdbc:mysql://sql305.epizy.com:3306/epiz_25185035_invoicia?useSSL=false";
+//		String user = "epiz_25185035";
+//		String password = "Kidsindance";
+		String url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9345782?useSSL=false";
+        String user = "sql9345782";
+        String password = "RHCA2ImR6x";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url,user,password);

@@ -326,6 +326,13 @@ public class Invoice {
 	private LocalDateTime now = LocalDateTime.now(); 
 
 	public static JButton btnCreate;
+	public static JButton button;
+	public static JButton button_2;
+	public static JButton button_4;
+	public static JButton button_5;
+	public static JButton btnRetrieve;
+	public static JButton btnClear;
+	public static JButton btnPrintout;
 
 	/**
 	 * Launch the application.
@@ -365,6 +372,7 @@ public class Invoice {
 	 */
 	public Invoice() {
 		initialize();
+		invalido(false); // set to true to allow buttons back in
 		Database.StartInvoice();
 	}
 
@@ -373,6 +381,16 @@ public class Invoice {
 //		Database.CreateDate(dtf.format(now) + "");
 
 		return 1;
+	}
+	
+	private void invalido(boolean truce) {
+		btnCreate.setVisible(truce);
+		button.setVisible(truce);
+		button_2.setVisible(truce);
+		button_4.setVisible(truce);
+		button_5.setVisible(truce);
+		btnClear.setVisible(truce);
+		btnPrintout.setVisible(truce);
 	}
 
 	private void Clear() {
@@ -480,6 +498,8 @@ public class Invoice {
 		lblX7.setVisible(false);
 		lblX8.setVisible(false);
 		lblX9.setVisible(false);
+		
+		
 
 	}
 
@@ -1305,7 +1325,7 @@ public class Invoice {
 		lblFileSearch.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		pnlFile.add(lblFileSearch);
 
-		JButton btnClear = new JButton("RESET");
+		btnClear = new JButton("RESET");
 		btnClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1315,13 +1335,12 @@ public class Invoice {
 		btnClear.setBounds(10, 184, 120, 30);
 		pnlFile.add(btnClear);
 
-		JButton button_2 = new JButton("?2");
+		button_2 = new JButton("?2");
 		button_2.setBounds(140, 225, 120, 30);
 		pnlFile.add(button_2);
 
-
-
-		JButton btnPrintout = new JButton("Printout 1");
+		
+		btnPrintout = new JButton("Printout 1");
 		btnPrintout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -1419,12 +1438,14 @@ public class Invoice {
 		});
 		Database.LoadYear(cmbStudioName.getSelectedIndex());
 
+		
+		
 
-		JButton button = new JButton("?2");
+		button = new JButton("?2");
 		button.setBounds(10, 306, 120, 30);
 		pnlFile.add(button);
 
-		JButton button_4 = new JButton("?2");
+		button_4 = new JButton("?2");
 		button_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1434,7 +1455,7 @@ public class Invoice {
 		button_4.setBounds(140, 306, 120, 30);
 		pnlFile.add(button_4);
 
-		JButton button_5 = new JButton("?2");
+		button_5 = new JButton("?2");
 		button_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1444,7 +1465,7 @@ public class Invoice {
 		button_5.setBounds(10, 225, 120, 30);
 		pnlFile.add(button_5);
 
-		JButton btnRetrieve = new JButton("RETRIEVE");
+		btnRetrieve = new JButton("RETRIEVE");
 		btnRetrieve.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1632,9 +1653,9 @@ public class Invoice {
 
 		btnCreate.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("A");
+//				System.out.println("A");
 				if(txtCostumeName.getText().length()<1) {
-					System.out.println("AAA");
+//					System.out.println("AAA");
 					txtCostumeName.setBorder(new LineBorder(Color.red,1));
 					JOptionPane.showMessageDialog(null, "Write a name for the Costume!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
@@ -1681,20 +1702,21 @@ public class Invoice {
 					int year = Integer.parseInt(Mathe.InvoiceNumber().substring(3, 5));
 					
 					
-					System.out.println("D");
+//					System.out.println("D");
 					result = 0;
 					int studio_id = cmbStudio.getSelectedIndex();
 
 					int invoice_id = Database.HasInvoice(studio_id);
-					System.out.println(invoice_id);
+					System.out.println(invoice_id + " Invoice Id : Studio Id " + studio_id);
+					
 					if(invoice_id == 0) {
 						Database.CreateNewInvoice(studio_id, year, invcName);
-						System.out.println("D1");
+//						System.out.println("D1");
 					}else {
 						Database.CreateInvoice(studio_id, invoice_id, year, invcName);
-						System.out.println("D2");
+//						System.out.println("D2");
 					}
-					System.out.println("E");
+//					System.out.println("E");
 
 					//					if(result == 1) {
 					//						output("Invoice:", "saved");
