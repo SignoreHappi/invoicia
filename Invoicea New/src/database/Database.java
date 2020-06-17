@@ -369,6 +369,59 @@ public class Database extends Invoice{
 
 	}
 
+	public static void GetMaterialPrices() {
+		String cmd = "SELECT * FROM material ORDER BY material_name ASC";
+		String name;
+		double cost;
+		int count = 0;
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			stmt = connect.prepareStatement(cmd);			
+			//Create the code
+			//Execute the code
+			stmt.executeQuery(cmd);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmd);
+			//While there's code to be executes, do something
+
+
+
+			while(rs.next()) {
+
+				name = rs.getString("material_name");
+				cost = rs.getDouble("material_cost");
+
+				//				Builds the price with .00 in the end
+				StringBuilder sbuf = new StringBuilder();
+				Formatter fmt = new Formatter(sbuf);
+				fmt.format("$%.2f%n", cost);
+
+				if(name.contains("#")) {
+					int index = name.indexOf("#");
+					String subName = name;
+					name = subName.substring(0, index);
+					name = name + "\" " + subName .substring(index+1);
+				}
+				materials[count][0] = name;
+				materials[count][1] = Double.toString(cost);
+				count++;
+			}
+
+			//If there's some error, return it
+		} catch (SQLException e) {
+			System.out.println("Load Material");
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
+	}
+	
 	public static void LoadMaterials(boolean typers){
 		Invoice.homeMaterialTbl.setRowCount(0);
 		Invoice.materialTable.setRowCount(0);
@@ -1106,6 +1159,8 @@ public class Database extends Invoice{
 			JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
 			return 1;
 		}
+		
+		
 	}
 
 
