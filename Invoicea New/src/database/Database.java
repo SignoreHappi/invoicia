@@ -403,6 +403,7 @@ public class Database extends Invoice{
 					name = subName.substring(0, index);
 					name = name + "\" " + subName .substring(index+1);
 				}
+				materialsPricesList.add(name + "&" + cost);
 				materials[count][0] = name;
 				materials[count][1] = Double.toString(cost);
 				count++;
@@ -424,8 +425,10 @@ public class Database extends Invoice{
 	
 	public static void LoadMaterials(boolean typers){
 		Invoice.homeMaterialTbl.setRowCount(0);
+		Invoice.fabricMaterialTbl.setRowCount(0);
 		Invoice.materialTable.setRowCount(0);
-		Invoice.txtSearchMaterial.setText("");;
+		
+		Invoice.txtSearchMaterial.setText("");
 		String cmd;
 
 		if(typers == false) {
@@ -473,6 +476,7 @@ public class Database extends Invoice{
 				Invoice.materialTable.insertRow(Invoice.materialTable.getRowCount(), new Object[] {Integer.toString(id), 
 						name, type, fmt});
 				Invoice.homeMaterialTbl.insertRow(Invoice.homeMaterialTbl.getRowCount(), new Object[] {name, type, fmt});
+//				Invoice.fabricMaterialTbl.insertRow(Invoice.homeMaterialTbl.getRowCount(), new Object[] {name, type, fmt});
 			}
 
 			//If there's some error, return it
@@ -489,6 +493,51 @@ public class Database extends Invoice{
 		}
 	}
 
+	public static void LoadMaterialList() {
+		String cmd = "SELECT * FROM material ORDER BY material_name ASC";
+		String name, type;
+		try {
+			//Create the code
+			connect = DBConnect.connectDB();
+			stmt = connect.prepareStatement(cmd);			
+			//Create the code
+			//Execute the code
+			stmt.executeQuery(cmd);
+			//For every possible execution, create a rs
+			ResultSet rs = stmt.executeQuery(cmd);
+			//While there's code to be executes, do something
+
+
+
+			while(rs.next()) {
+
+				name = rs.getString("material_name");
+				type = rs.getString("material_type");
+
+
+				if(name.contains("#")) {
+					int index = name.indexOf("#");
+					String subName = name;
+					name = subName.substring(0, index);
+					name = name + "\" " + subName .substring(index+1);
+				}
+				
+			}
+
+			//If there's some error, return it
+		} catch (SQLException e) {
+			System.out.println("Load Material");
+			System.out.print(e);
+		}finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
+	}
+	
 	public static void SearchMaterial(String materialSearch) {
 		Invoice.materialTable.setRowCount(0);
 		//		char typed = enter.getKeyChar();

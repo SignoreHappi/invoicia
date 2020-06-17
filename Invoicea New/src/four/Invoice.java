@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
@@ -60,6 +61,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 
+import java.util.ArrayList;
 
 
 
@@ -303,6 +305,7 @@ public class Invoice {
 
 	public static DefaultTableModel homeMaterialTbl;	
 	public static JTable homeMaterialJTbl;
+
 	public static String clientsSearch = null;
 
 	public static String searching = null;
@@ -314,6 +317,10 @@ public class Invoice {
 	public static int fabricY = 11;
 	public static double totalFabric = 0;
 	public static String[][] materials = null;
+    
+
+    public static ArrayList<String> materialList = new ArrayList<String>();
+    public static DefaultTableModel fabricMaterialTbl;
 	
 	public static JButton btnAddMaterial;
 
@@ -733,7 +740,6 @@ public class Invoice {
 		homeMaterialScroll.setLocation(20,46);
 		pnlMaterial.add(homeMaterialScroll);
 		homeMaterialScroll.setSize(297,302);
-
 
 		homeMaterialJTbl.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
@@ -2381,7 +2387,6 @@ public class Invoice {
 		panel_14.add(txtSearchMaterial);
 		txtSearchMaterial.setColumns(10);
 
-		Database.LoadMaterials(false);
 
 		JButton btnUpdateTable = new JButton("Search Material");
 		btnUpdateTable.addActionListener(new ActionListener() {
@@ -2498,8 +2503,11 @@ public class Invoice {
 		tabbedPane.addTab("Fabric", null, Fabric, null);
 		Fabric.setLayout(null);
 		
+		//TODO Add Material Table to List
+		
+		
 		JPanel fabricPanel = new JPanel();
-		fabricPanel.setBounds(35, 25, 402, 273);
+		fabricPanel.setBounds(35, 25, 402, 614);
 		Fabric.add(fabricPanel);
 		fabricPanel.setLayout(null);
 		
@@ -2525,7 +2533,7 @@ public class Invoice {
 		
 		JLabel lblName_2_2 = new JLabel("Amount:");
 		lblName_2_2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblName_2_2.setBounds(33, 150, 107, 14);
+		lblName_2_2.setBounds(33, 177, 107, 14);
 		fabricPanel.add(lblName_2_2);
 		
 		
@@ -2552,7 +2560,7 @@ public class Invoice {
 						}
 						System.out.print(materials[i][0]);
 
-						System.out.println(materials[i][1]);
+						System.out.println(" " + materials[i][1]);
 					}
 				}
 				
@@ -2645,19 +2653,26 @@ public class Invoice {
 						fabricY += distanceLabel;
 						
 //						totalFabric
-						int index = -10;
-						
-						for(int i = 0; i < 500; i++) {
-							if(materials[i][0] == null) {
-								break;
+						int index = -1;
+						for (String type : materialList) {
+						    if (type.contains(txtFabricName.getText())) {
+						        System.out.println("contains");
+						    }else {
+								System.out.println("Not Found");
 							}
-							if(materials[i][0] == txtFabricName.getText()) {
-								index = i;
-								break;
-							}
-							
 						}
-						System.out.println(index);
+						
+//						for(int i = 0; i < 500; i++) {
+//							if(materials[i][0] == null) {
+//								break;
+//							}
+//							if(materials[i][0] == txtFabricName.getText()) {
+//								index = i;
+//								break;
+//							}
+//							
+//						}
+//						System.out.println(index);
 						
 		        	}
 		        }else {
@@ -2666,7 +2681,7 @@ public class Invoice {
 
 			}
 		});
-		btnAddFabric.setBounds(33, 215, 89, 23);
+		btnAddFabric.setBounds(33, 580, 89, 23);
 		fabricPanel.add(btnAddFabric);
 		
 		txtFabricNumber = new JTextField();
@@ -2686,20 +2701,29 @@ public class Invoice {
 		
 		txtFabricAmount = new JTextField();
 		txtFabricAmount.setColumns(10);
-		txtFabricAmount.setBounds(130, 150, 155, 20);
+		txtFabricAmount.setBounds(130, 177, 155, 20);
 		fabricPanel.add(txtFabricAmount);
 		
 		JLabel lblName_2_1_1_1 = new JLabel("Studio:");
 		lblName_2_1_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblName_2_1_1_1.setBounds(33, 177, 107, 14);
+		lblName_2_1_1_1.setBounds(33, 204, 107, 14);
 		fabricPanel.add(lblName_2_1_1_1);
 		
 		txtFabricStudio = new JTextField();
 		txtFabricStudio.setColumns(10);
-		txtFabricStudio.setBounds(130, 175, 155, 20);
+		txtFabricStudio.setBounds(130, 202, 155, 20);
 		fabricPanel.add(txtFabricStudio);
+
 		
-	
+		
+		fabricMaterialTbl = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {return false;}
+		};
+		fabricMaterialTbl.addColumn("Material Name");
+		fabricMaterialTbl.addColumn("Material Type");
+		fabricMaterialTbl.addColumn("Material Price");
+		Database.LoadMaterials(false);
+
 		
 		JButton btnNewButton = new JButton("Finish");
 		btnNewButton.setBounds(436, 267, 89, 23);
