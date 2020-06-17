@@ -403,7 +403,7 @@ public class Database extends Invoice{
 					name = subName.substring(0, index);
 					name = name + "\" " + subName .substring(index+1);
 				}
-				materialsPricesList.add(name + "&" + cost);
+//				materialsPricesList.add(name + "&" + cost);
 				materials[count][0] = name;
 				materials[count][1] = Double.toString(cost);
 				count++;
