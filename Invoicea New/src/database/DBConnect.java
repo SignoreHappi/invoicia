@@ -10,9 +10,9 @@ public class DBConnect {
 //		String url = "jdbc:mysql://sql305.epizy.com:3306/epiz_25185035_invoicia?useSSL=false";
 //		String user = "epiz_25185035";
 //		String password = "Kidsindance";
-		String url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9345782?useSSL=false";
-        String user = "sql9345782";
-        String password = "RHCA2ImR6x";
+		String url = "jdbc:mysql://remotemysql.com:3306/ZZeQxiV80X?useSSL=false";
+        String user = "ZZeQxiV80X";
+        String password = "3OPa7vc861";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url,user,password);

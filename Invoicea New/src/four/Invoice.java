@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -60,6 +61,7 @@ import javax.swing.event.TableColumnModelListener;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
+import javax.swing.*;
 
 import java.util.ArrayList;
 
@@ -96,6 +98,8 @@ import javax.swing.border.LineBorder;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.VetoableChangeListener;
+import javax.swing.JPopupMenu;
+import java.awt.Panel;
 
 public class Invoice {
 
@@ -321,7 +325,9 @@ public class Invoice {
 
     public static ArrayList<String> materialList = new ArrayList<String>();
     public static DefaultTableModel fabricMaterialTbl;
-	
+	public static DefaultListModel fabricListModel;
+    
+    
 	public static JButton btnAddMaterial;
 
 	public static JFrame updateTable;
@@ -353,6 +359,7 @@ public class Invoice {
 	private JTextField txtFabricStudio;
 	
 	private int fabricCount = 0;
+	private JList fabricNameList = new JList();
 
 	/**
 	 * Launch the application.
@@ -2503,14 +2510,27 @@ public class Invoice {
 		tabbedPane.addTab("Fabric", null, Fabric, null);
 		Fabric.setLayout(null);
 		
-		//TODO Add Material Table to List
-		
 		
 		JPanel fabricPanel = new JPanel();
 		fabricPanel.setBounds(35, 25, 402, 614);
 		Fabric.add(fabricPanel);
 		fabricPanel.setLayout(null);
 		
+		JPopupMenu popupMenu = new JPopupMenu();
+		addPopup(fabricPanel, popupMenu);
+		popupMenu.setBounds(0, 0, 155, 6);
+		
+		fabricListModel = new DefaultListModel();
+		
+		fabricNameList.setModel(fabricListModel);
+		fabricNameList.setFixedCellWidth(153);
+		
+		JScrollPane fabricNameScroll = new JScrollPane(fabricNameList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		fabricNameScroll.setPreferredSize(new Dimension(180,300));
+		popupMenu.add(fabricNameScroll);
+		
+		Database.LoadMaterialList();
 		JLabel lblNewLabel = new JLabel("Add a new Fabric");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lblNewLabel.setBounds(33, 27, 107, 14);
@@ -2550,23 +2570,12 @@ public class Invoice {
 				
 
 				
-				if(materials == null) {
-					
-					materials = new String[500][2];	
-					Database.GetMaterialPrices();
-					for(int i = 0; i < 500; i++) {
-						if(materials[i][0] == null) {
-							break;
-						}
-						System.out.print(materials[i][0]);
-
-						System.out.println(" " + materials[i][1]);
-					}
-				}
+				
 				
 				
 				boolean proceed = true;
 				String date = txtFabricDate.getText();
+
 		        if(date == null || date.isEmpty()) {
 		        	Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		        	txtFabricNumber.setBorder(border);
@@ -2695,6 +2704,37 @@ public class Invoice {
 		fabricPanel.add(txtFabricDate);
 		
 		txtFabricName = new JTextField();
+		txtFabricName.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				popupMenu.show(txtFabricName, 0, txtFabricName.getHeight());
+				txtFabricName.requestFocusInWindow();
+
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+//				popupMenu.setVisible(false);
+//				txtFabricName.requestFocusInWindow();
+			}
+		});
+		txtFabricName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+//				fabricListModel.removeAllElements();
+				String fabricName = txtFabricName.getText().trim();
+				if(fabricName != "") {
+//					System.out.println(fabricName);
+				}
+				popupMenu.show(txtFabricName, 0, txtFabricName.getHeight());
+				txtFabricName.requestFocusInWindow();
+				SearchFabricName(txtFabricName.getText());
+		        
+				
+			}
+		});
+		
+		
+		
 		txtFabricName.setColumns(10);
 		txtFabricName.setBounds(130, 123, 155, 20);
 		fabricPanel.add(txtFabricName);
@@ -2737,6 +2777,20 @@ public class Invoice {
 
 		frame.setLocationRelativeTo(null);
 	}			// --------------------------------------------------------------------------------------------------- end of Jframe
+	private String SearchFabricName(String name) {
+	      String pattern = "(" + name + ")";
+
+		for (int i = 0; i < fabricNameList.getModel().getSize(); i++) {
+			Object item = fabricNameList.getModel().getElementAt(i);
+			if(item.toString().matches(pattern)) {
+				System.out.println(item.toString() + " - " + "Matches" + pattern);
+			}else {
+				System.out.println(item.toString() + " - " + "Doestn match" + pattern);
+			}
+		}
+		
+		return null;
+	}
 
 
 	protected String GetMaterialName(String name) {
@@ -2748,7 +2802,8 @@ public class Invoice {
 
 	}
 
-
+	
+	
 	protected void DeleteSelectedMaterial(int item) {
 		if(selectedMaterials[0][item+1] != null) {
 			for(int i = item; i< 10; i++) {
@@ -3708,6 +3763,23 @@ public class Invoice {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
 
