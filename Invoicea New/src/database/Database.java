@@ -425,7 +425,7 @@ public class Database extends Invoice{
 	
 	
 	public static String[] GetClientInfo(int studio_id) {
-		String[] studioInfo = new String[6];
+		String[] studioInfo = new String[4];
 		String cmd = "SELECT * FROM studio WHERE studio_id = " + studio_id;
 		
 		try {
