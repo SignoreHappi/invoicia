@@ -421,7 +421,7 @@ public class Database extends Invoice{
 //				e.printStackTrace();
 //			}		
 //		}
-//	}
+//	aaaa}
 	
 	
 	public static String[] GetClientInfo(int studio_id) {
